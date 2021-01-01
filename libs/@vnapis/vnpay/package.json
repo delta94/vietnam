@@ -1,0 +1,39 @@
+{
+  "name": "vnpay",
+  "version": "1.0.2",
+  "description": "VNPay Client",
+  "main": "./build/src/index.js",
+  "author": "Hieu Doan <hieumdoan@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "engineStrict": true,
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "build/src",
+    "!build/src/**/*.map"
+  ],
+  "scripts": {
+    "build": "rm -rf build && tsc && rm -rf build/src && webpack && c8 mocha \"build/test/**/*.js\" --timeout 60000"
+  },
+  "dependencies": {
+    "qs": "^6.9.4",
+    "sha256": "^0.2.0",
+    "uuid": "^8.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.8",
+    "assert": "^2.0.0",
+    "c8": "^7.3.3",
+    "mocha": "^8.1.3",
+    "ts-loader": "^8.0.5",
+    "tslib": "^2.0.3",
+    "typescript": "^4.0.3"
+  },
+  "keywords": [
+    "vietnam",
+    "vnpay",
+    "vnpay.vn"
+  ]
+}

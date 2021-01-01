@@ -1,0 +1,6 @@
+// POST /finance-forex-rates-v1/_delete_by_query
+{
+  "query": {
+    "match_all": {}
+  }
+}

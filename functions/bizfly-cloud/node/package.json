@@ -1,0 +1,18 @@
+{
+  "name": "bizfly-cloud",
+  "version": "1.0.0",
+  "description": "Bizfly Cloud",
+  "main": "build/server.ts",
+  "repository": "https://github.com/hieudoanm/vietnam",
+  "author": "Hieu Doan <hieumdoan@gmail.com>",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "ts-node server.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.10",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.1.2"
+  }
+}

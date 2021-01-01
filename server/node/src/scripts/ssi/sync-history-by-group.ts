@@ -1,0 +1,34 @@
+'use strict';
+
+import * as dotenv from 'dotenv';
+dotenv.config({ path: './src/environments/dev.env' });
+
+import { mongooseClient } from '../../clients';
+import { dsFinanceStockListedCompany } from '../../models/data';
+import { stockService } from '../../services';
+
+const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
+
+const main = async () => {
+  await mongooseClient.init();
+
+  let GROUP = process.env.GROUP || '';
+  GROUP = GROUP.toUpperCase();
+
+  console.log(GROUP);
+
+  const companies = await dsFinanceStockListedCompany.find(
+    { group: GROUP },
+    { sort: { symbol: 1 } }
+  );
+
+  for (const company of companies) {
+    const { symbol } = company;
+    console.log(symbol);
+    await stockService.syncHistoryBySymbol(symbol, TELEGRAM_CHAT_ID);
+  }
+
+  process.exit(0);
+};
+
+main().catch(error => console.error(error));
