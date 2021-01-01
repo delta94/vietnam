@@ -2,7 +2,7 @@
 
 ## Demo
 
-[Vietnam APIs](https://vietnamapis.herokuapp.com/)
+[Vietnam APIs](https://vietnamd.herokuapp.com/)
 
 ## npm packages
 

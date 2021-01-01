@@ -37,9 +37,9 @@ jobs:
         working-directory: ./server/node
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:push web --app vietnamapis
+        run: heroku container:push web --app vietnamd
       - name: Heroku - Release
         working-directory: ./server/node
         env:
           HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-        run: heroku container:release web --app vietnamapis
+        run: heroku container:release web --app vietnamd

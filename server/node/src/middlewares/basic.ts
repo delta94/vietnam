@@ -18,7 +18,7 @@ export default async (app: express.Application) => {
   app.use(helmet());
 
   // const devOrigin = 'http://localhost:8888';
-  // const prodOrigin = 'https://vietnamapis.herokuapp.com';
+  // const prodOrigin = 'https://vietnamd.herokuapp.com';
   // const origin = NODE_ENV === 'development' ? devOrigin : prodOrigin;
   // console.log(origin);
   // const methods = ['GET', 'OPTIONS', 'POST'].join(',');
