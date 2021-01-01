@@ -11,7 +11,7 @@ import * as http from 'http';
 import * as path from 'path';
 import { AddressInfo } from 'net';
 
-import api from './api';
+import apis from './apis';
 import middlewares from './middlewares';
 import jobs from './jobs';
 
@@ -38,7 +38,7 @@ const serverOnError: any = (error: any = {}) => {
 const startServer: Function = async () => {
   const app = express();
   await middlewares(app);
-  await api(app);
+  await apis(app);
 
   // Default
   if (NODE_ENV === 'production') {

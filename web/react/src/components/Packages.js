@@ -6,9 +6,9 @@ class Packages extends Component {
     super(props);
     const basicPackages = [
       { name: 'vnapis', demo: '' },
-      { name: 'vietnamnews', demo: 'https://hieudoanm.github.io/vietnam/#/news' },
-      { name: 'vietnambanks', demo: 'https://hieudoanm.github.io/vietnam/#/banks' },
-      { name: 'vietnamgovernment', demo: '' },
+      { name: '@vietnam/news', demo: 'https://hieudoanm.github.io/vietnam/#/news' },
+      { name: '@vietnam/banks', demo: 'https://hieudoanm.github.io/vietnam/#/banks' },
+      { name: '@vietnam/government', demo: '' },
       { name: 'vietcetera', demo: 'https://hieudoanm.github.io/vietnam/#/vietcetera' }
     ].sort((a, b) => (a.name > b.name ? 1 : -1));
     const paymentPackages = [

@@ -10,6 +10,8 @@ import FinanceProfit from './FinanceProfit';
 
 import Footer from './Footer';
 
+import GovernmentMinistries from './GovernmentMinistries';
+
 import Navigation from './Navigation';
 
 import NewsFeed from './NewsFeed';
@@ -28,6 +30,7 @@ export {
   FinancePotentials,
   FinanceProfit,
   Footer,
+  GovernmentMinistries,
   Navigation,
   NewsFeed,
   NewsSources,
