@@ -29,7 +29,7 @@ export default class PostgreClient {
     });
   }
 
-  private async query(text: string, values: Array<string> = []): Promise<string | Array<any>> {
+  public async query(text: string, values: Array<string> = []): Promise<string | Array<any>> {
     const self = this;
     const name: string = uuid.v4();
     const query = { name, text, values, rowMode: 'array' };
@@ -112,6 +112,13 @@ export default class PostgreClient {
     return await this.query(text);
   }
 
+  public async dropAll(): Promise<string | Array<any>> {
+    const drop = `DROP SCHEMA public CASCADE;`;
+    await this.query(drop);
+    const create = `CREATE SCHEMA public;`;
+    return await this.query(create);
+  }
+
   public async find(table: string, fields: Array<string> = []): Promise<string | Array<any>> {
     const tableName: string = table.toUpperCase();
     const columns: string = fields.length ? fields.join(',') : '*';
@@ -133,6 +140,29 @@ export default class PostgreClient {
       .join(',');
 
     const text = `INSERT INTO ${tableName} (ID,${keys}) VALUES (1,${values})`;
+    return await this.query(text);
+  }
+
+  public async insertMany(table: string, rows): Promise<string | Array<any>> {
+    const tableName: string = table.toUpperCase();
+    const [firstRow] = rows;
+    const keys = Object.keys(firstRow)
+      .map(key => key.toUpperCase())
+      .join(',');
+    const values = rows
+      .map((row, index) => {
+        const rowValues = Object.keys(row)
+          .map(key => {
+            const value = row[key];
+            const type = typeof value;
+            return type === 'string' ? `'${value}'` : value;
+          })
+          .join(',');
+        return `(${index + 1},${rowValues})`;
+      })
+      .join(',');
+
+    const text = `INSERT INTO ${tableName} (ID,${keys}) VALUES ${values}`;
     return await this.query(text);
   }
 

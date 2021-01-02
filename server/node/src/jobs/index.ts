@@ -5,7 +5,7 @@ import * as schedule from 'node-schedule';
 
 // import { telegramClient } from '../clients';
 import { utils } from '../libs';
-import { banksService, stockService } from '../services';
+import { banksService, financeService } from '../services';
 
 const URL_BASE: string = process.env.URL_BASE;
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
@@ -30,7 +30,7 @@ export default async () => {
         await banksService.syncForexRates(TELEGRAM_CHAT_ID, time);
       }
       if (day >= 1 && day <= 5 && hour % 4 === 0 && minute === 0) {
-        await stockService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
+        await financeService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
       }
     }
   });

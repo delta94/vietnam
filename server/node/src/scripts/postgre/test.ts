@@ -8,7 +8,7 @@ import { MapsProvinceShema } from '../../models/postgre';
 
 const main = async () => {
   await postgreClient.connect();
-  const table: string = 'mapsprovinces';
+  const table: string = 'maps_provinces';
   // Drop Table
   const dropTableResponse = await postgreClient.dropTable(table);
   console.log('dropTableResponse', dropTableResponse);

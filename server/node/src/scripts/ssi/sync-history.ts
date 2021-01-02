@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
-import { stockService } from '../../services';
+import { financeService } from '../../services';
 
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
 
@@ -15,9 +15,9 @@ const main = async () => {
   SYMBOL = SYMBOL.toUpperCase();
 
   if (SYMBOL) {
-    await stockService.syncHistoryBySymbol(SYMBOL, TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbol(SYMBOL, TELEGRAM_CHAT_ID);
   } else {
-    await stockService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
   }
 
   process.exit(0);

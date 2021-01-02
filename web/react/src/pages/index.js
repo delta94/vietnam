@@ -1,11 +1,29 @@
 import Banks from './Banks';
+import Calendar from './Calendar';
+import EthnicMinorities from './EthnicMinorities';
 import Finance from './Finance';
 import Government from './Government';
 import Home from './Home';
+import LicensePlates from './LicensePlates';
 import Maps from './Maps';
 import News from './News';
+import Phones from './Phones';
 import Sports from './Sports';
-import Uong from './Uong';
+import Technologies from './Technologies';
 import Vietcetera from './Vietcetera';
 
-export { Banks, Finance, Government, Home, Maps, News, Sports, Uong, Vietcetera };
+export {
+  Banks,
+  Calendar,
+  EthnicMinorities,
+  Finance,
+  Government,
+  Home,
+  LicensePlates,
+  Maps,
+  News,
+  Phones,
+  Sports,
+  Technologies,
+  Vietcetera
+};

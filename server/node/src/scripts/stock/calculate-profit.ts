@@ -3,7 +3,7 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
-import { stockService } from '../../services';
+import { financeService } from '../../services';
 
 const main = async () => {
   const buy = parseFloat(process.env.BUY) || 0;
@@ -12,7 +12,7 @@ const main = async () => {
 
   if (!buy || !sell) return;
 
-  const profit = stockService.calculateProfit(buy, sell, volume);
+  const profit = financeService.calculateProfit(buy, sell, volume);
 
   console.log(profit);
 };

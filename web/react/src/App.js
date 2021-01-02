@@ -1,30 +1,25 @@
 import React, { Component } from 'react';
 import { HashRouter, Route } from 'react-router-dom';
 
-import { Banks, Finance, Government, Home, Maps, News, Sports, Uong, Vietcetera } from './pages';
-import { Navigation, Footer } from './components';
+import routes from './routers';
+import { HomeFooter, HomeNavigation } from './components';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Navigation></Navigation>
+        <HomeNavigation></HomeNavigation>
         <div className="pb-5">
           <div className="pb-5">
             <HashRouter basename="/">
-              <Route exact path="/" component={Home}></Route>
-              <Route exact path="/banks" component={Banks}></Route>
-              <Route exact path="/finance" component={Finance}></Route>
-              <Route exact path="/government" component={Government}></Route>
-              <Route exact path="/maps" component={Maps}></Route>
-              <Route exact path="/news" component={News}></Route>
-              <Route exact path="/sports" component={Sports}></Route>
-              <Route exact path="/uong" component={Uong}></Route>
-              <Route exact path="/vietcetera" component={Vietcetera}></Route>
+              {routes.map((route, key) => {
+                const { path, component } = route;
+                return <Route exact path={path} component={component}></Route>;
+              })}
             </HashRouter>
           </div>
         </div>
-        <Footer></Footer>
+        <HomeFooter></HomeFooter>
       </div>
     );
   }

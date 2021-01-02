@@ -5,7 +5,7 @@ dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
 import { dsFinanceStockListedCompany } from '../../models/data';
-import { stockService } from '../../services';
+import { financeService } from '../../services';
 
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
 
@@ -25,7 +25,7 @@ const main = async () => {
   for (const company of companies) {
     const { symbol } = company;
     console.log(symbol);
-    await stockService.syncHistoryBySymbol(symbol, TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbol(symbol, TELEGRAM_CHAT_ID);
   }
 
   process.exit(0);

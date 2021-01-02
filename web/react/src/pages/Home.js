@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Packages } from '../components';
+import { HomePackages } from '../components';
 
 class Home extends Component {
   constructor() {
@@ -25,11 +25,10 @@ class Home extends Component {
             <Form.Control
               type="text"
               placeholder="Query"
-              className="text-center"
               value={this.state.value}
               onChange={this.updateQuery}></Form.Control>
           </Form>
-          <Packages query={query}></Packages>
+          <HomePackages query={query}></HomePackages>
         </main>
       </div>
     );

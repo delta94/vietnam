@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
-import { stockService } from '../../services';
+import { financeService } from '../../services';
 import { dsFinanceStockIndicator, dsFinanceStockListedCompany } from '../../models/data';
 
 const main = async () => {
@@ -15,7 +15,7 @@ const main = async () => {
 
   const year = 2020;
   const period = 'quarterly';
-  const list = await stockService.getPBbyCompanies(companies, { year, period });
+  const list = await financeService.getPBbyCompanies(companies, { year, period });
 
   const key = 'PB';
 

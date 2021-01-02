@@ -1,24 +1,29 @@
-import BanksForex from './BanksForex';
-import BanksHistory from './BanksHistory';
-import BanksList from './BanksList';
+import BanksForex from './banks/Forex';
+import BanksHistory from './banks/History';
+import BanksList from './banks/List';
 
-import FinanceCompanies from './FinanceCompanies';
-import FinanceHighlights from './FinanceHighlights';
-import FinanceHistory from './FinanceHistory';
-import FinancePotentials from './FinancePotentials';
-import FinanceProfit from './FinanceProfit';
+import FinanceCompanies from './finance/Companies';
+import FinanceHighlights from './finance/Highlights';
+import FinanceHistory from './finance/History';
+import FinancePotentials from './finance/Potentials';
+import FinanceProfit from './finance/Profit';
 
-import Footer from './Footer';
+import HomeFooter from './home/Footer';
+import HomeNavigation from './home/Navigation';
+import HomePackages from './home/Packages';
 
-import GovernmentMinistries from './GovernmentMinistries';
+import GovernmentMinisters from './government/Ministers';
+import GovernmentMinistries from './government/Ministries';
 
-import Navigation from './Navigation';
+import MapsDistricts from './maps/Districts';
+import MapsProvinces from './maps/Provinces';
+import MapsWards from './maps/Wards';
 
-import NewsFeed from './NewsFeed';
-import NewsSources from './NewsSources';
-import NewsTrends from './NewsTrends';
+import NewsFeed from './news/Feed';
+import NewsSources from './news/Sources';
+import NewsTrends from './news/Trends';
 
-import Packages from './Packages';
+import SportsClubs from './sports/Clubs';
 
 export {
   BanksForex,
@@ -29,11 +34,16 @@ export {
   FinanceHistory,
   FinancePotentials,
   FinanceProfit,
-  Footer,
+  GovernmentMinisters,
   GovernmentMinistries,
-  Navigation,
+  HomeFooter,
+  HomeNavigation,
+  HomePackages,
+  MapsDistricts,
+  MapsProvinces,
+  MapsWards,
   NewsFeed,
   NewsSources,
   NewsTrends,
-  Packages
+  SportsClubs
 };
