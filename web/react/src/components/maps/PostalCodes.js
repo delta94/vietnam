@@ -7,29 +7,29 @@ class MapsDistricts extends Component {
   constructor() {
     super();
 
-    this.state = { districts: [], loading: true };
+    this.state = { postalCodes: [], loading: true };
 
-    this.getDistricts = this.getDistricts.bind(this);
+    this.getPostalCodes = this.getPostalCodes.bind(this);
   }
 
   async componentDidMount() {
-    await this.getDistricts();
+    await this.getPostalCodes();
   }
 
-  async getDistricts() {
+  async getPostalCodes() {
     await this.setState({ loading: true });
-    const districts = await apis.getDistricts();
-    await this.setState({ districts, loading: false });
+    const postalCodes = await apis.getPostalCodes();
+    await this.setState({ postalCodes, loading: false });
   }
 
   render() {
-    const { districts = [], loading = true } = this.state;
+    const { postalCodes = [], loading = true } = this.state;
     return (
       <div id="MapsDistricts">
         <div className="mt-3 w-100">
           <Card className="shadow">
             <Card.Body>
-              <Card.Title className="text-center">Districts ({districts.length})</Card.Title>
+              <Card.Title className="text-center">Districts ({postalCodes.length})</Card.Title>
               {loading && (
                 <div className="text-center">
                   <Spinner animation="border" variant="danger"></Spinner>
@@ -40,19 +40,17 @@ class MapsDistricts extends Component {
                   <table className="table">
                     <thead>
                       <tr>
-                        <th>Name</th>
-                        <th>Level</th>
+                        <th>Code</th>
                         <th>Province</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {districts.length
-                        ? districts.map((district, index) => {
-                            const { name = '', level = '', province = '' } = district;
+                      {postalCodes.length
+                        ? postalCodes.map((district, index) => {
+                            const { code = '', province = '' } = district;
                             return (
                               <tr key={index}>
-                                <td>{name}</td>
-                                <td>{level}</td>
+                                <td>{code}</td>
                                 <td>{province}</td>
                               </tr>
                             );

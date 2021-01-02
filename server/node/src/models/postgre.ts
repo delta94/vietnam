@@ -37,6 +37,12 @@ export const LicensePlateShema = {
   type: { type: 'text', required: true }
 };
 
+export const MapsPostalCodes = {
+  id: { type: 'int', primary: true, required: true },
+  code: { type: 'text', required: true },
+  province: { type: 'text', required: true }
+};
+
 export const MapsProvinceShema = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true },

@@ -1,9 +1,31 @@
 'use strict';
 
-import { providers, IProvider } from './providers';
+interface IProvider {
+  id: string;
+  name: string;
+  prefixes: Array<string>;
+}
 
-class Phones {
-  private providers: Array<IProvider> = providers;
+export default class Phones {
+  private providers: Array<IProvider> = [
+    {
+      id: 'viettel',
+      name: 'Viettel',
+      prefixes: ['086', '096', '097', '098', '032', '033', '034', '035', '036', '037', '038', '039']
+    },
+    {
+      id: 'mobifone',
+      name: 'Mobifone',
+      prefixes: ['089', '090', '093', '070', '076', '077', '078', '079']
+    },
+    {
+      id: 'vinaphone',
+      name: 'Vinaphone',
+      prefixes: ['081', '082', '083', '084', '085', '088', '091', '094']
+    },
+    { id: 'vietnamobile', name: 'Vietnamobile', prefixes: ['056', '058', '092'] },
+    { id: 'Gmobile', name: 'Gmobile', prefixes: ['059', '099'] }
+  ];
 
   public getProviders(): Array<IProvider> {
     return this.providers;
@@ -39,7 +61,3 @@ class Phones {
     return provider;
   }
 }
-
-const phones: Phones = new Phones();
-
-export default phones;

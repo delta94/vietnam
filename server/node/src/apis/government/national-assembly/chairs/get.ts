@@ -2,9 +2,9 @@
 
 import { Request, Response } from 'express';
 
-import vietnamgovernment from 'vietnamgovernment';
+import { governmentService } from '../../../../services';
 
 export default async (req: Request, res: Response): Promise<Response<any>> => {
-  const nationalAssemblyChairs = vietnamgovernment.getNationalAssemblyChairs();
-  return res.json(nationalAssemblyChairs);
+  const chairs = await governmentService.getNationalAssemblyChairs();
+  return res.json(chairs);
 };

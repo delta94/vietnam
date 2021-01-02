@@ -18,7 +18,6 @@ const main = async () => {
   const insertManyResponse: any = await postgreClient.insertMany(table, rows);
   console.log('insertManyResponse', insertManyResponse);
 
-  // Find
   const allRows = await postgreClient.find(table);
   console.log('rows', allRows);
 

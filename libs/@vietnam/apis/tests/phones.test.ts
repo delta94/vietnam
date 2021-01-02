@@ -3,7 +3,7 @@
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
 
-import phones from '../src/';
+import { phones } from '../src/';
 
 describe('phones', () => {
   it('get providers', async () => {

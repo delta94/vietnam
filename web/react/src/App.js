@@ -12,9 +12,9 @@ class App extends Component {
         <div className="pb-5">
           <div className="pb-5">
             <HashRouter basename="/">
-              {routes.map((route, key) => {
+              {routes.map((route, index) => {
                 const { path, component } = route;
-                return <Route exact path={path} component={component}></Route>;
+                return <Route key={index} exact path={`/${path}`} component={component}></Route>;
               })}
             </HashRouter>
           </div>

@@ -5,7 +5,8 @@ type SportEnum = 'basketball' | 'futsal' | 'football';
 interface IClub {
   name: string;
   city: string;
-  sport: SportEnum;
+  sport: string;
+  sport_en: SportEnum;
   competition: string;
 }
 

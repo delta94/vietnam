@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
 
-import { MapsDistricts, MapsProvinces, MapsWards } from '../components';
+import { MapsDistricts, MapsPostalCodes, MapsProvinces, MapsWards } from '../components';
 
 class Maps extends Component {
   render() {
@@ -9,6 +9,9 @@ class Maps extends Component {
       <div id="Maps">
         <main className="container mt-3">
           <Tabs defaultActiveKey="provinces" className="nav-justified">
+            <Tab eventKey="postalCodes" title="Postal Codes">
+              <MapsPostalCodes></MapsPostalCodes>
+            </Tab>
             <Tab eventKey="provinces" title="Provinces">
               <MapsProvinces></MapsProvinces>
             </Tab>

@@ -7,6 +7,70 @@ class APIS {
     this.base = base;
   }
 
+  getGeneralSecretaries() {
+    const url = endpoints.government.generalSecretaries.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((generalSecretaries = []) => {
+          resolve(generalSecretaries);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
+  getPresidents() {
+    const url = endpoints.government.presidents.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((presidents = []) => {
+          resolve(presidents);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
+  getPrimeMinisters() {
+    const url = endpoints.government.primeMinisters.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((primeMinisters = []) => {
+          resolve(primeMinisters);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
+  getNationalAssemblyChairs() {
+    const url = endpoints.government.nationalAssemblyChairs.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((chairs = []) => {
+          resolve(chairs);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
   getMinistries() {
     const url = endpoints.government.ministries.get;
 
@@ -250,6 +314,22 @@ class APIS {
         .catch(error => {
           console.error(error);
           resolve({});
+        });
+    });
+  }
+
+  getPostalCodes() {
+    const url = endpoints.maps.postalCodes.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((postalCodes = []) => {
+          resolve(postalCodes);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
         });
     });
   }

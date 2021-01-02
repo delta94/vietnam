@@ -3,7 +3,7 @@
 import * as assert from 'assert';
 import { describe, it } from 'mocha';
 
-import calendar from '../src/';
+import { calendar } from '../src/';
 
 describe('calendar', () => {
   it('convert solar to lunar', async () => {

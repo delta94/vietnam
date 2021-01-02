@@ -12,10 +12,15 @@ import HomeFooter from './home/Footer';
 import HomeNavigation from './home/Navigation';
 import HomePackages from './home/Packages';
 
+import GovernmentGeneralSecretaries from './government/GeneralSecretaries';
 import GovernmentMinisters from './government/Ministers';
 import GovernmentMinistries from './government/Ministries';
+import GovernmentNationalAssemblyChairs from './government/NationalAssemblyChairs';
+import GovernmentPresidents from './government/Presidents';
+import GovernmentPrimeMinisters from './government/PrimeMinisters';
 
 import MapsDistricts from './maps/Districts';
+import MapsPostalCodes from './maps/PostalCodes';
 import MapsProvinces from './maps/Provinces';
 import MapsWards from './maps/Wards';
 
@@ -34,12 +39,17 @@ export {
   FinanceHistory,
   FinancePotentials,
   FinanceProfit,
+  GovernmentGeneralSecretaries,
   GovernmentMinisters,
   GovernmentMinistries,
+  GovernmentNationalAssemblyChairs,
+  GovernmentPresidents,
+  GovernmentPrimeMinisters,
   HomeFooter,
   HomeNavigation,
   HomePackages,
   MapsDistricts,
+  MapsPostalCodes,
   MapsProvinces,
   MapsWards,
   NewsFeed,

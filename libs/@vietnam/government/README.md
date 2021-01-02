@@ -16,9 +16,6 @@ import vngov from 'vietnamgovernment';
 // Get National Assembly Members
 const nationalAssemblyMembers = vngov.getNationalAssemblyMembers(14); // options: from 1 to 14 - default 14
 
-// Get Ethnic Minorities
-const ethnicMinorities = vngov.getEthnicMinorities();
-
 // Get Ministries
 const ministries = vngov.getMinistries();
 

@@ -3,35 +3,35 @@ import { Card, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../services';
 
-class MapsProvinces extends Component {
+class GovernmentPrimeMinisters extends Component {
   constructor() {
     super();
 
-    this.state = { provinces: [], loading: true };
+    this.state = { primeMinisters: [], loading: true };
 
-    this.getProvinces = this.getProvinces.bind(this);
+    this.getPrimeMinisters = this.getPrimeMinisters.bind(this);
   }
 
   async componentDidMount() {
-    await this.getProvinces();
+    await this.getPrimeMinisters();
   }
 
-  async getProvinces() {
-    const self = this;
-
-    self.setState({ loading: true });
-    const provinces = await apis.getProvinces();
-    self.setState({ provinces, loading: false });
+  async getPrimeMinisters() {
+    const { ministry } = this.state;
+    this.setState({ loading: true });
+    const primeMinisters = await apis.getPrimeMinisters(ministry);
+    this.setState({ primeMinisters, loading: false });
   }
 
   render() {
-    const { provinces, loading } = this.state;
+    const { primeMinisters = [], loading = false } = this.state;
+
     return (
-      <div id="MapsProvinces">
+      <div id="GovernmentPrimeMinisters">
         <div className="mt-3 w-100">
           <Card className="shadow">
             <Card.Body>
-              <Card.Title className="text-center">Provinces ({provinces.length})</Card.Title>
+              <Card.Title className="text-center">Ministers ({primeMinisters.length})</Card.Title>
               {loading && (
                 <div className="text-center">
                   <Spinner animation="border" variant="danger"></Spinner>
@@ -43,26 +43,19 @@ class MapsProvinces extends Component {
                     <thead>
                       <tr>
                         <th>Name</th>
-                        <th>Capital</th>
-                        <th>Macro Region</th>
-                        <th>Region</th>
+                        <th>Start</th>
+                        <th>End</th>
                       </tr>
                     </thead>
                     <tbody>
-                      {provinces.length
-                        ? provinces.map((province, index) => {
-                            const {
-                              name = '',
-                              capital = '',
-                              region = '',
-                              macro_region = ''
-                            } = province;
+                      {primeMinisters.length
+                        ? primeMinisters.map((minister, index) => {
+                            const { name = '', start_date = '', end_date = '' } = minister;
                             return (
                               <tr key={index}>
                                 <td>{name}</td>
-                                <td>{capital}</td>
-                                <td>{macro_region}</td>
-                                <td>{region}</td>
+                                <td>{start_date}</td>
+                                <td>{end_date.toUpperCase()}</td>
                               </tr>
                             );
                           })
@@ -79,4 +72,4 @@ class MapsProvinces extends Component {
   }
 }
 
-export default MapsProvinces;
+export default GovernmentPrimeMinisters;

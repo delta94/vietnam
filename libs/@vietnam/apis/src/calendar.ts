@@ -1,6 +1,46 @@
 'use strict';
 
-import { listOfCan, CanEnum, listOfChi, ChiEnum, listOfTietKhi, TietKhiEnum } from './configs';
+type CanEnum = 'Giáp' | 'Ất' | 'Bính' | 'Đinh' | 'Mậu' | 'Kỷ' | 'Canh' | 'Tân' | 'Nhâm' | 'Quý';
+
+type ChiEnum =
+  | 'Tý'
+  | 'Sửu'
+  | 'Dần'
+  | 'Mão'
+  | 'Thìn'
+  | 'Tỵ'
+  | 'Ngọ'
+  | 'Mùi'
+  | 'Thân'
+  | 'Dậu'
+  | 'Tuất'
+  | 'Hợi';
+
+type TietKhiEnum =
+  | 'Xuân phân'
+  | 'Thanh minh'
+  | 'Cốc vũ'
+  | 'Lập hạ'
+  | 'Tiểu mãn'
+  | 'Mang chủng'
+  | 'Hạ chí'
+  | 'Tiểu thử'
+  | 'Đại thử'
+  | 'Lập thu'
+  | 'Xử thử'
+  | 'Bạch lộ'
+  | 'Thu phân'
+  | 'Hàn lộ'
+  | 'Sương giáng'
+  | 'Lập đông'
+  | 'Tiểu tuyết'
+  | 'Đại tuyết'
+  | 'Đông chí'
+  | 'Tiểu hàn'
+  | 'Đại hàn'
+  | 'Lập xuân'
+  | 'Vũ thủy'
+  | 'Kinh trập';
 
 interface IDate {
   year: number;
@@ -8,10 +48,59 @@ interface IDate {
   date: number;
 }
 
-class Calendar {
-  private listOfCan: Array<CanEnum> = listOfCan;
-  private listOfChi: Array<ChiEnum> = listOfChi;
-  private listOfTietKhi: Array<TietKhiEnum> = listOfTietKhi;
+export default class Calendar {
+  private listOfCan: Array<CanEnum> = [
+    'Giáp',
+    'Ất',
+    'Bính',
+    'Đinh',
+    'Mậu',
+    'Kỷ',
+    'Canh',
+    'Tân',
+    'Nhâm',
+    'Quý'
+  ];
+  private listOfChi: Array<ChiEnum> = [
+    'Tý',
+    'Sửu',
+    'Dần',
+    'Mão',
+    'Thìn',
+    'Tỵ',
+    'Ngọ',
+    'Mùi',
+    'Thân',
+    'Dậu',
+    'Tuất',
+    'Hợi'
+  ];
+  private listOfTietKhi: Array<TietKhiEnum> = [
+    'Xuân phân',
+    'Thanh minh',
+    'Cốc vũ',
+    'Lập hạ',
+    'Tiểu mãn',
+    'Mang chủng',
+    'Hạ chí',
+    'Tiểu thử',
+    'Đại thử',
+    'Lập thu',
+    'Xử thử',
+    'Bạch lộ',
+    'Thu phân',
+    'Hàn lộ',
+    'Sương giáng',
+    'Lập đông',
+    'Tiểu tuyết',
+    'Đại tuyết',
+    'Đông chí',
+    'Tiểu hàn',
+    'Đại hàn',
+    'Lập xuân',
+    'Vũ thủy',
+    'Kinh trập'
+  ];
   /**
    * (Solar) date to (Julius) jd
    */
@@ -317,7 +406,3 @@ class Calendar {
     return listOfTietKhi[tietKhiIndex];
   }
 }
-
-const calendar: Calendar = new Calendar();
-
-export default calendar;

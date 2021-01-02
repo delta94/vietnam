@@ -16,55 +16,68 @@ import {
 
 const routes = [
   {
-    path: '/',
+    path: '',
+    text: '',
     component: Home
   },
   {
-    path: '/banks',
+    path: 'banks',
+    text: 'Banks',
     component: Banks
   },
   {
-    path: '/calendar',
+    path: 'calendar',
+    text: 'Calendar',
     component: Calendar
   },
   {
-    path: '/ethnic-minorities',
+    path: 'ethnic-minorities',
+    text: 'Ethnic Minorities',
     component: EthnicMinorities
   },
   {
-    path: '/finance',
+    path: 'finance',
+    text: 'Finance',
     component: Finance
   },
   {
-    path: '/government',
+    path: 'government',
+    text: 'Government',
     component: Government
   },
   {
-    path: '/license-plates',
+    path: 'license-plates',
+    text: 'License Plates',
     component: LicensePlates
   },
   {
-    path: '/maps',
+    path: 'maps',
+    text: 'Maps',
     component: Maps
   },
   {
-    path: '/news',
+    path: 'news',
+    text: 'News',
     component: News
   },
   {
-    path: '/phones',
+    path: 'phones',
+    text: 'Phones',
     component: Phones
   },
   {
-    path: '/sports',
+    path: 'sports',
+    text: 'Sports',
     component: Sports
   },
   {
-    path: '/technologies',
+    path: 'technologies',
+    text: 'Technologies',
     component: Technologies
   },
   {
-    path: '/vietcetera',
+    path: 'vietcetera',
+    text: 'Vietcetera',
     component: Vietcetera
   }
 ];

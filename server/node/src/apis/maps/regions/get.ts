@@ -2,9 +2,9 @@
 
 import { Request, Response } from 'express';
 
-import { maps } from 'vnapis';
+import { mapsService } from '../../../services';
 
 export default async (req: Request, res: Response): Promise<Response<any>> => {
-  const regions = maps.getRegions();
+  const regions = await mapsService.getRegions();
   return res.json(regions);
 };
