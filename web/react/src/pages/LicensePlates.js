@@ -10,6 +10,7 @@ class LicensePlates extends Component {
     this.state = { query: '', licensePlates: [], filterLicensePlates: [], loading: true };
 
     this.getLicensePlates = this.getLicensePlates.bind(this);
+    this.renderTable = this.renderTable.bind(this);
     this.filter = this.filter.bind(this);
   }
 
@@ -34,9 +35,51 @@ class LicensePlates extends Component {
     const licensePlates = await apis.getLicensePlates();
     const filterLicensePlates = licensePlates.filter(licensePlate => {
       const { license } = licensePlate;
-      return query ? license.includes(query) : true;
+      return query ? license.toLowerCase().includes(query.toLowerCase()) : true;
     });
     this.setState({ licensePlates, filterLicensePlates, loading: false });
+  }
+
+  renderTable(loading, filterLicensePlates) {
+    return (
+      <div id="table">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <div className="table-responsive table-container h-60vh">
+            <table className="table">
+              <caption className="text-center text-white bg-danger">
+                License Plates ({filterLicensePlates.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>License</th>
+                  <th>Definition</th>
+                  <th>Type</th>
+                </tr>
+              </thead>
+              <tbody>
+                {filterLicensePlates.length
+                  ? filterLicensePlates.map((licensePlate, index) => {
+                      const { license = '', definition = '', type = '' } = licensePlate;
+                      return (
+                        <tr key={index}>
+                          <td>{license}</td>
+                          <td>{definition}</td>
+                          <td>{type}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
   }
 
   render() {
@@ -48,48 +91,14 @@ class LicensePlates extends Component {
           <div className="mt-3 w-100">
             <Card className="shadow">
               <Card.Body>
-                <Card.Title className="text-center">
-                  License Plates ({filterLicensePlates.length})
-                </Card.Title>
-                <Form className="mt-3 mb-3 w-100">
+                <Form className="mb-3 w-100">
                   <Form.Control
                     type="text"
                     placeholder="License"
                     value={this.state.value}
                     onChange={this.filter}></Form.Control>
                 </Form>
-                {loading && (
-                  <div className="text-center">
-                    <Spinner animation="border" variant="danger"></Spinner>
-                  </div>
-                )}
-                {!loading && (
-                  <div className="table-responsive table-container">
-                    <table className="table">
-                      <thead>
-                        <tr>
-                          <th>License</th>
-                          <th>Definition</th>
-                          <th>Type</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filterLicensePlates.length
-                          ? filterLicensePlates.map((licensePlate, index) => {
-                              const { license = '', definition = '', type = '' } = licensePlate;
-                              return (
-                                <tr key={index}>
-                                  <td>{license}</td>
-                                  <td>{definition}</td>
-                                  <td>{type}</td>
-                                </tr>
-                              );
-                            })
-                          : ''}
-                      </tbody>
-                    </table>
-                  </div>
-                )}
+                {this.renderTable(loading, filterLicensePlates)}
               </Card.Body>
             </Card>
           </div>

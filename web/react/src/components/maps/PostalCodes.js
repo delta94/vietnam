@@ -10,6 +10,7 @@ class MapsDistricts extends Component {
     this.state = { postalCodes: [], loading: true };
 
     this.getPostalCodes = this.getPostalCodes.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -22,45 +23,51 @@ class MapsDistricts extends Component {
     await this.setState({ postalCodes, loading: false });
   }
 
+  renderTable(loading, postalCodes) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <table className="table">
+            <caption className="text-white text-center bg-danger">
+              Postal Codes ({postalCodes.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>Code</th>
+                <th>Province</th>
+              </tr>
+            </thead>
+            <tbody>
+              {postalCodes.length
+                ? postalCodes.map((district, index) => {
+                    const { code = '', province = '' } = district;
+                    return (
+                      <tr key={index}>
+                        <td>{code}</td>
+                        <td>{province}</td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const { postalCodes = [], loading = true } = this.state;
     return (
       <div id="MapsDistricts">
         <div className="mt-3 w-100">
           <Card className="shadow">
-            <Card.Body>
-              <Card.Title className="text-center">Districts ({postalCodes.length})</Card.Title>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading && (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Code</th>
-                        <th>Province</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {postalCodes.length
-                        ? postalCodes.map((district, index) => {
-                            const { code = '', province = '' } = district;
-                            return (
-                              <tr key={index}>
-                                <td>{code}</td>
-                                <td>{province}</td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </Card.Body>
+            <Card.Body>{this.renderTable(loading, postalCodes)}</Card.Body>
           </Card>
         </div>
       </div>

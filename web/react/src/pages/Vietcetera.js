@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Card } from 'react-bootstrap';
+import { Form, Card, ListGroup, Spinner } from 'react-bootstrap';
 import VietceteraClient from 'vietcetera';
 
 const vietcetera = new VietceteraClient();
@@ -7,7 +7,7 @@ const vietcetera = new VietceteraClient();
 class Vietcetera extends Component {
   constructor() {
     super();
-    this.state = { articles: [] };
+    this.state = { articles: [], loading: false };
     this.getArticles = this.getArticles.bind(this);
     this.processArticles = this.processArticles.bind(this);
   }
@@ -31,52 +31,61 @@ class Vietcetera extends Component {
 
   async getArticles(event) {
     const { value: type = '' } = event.target;
+    await this.setState({ loading: true });
     const basicArticles = await vietcetera.getArticles({ type });
     const articles = this.processArticles(basicArticles);
-    console.log(articles);
-    this.setState({ articles });
+    await this.setState({ articles, loading: false });
   }
 
   render() {
-    const { articles = [] } = this.state;
+    const { articles = [], loading } = this.state;
 
     return (
       <div id="Vietcetera">
         <main className="container">
-          <Form className="mt-3 w-100">
-            <Form.Group>
-              <Form.Control
-                as="select"
-                defaultValue="latest"
-                value={this.state.value}
-                onChange={this.getArticles}>
-                <option value="latest">Latest</option>
-                <option value="popular">Popular</option>
-                <option value="editor-pick">Editor Pick</option>
-              </Form.Control>
-            </Form.Group>
-          </Form>
-          <div className="mb-5 row">
-            {articles.length !== 0 &&
-              articles.map((article, index) => {
-                const { title = '', url = '', publishDate = '', description = '' } = article;
-                return (
-                  <div className="col-sm-6">
-                    <Card key={index} className="mb-3">
-                      <Card.Body>
+          <Card className="shadow mt-3">
+            <Card.Body>
+              <Card.Title className="text-center">Vietcetera ({articles.length})</Card.Title>
+              <Form className="mt-3 w-100">
+                <Form.Group>
+                  <Form.Control
+                    as="select"
+                    defaultValue="latest"
+                    value={this.state.value}
+                    onChange={this.getArticles}>
+                    <option value="latest">Latest</option>
+                    <option value="popular">Popular</option>
+                    <option value="editor-pick">Editor Pick</option>
+                  </Form.Control>
+                </Form.Group>
+              </Form>
+              <ListGroup className="mt-3">
+                {loading && (
+                  <div className="text-center">
+                    <Spinner animation="border" variant="danger"></Spinner>
+                  </div>
+                )}
+                {!loading &&
+                  articles.length !== 0 &&
+                  articles.map((article, index) => {
+                    const { title = '', url = '', publishDate = '', description = '' } = article;
+                    return (
+                      <ListGroup.Item key={index}>
                         <Card.Title>
                           <a href={url} target="_blank" rel="noreferrer">
                             {title}
                           </a>
                         </Card.Title>
-                        <Card.Subtitle className="text-muted">{publishDate}</Card.Subtitle>
+                        <Card.Subtitle className="small text-muted mb-1">
+                          {publishDate}
+                        </Card.Subtitle>
                         <Card.Text>{description}</Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                );
-              })}
-          </div>
+                      </ListGroup.Item>
+                    );
+                  })}
+              </ListGroup>
+            </Card.Body>
+          </Card>
         </main>
       </div>
     );

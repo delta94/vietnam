@@ -15,3 +15,28 @@ code {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.h-50vh {
+  max-height: 50vh;
+}
+
+.h-60vh {
+  max-height: 60vh;
+}
+
+.dotted {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+}
+
+.table-container {
+  border: 1px solid #dee2e6;
+}
+
+.table {
+  margin-bottom: 0 !important;
+}
+
+table caption {
+  caption-side: top ;
+}

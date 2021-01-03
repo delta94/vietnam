@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
 
 import routes from '../../routers';
@@ -7,7 +8,7 @@ class HomeNavigation extends Component {
   render() {
     return (
       <div id="HomeNavigation">
-        <Navbar bg="danger" expand="sm" variant="dark">
+        <Navbar bg="danger" expand="sm" className="shadow" variant="dark">
           <div className="container">
             <Navbar.Brand href="#" className="text-white">
               VNPM
@@ -18,10 +19,8 @@ class HomeNavigation extends Component {
                   const { path, text } = route;
                   if (!text) return '';
                   return (
-                    <NavDropdown.Item
-                      key={index}
-                      href={`https://hieudoanm.github.io/vietnam/#/${path}`}>
-                      {text}
+                    <NavDropdown.Item key={index}>
+                      <Link to={path}>{text}</Link>
                     </NavDropdown.Item>
                   );
                 })}

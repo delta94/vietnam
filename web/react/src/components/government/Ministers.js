@@ -12,6 +12,7 @@ class GovernmentMinisters extends Component {
     this.getMinistries = this.getMinistries.bind(this);
     this.getMinisters = this.getMinisters.bind(this);
     this.updateMinistry = this.updateMinistry.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -38,6 +39,46 @@ class GovernmentMinisters extends Component {
     await this.getMinisters();
   }
 
+  renderTable(loading, ministers) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <table className="table">
+            <caption className="text-center text-white bg-danger">
+              Ministers ({ministers.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Start</th>
+                <th>End</th>
+              </tr>
+            </thead>
+            <tbody>
+              {ministers.length
+                ? ministers.map((minister, index) => {
+                    const { name = '', start_date = '', end_date = '' } = minister;
+                    return (
+                      <tr key={index}>
+                        <td>{name}</td>
+                        <td>{start_date}</td>
+                        <td>{end_date.toUpperCase()}</td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const { ministers = [], ministries = [], loading = false } = this.state;
     console.log('loading', loading);
@@ -48,7 +89,6 @@ class GovernmentMinisters extends Component {
         <div className="mt-3 w-100">
           <Card className="shadow">
             <Card.Body>
-              <Card.Title className="text-center">Ministers ({ministers.length})</Card.Title>
               <Form className="mt-3 w-100">
                 <Form.Group>
                   <Form.Control
@@ -67,38 +107,7 @@ class GovernmentMinisters extends Component {
                   </Form.Control>
                 </Form.Group>
               </Form>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading && (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Start</th>
-                        <th>End</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {ministers.length
-                        ? ministers.map((minister, index) => {
-                            const { name = '', start_date = '', end_date = '' } = minister;
-                            return (
-                              <tr key={index}>
-                                <td>{name}</td>
-                                <td>{start_date}</td>
-                                <td>{end_date.toUpperCase()}</td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+              {this.renderTable(loading, ministers)}
             </Card.Body>
           </Card>
         </div>

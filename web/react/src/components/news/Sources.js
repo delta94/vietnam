@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Card, Badge } from 'react-bootstrap';
+import { Card, Badge, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../services';
 
 class NewsSources extends Component {
   constructor() {
     super();
-    this.state = { sources: [] };
+
+    this.state = { sources: [], loading: true };
+
     this.getSources = this.getSources.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -15,44 +18,73 @@ class NewsSources extends Component {
   }
 
   async getSources() {
-    const self = this;
+    this.setState({ loading: true });
     const sources = await apis.getSources();
-    self.setState({ sources });
+    this.setState({ sources, loading: false });
+  }
+
+  renderTable(loading, sources) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <table className="table">
+            <caption className="text-center text-white bg-danger">
+              Sources ({sources.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Category</th>
+                <th>Categories</th>
+              </tr>
+            </thead>
+            <tbody>
+              {sources.length
+                ? sources.map((source, index) => {
+                    const { id = '', name = '', url = '', category = '', categories = [] } = source;
+                    return (
+                      <tr key={index}>
+                        <td>{id}</td>
+                        <td>
+                          <a href={url} target="_blank" rel="noreferrer">
+                            {name}
+                          </a>
+                        </td>
+                        <td>{category}</td>
+                        <td>
+                          {categories.map((category, index) => {
+                            return (
+                              <Badge key={index} variant="danger" className="text-white mr-1">
+                                {category}
+                              </Badge>
+                            );
+                          })}
+                        </td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
   }
 
   render() {
-    const { sources = [] } = this.state;
+    const { sources = [], loading } = this.state;
 
     return (
       <div id="NewsSources">
-        <div className="row mt-3">
-          {sources.map((source = {}, index) => {
-            const { id = '', name = '', url = '', category = '', categories = [] } = source;
-            return (
-              <div key={index} className="col-sm-6 mb-3">
-                <Card className="w-100">
-                  <Card.Body>
-                    <Card.Title>
-                      <a href={url} target="_blank" rel="noreferrer">
-                        {id} - {name}
-                      </a>
-                    </Card.Title>
-                    <Card.Subtitle className="d-block text-muted mb-1">
-                      {category && <small>{category}</small>}
-                    </Card.Subtitle>
-                    {categories.map((category, index) => {
-                      return (
-                        <Badge key={index} variant="danger" className="text-white mr-1">
-                          {category}
-                        </Badge>
-                      );
-                    })}
-                  </Card.Body>
-                </Card>
-              </div>
-            );
-          })}
-        </div>
+        <Card className="shadow mt-3">
+          <Card.Body>{this.renderTable(loading, sources)}</Card.Body>
+        </Card>
       </div>
     );
   }

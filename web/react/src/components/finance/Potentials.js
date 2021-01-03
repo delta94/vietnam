@@ -8,8 +8,11 @@ import { apis } from '../../services';
 class FinancePotentials extends Component {
   constructor() {
     super();
+
     this.state = { loading: false, potentials: [], from: 0, to: 0 };
+
     this.updatePeriod = this.updatePeriod.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -27,11 +30,106 @@ class FinancePotentials extends Component {
   }
 
   async getStockPotentials() {
-    const self = this;
     const { from = 0, to = 0 } = this.state;
-    self.setState({ loading: true });
+    this.setState({ loading: true });
     const potentials = await apis.getStockPotentials(from, to);
-    self.setState({ potentials, loading: false });
+    this.setState({ potentials, loading: false });
+  }
+
+  renderTable(loading, potentials) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading ? (
+          <table className="table">
+            <caption className="text-white text-center bg-danger">
+              Potentials ({potentials.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Latest</th>
+                <th>Diff</th>
+                <th>Median</th>
+                <th>Average</th>
+                <th>Middle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {potentials.length
+                ? potentials.map((potential, index) => {
+                    const {
+                      symbol = '',
+                      group = '',
+                      startDate = '',
+                      name = '',
+                      industry = '',
+                      subsector = '',
+                      low = false,
+                      latest,
+                      latestDate,
+                      min,
+                      minDate,
+                      max,
+                      maxDate,
+                      diff,
+                      diffToMin,
+                      diffToMax,
+                      median,
+                      average,
+                      middle
+                    } = potential;
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <div>{symbol}</div>
+                          <div>{group}</div>
+                          <div>{startDate}</div>
+                        </td>
+                        <td>
+                          <div>{name}</div>
+                          <div>{industry}</div>
+                          <div>{subsector}</div>
+                        </td>
+                        <td>
+                          <div className={low ? 'text-danger' : 'text-success'}>
+                            <div>
+                              {latest} ({latestDate})
+                            </div>
+                            <div>
+                              {min} ({minDate})
+                            </div>
+                            <div>
+                              {max} ({maxDate})
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className={low ? 'text-danger' : 'text-success'}>
+                            <div>{diff}</div>
+                            <div>{diffToMin}</div>
+                            <div>{diffToMax}</div>
+                          </div>
+                        </td>
+                        <td>{median}</td>
+                        <td>{average}</td>
+                        <td>{middle}</td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        ) : (
+          ''
+        )}
+      </div>
+    );
   }
 
   render() {
@@ -41,7 +139,6 @@ class FinancePotentials extends Component {
         <div className="w-100 mt-3">
           <Card className="shadow">
             <Card.Body>
-              <Card.Title className="text-center">Potential</Card.Title>
               <Form>
                 <Form.Group>
                   <Form.Control
@@ -60,94 +157,7 @@ class FinancePotentials extends Component {
                   </Form.Control>
                 </Form.Group>
               </Form>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading ? (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Latest</th>
-                        <th>Diff</th>
-                        <th>Median</th>
-                        <th>Average</th>
-                        <th>Middle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {potentials.length
-                        ? potentials.map((potential, index) => {
-                            const {
-                              symbol = '',
-                              group = '',
-                              startDate = '',
-                              name = '',
-                              industry = '',
-                              subsector = '',
-                              low = false,
-                              latest,
-                              latestDate,
-                              min,
-                              minDate,
-                              max,
-                              maxDate,
-                              diff,
-                              diffToMin,
-                              diffToMax,
-                              median,
-                              average,
-                              middle
-                            } = potential;
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  <div>{symbol}</div>
-                                  <div>{group}</div>
-                                  <div>{startDate}</div>
-                                </td>
-                                <td>
-                                  <div>{name}</div>
-                                  <div>{industry}</div>
-                                  <div>{subsector}</div>
-                                </td>
-                                <td>
-                                  <div className={low ? 'text-danger' : 'text-success'}>
-                                    <div>
-                                      {latest} ({latestDate})
-                                    </div>
-                                    <div>
-                                      {min} ({minDate})
-                                    </div>
-                                    <div>
-                                      {max} ({maxDate})
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className={low ? 'text-danger' : 'text-success'}>
-                                    <div>{diff}</div>
-                                    <div>{diffToMin}</div>
-                                    <div>{diffToMax}</div>
-                                  </div>
-                                </td>
-                                <td>{median}</td>
-                                <td>{average}</td>
-                                <td>{middle}</td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              ) : (
-                ''
-              )}
+              {this.renderTable(loading, potentials)}
             </Card.Body>
           </Card>
         </div>

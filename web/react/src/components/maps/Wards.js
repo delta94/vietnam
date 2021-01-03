@@ -17,11 +17,9 @@ class MapsWards extends Component {
   }
 
   async getWards() {
-    const self = this;
-
-    self.setState({ loading: true });
+    this.setState({ loading: true });
     const wards = await apis.getWards();
-    self.setState({ wards, loading: false });
+    this.setState({ wards, loading: false });
   }
 
   render() {

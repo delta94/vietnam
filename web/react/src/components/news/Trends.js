@@ -15,10 +15,8 @@ class NewsTrends extends Component {
   }
 
   async getGoogleTrends() {
-    const self = this;
-
     const trends = await apis.getGoogleTrends();
-    self.setState({ trends });
+    this.setState({ trends });
   }
 
   render() {
@@ -28,12 +26,12 @@ class NewsTrends extends Component {
       <div id="NewsTrends">
         <Card className="shadow mt-3 mb-3">
           <Card.Body>
-            <Card.Title>Trends ({trends.length})</Card.Title>
+            <Card.Title className="text-center">Trends ({trends.length})</Card.Title>
             {trends.length !== 0 &&
               trends.map((trend, index) => {
                 const { text, url } = trend;
                 return (
-                  <Badge key={index} variant="primary" className="mr-1">
+                  <Badge key={index} variant="danger" className="mr-1">
                     <a
                       key={index}
                       href={url}

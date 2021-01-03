@@ -83,22 +83,20 @@ class FinanceHistory extends Component {
   }
 
   async getStockCompanies() {
-    const self = this;
-    self.setState({ loading: true });
+    this.setState({ loading: true });
     const companies = await apis.getStockCompanies();
     const symbols = companies.map(company => company.symbol);
     const symbol = symbols[0];
-    self.setState({ symbols, symbol, loading: false });
+    this.setState({ symbols, symbol, loading: false });
   }
 
   async getStockHistory() {
-    const self = this;
     const { from = 0, to = 0, symbol = '' } = this.state;
     const result = await apis.getStockHistory(symbol, from, to);
-    const labels = self.processLabels(result);
-    const datasets = self.processDatasets(labels, result);
+    const labels = this.processLabels(result);
+    const datasets = this.processDatasets(labels, result);
     console.log(labels, datasets);
-    self.setState({ data: { labels, datasets }, loading: false });
+    this.setState({ data: { labels, datasets }, loading: false });
   }
 
   processDatasets(historyLabels, historyData) {

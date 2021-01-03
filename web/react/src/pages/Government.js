@@ -15,7 +15,7 @@ class Government extends Component {
     return (
       <div id="Government">
         <main className="container mt-3">
-          <Tabs defaultActiveKey="ministries" className="nav-justified">
+          <Tabs defaultActiveKey="generalSecretaries" className="nav-justified">
             <Tab eventKey="generalSecretaries" title="General Secretaries">
               <GovernmentGeneralSecretaries></GovernmentGeneralSecretaries>
             </Tab>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, ListGroup, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../services';
 import { capitalize } from '../../helper';
@@ -7,7 +7,9 @@ import { capitalize } from '../../helper';
 class NewsFeed extends Component {
   constructor() {
     super();
+
     this.state = { category: '', categories: [], source: '', sources: [], articles: [] };
+
     this.getCategories = this.getCategories.bind(this);
     this.getSources = this.getSources.bind(this);
     this.getArticles = this.getArticles.bind(this);
@@ -22,20 +24,22 @@ class NewsFeed extends Component {
   }
 
   async getCategories() {
-    const self = this;
     const categories = await apis.getCategories();
-    self.setState({ categories });
+    const [category = ''] = categories;
+    this.setState({ category, categories });
   }
 
   async getSources() {
-    const self = this;
     const sources = await apis.getSources();
-    self.setState({ sources });
+    const [source = {}] = sources;
+    const { id } = source;
+    this.setState({ source: id, sources });
   }
 
-  updateCategory(event) {
+  async updateCategory(event) {
     const { value: category } = event.target;
     this.setState({ category });
+    await this.getArticles();
   }
 
   async updateSource(event) {
@@ -45,68 +49,74 @@ class NewsFeed extends Component {
   }
 
   async getArticles() {
-    const self = this;
     const { category = '', source = '' } = this.state;
+    await this.setState({ loading: true });
     const articles = await apis.getArticles({ category, source });
-    self.setState({ articles });
+    this.setState({ articles, loading: false });
   }
 
   render() {
-    const { articles = [], categories = [], sources = [] } = this.state;
+    const { articles = [], categories = [], sources = [], loading } = this.state;
 
     return (
       <div id="NewsFeed">
-        <Form className="mt-3 w-100">
-          <div className="row mb-3">
-            <div className="col-sm-6">
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue="latest"
-                  value={this.state.value}
-                  onChange={this.updateCategory}>
-                  {categories.map((category, index) => {
+        <Card className="shadow mt-3">
+          <Card.Body>
+            <Form className="mt-3 w-100">
+              <div className="row mb-3">
+                <div className="col-sm-6">
+                  <Form.Group>
+                    <Form.Control
+                      as="select"
+                      defaultValue="latest"
+                      value={this.state.value}
+                      onChange={this.updateCategory}>
+                      {categories.map((category, index) => {
+                        return (
+                          <option key={index} value={category}>
+                            {capitalize(category)}
+                          </option>
+                        );
+                      })}
+                    </Form.Control>
+                  </Form.Group>
+                </div>
+                <div className="col-sm-6">
+                  <Form.Group>
+                    <Form.Control
+                      as="select"
+                      defaultValue="latest"
+                      value={this.state.value}
+                      onChange={this.updateSource}>
+                      {sources.map((source, index) => {
+                        return (
+                          <option key={index} value={source.id}>
+                            {source.name}
+                          </option>
+                        );
+                      })}
+                    </Form.Control>
+                  </Form.Group>
+                </div>
+              </div>
+              <ListGroup className="mt-3">
+                {loading && (
+                  <div className="text-center">
+                    <Spinner animation="border" variant="danger"></Spinner>
+                  </div>
+                )}
+                {!loading &&
+                  articles.length !== 0 &&
+                  articles.map((article = {}, index) => {
+                    const {
+                      title = '',
+                      url = '',
+                      source = '',
+                      dateTimeString = '',
+                      description = ''
+                    } = article;
                     return (
-                      <option key={index} value={category}>
-                        {capitalize(category)}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </div>
-            <div className="col-sm-6">
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue="latest"
-                  value={this.state.value}
-                  onChange={this.updateSource}>
-                  {sources.map((source, index) => {
-                    return (
-                      <option key={index} value={source.id}>
-                        {source.name}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </div>
-          </div>
-          <div className="row">
-            {articles.length &&
-              articles.map((article = {}, index) => {
-                const {
-                  title = '',
-                  url = '',
-                  source = '',
-                  dateTimeString = '',
-                  description = ''
-                } = article;
-                return (
-                  <div key={index} className="col-sm-6 mb-3">
-                    <Card className="w-100">
-                      <Card.Body>
+                      <ListGroup.Item key={index}>
                         <Card.Title>
                           <a href={url} target="_blank" rel="noreferrer">
                             {title}
@@ -117,13 +127,13 @@ class NewsFeed extends Component {
                           {dateTimeString && <small>{dateTimeString}</small>}
                         </Card.Subtitle>
                         <Card.Text>{description}</Card.Text>
-                      </Card.Body>
-                    </Card>
-                  </div>
-                );
-              })}
-          </div>
-        </Form>
+                      </ListGroup.Item>
+                    );
+                  })}
+              </ListGroup>
+            </Form>
+          </Card.Body>
+        </Card>
       </div>
     );
   }

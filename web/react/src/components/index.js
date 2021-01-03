@@ -8,9 +8,7 @@ import FinanceHistory from './finance/History';
 import FinancePotentials from './finance/Potentials';
 import FinanceProfit from './finance/Profit';
 
-import HomeFooter from './home/Footer';
-import HomeNavigation from './home/Navigation';
-import HomePackages from './home/Packages';
+import Code from './globals/Code';
 
 import GovernmentGeneralSecretaries from './government/GeneralSecretaries';
 import GovernmentMinisters from './government/Ministers';
@@ -18,6 +16,10 @@ import GovernmentMinistries from './government/Ministries';
 import GovernmentNationalAssemblyChairs from './government/NationalAssemblyChairs';
 import GovernmentPresidents from './government/Presidents';
 import GovernmentPrimeMinisters from './government/PrimeMinisters';
+
+import HomeFooter from './home/Footer';
+import HomeNavigation from './home/Navigation';
+import HomePackages from './home/Packages';
 
 import MapsDistricts from './maps/Districts';
 import MapsPostalCodes from './maps/PostalCodes';
@@ -55,5 +57,7 @@ export {
   NewsFeed,
   NewsSources,
   NewsTrends,
-  SportsClubs
+  SportsClubs,
+  // Globals
+  Code
 };

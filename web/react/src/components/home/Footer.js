@@ -6,7 +6,7 @@ class HomeFooter extends Component {
     const year = d.getFullYear();
     return (
       <div id="HomeFooter">
-        <footer className="fixed-bottom bg-danger pt-3 pb-3 text-white text-center">
+        <footer className="fixed-bottom bg-danger pt-3 pb-3 text-white text-center shadow">
           &copy;{' '}
           <a
             href="https://www.linkedin.com/in/hieudoanm/"

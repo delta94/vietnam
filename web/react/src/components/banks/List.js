@@ -6,8 +6,11 @@ import { apis } from '../../services';
 class BanksList extends Component {
   constructor() {
     super();
+
     this.state = { banks: [], loading: false };
+
     this.getBanksWithForex = this.getBanksWithForex.bind(this);
+    this.renderTable = this.renderTable.bind(this);
     this.syncForex = this.syncForex.bind(this);
   }
 
@@ -26,6 +29,55 @@ class BanksList extends Component {
     alert(message);
   }
 
+  renderTable(loading, banks) {
+    return (
+      <div id="table">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <div className="table-responsive table-container">
+            <table className="table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Forex</th>
+                  <th>Sync</th>
+                </tr>
+              </thead>
+              <tbody>
+                {banks.length
+                  ? banks.map((bank, index) => {
+                      const { id = '', name = '', forex = '' } = bank;
+                      return (
+                        <tr key={index}>
+                          <td>{id}</td>
+                          <td>{name}</td>
+                          <td>
+                            <a href={forex} target="_blank" rel="noreferrer">
+                              Forex
+                            </a>
+                          </td>
+                          <td>
+                            <Button variant="danger" onClick={() => this.syncForex(id)}>
+                              Sync
+                            </Button>
+                          </td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    );
+  }
+
   render() {
     const { banks = [], loading = false } = this.state;
     console.log('loading', loading);
@@ -36,48 +88,7 @@ class BanksList extends Component {
           <Card className="shadow">
             <Card.Body>
               <Card.Title className="text-center">Banks ({banks.length})</Card.Title>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading && (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th>Forex</th>
-                        <th>Sync</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {banks.length
-                        ? banks.map((bank, index) => {
-                            const { id = '', name = '', forex = '' } = bank;
-                            return (
-                              <tr key={index}>
-                                <td>{id}</td>
-                                <td>{name}</td>
-                                <td>
-                                  <a href={forex} target="_blank" rel="noreferrer">
-                                    Forex
-                                  </a>
-                                </td>
-                                <td>
-                                  <Button variant="danger" onClick={() => this.syncForex(id)}>
-                                    Sync
-                                  </Button>
-                                </td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+              {this.renderTable(loading, banks)}
             </Card.Body>
           </Card>
         </div>

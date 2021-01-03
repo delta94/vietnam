@@ -10,6 +10,7 @@ class MapsProvinces extends Component {
     this.state = { provinces: [], loading: true };
 
     this.getProvinces = this.getProvinces.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -17,11 +18,51 @@ class MapsProvinces extends Component {
   }
 
   async getProvinces() {
-    const self = this;
-
-    self.setState({ loading: true });
+    this.setState({ loading: true });
     const provinces = await apis.getProvinces();
-    self.setState({ provinces, loading: false });
+    this.setState({ provinces, loading: false });
+  }
+
+  renderTable(loading, provinces) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <table className="table">
+            <caption className="text-white text-center bg-danger">
+              Provinces ({provinces.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Capital</th>
+                <th>Macro Region</th>
+                <th>Region</th>
+              </tr>
+            </thead>
+            <tbody>
+              {provinces.length
+                ? provinces.map((province, index) => {
+                    const { name = '', capital = '', region = '', macro_region = '' } = province;
+                    return (
+                      <tr key={index}>
+                        <td>{name}</td>
+                        <td>{capital}</td>
+                        <td>{macro_region}</td>
+                        <td>{region}</td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        )}
+      </div>
+    );
   }
 
   render() {
@@ -30,48 +71,7 @@ class MapsProvinces extends Component {
       <div id="MapsProvinces">
         <div className="mt-3 w-100">
           <Card className="shadow">
-            <Card.Body>
-              <Card.Title className="text-center">Provinces ({provinces.length})</Card.Title>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading && (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Name</th>
-                        <th>Capital</th>
-                        <th>Macro Region</th>
-                        <th>Region</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {provinces.length
-                        ? provinces.map((province, index) => {
-                            const {
-                              name = '',
-                              capital = '',
-                              region = '',
-                              macro_region = ''
-                            } = province;
-                            return (
-                              <tr key={index}>
-                                <td>{name}</td>
-                                <td>{capital}</td>
-                                <td>{macro_region}</td>
-                                <td>{region}</td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </Card.Body>
+            <Card.Body>{this.renderTable(loading, provinces)}</Card.Body>
           </Card>
         </div>
       </div>

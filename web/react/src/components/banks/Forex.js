@@ -22,7 +22,6 @@ class BanksForex extends Component {
   }
 
   async sort(by) {
-    const self = this;
     const { data = [], currency = '', sortDir = 1, sortBy = '' } = this.state;
     const dir = sortDir * (by === sortBy ? -1 : 1);
     await this.setState({ sortBy: by, sortDir: dir });
@@ -48,7 +47,7 @@ class BanksForex extends Component {
       });
     }
 
-    self.setState({ data });
+    this.setState({ data });
   }
 
   render() {

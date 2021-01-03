@@ -1,80 +1,80 @@
 import React, { Component } from 'react';
-import { Card, ListGroup } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { Card, Form } from 'react-bootstrap';
 
 class HomePackages extends Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     const apis = [
       {
         name: 'banks',
         npm: 'vietnambanks',
-        docs: 'https://hieudoanm.github.io/vietnam/#/banks'
+        docs: '/banks'
       },
       {
         name: 'calendar',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/calendar'
+        docs: '/calendar'
       },
       {
         name: 'ethnic-minorities',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/ethnic-minorities'
+        docs: '/ethnic-minorities'
       },
       {
         name: 'finance',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/finance'
+        docs: '/finance'
       },
       {
         name: 'government',
         npm: 'vietnamgovernment',
-        docs: 'https://hieudoanm.github.io/vietnam/#/government'
+        docs: '/government'
       },
       {
         name: 'license-plates',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/license-plates'
+        docs: '/license-plates'
       },
       {
         name: 'maps',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/maps'
+        docs: '/maps'
       },
       {
         name: 'news',
         npm: 'vietnamnews',
-        docs: 'https://hieudoanm.github.io/vietnam/#/news'
+        docs: '/news'
       },
       {
         name: 'phones',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/phones'
+        docs: '/phones'
       },
       {
         name: 'technologies',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/technologies'
+        docs: '/technologies'
       },
       {
         name: 'sports',
         npm: '',
-        docs: 'https://hieudoanm.github.io/vietnam/#/sports'
+        docs: '/sports'
       },
-      { name: 'vnltk', npm: 'vnapis', docs: 'https://hieudoanm.github.io/vietnam/#/vnltk' }
+      { name: 'vnltk', npm: 'vnapis', docs: '/vnltk' }
     ].sort((a, b) => (a.name > b.name ? 1 : -1));
 
-    this.state = {
-      apis,
-      filterAPIs: apis
-    };
+    this.state = { query: '', apis, filterAPIs: apis };
 
     this.filterPackages = this.filterPackages.bind(this);
-    this.renderPackages = this.renderPackages.bind(this);
+    this.renderTable = this.renderTable.bind(this);
+    this.updateQuery = this.updateQuery.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { query = '' } = nextProps;
-    const { apis = [], externalPackages = [] } = this.state;
+  async updateQuery(event) {
+    const { value = '' } = event.target;
+    await this.setState({ query: value });
+    const { query = '', apis = [], externalPackages = [] } = this.state;
     const filterAPIs = this.filterPackages(apis, query);
     const filterExternalPackages = this.filterPackages(externalPackages, query);
     this.setState({ filterAPIs, filterExternalPackages });
@@ -87,42 +87,59 @@ class HomePackages extends Component {
     });
   }
 
-  renderPackages(title, packages = []) {
+  renderTable(title, packages = []) {
     return (
       <Card className="shadow">
         <Card.Body>
-          <Card.Title className="text-center">
-            {title} ({packages.length})
-          </Card.Title>
-          <ListGroup className="mt-3 mb-3 text-center">
-            {packages.length !== 0 &&
-              packages.map((_package, index) => {
-                const { name = '', npm = '', docs = '' } = _package;
-                return (
-                  <ListGroup.Item
-                    className="d-flex justify-content-between align-items-center"
-                    key={index}>
-                    {name}
-                    <span>
-                      {npm && (
-                        <a
-                          href={`https://www.npmjs.com/package/${npm}`}
-                          rel="noreferrer"
-                          target="_blank">
-                          npm -
-                        </a>
-                      )}
-                      {docs && (
-                        <a className="ml-1" href={docs} target="_blank" rel="noreferrer">
-                          Docs
-                        </a>
-                      )}
-                    </span>
-                  </ListGroup.Item>
-                );
-              })}
-            {packages.length === 0 && <ListGroup.Item>No packages</ListGroup.Item>}
-          </ListGroup>
+          <Form className="w-100 mb-3">
+            <Form.Control
+              type="text"
+              placeholder="Query"
+              value={this.state.value}
+              onChange={this.updateQuery}></Form.Control>
+          </Form>
+          <div className="table-responsive table-container h-60vh">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">
+                {title} ({packages.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Package</th>
+                  <th>Docs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {packages.length !== 0 &&
+                  packages.map((_package, index) => {
+                    const { name = '', npm = '', docs = '' } = _package;
+                    return (
+                      <tr key={index}>
+                        <td>{name}</td>
+                        <td>
+                          {npm && (
+                            <a
+                              href={`https://www.npmjs.com/package/${npm}`}
+                              rel="noreferrer"
+                              target="_blank">
+                              npm
+                            </a>
+                          )}
+                        </td>
+                        <td>
+                          {docs && (
+                            <Link className="ml-1" to={docs}>
+                              Docs
+                            </Link>
+                          )}
+                        </td>
+                      </tr>
+                    );
+                  })}
+              </tbody>
+            </table>
+          </div>
         </Card.Body>
       </Card>
     );
@@ -132,7 +149,7 @@ class HomePackages extends Component {
     const { filterAPIs = [] } = this.state;
     return (
       <div id="HomePackages">
-        <div className="mt-3">{this.renderPackages('APIs', filterAPIs)}</div>
+        <div className="mt-3">{this.renderTable('APIs', filterAPIs)}</div>
       </div>
     );
   }

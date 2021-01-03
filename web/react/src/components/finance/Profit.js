@@ -34,10 +34,9 @@ class FinanceProfit extends Component {
 
   async calculateProfit(event) {
     event.preventDefault();
-    const self = this;
     const { buy = 0, sell = 0, volume = 0 } = this.state;
     const profit = await apis.calculateProfit(buy, sell, volume);
-    self.setState({ profit });
+    this.setState({ profit });
   }
 
   render() {

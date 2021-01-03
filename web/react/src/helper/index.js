@@ -38,3 +38,14 @@ export const processPeriod = period => {
 export const deepClone = (o = {}) => {
   return JSON.parse(JSON.stringify(o));
 };
+
+export const copyToClipboard = text => {
+  navigator.clipboard
+    .writeText(text)
+    .then(() => {
+      alert('Text copied to clipboard');
+    })
+    .catch(err => {
+      alert('Error in copying text: ', err);
+    });
+};

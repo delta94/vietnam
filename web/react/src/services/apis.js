@@ -1,12 +1,6 @@
-import { baseAPI } from '../configs';
-
 import endpoints from './apis-configs';
 
 class APIS {
-  constructor(base) {
-    this.base = base;
-  }
-
   getGeneralSecretaries() {
     const url = endpoints.government.generalSecretaries.get;
 
@@ -88,7 +82,7 @@ class APIS {
   }
 
   getMinisters(ministry) {
-    const url = `${this.base}/government/ministers?ministry=${ministry}`;
+    const url = `${endpoints.government.ministers.get}?ministry=${ministry}`;
 
     return new Promise(resolve => {
       fetch(url)
@@ -156,7 +150,7 @@ class APIS {
 
   getArticles(options = {}) {
     const { category, source } = options;
-    const url = `${this.base}/news?category=${category}&sources=${source}`;
+    const url = `${endpoints.news.get}?category=${category}&sources=${source}`;
     return new Promise(resolve => {
       fetch(url)
         .then(res => res.json())
@@ -172,7 +166,7 @@ class APIS {
   }
 
   calculateProfit(buy, sell, volume) {
-    const url = `${this.base}/finance/profit`;
+    const url = endpoints.finance.profit.post;
     return new Promise(resolve => {
       fetch(url, {
         method: 'POST',
@@ -192,7 +186,7 @@ class APIS {
   }
 
   getStockHighlights(from, to) {
-    const url = `${this.base}/finance/highlights`;
+    const url = endpoints.finance.highlights.post;
     return new Promise(resolve => {
       fetch(url, {
         method: 'POST',
@@ -211,7 +205,7 @@ class APIS {
   }
 
   getStockPotentials(from, to) {
-    const url = `${this.base}/finance/potentials`;
+    const url = endpoints.finance.potentials.post;
     return new Promise(resolve => {
       fetch(url, {
         method: 'POST',
@@ -230,7 +224,7 @@ class APIS {
   }
 
   getStockCompanies() {
-    const url = `${this.base}/finance/companies`;
+    const url = endpoints.finance.companies.get;
     return new Promise(resolve => {
       fetch(url)
         .then(res => res.json())
@@ -246,7 +240,7 @@ class APIS {
   }
 
   getBanksForexRates() {
-    const url = `${this.base}/banks/forex/rates`;
+    const url = endpoints.banks.forex.rates.get;
     return new Promise(resolve => {
       fetch(url)
         .then(res => res.json())
@@ -263,7 +257,7 @@ class APIS {
   }
 
   getBanksWithForex() {
-    const url = `${this.base}/banks`;
+    const url = endpoints.banks.get;
 
     return new Promise(resolve => {
       fetch(url)
@@ -280,7 +274,7 @@ class APIS {
   }
 
   syncForex(id) {
-    const url = `${this.base}/banks/forex/sync`;
+    const url = endpoints.banks.forex.sync.post;
     return new Promise(resolve => {
       fetch(url, {
         method: 'POST',
@@ -300,7 +294,8 @@ class APIS {
   }
 
   getStockHistory(symbol, from, to) {
-    const url = `${this.base}/finance/history`;
+    const url = endpoints.finance.history.post;
+
     return new Promise(resolve => {
       fetch(url, {
         method: 'POST',
@@ -399,7 +394,7 @@ class APIS {
   }
 
   getLicensePlates() {
-    const url = endpoints.ethnicMinorities.get;
+    const url = endpoints.licensePlates.get;
 
     return new Promise(resolve => {
       fetch(url)
@@ -445,8 +440,24 @@ class APIS {
         });
     });
   }
+
+  getPhonesProviders() {
+    const url = endpoints.phones.providers.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((technologies = []) => {
+          resolve(technologies);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
 }
 
-const apis = new APIS(baseAPI);
+const apis = new APIS();
 
 export default apis;

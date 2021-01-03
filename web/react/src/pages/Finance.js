@@ -15,7 +15,7 @@ class Finance extends Component {
       <div id="Finance">
         <main className="container mt-3">
           <Tabs defaultActiveKey="companies" className="nav-justified">
-            <Tab eventKey="companies" title="Forex">
+            <Tab eventKey="companies" title="Companies">
               <FinanceCompanies></FinanceCompanies>
             </Tab>
             <Tab eventKey="highlights" title="Highlights">

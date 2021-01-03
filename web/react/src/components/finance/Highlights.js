@@ -8,8 +8,11 @@ import { processPeriod } from '../../helper';
 class FinanceHighlights extends Component {
   constructor() {
     super();
+
     this.state = { loading: false, highlights: [], from: 0, to: 0 };
+
     this.updatePeriod = this.updatePeriod.bind(this);
+    this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
@@ -27,11 +30,106 @@ class FinanceHighlights extends Component {
   }
 
   async getStockHighlights() {
-    const self = this;
     const { from = 0, to = 0 } = this.state;
-    self.setState({ loading: true });
+    this.setState({ loading: true });
     const highlights = await apis.getStockHighlights(from, to);
-    self.setState({ highlights, loading: false });
+    this.setState({ highlights, loading: false });
+  }
+
+  renderTable(loading, highlights) {
+    return (
+      <div className="table-responsive table-container">
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading ? (
+          <table className="table">
+            <caption className="text-white text-center bg-danger">
+              Highlights ({highlights.length})
+            </caption>
+            <thead>
+              <tr>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Latest</th>
+                <th>Diff</th>
+                <th>Median</th>
+                <th>Average</th>
+                <th>Middle</th>
+              </tr>
+            </thead>
+            <tbody>
+              {highlights.length
+                ? highlights.map((highlight, index) => {
+                    const {
+                      symbol = '',
+                      group = '',
+                      startDate = '',
+                      name = '',
+                      industry = '',
+                      subsector = '',
+                      low = false,
+                      latest,
+                      latestDate,
+                      min,
+                      minDate,
+                      max,
+                      maxDate,
+                      diff,
+                      diffToMin,
+                      diffToMax,
+                      median,
+                      average,
+                      middle
+                    } = highlight;
+                    return (
+                      <tr key={index}>
+                        <td>
+                          <div>{symbol}</div>
+                          <div>{group}</div>
+                          <div>{startDate}</div>
+                        </td>
+                        <td>
+                          <div>{name}</div>
+                          <div>{industry}</div>
+                          <div>{subsector}</div>
+                        </td>
+                        <td>
+                          <div className={low ? 'text-danger' : 'text-success'}>
+                            <div>
+                              {latest} ({latestDate})
+                            </div>
+                            <div>
+                              {min} ({minDate})
+                            </div>
+                            <div>
+                              {max} ({maxDate})
+                            </div>
+                          </div>
+                        </td>
+                        <td>
+                          <div className={low ? 'text-danger' : 'text-success'}>
+                            <div>{diff}</div>
+                            <div>{diffToMin}</div>
+                            <div>{diffToMax}</div>
+                          </div>
+                        </td>
+                        <td>{median}</td>
+                        <td>{average}</td>
+                        <td>{middle}</td>
+                      </tr>
+                    );
+                  })
+                : ''}
+            </tbody>
+          </table>
+        ) : (
+          ''
+        )}
+      </div>
+    );
   }
 
   render() {
@@ -41,7 +139,7 @@ class FinanceHighlights extends Component {
         <div className="w-100 mt-3">
           <Card className="shadow">
             <Card.Body>
-              <Card.Title className="text-center">Highlight</Card.Title>
+              <Card.Title className="text-center"></Card.Title>
               <Form>
                 <Form.Group>
                   <Form.Control
@@ -60,94 +158,7 @@ class FinanceHighlights extends Component {
                   </Form.Control>
                 </Form.Group>
               </Form>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading ? (
-                <div className="table-responsive table-container">
-                  <table className="table">
-                    <thead>
-                      <tr>
-                        <th>Symbol</th>
-                        <th>Name</th>
-                        <th>Latest</th>
-                        <th>Diff</th>
-                        <th>Median</th>
-                        <th>Average</th>
-                        <th>Middle</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {highlights.length
-                        ? highlights.map((highlight, index) => {
-                            const {
-                              symbol = '',
-                              group = '',
-                              startDate = '',
-                              name = '',
-                              industry = '',
-                              subsector = '',
-                              low = false,
-                              latest,
-                              latestDate,
-                              min,
-                              minDate,
-                              max,
-                              maxDate,
-                              diff,
-                              diffToMin,
-                              diffToMax,
-                              median,
-                              average,
-                              middle
-                            } = highlight;
-                            return (
-                              <tr key={index}>
-                                <td>
-                                  <div>{symbol}</div>
-                                  <div>{group}</div>
-                                  <div>{startDate}</div>
-                                </td>
-                                <td>
-                                  <div>{name}</div>
-                                  <div>{industry}</div>
-                                  <div>{subsector}</div>
-                                </td>
-                                <td>
-                                  <div className={low ? 'text-danger' : 'text-success'}>
-                                    <div>
-                                      {latest} ({latestDate})
-                                    </div>
-                                    <div>
-                                      {min} ({minDate})
-                                    </div>
-                                    <div>
-                                      {max} ({maxDate})
-                                    </div>
-                                  </div>
-                                </td>
-                                <td>
-                                  <div className={low ? 'text-danger' : 'text-success'}>
-                                    <div>{diff}</div>
-                                    <div>{diffToMin}</div>
-                                    <div>{diffToMax}</div>
-                                  </div>
-                                </td>
-                                <td>{median}</td>
-                                <td>{average}</td>
-                                <td>{middle}</td>
-                              </tr>
-                            );
-                          })
-                        : ''}
-                    </tbody>
-                  </table>
-                </div>
-              ) : (
-                ''
-              )}
+              {this.renderTable(loading, highlights)}
             </Card.Body>
           </Card>
         </div>

@@ -8,18 +8,18 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <HomeNavigation></HomeNavigation>
         <div className="pb-5">
           <div className="pb-5">
             <HashRouter basename="/">
+              <HomeNavigation></HomeNavigation>
               {routes.map((route, index) => {
                 const { path, component } = route;
                 return <Route key={index} exact path={`/${path}`} component={component}></Route>;
               })}
+              <HomeFooter></HomeFooter>
             </HashRouter>
           </div>
         </div>
-        <HomeFooter></HomeFooter>
       </div>
     );
   }
