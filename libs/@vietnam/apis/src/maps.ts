@@ -1,5 +1,7 @@
 'use strict';
 
+import fetch from 'node-fetch';
+
 export default class Maps {
   private fetch(endpoint): Promise<Array<any>> {
     const url = `https://vietnamd.herokuapp.com/api/maps/${endpoint}`;

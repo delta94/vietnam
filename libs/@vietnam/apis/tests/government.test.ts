@@ -6,11 +6,11 @@ import { describe, it } from 'mocha';
 import { government } from '../src/';
 
 describe('government', () => {
-  // it('get national assembly members', async () => {
-  //   const nationalAssemblyMembers = await government.getNationalAssemblyMembers();
-  //   console.log(nationalAssemblyMembers);
-  //   assert.ok(typeof nationalAssemblyMembers === 'object');
-  // });
+  it('get national assembly members', async () => {
+    const nationalAssemblyMembers = await government.getNationalAssemblyMembers();
+    console.log(nationalAssemblyMembers);
+    assert.ok(typeof nationalAssemblyMembers === 'object');
+  });
 
   it('get ministries', async () => {
     const ministries = await government.getMinistries();

@@ -89,6 +89,11 @@ export default class GovernmentService {
     return officials.filter(official => official.title_short === 'national-assembly-chair');
   }
 
+  public async getNationalAssemblyMembers(no: number = 14): Promise<string | Array<any>> {
+    const members: any = await postgreClient.find('national_assembly_members');
+    return members.filter(member => member.no === no);
+  }
+
   public async getIncumbents(): Promise<string | Array<any>> {
     const fields: Array<string> = [
       'ranking',

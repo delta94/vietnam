@@ -78,6 +78,21 @@ export default class Government {
     });
   }
 
+  public async getNationalAssemblyMembers(no: number = 14): Promise<Array<any>> {
+    const url = `https://vietnamd.herokuapp.com/api/government/national-assembly/members?no=${no}`;
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((members: Array<any> = []) => {
+          resolve(members);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
   public getMinistries(): Promise<Array<any>> {
     const url = `https://vietnamd.herokuapp.com/api/government/ministries`;
     return new Promise(resolve => {
