@@ -2,30 +2,24 @@
 
 import Address from './services/address';
 import Order from './services/order';
+import Service from './services/service';
 import Store from './services/store';
 import Ticket from './services/ticket';
 
-interface IOptions {
-  token: string;
-  dev?: boolean;
-}
+import { IOptions } from './helper/constants';
 
 export default class GHN {
-  private prod: string = 'https://online-gateway.ghn.vn';
-  private dev: string = 'https://dev-online-gateway.ghn.vn';
-
   public address: Address;
   public order: Order;
+  public service: Service;
   public store: Store;
   public ticket: Ticket;
 
-  constructor(options: IOptions) {
-    const { token, dev = false } = options;
-    const base = dev ? this.prod : this.dev;
-
-    this.address = new Address(token, base);
-    this.order = new Order(token, base);
-    this.store = new Store(token, base);
-    this.ticket = new Ticket(token, base);
+  constructor(token: string, test: boolean = false) {
+    this.address = new Address(token, test);
+    this.order = new Order(token, test);
+    this.service = new Service(token, test);
+    this.store = new Store(token, test);
+    this.ticket = new Ticket(token, test);
   }
 }

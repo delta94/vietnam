@@ -1,88 +1,84 @@
 'use strict';
 
-import utils from '../helper/utils';
+import Base from '../helper/base';
+import { apis, IEndpoint, IResponse } from '../helper/constants';
 
-import { ApiRequestOptions } from '../helper/interfaces';
-
-export default class Address {
-  private token: string;
-  private base: string;
-
-  constructor(token, base) {
-    this.token = token;
-    this.base = `${base}/shiip/public-api/v2/shipping-order`;
+export default class Address extends Base {
+  constructor(token: string, test: boolean) {
+    super(token, test);
   }
 
-  private async apiRequest(
-    method: string,
-    endpoint: string,
-    options: ApiRequestOptions = {}
-  ): Promise<any> {
-    const self = this;
-    const { token = '', base = '' } = self;
-    const { queryParams = {}, body = {} } = options;
-    const queryParamsString = utils.convertObjectToQueryString(queryParams);
-    const url = `${base}/${endpoint}?${queryParamsString}`;
-    const headers = { Token: token, 'Content-Type': 'application/json' };
-    const requestInit: RequestInit = Object.keys(body).length
-      ? { method, headers, body: JSON.stringify(body) }
-      : { method, headers };
-    return new Promise(resolve => {
-      fetch(url, requestInit)
-        .then(res => res.json())
-        .then(res => {
-          const { data = {} } = res;
-          resolve(data);
-        })
-        .catch(error => {
-          resolve(error);
-        });
-    });
-  }
-
-  public async get(): Promise<any> {}
-
-  public async create(): Promise<any> {}
-
-  public async getAvailableServices(options): Promise<any> {
-    const { shop_id, from_district_id, to_district_id } = options;
-    const res = await this.apiRequest('POST', `available-services`, {
-      body: { shop_id, from_district: from_district_id, to_district: to_district_id }
-    });
-    const { data = [] } = res;
+  public async getOrder(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.getOrder;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
     return data;
   }
 
-  public async calculateFee(shop, location, item): Promise<any> {
-    const { service_id, shop_id } = shop;
-    const { from_district_id, to_district_id, to_ward_code } = location;
-    const { height, length, weight, width, insurance_value, coupon = '' } = item;
-    const queryParams = { shop_id };
-    const body = {
-      service_id,
-      from_district_id,
-      to_district_id,
-      to_ward_code,
-      height,
-      length,
-      weight,
-      width,
-      insurance_value,
-      coupon
-    };
-    const res = await this.apiRequest('POST', `fee`, { queryParams, body });
-    const { data = [] } = res;
+  public async getOrderByClientCode(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.getOrderByClientCode;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
     return data;
   }
 
-  public async calculateExpectedDeliveryTime(shop, from, to): Promise<any> {
-    const { service_id, shop_id } = shop;
-    const { from_district_id, from_ward_code } = from;
-    const { to_district_id, to_ward_code } = to;
-    const queryParams = { shop_id };
-    const body = { service_id, from_district_id, from_ward_code, to_district_id, to_ward_code };
-    const res = await this.apiRequest('POST', `leadtime`, { queryParams, body });
-    const { data = [] } = res;
+  public async getOrderFee(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.getOrderFee;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
+  }
+
+  public async createOrder(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.createOrder;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
+  }
+
+  public async updateOrder(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.getOrder;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
+  }
+
+  public async updateOrderCOD(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.getOrderByClientCode;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
+  }
+
+  public async printOrder(): Promise<string> {
+    const endpoint: IEndpoint = apis.order.getOrderFee;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return '';
+    const { token = '' } = data;
+    const url: string = `https://dev-online-gateway.ghn.vn/a5/public-api/printA5?token=${token}`;
+    return url;
+  }
+
+  public async returnOrder(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.returnOrder;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
+  }
+
+  public async cancelOrder(): Promise<number> {
+    const endpoint: IEndpoint = apis.order.returnOrder;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
     return data;
   }
 }

@@ -1,57 +1,50 @@
 'use strict';
 
-import utils from '../helper/utils';
+import Base from '../helper/base';
+import { apis, IEndpoint, IResponse, IPagination, IStore } from '../helper/constants';
 
-import { ApiRequestOptions } from '../helper/interfaces';
-
-export default class Store {
-  private token: string;
-  private base: string;
-
-  constructor(token, base) {
-    this.token = token;
-    this.base = `${base}/shiip/public-api/v2/shop`;
+export default class Store extends Base {
+  constructor(token: string, test: boolean) {
+    super(token, test);
   }
 
-  private async apiRequest(
-    method: string,
-    endpoint: string,
-    options: ApiRequestOptions = {}
-  ): Promise<any> {
-    const self = this;
-    const { token = '', base = '' } = self;
-    const { queryParams = {}, body = {} } = options;
-    const queryParamsString = utils.convertObjectToQueryString(queryParams);
-    const url = `${base}/${endpoint}?${queryParamsString}`;
-    const headers = { Token: token, 'Content-Type': 'application/json' };
-    const requestInit: RequestInit = Object.keys(body).length
-      ? { method, headers, body: JSON.stringify(body) }
-      : { method, headers };
-    return new Promise(resolve => {
-      fetch(url, requestInit)
-        .then(res => res.json())
-        .then(res => {
-          const { data = [] } = res;
-          resolve(data);
-        })
-        .catch(error => {
-          resolve(error);
-        });
+  public async getStores(client_phone: string, pagination: IPagination): Promise<Array<IStore>> {
+    const endpoint: IEndpoint = apis.store.getStores;
+    const { offset = 0, limit = 1000 } = pagination;
+    const response: IResponse = await this.fetch(endpoint, {
+      query: { client_phone, offset, limit }
     });
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return [];
+    const { shops = [] } = data;
+    return shops;
   }
 
-  public async list(offset: number, limit: number, client_phone: string = ''): Promise<any> {
-    return await this.apiRequest('GET', `all`, { queryParams: { offset, limit, client_phone } });
+  public async createStore(district_id: number, ward_code: string, store: IStore): Promise<number> {
+    const endpoint: IEndpoint = apis.store.createStore;
+    const { name, phone, address } = store;
+    const response: IResponse = await this.fetch(endpoint, {
+      query: { district_id, ward_code, name, phone, address }
+    });
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    const { shop_id } = data;
+    return shop_id;
   }
 
-  public async register(options: any): Promise<any> {
-    const { district_id, ward_code, name, phone, address } = options;
-    const body = { district_id, ward_code, name, phone, address };
-    return await this.apiRequest('POST', `register`, { body });
+  public async addStaff(): Promise<number> {
+    const endpoint: IEndpoint = apis.store.addStaff;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
   }
 
-  public async addStaff(shop_id: string, username: string): Promise<any> {
-    const body = { shop_id, username };
-    return await this.apiRequest('POST', `add-client`, { body, queryParams: { shop_id } });
+  public async deliveryAgain(): Promise<number> {
+    const endpoint: IEndpoint = apis.store.deliveryAgain;
+    const response: IResponse = await this.fetch(endpoint);
+    const { code = 0, data = {} } = response;
+    if (code !== 200) return 0;
+    return data;
   }
 }
