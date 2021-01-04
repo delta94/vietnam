@@ -9,17 +9,17 @@ class MapsProvinces extends Component {
 
     this.state = { provinces: [], loading: true };
 
-    this.getProvinces = this.getProvinces.bind(this);
+    this.getMapsProvinces = this.getMapsProvinces.bind(this);
     this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
-    await this.getProvinces();
+    await this.getMapsProvinces();
   }
 
-  async getProvinces() {
+  async getMapsProvinces() {
     this.setState({ loading: true });
-    const provinces = await apis.getProvinces();
+    const provinces = await apis.getMapsProvinces();
     this.setState({ provinces, loading: false });
   }
 

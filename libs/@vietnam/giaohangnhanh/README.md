@@ -70,12 +70,14 @@ const info = {
   to_address: '',
   to_ward_code: '',
   to_district_id: 0,
+  service_id: 0,
+  service_type_id: 0,
   content: '',
   weight: 0,
   length: 0,
   width: 0,
   height: 0,
-  payment_type_id: 1,
+  payment_type_id: 1, // CHOTHUHANG - CHOXEMHANGKHONGTHU - KHONGCHOXEMHANG
   required_note: ''
 };
 const order = await ghn.order.createOrder(shop_id, info);
@@ -86,6 +88,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=66)
 
 ```ts
+const order_code: string = '';
+const order = await ghn.order.getOrder(order_code);
 ```
 
 #### Get Order Info (by client_order_code)
@@ -93,6 +97,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=118)
 
 ```ts
+const client_order_code: string = '';
+const orderByClientCode = await ghn.order.getOrderByClientCode(client_order_code);
 ```
 
 #### Get Fee of Order Info
@@ -100,6 +106,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=71)
 
 ```ts
+const order_code: string = '';
+const orderFee = await ghn.order.getOrderFee(order_code);
 ```
 
 #### Update Order
@@ -107,6 +115,10 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=75)
 
 ```ts
+const updatedOrder: any = {
+  content: 'Updated Test Content'
+}
+const updatedOrderMessage = await ghn.order.updateOrder(shop_id, order_code, updatedOrder);
 ```
 
 #### Update COD of Order
@@ -114,6 +126,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=64)
 
 ```ts
+const cod_amount: number = 0;
+const updatedCOD = await ghn.order.updateOrderCOD(order_code, amount);
 ```
 
 #### Print Order
@@ -121,6 +135,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=64)
 
 ```ts
+const order_codes: Array<string> = [order_code];
+const printOrder = await ghn.order.printOrder([order_code]);
 ```
 
 #### Return Order
@@ -128,6 +144,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=72)
 
 ```ts
+const order_codes: Array<string> = [order_code];
+const returnOrder = await ghn.order.returnOrder(order_codes);
 ```
 
 #### Cancel Order
@@ -135,6 +153,8 @@ const order = await ghn.order.createOrder(shop_id, info);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=73)
 
 ```ts
+const order_codes: Array<string> = [order_code];
+const cancelOrder = await ghn.order.cancelOrder(order_codes);
 ```
 
 ### Service - Calculate Fee
@@ -163,7 +183,7 @@ const weight: number = 0; // gram
 const length: number = 0; // cm
 const width: number = 0; // cm
 const height: number = 0; // cm
-const feeData = await ghn.service.calculateFee(shop_id, {
+const options = {
   service_id,
   to_ward_code,
   to_district_id,
@@ -171,7 +191,8 @@ const feeData = await ghn.service.calculateFee(shop_id, {
   length,
   width,
   height
-});
+};
+const feeData = await ghn.service.calculateFee(shop_id, options);
 ```
 
 #### Calculate the Expected Delivery Time
@@ -227,10 +248,10 @@ const wards = await ghn.address.getWards(district_id);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=62)
 
 ```ts
-const district_id: number = 0;
-const ward_code: string = '';
-const pagination = { offset: 0, limit: 1000 };
-const stations = await ghn.address.getStations(district_id, ward_code, pagination);
+const district_id: number = 0; // optional
+const ward_code: string = ''; // optional
+const options = { district_id, ward_code, offset: 0, limit: 1000 };
+const stations = await ghn.address.getStations(options);
 ```
 
 ### Store
@@ -240,8 +261,8 @@ const stations = await ghn.address.getStations(district_id, ward_code, paginatio
 [Documentation](https://api.ghn.vn/home/docs/detail?id=79)
 
 ```ts
-const client_phone = '';
-const pagination = { offset: 0, limit: 1000 };
+const client_phone: string = '';
+const pagination = { offset: 0, limit: 10000 };
 const stores = await ghn.store.getStores(client_phone, pagination);
 ```
 
@@ -250,9 +271,12 @@ const stores = await ghn.store.getStores(client_phone, pagination);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=58)
 
 ```ts
-const district_id: number = 0;
-const ward_code: string = '';
-const info = { name: '', phone: '', address: '' };
+const district_id: number = 0; // required
+const ward_code: string = ''; // required
+const name: string = ''; // required
+const phone: string = ''; // required
+const address: string = ''; // required
+const info = { name, phone, address };
 const store = await ghn.store.createStore(district_id, ward_code, info);
 ```
 
@@ -292,7 +316,11 @@ const ticket = await ghn.ticket.getTicket(ticket_id);
 [Documentation](https://api.ghn.vn/home/docs/detail?id=70)
 
 ```ts
-const ticket_info: any = { category: '', description: '', order_code: '' };
+const c_email: string = '';
+const category: string = ''; // optional: Tư vấn - Hối Giao/Lấy/Trả hàng - Thay đổi thông tin - Khiếu nại
+const description: string = '';
+const order_code: string = '';
+const ticket_info: any = { c_email, category, description, order_code };
 const ticket = await ghn.ticket.createTicket(ticket_info);
 ```
 

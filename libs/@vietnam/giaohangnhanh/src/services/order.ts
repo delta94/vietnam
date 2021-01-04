@@ -3,6 +3,7 @@
 import Base from '../helper/base';
 import {
   apis,
+  IError,
   IEndpoint,
   IResponse,
   IOrder,
@@ -18,42 +19,46 @@ export default class Address extends Base {
     super(token, test);
   }
 
-  public async createOrder(shop_id: number, order: IOrderCreateRequest): Promise<number> {
+  public async createOrder(shop_id: number, order: IOrderCreateRequest): Promise<IOrder | IError> {
     const endpoint: IEndpoint = apis.order.createOrder;
     const body = Object.assign({ shop_id }, order);
     const response: IResponse = await this.fetch(endpoint, { body });
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return 0;
+    const { code = 0, message = '', data = {} } = response;
+    if (code !== 200) return { message };
     return data;
   }
 
-  public async getOrder(order_code: string): Promise<IOrder> {
+  public async getOrder(order_code: string): Promise<IOrder | IError> {
     const endpoint: IEndpoint = apis.order.getOrder;
     const response: IResponse = await this.fetch(endpoint, { query: { order_code } });
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return {};
+    const { code = 0, message = '', data = {} } = response;
+    if (code !== 200) return { message };
     return data;
   }
 
-  public async getOrderByClientCode(client_order_code: string): Promise<IOrder> {
+  public async getOrderByClientCode(client_order_code: string): Promise<IOrder | IError> {
     const endpoint: IEndpoint = apis.order.getOrderByClientCode;
     const response: IResponse = await this.fetch(endpoint, { query: { client_order_code } });
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return {};
+    const { code = 0, message = '', data = {} } = response;
+    if (code !== 200) return { message };
     return data;
   }
 
-  public async getOrderFee(order_code: string): Promise<IOrderFee> {
+  public async getOrderFee(order_code: string): Promise<IOrderFee | IError> {
     const endpoint: IEndpoint = apis.order.getOrderFee;
     const response: IResponse = await this.fetch(endpoint, { query: { order_code } });
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return {};
+    const { code = 0, message = '', data = {} } = response;
+    if (code !== 200) return { message };
     return data;
   }
 
-  public async updateOrder(shop_id: number, order: IOrderUpdateRequest): Promise<string> {
+  public async updateOrder(
+    shop_id: number,
+    order_code: string,
+    order: IOrderUpdateRequest
+  ): Promise<string> {
     const endpoint: IEndpoint = apis.order.updateOrder;
-    const body = Object.assign({ shop_id }, order);
+    const body = Object.assign({ shop_id, order_code }, order);
     const response: IResponse = await this.fetch(endpoint, { body });
     const { code = 0, message = '' } = response;
     if (code !== 200) return message;
@@ -68,29 +73,33 @@ export default class Address extends Base {
     return message;
   }
 
-  public async printOrder(order_code: string): Promise<string> {
+  public async printOrder(order_codes: Array<string>): Promise<string> {
     const endpoint: IEndpoint = apis.order.printOrder;
-    const response: IResponse = await this.fetch(endpoint, { body: { order_code } });
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return '';
+    const response: IResponse = await this.fetch(endpoint, { body: { order_codes } });
+    const { code = 0, message = '', data = {} } = response;
+    if (code !== 200) return message;
     const { token = '' } = data;
     const url: string = `https://dev-online-gateway.ghn.vn/a5/public-api/printA5?token=${token}`;
     return url;
   }
 
-  public async returnOrder(order_code: string): Promise<Array<IOrderReturnResponse>> {
+  public async returnOrder(
+    order_codes: Array<string>
+  ): Promise<Array<IOrderReturnResponse> | IError> {
     const endpoint: IEndpoint = apis.order.returnOrder;
-    const response: IResponse = await this.fetch(endpoint, { body: { order_code } });
-    const { code = 0, data = [] } = response;
-    if (code !== 200) return [];
+    const response: IResponse = await this.fetch(endpoint, { body: { order_codes } });
+    const { code = 0, message = '', data = [] } = response;
+    if (code !== 200) return { message };
     return data;
   }
 
-  public async cancelOrder(order_codes: Array<string>): Promise<Array<IOrderCancelResponse>> {
+  public async cancelOrder(
+    order_codes: Array<string>
+  ): Promise<Array<IOrderCancelResponse> | IError> {
     const endpoint: IEndpoint = apis.order.cancelOrder;
     const response: IResponse = await this.fetch(endpoint, { body: { order_codes } });
-    const { code = 0, data = [] } = response;
-    if (code !== 200) return [];
+    const { code = 0, message = '', data = [] } = response;
+    if (code !== 200) return { message };
     return data;
   }
 }

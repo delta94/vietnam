@@ -32,6 +32,10 @@ import NewsTrends from './news/Trends';
 
 import SportsClubs from './sports/Clubs';
 
+import GiaoHangNhanh from './technologies/GiaoHangNhanh';
+import List from './technologies/List';
+import Vietcetera from './technologies/Vietcetera';
+
 export {
   BanksForex,
   BanksHistory,
@@ -58,6 +62,10 @@ export {
   NewsSources,
   NewsTrends,
   SportsClubs,
+  // Technologies
+  GiaoHangNhanh,
+  List,
+  Vietcetera,
   // Globals
   Code
 };

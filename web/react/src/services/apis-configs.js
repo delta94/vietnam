@@ -50,7 +50,10 @@ const endpoints = {
     }
   },
   technologies: {
-    get: `${baseAPI}/technologies`
+    get: `${baseAPI}/technologies`,
+    giaohangnhanh: {
+      provinces: { get: `${baseAPI}/technologies/giaohangnhanh/provinces` }
+    }
   }
 };
 

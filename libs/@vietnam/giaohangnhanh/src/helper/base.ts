@@ -25,19 +25,19 @@ export default class Base {
   private buildURL(api: string, query: any = {}): string {
     const queryParamsString: string = this.convertObjectToQueryString(query);
     const url: string = `${api}?${queryParamsString}`;
-    return url;
+    return encodeURI(url);
   }
 
   public async fetch(endpoint: IEndpoint, options: IRequestOptions = {}): Promise<any> {
     const { token } = this;
     const { production, test, method } = endpoint;
     const api: string = this.test ? test : production;
-    const { query = {}, body = {} } = options;
+    const { query = {}, body = {}, headers = {} } = options;
     const url = this.buildURL(api, query);
-    const headers = { Token: token, 'Content-Type': 'application/json' };
+    const _headers = Object.assign(headers, { Token: token, 'Content-Type': 'application/json' });
     const requestInit: RequestInit = Object.keys(body).length
-      ? { method, headers, body: JSON.stringify(body) }
-      : { method, headers };
+      ? { method, headers: _headers, body: JSON.stringify(body) }
+      : { method, headers: _headers };
     return new Promise(resolve => {
       fetch(url, requestInit)
         .then(res => res.json())
@@ -45,8 +45,7 @@ export default class Base {
           resolve(res);
         })
         .catch(error => {
-          console.error(error);
-          resolve({});
+          resolve({ code: 0, message: error.stack, data: {} });
         });
     });
   }

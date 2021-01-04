@@ -10,7 +10,6 @@ import News from './News';
 import Phones from './Phones';
 import Sports from './Sports';
 import Technologies from './Technologies';
-import Vietcetera from './Vietcetera';
 
 export {
   Banks,
@@ -24,6 +23,5 @@ export {
   News,
   Phones,
   Sports,
-  Technologies,
-  Vietcetera
+  Technologies
 };

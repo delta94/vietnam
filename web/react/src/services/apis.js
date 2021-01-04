@@ -345,7 +345,7 @@ class APIS {
     });
   }
 
-  getProvinces() {
+  getMapsProvinces() {
     const url = endpoints.maps.provinces.get;
 
     return new Promise(resolve => {
@@ -449,6 +449,22 @@ class APIS {
         .then(res => res.json())
         .then((technologies = []) => {
           resolve(technologies);
+        })
+        .catch(error => {
+          console.error(error);
+          resolve([]);
+        });
+    });
+  }
+
+  getProvinces() {
+    const url = endpoints.technologies.giaohangnhanh.provinces.get;
+
+    return new Promise(resolve => {
+      fetch(url)
+        .then(res => res.json())
+        .then((provinces = []) => {
+          resolve(provinces);
         })
         .catch(error => {
           console.error(error);

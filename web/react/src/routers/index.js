@@ -10,8 +10,7 @@ import {
   News,
   Phones,
   Sports,
-  Technologies,
-  Vietcetera
+  Technologies
 } from '../pages';
 
 const routes = [
@@ -74,11 +73,6 @@ const routes = [
     path: 'technologies',
     text: 'Technologies',
     component: Technologies
-  },
-  {
-    path: 'vietcetera',
-    text: 'Vietcetera',
-    component: Vietcetera
   }
 ];
 

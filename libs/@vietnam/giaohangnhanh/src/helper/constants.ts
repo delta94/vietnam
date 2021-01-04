@@ -46,24 +46,24 @@ const test: string = `https://dev-online-gateway.ghn.vn`;
 
 export const apis = {
   order: {
+    createOrder: {
+      production: `${production}/shiip/public-api/v2/shipping-order/create`,
+      test: `${test}/shiip/public-api/v2/shipping-order/create`,
+      method: 'POST'
+    },
     getOrder: {
       production: `${production}/shiip/public-api/v2/shipping-order/detail`,
       test: `${test}/shiip/public-api/v2/shipping-order/detail`,
-      method: 'POST'
+      method: 'GET'
     },
     getOrderByClientCode: {
       production: `${production}/shiip/public-api/v2/shipping-order/detail-by-client-code`,
       test: `${test}/shiip/public-api/v2/shipping-order/detail-by-client-code`,
-      method: 'POST'
+      method: 'GET'
     },
     getOrderFee: {
       production: `${production}/shiip/public-api/v2/shipping-order/soc`,
       test: `${test}/shiip/public-api/v2/shipping-order/soc`,
-      method: 'POST'
-    },
-    createOrder: {
-      production: `${production}/shiip/public-api/v2/shipping-order/create`,
-      test: `${test}/shiip/public-api/v2/shipping-order/create`,
       method: 'POST'
     },
     updateOrder: {
@@ -175,6 +175,7 @@ export const apis = {
 export interface IRequestOptions {
   query?: any;
   body?: any;
+  headers?: any;
 }
 
 export interface IEndpoint {
@@ -212,6 +213,13 @@ export interface IWard {
   code: string;
   district_id: number;
   name: string;
+}
+
+export interface IStationRequest {
+  district_id?: number;
+  ward_code?: string;
+  offset?: number;
+  limit?: number;
 }
 
 export interface IStation {
@@ -265,6 +273,7 @@ export interface IStoreDeliveryAgainResponse {
  * Ticket
  */
 export interface ITicketRequest {
+  c_email: string;
   order_code: string;
   category: string | 'Tư vấn' | 'Hối Giao/Lấy/Trả hàng' | 'Thay đổi thông tin' | 'Khiếu nại';
   description: string;
@@ -359,21 +368,21 @@ export interface IOrderCreateRequest {
   return_address?: string;
   return_district_id?: number;
   return_ward_code?: string;
-
-  client_order_code?: string;
-  cod_amount?: number;
+  // Service
+  service_id: number;
+  service_type_id: number;
   // Content
   content: string;
   weight: number;
   length: number;
   width: number;
   height: number;
-
+  // Other Required
   payment_type_id: number | 1 | 2;
   required_note: string | 'CHOTHUHANG' | 'CHOXEMHANGKHONGTHU' | 'KHONGCHOXEMHANG';
-  // Service
-  service_id?: number;
-  service_type_id?: number;
+
+  client_order_code?: string;
+  cod_amount?: number;
 
   pick_station_id?: number;
   insurance_value?: number;
@@ -396,6 +405,9 @@ export interface IOrderItem {
 }
 
 export interface IOrder {
+  order_code?: string;
+  client_order_code?: string;
+
   shop_id?: number;
   client_id?: number;
   return_name?: string;
@@ -431,7 +443,6 @@ export interface IOrder {
   insurance_value?: number;
   order_value?: number;
   pick_station_id?: number;
-  client_order_code?: string;
   required_note?: string;
   content?: string;
   note?: string;
@@ -441,7 +452,6 @@ export interface IOrder {
   items?: Array<IOrderItem>;
   coupon?: string;
   _id?: string;
-  order_code?: string;
   version_no?: string;
   updated_ip?: string;
   updated_employee?: number;
@@ -508,7 +518,6 @@ export interface IOrderFeePayment {
 }
 
 export interface IOrderUpdateRequest {
-  order_code?: string;
   // From
   from_name?: string;
   from_phone?: string;
@@ -552,4 +561,12 @@ export interface IOrderCancelResponse {
   order_code: string;
   result: boolean;
   message: string;
+}
+
+export interface IError {
+  message?: string;
+
+  id?: number;
+  order_code?: string;
+  client_order_code?: string;
 }
