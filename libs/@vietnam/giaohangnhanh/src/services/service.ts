@@ -1,7 +1,17 @@
 'use strict';
 
 import Base from '../helper/base';
-import { apis, IEndpoint, IResponse } from '../helper/constants';
+import {
+  apis,
+  IEndpoint,
+  IOrder,
+  IService,
+  IResponse,
+  IServiceCalculateFeeRequest,
+  IServiceCalculateFeeResponse,
+  IServiceCalculateTimeRequest,
+  IServiceCalculateTimeResponse
+} from '../helper/constants';
 
 export default class Service extends Base {
   constructor(token: string, test: boolean) {
@@ -12,7 +22,7 @@ export default class Service extends Base {
     shop_id: number,
     from_district: number,
     to_district: number
-  ): Promise<Array<any>> {
+  ): Promise<Array<IService>> {
     const endpoint: IEndpoint = apis.service.getServices;
     const response: IResponse = await this.fetch(endpoint, {
       query: { shop_id, from_district, to_district }
@@ -20,25 +30,33 @@ export default class Service extends Base {
     const { code = 0, data = [] } = response;
     if (code !== 200) return [];
     const services = data.map(item => {
-      const { service_id: id, short_name: name, service_type_id: serviceTypeID } = item;
-      return { id, name, serviceTypeID };
+      const { service_id, short_name, service_type_id } = item;
+      return { service_id, short_name, service_type_id };
     });
     return services;
   }
 
-  public async calculateFee(): Promise<number> {
+  public async calculateFee(
+    shop_id: number,
+    location: IServiceCalculateFeeRequest
+  ): Promise<IServiceCalculateFeeResponse> {
     const endpoint: IEndpoint = apis.service.calculateFee;
-    const response: IResponse = await this.fetch(endpoint);
+    const body = Object.assign({ shop_id }, location);
+    const response: IResponse = await this.fetch(endpoint, { body });
     const { code = 0, data = {} } = response;
-    if (code !== 200) return 0;
+    if (code !== 200) return {};
     return data;
   }
 
-  public async calculateExpectedDeliveryTime(): Promise<number> {
+  public async calculateExpectedDeliveryTime(
+    shop_id: number,
+    location: IServiceCalculateTimeRequest
+  ): Promise<IServiceCalculateTimeResponse> {
     const endpoint: IEndpoint = apis.service.calculateExpectedDeliveryTime;
-    const response: IResponse = await this.fetch(endpoint);
+    const body = Object.assign({ shop_id }, location);
+    const response: IResponse = await this.fetch(endpoint, { body });
     const { code = 0, data = {} } = response;
-    if (code !== 200) return 0;
+    if (code !== 200) return {};
     return data;
   }
 }

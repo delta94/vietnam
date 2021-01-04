@@ -15,7 +15,8 @@ export default class GHN {
   public store: Store;
   public ticket: Ticket;
 
-  constructor(token: string, test: boolean = false) {
+  constructor(token: string, options: IOptions) {
+    const { test = false } = options;
     this.address = new Address(token, test);
     this.order = new Order(token, test);
     this.service = new Service(token, test);

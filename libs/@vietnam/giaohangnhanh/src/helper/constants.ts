@@ -49,167 +49,125 @@ export const apis = {
     getOrder: {
       production: `${production}/shiip/public-api/v2/shipping-order/detail`,
       test: `${test}/shiip/public-api/v2/shipping-order/detail`,
-      method: 'POST',
-      queryParams: ['order_code']
+      method: 'POST'
     },
     getOrderByClientCode: {
       production: `${production}/shiip/public-api/v2/shipping-order/detail-by-client-code`,
       test: `${test}/shiip/public-api/v2/shipping-order/detail-by-client-code`,
-      method: 'POST',
-      queryParams: ['client_order_code']
+      method: 'POST'
     },
     getOrderFee: {
       production: `${production}/shiip/public-api/v2/shipping-order/soc`,
       test: `${test}/shiip/public-api/v2/shipping-order/soc`,
-      method: 'POST',
-      queryParams: ['shop_id', 'order_code']
+      method: 'POST'
     },
     createOrder: {
       production: `${production}/shiip/public-api/v2/shipping-order/create`,
       test: `${test}/shiip/public-api/v2/shipping-order/create`,
-      method: 'POST',
-      queryParams: []
+      method: 'POST'
     },
     updateOrder: {
       production: `${production}/shiip/public-api/v2/shipping-order/update`,
       test: `${test}/shiip/public-api/v2/shipping-order/update`,
-      method: 'POST',
-      queryParams: ['shop_id', 'order_code', 'note']
+      method: 'POST'
     },
     updateOrderCOD: {
       production: `${production}/shiip/public-api/v2/shipping-order/updateCOD`,
       test: `${test}/shiip/public-api/v2/shipping-order/updateCOD`,
-      method: 'POST',
-      queryParams: ['order_code', 'cod_amount']
+      method: 'POST'
     },
     printOrder: {
       production: `${production}/shiip/public-api/v2/a5/gen-token`,
       test: `${test}/shiip/public-api/v2/a5/gen-token`,
-      method: 'POST',
-      queryParams: ['order_codes']
+      method: 'POST'
     },
     returnOrder: {
       production: `${production}/shiip/public-api/v2/switch-status/return`,
       test: `${test}/shiip/public-api/v2/switch-status/return`,
-      method: 'POST',
-      queryParams: ['order_codes']
+      method: 'POST'
     },
     cancelOrder: {
       production: `${production}/shiip/public-api/v2/switch-status/cancel`,
       test: `${test}/shiip/public-api/v2/switch-status/cancel`,
-      method: 'POST',
-      queryParams: ['order_codes']
+      method: 'POST'
     }
   },
   service: {
     getServices: {
       production: `${production}/shiip/public-api/v2/shipping-order/available-services`,
       test: `${test}/shiip/public-api/v2/shipping-order/available-services`,
-      method: 'POST',
-      queryParams: ['shop_id', 'from_district', 'to_district']
+      method: 'POST'
     },
     calculateFee: {
       production: `${production}/shiip/public-api/v2/shipping-order/fee`,
       test: `${test}/shiip/public-api/v2/shipping-order/fee`,
-      method: 'POST',
-      queryParams: [
-        'shop_id',
-        'service_id',
-        'service_type_id',
-        'insurance_value',
-        'coupon',
-        'from_district_id',
-        'to_district_id',
-        'to_ward_code',
-        'height',
-        'length',
-        'weight',
-        'width'
-      ]
+      method: 'POST'
     },
     calculateExpectedDeliveryTime: {
       production: `${production}/shiip/public-api/v2/shipping-order/leadtime`,
       test: `${test}/shiip/public-api/v2/shipping-order/leadtime`,
-      method: 'POST',
-      queryParams: [
-        'service_id',
-        'from_district_id',
-        'from_ward_code',
-        'to_district_id',
-        'to_ward_code'
-      ]
+      method: 'POST'
     }
   },
   address: {
     getProvinces: {
       production: `${production}/shiip/public-api/master-data/province`,
       test: `${test}/shiip/public-api/master-data/province`,
-      method: 'GET',
-      queryParams: []
+      method: 'GET'
     },
     getDistricts: {
       production: `${production}/shiip/public-api/master-data/district`,
       test: `${test}/shiip/public-api/master-data/district`,
-      method: 'GET',
-      queryParams: [`province_id`]
+      method: 'GET'
     },
     getWards: {
       production: `${production}/shiip/public-api/master-data/ward`,
       test: `${test}/shiip/public-api/master-data/ward`,
-      method: 'GET',
-      queryParams: [`district_id`]
+      method: 'GET'
     },
     getStations: {
       production: `${production}/shiip/public-api/v2/station/get`,
       test: `${test}/shiip/public-api/v2/station/get`,
-      method: 'GET',
-      queryParams: [`district_id`, `ward_code`, `offset`, `limit`]
+      method: 'GET'
     }
   },
   store: {
     getStores: {
       production: `${production}/shiip/public-api/v2/shop/all`,
       test: `${test}/shiip/public-api/v2/shop/all`,
-      method: 'POST',
-      queryParams: ['offset', 'limit', 'client_phone']
+      method: 'POST'
     },
     createStore: {
       production: `${production}/shiip/public-api/v2/shop/register`,
       test: `${test}/shiip/public-api/v2/shop/register`,
-      method: 'GET',
-      queryParams: ['district_id', 'ward_code', 'name', 'phone', 'address']
+      method: 'GET'
     },
     addStaff: {
       production: `${production}/shiip/public-api/v2/shop/add-client`,
       test: `${test}/shiip/public-api/v2/shop/add-client`,
-      method: 'POST',
-      queryParams: ['username', 'shop_id']
+      method: 'POST'
     },
-    deliveryAgain: {
+    deliverAgain: {
       production: `${production}/shiip/public-api/v2/switch-status/storing`,
       test: `${test}/shiip/public-api/v2/switch-status/storing`,
-      method: 'POST',
-      queryParams: ['order_codes', 'shop_id']
+      method: 'POST'
     }
   },
   ticket: {
     getTicket: {
       production: `${production}/shiip/public-api/ticket/detail`,
       test: `${test}/shiip/public-api/ticket/detail`,
-      method: 'GET',
-      queryParams: ['ticket_id']
+      method: 'GET'
     },
     createTicket: {
       production: `${production}/shiip/public-api/ticket/create`,
       test: `${test}/shiip/public-api/ticket/create`,
-      method: 'POST',
-      queryParams: ['order_code', 'category', 'attachments', 'description']
+      method: 'POST'
     },
     addFeedback: {
       production: `${production}/shiip/public-api/ticket/reply`,
       test: `${test}/shiip/public-api/ticket/reply`,
-      method: 'POST',
-      queryParams: ['ticket_id', 'attachments', 'description']
+      method: 'POST'
     }
   }
 };
@@ -223,8 +181,6 @@ export interface IEndpoint {
   production: string;
   test: string;
   method: string | 'GET' | 'POST' | 'PUT' | 'DELETE';
-  queryParams?: Array<string>;
-  bodyParams?: Array<string>;
 }
 
 export interface IOptions {
@@ -238,23 +194,23 @@ export interface IResponse {
 }
 
 export interface IProvince {
-  id: number;
+  province_id: number;
   name: string;
   code: string;
 }
 
 export interface IDistrict {
-  id: number;
-  provinceID: number;
+  district_id: number;
+  province_id: number;
   name: string;
   code: string;
   type: string;
-  supportType: string;
+  support_type: string;
 }
 
 export interface IWard {
   code: string;
-  districtID: number;
+  district_id: number;
   name: string;
 }
 
@@ -273,7 +229,9 @@ export interface IPagination {
   offset?: number;
   limit?: number;
 }
-
+/**
+ * Store
+ */
 export interface IStore {
   _id?: number;
   name: string;
@@ -281,7 +239,7 @@ export interface IStore {
   address: string;
   ward_code?: string;
   district_id?: number;
-  client_id?: 2500755;
+  client_id?: number;
   bank_account_id?: number;
   status?: number;
   location?: any;
@@ -296,4 +254,302 @@ export interface IStore {
   created_client?: number;
   created_source?: string;
   created_date?: string;
+}
+
+export interface IStoreDeliveryAgainResponse {
+  order_code: string;
+  result: boolean;
+  message: string;
+}
+/**
+ * Ticket
+ */
+export interface ITicketRequest {
+  order_code: string;
+  category: string | 'Tư vấn' | 'Hối Giao/Lấy/Trả hàng' | 'Thay đổi thông tin' | 'Khiếu nại';
+  description: string;
+  attachments?: any;
+}
+
+export interface ITicketResponse {
+  attachments?: any;
+  c_email?: string;
+  c_name?: string;
+  client_id?: string;
+  conversations?: Array<any>;
+  created_at?: string;
+  created_by?: number;
+  description?: string;
+  id?: number;
+  order_code?: string;
+  status?: string;
+  status_id?: number;
+  type?: string;
+  updated_at?: string;
+}
+
+export interface IFeedbackRequest {
+  description: string;
+  attachments?: any;
+}
+
+export interface IFeedbackResponse {
+  body?: string;
+  created_at?: string;
+  from_email?: string;
+  updated_at?: string;
+  user_id?: number;
+}
+/**
+ * Service
+ */
+export interface IService {
+  short_name: string;
+  service_id: number;
+  service_type_id: number;
+}
+
+export interface IServiceCalculateFeeRequest {
+  service_id: number;
+  service_type_id?: number;
+  insurance_value?: number;
+  coupon?: string;
+  to_ward_code: string;
+  to_district_id: number;
+  weight: number;
+  length: number;
+  width: number;
+  height: number;
+}
+
+export interface IServiceCalculateFeeResponse {
+  total?: number;
+  service_fee?: number;
+  insurance_fee?: number;
+  pick_station_fee?: number;
+  coupon_value?: number;
+  r2s_fee?: number;
+}
+
+export interface IServiceCalculateTimeRequest {
+  from_district_id: number;
+  from_ward_code: string;
+  to_district_id: number;
+  to_ward_code: string;
+  service_id: number;
+}
+
+export interface IServiceCalculateTimeResponse {
+  leadtime?: number;
+  order_date?: number;
+}
+/**
+ * Order
+ */
+
+export interface IOrderCreateRequest {
+  // To
+  to_name: string;
+  to_phone: string;
+  to_address: string;
+  to_ward_code: string;
+  to_district_id: number;
+  // Return
+  return_phone?: string;
+  return_address?: string;
+  return_district_id?: number;
+  return_ward_code?: string;
+
+  client_order_code?: string;
+  cod_amount?: number;
+  // Content
+  content: string;
+  weight: number;
+  length: number;
+  width: number;
+  height: number;
+
+  payment_type_id: number | 1 | 2;
+  required_note: string | 'CHOTHUHANG' | 'CHOXEMHANGKHONGTHU' | 'KHONGCHOXEMHANG';
+  // Service
+  service_id?: number;
+  service_type_id?: number;
+
+  pick_station_id?: number;
+  insurance_value?: number;
+  coupon?: string;
+  note?: string;
+  items?: Array<IOrderItem>;
+
+  deliver_station_id?: number;
+}
+
+export interface IOrderItem {
+  name?: string;
+  code?: string;
+  quantity?: number;
+  price?: number;
+  length?: number;
+  width?: number;
+  height?: number;
+  category?: any;
+}
+
+export interface IOrder {
+  shop_id?: number;
+  client_id?: number;
+  return_name?: string;
+  return_phone?: string;
+  return_address?: string;
+  return_ward_code?: string;
+  return_district_id?: number;
+  from_name?: string;
+  from_phone?: string;
+  from_address?: string;
+  from_ward_code?: string;
+  from_district_id?: number;
+  deliver_station_id?: number;
+  to_name?: string;
+  to_phone?: string;
+  to_address?: string;
+  to_ward_code?: string;
+  to_district_id?: number;
+  weight?: number;
+  length?: number;
+  width?: number;
+  height?: number;
+  converted_weight?: number;
+  service_type_id?: number;
+  service_id?: number;
+  payment_type_id?: number;
+  custom_service_fee?: number;
+  cod_amount?: number;
+  cod_collect_date?: null;
+  cod_transfer_date?: null;
+  is_cod_transferred?: false;
+  is_cod_collected?: false;
+  insurance_value?: number;
+  order_value?: number;
+  pick_station_id?: number;
+  client_order_code?: string;
+  required_note?: string;
+  content?: string;
+  note?: string;
+  employee_note?: string;
+  seal_code?: string;
+  pickup_time?: string;
+  items?: Array<IOrderItem>;
+  coupon?: string;
+  _id?: string;
+  order_code?: string;
+  version_no?: string;
+  updated_ip?: string;
+  updated_employee?: number;
+  updated_client?: number;
+  updated_source?: string;
+  updated_date?: string;
+  updated_warehouse?: number;
+  created_ip?: string;
+  created_employee?: number;
+  created_client?: number;
+  created_source?: string;
+  created_date?: string;
+  status?: string;
+  pick_warehouse_id?: number;
+  deliver_warehouse_id?: number;
+  current_warehouse_id?: number;
+  return_warehouse_id?: number;
+  next_warehouse_id?: number;
+  leadtime?: string;
+  order_date?: string;
+  soc_id?: string;
+  finish_date?: string;
+  tag?: Array<string>;
+  log?: Array<ILog>;
+  is_partial_return?: boolean;
+}
+
+export interface ILog {
+  status?: string;
+  updated_date?: string;
+}
+
+export interface IOrderFee {
+  _id?: string;
+  order_code?: string;
+  detail?: IOrderFeeDetail;
+  payment?: Array<IOrderFeePayment>;
+  cod_collect_date?: string;
+  transaction_id?: string;
+  created_ip?: string;
+  created_date?: string;
+  updated_ip?: string;
+  updated_client?: number;
+  updated_employee?: number;
+  updated_source?: string;
+  updated_date?: string;
+}
+
+export interface IOrderFeeDetail {
+  main_service?: number;
+  insurance?: number;
+  station_do?: number;
+  station_pu?: number;
+  return?: number;
+  r2s?: number;
+  coupon?: number;
+}
+
+export interface IOrderFeePayment {
+  value?: number;
+  payment_type?: number;
+  paid_date?: string;
+  created_date?: string;
+}
+
+export interface IOrderUpdateRequest {
+  order_code?: string;
+  // From
+  from_name?: string;
+  from_phone?: string;
+  from_address?: string;
+  from_ward_code?: string;
+  // To
+  to_name?: string;
+  to_phone?: string;
+  to_ward_code?: string;
+  to_district_id?: number;
+  // Return
+  return_phone?: string;
+  return_address?: string;
+  return_district_id?: number;
+  return_ward_code?: string;
+
+  client_order_code?: string;
+  cod_amount?: number;
+  content?: string;
+  weight?: number;
+  length?: number;
+  width?: number;
+  height?: number;
+  pick_station_id?: number;
+  insurance_value?: number;
+  coupon?: string;
+  service_type_id?: number;
+  service_id?: number;
+  payment_type_id?: number | 1 | 2;
+  note?: string;
+  required_note?: string | 'CHOTHUHANG' | 'CHOXEMHANGKHONGTHU' | 'KHONGCHOXEMHANG';
+}
+
+export interface IOrderReturnResponse {
+  order_code: string;
+  result: boolean;
+  message: string;
+}
+
+export interface IOrderCancelResponse {
+  order_code: string;
+  result: boolean;
+  message: string;
 }

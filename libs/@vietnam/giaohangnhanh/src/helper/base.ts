@@ -13,8 +13,8 @@ export default class Base {
     this.test = test;
   }
 
-  private convertObjectToQueryString(queryParams: Array<string> = [], query: any = {}): string {
-    return queryParams
+  private convertObjectToQueryString(query: any = {}): string {
+    return Object.keys(query)
       .map(key => {
         const value: string = (query[key] || '').toString();
         return `${key}=${value}`;
@@ -22,18 +22,18 @@ export default class Base {
       .join('&');
   }
 
-  private buildURL(api: string, queryParams: Array<string> = [], query: any = {}): string {
-    const queryParamsString: string = this.convertObjectToQueryString(queryParams, query);
+  private buildURL(api: string, query: any = {}): string {
+    const queryParamsString: string = this.convertObjectToQueryString(query);
     const url: string = `${api}?${queryParamsString}`;
     return url;
   }
 
   public async fetch(endpoint: IEndpoint, options: IRequestOptions = {}): Promise<any> {
     const { token } = this;
-    const { production, test, method, queryParams = [], bodyParams = [] } = endpoint;
+    const { production, test, method } = endpoint;
     const api: string = this.test ? test : production;
     const { query = {}, body = {} } = options;
-    const url = this.buildURL(api, queryParams, query);
+    const url = this.buildURL(api, query);
     const headers = { Token: token, 'Content-Type': 'application/json' };
     const requestInit: RequestInit = Object.keys(body).length
       ? { method, headers, body: JSON.stringify(body) }

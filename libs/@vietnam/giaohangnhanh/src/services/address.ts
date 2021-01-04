@@ -23,8 +23,8 @@ export default class Address extends Base {
     const { code = 0, data = [] } = response;
     if (code !== 200) return [];
     const provinces = data.map(item => {
-      const { ProvinceID: id, ProvinceName: name, Code: code } = item;
-      return { id, name, code };
+      const { ProvinceID: province_id, ProvinceName: name, Code: code } = item;
+      return { province_id, name, code };
     });
     return provinces;
   }
@@ -36,14 +36,14 @@ export default class Address extends Base {
     if (code !== 200) return [];
     const districts = data.map(item => {
       const {
-        DistrictID: id,
-        ProvinceID: provinceID,
+        DistrictID: district_id,
+        ProvinceID: province_id,
         DistrictName: name,
         Code: code,
         Type: type,
-        SupportType: supportType
+        SupportType: support_type
       } = item;
-      return { id, provinceID, name, code, type, supportType };
+      return { district_id, province_id, name, code, type, support_type };
     });
     return districts;
   }
@@ -54,8 +54,8 @@ export default class Address extends Base {
     const { code = 0, data = [] } = response;
     if (code !== 200) return [];
     const wards = data.map(item => {
-      const { DistrictID: districtID, WardName: name, WardCode: code } = item;
-      return { districtID, name, code };
+      const { DistrictID: district_id, WardName: name, WardCode: code } = item;
+      return { district_id, name, code };
     });
     return wards;
   }

@@ -1,7 +1,14 @@
 'use strict';
 
 import Base from '../helper/base';
-import { apis, IEndpoint, IResponse, IPagination, IStore } from '../helper/constants';
+import {
+  apis,
+  IEndpoint,
+  IResponse,
+  IPagination,
+  IStore,
+  IStoreDeliveryAgainResponse
+} from '../helper/constants';
 
 export default class Store extends Base {
   constructor(token: string, test: boolean) {
@@ -32,19 +39,23 @@ export default class Store extends Base {
     return shop_id;
   }
 
-  public async addStaff(): Promise<number> {
+  public async addStaff(shop_id: number, username: string): Promise<number> {
     const endpoint: IEndpoint = apis.store.addStaff;
-    const response: IResponse = await this.fetch(endpoint);
+    const response: IResponse = await this.fetch(endpoint, { body: { shop_id, username } });
     const { code = 0, data = {} } = response;
     if (code !== 200) return 0;
-    return data;
+    const { client_shop_id = 0 } = data;
+    return client_shop_id;
   }
 
-  public async deliveryAgain(): Promise<number> {
-    const endpoint: IEndpoint = apis.store.deliveryAgain;
-    const response: IResponse = await this.fetch(endpoint);
-    const { code = 0, data = {} } = response;
-    if (code !== 200) return 0;
+  public async deliverAgain(
+    shop_id: number,
+    order_code: string
+  ): Promise<Array<IStoreDeliveryAgainResponse>> {
+    const endpoint: IEndpoint = apis.store.deliverAgain;
+    const response: IResponse = await this.fetch(endpoint, { body: { shop_id, order_code } });
+    const { code = 0, data = [] } = response;
+    if (code !== 200) return [];
     return data;
   }
 }
