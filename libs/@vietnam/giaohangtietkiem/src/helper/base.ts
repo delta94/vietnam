@@ -2,15 +2,15 @@
 
 import fetch from 'node-fetch';
 
-import { IResponse, IRequestOptions, IEndpoint } from './constants';
+import { IRequestOptions, IEndpoint } from './constants';
 
 export default class Base {
   private token: string;
-  private test: boolean;
+  private sandbox: boolean;
 
-  constructor(token: string, test: boolean) {
+  constructor(token: string, sandbox: boolean = false) {
     this.token = token;
-    this.test = test;
+    this.sandbox = sandbox;
   }
 
   private convertObjectToQueryString(query: any = {}): string {
@@ -28,10 +28,10 @@ export default class Base {
     return encodeURI(url);
   }
 
-  public async fetch(endpoint: IEndpoint, options: IRequestOptions = {}): Promise<IResponse> {
+  public async fetch(endpoint: IEndpoint, options: IRequestOptions = {}): Promise<any> {
     const { token } = this;
-    const { production, test, method } = endpoint;
-    const api: string = this.test ? test : production;
+    const { production, sandbox, method } = endpoint;
+    const api: string = this.sandbox ? sandbox : production;
     const { query = {}, body = {} } = options;
     const url = this.buildURL(api, query);
     const headers = { Token: token, 'Content-Type': 'application/json' };

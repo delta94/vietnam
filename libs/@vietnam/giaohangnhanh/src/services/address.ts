@@ -3,7 +3,6 @@
 import Base from '../helper/base';
 import {
   apis,
-  IError,
   IEndpoint,
   IResponse,
   IProvince,
@@ -19,7 +18,7 @@ export default class Address extends Base {
     super(token, test);
   }
 
-  public async getProvinces(): Promise<Array<IProvince> | IError> {
+  public async getProvinces(): Promise<Array<IProvince> | any> {
     const endpoint: IEndpoint = apis.address.getProvinces;
     const response: IResponse = await this.fetch(endpoint);
     const { code = 0, message = '', data = [] } = response;
@@ -31,7 +30,7 @@ export default class Address extends Base {
     return provinces;
   }
 
-  public async getDistricts(province_id: number): Promise<Array<IDistrict> | IError> {
+  public async getDistricts(province_id: number): Promise<Array<IDistrict> | any> {
     const endpoint: IEndpoint = apis.address.getDistricts;
     const response: IResponse = await this.fetch(endpoint, { query: { province_id } });
     const { code = 0, message = '', data = [] } = response;
@@ -50,7 +49,7 @@ export default class Address extends Base {
     return districts;
   }
 
-  public async getWards(district_id: number): Promise<Array<IWard> | IError> {
+  public async getWards(district_id: number): Promise<Array<IWard> | any> {
     const endpoint: IEndpoint = apis.address.getWards;
     const response: IResponse = await this.fetch(endpoint, { query: { district_id } });
     const { code = 0, message = '', data = [] } = response;
@@ -62,7 +61,7 @@ export default class Address extends Base {
     return wards;
   }
 
-  public async getStations(options: IStationRequest): Promise<Array<IStation> | IError> {
+  public async getStations(options: IStationRequest): Promise<Array<IStation> | any> {
     const endpoint: IEndpoint = apis.address.getStations;
     const { district_id = 0, ward_code = '', offset = 0, limit = 1000 } = options;
     const query = { district_id, ward_code, offset, limit };

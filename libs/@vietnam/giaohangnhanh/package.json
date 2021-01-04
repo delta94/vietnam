@@ -1,8 +1,9 @@
 {
   "name": "giaohangnhanh",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Giao Hang Nhanh Node API Client/Wrapper",
   "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
   "author": "Hieu Doan <hieumdoan@gmail.com>",
   "license": "MIT",
   "private": false,

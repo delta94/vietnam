@@ -3,7 +3,6 @@
 import Base from '../helper/base';
 import {
   apis,
-  IError,
   IEndpoint,
   IResponse,
   ITicketRequest,
@@ -17,7 +16,7 @@ export default class Ticket extends Base {
     super(token, test);
   }
 
-  public async getTicket(ticket_id: number): Promise<ITicketResponse | IError> {
+  public async getTicket(ticket_id: number): Promise<ITicketResponse> {
     const endpoint: IEndpoint = apis.ticket.getTicket;
     const response: IResponse = await this.fetch(endpoint, { query: { ticket_id } });
     const { code = 0, message = '', data = {} } = response;
@@ -25,7 +24,7 @@ export default class Ticket extends Base {
     return data;
   }
 
-  public async createTicket(ticket: ITicketRequest): Promise<ITicketResponse | IError> {
+  public async createTicket(ticket: ITicketRequest): Promise<ITicketResponse> {
     const endpoint: IEndpoint = apis.ticket.createTicket;
     const response: IResponse = await this.fetch(endpoint, { query: ticket });
     const { code = 0, message = '', data = {} } = response;
@@ -36,7 +35,7 @@ export default class Ticket extends Base {
   public async addFeedbackToTicket(
     ticket_id: number,
     feedback: IFeedbackRequest
-  ): Promise<IFeedbackResponse | IError> {
+  ): Promise<IFeedbackResponse> {
     const endpoint: IEndpoint = apis.ticket.addFeedback;
     const query = Object.assign({ ticket_id }, feedback);
     const response: IResponse = await this.fetch(endpoint, { query });

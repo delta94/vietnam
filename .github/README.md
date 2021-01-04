@@ -8,6 +8,7 @@
 
 [Vietnam Node Package Manager](https://hieudoanm.github.io/vietnam/)
 
+- [giaohangnhanh](https://www.npmjs.com/package/giaohangnhanh) ![download][npm-image-download-giaohangnhanh]
 - [onepay](https://www.npmjs.com/package/onepay) ![download][npm-image-download-onepay]
 - [vietcetera](https://www.npmjs.com/package/vietcetera) ![download][npm-image-download-vietcetera]
 - [vietnambanks](https://www.npmjs.com/package/vietnambanks) ![download][npm-image-download-vietnambanks]
@@ -18,6 +19,7 @@
 - [vtcpay](https://www.npmjs.com/package/vtcpay) ![download][npm-image-download-vtcpay]
 - [zalopay](https://www.npmjs.com/package/zalopay) ![download][npm-image-download-zalopay]
 
+[npm-image-download-giaohangnhanh]: https://img.shields.io/npm/dm/giaohangnhanh.svg?style=flat
 [npm-image-download-onepay]: https://img.shields.io/npm/dm/onepay.svg?style=flat
 [npm-image-download-vietcetera]: https://img.shields.io/npm/dm/vietcetera.svg?style=flat
 [npm-image-download-vietnambanks]: https://img.shields.io/npm/dm/vietnambanks.svg?style=flat

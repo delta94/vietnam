@@ -4,7 +4,6 @@ import Base from '../helper/base';
 import {
   apis,
   IEndpoint,
-  IError,
   IService,
   IResponse,
   IServiceCalculateFeeRequest,
@@ -22,7 +21,7 @@ export default class Service extends Base {
     shop_id: number,
     from_district: number,
     to_district: number
-  ): Promise<Array<IService> | IError> {
+  ): Promise<Array<IService> | any> {
     const endpoint: IEndpoint = apis.service.getServices;
     const response: IResponse = await this.fetch(endpoint, {
       query: { shop_id, from_district, to_district }
@@ -39,7 +38,7 @@ export default class Service extends Base {
   public async calculateFee(
     shop_id: number,
     location: IServiceCalculateFeeRequest
-  ): Promise<IServiceCalculateFeeResponse | IError> {
+  ): Promise<IServiceCalculateFeeResponse | any> {
     const endpoint: IEndpoint = apis.service.calculateFee;
     const body = Object.assign({ shop_id }, location);
     const response: IResponse = await this.fetch(endpoint, { body });
@@ -51,7 +50,7 @@ export default class Service extends Base {
   public async calculateExpectedDeliveryTime(
     shop_id: number,
     location: IServiceCalculateTimeRequest
-  ): Promise<IServiceCalculateTimeResponse | IError> {
+  ): Promise<IServiceCalculateTimeResponse> {
     const endpoint: IEndpoint = apis.service.calculateExpectedDeliveryTime;
     const body = Object.assign({ shop_id }, location);
     const response: IResponse = await this.fetch(endpoint, { body });

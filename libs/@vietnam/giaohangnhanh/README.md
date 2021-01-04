@@ -47,7 +47,7 @@ yarn add giaohangnhanh
 How to get API token [instruction](https://api.ghn.vn/home/docs/detail?id=116).
 
 ```ts
-import ghn from 'giaohangnhanh';
+import GHN from 'giaohangnhanh';
 const token: string = 'apikey';
 const ghn: GHN = new GHN(token);
 // OR
@@ -118,7 +118,7 @@ const orderFee = await ghn.order.getOrderFee(order_code);
 const updatedOrder: any = {
   content: 'Updated Test Content'
 }
-const updatedOrderMessage = await ghn.order.updateOrder(shop_id, order_code, updatedOrder);
+const { message } = await ghn.order.updateOrder(shop_id, order_code, updatedOrder);
 ```
 
 #### Update COD of Order
@@ -127,7 +127,7 @@ const updatedOrderMessage = await ghn.order.updateOrder(shop_id, order_code, upd
 
 ```ts
 const cod_amount: number = 0;
-const updatedCOD = await ghn.order.updateOrderCOD(order_code, amount);
+const { message } = await ghn.order.updateOrderCOD(order_code, amount);
 ```
 
 #### Print Order
@@ -277,7 +277,7 @@ const name: string = ''; // required
 const phone: string = ''; // required
 const address: string = ''; // required
 const info = { name, phone, address };
-const store = await ghn.store.createStore(district_id, ward_code, info);
+const { shop_id } = await ghn.store.createStore(district_id, ward_code, info);
 ```
 
 #### Add Staff to the Store
@@ -287,7 +287,7 @@ const store = await ghn.store.createStore(district_id, ward_code, info);
 ```ts
 const shop_id: number = 0;
 const phone_number: string = '';
-const staff = await ghn.store.addStaff(shop_id, phone_number);
+const { client_shop_id } = await ghn.store.addStaff(shop_id, phone_number);
 ```
 
 #### Delivery Again

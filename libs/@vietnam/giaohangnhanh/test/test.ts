@@ -96,14 +96,14 @@ describe('order && ticket', () => {
         console.log('feedback', feedback);
       }
 
-      const updatedOrderMessage = await ghn.order.updateOrder(shop_id, order_code, {
+      const { message } = await ghn.order.updateOrder(shop_id, order_code, {
         content: 'Updated Test Content'
       });
-      console.log('updatedOrderMessage', updatedOrderMessage);
+      console.log(`updatedOrder message ${message}`);
 
       const cod_amount: number = 10000;
-      const updatedCOD = await ghn.order.updateOrderCOD(order_code, cod_amount);
-      console.log('updatedCOD', updatedCOD);
+      const { message: codMessage } = await ghn.order.updateOrderCOD(order_code, cod_amount);
+      console.log(`updatedCOD message ${codMessage}`);
 
       const order_codes: Array<string> = [order_code];
 
@@ -191,15 +191,15 @@ describe('store', () => {
     const phone: string = '0904050607';
     const address: string = 'Test Store';
     const info = { name, phone, address };
-    const shop_id: any = await ghn.store.createStore(district_id, ward_code, info);
+    const { shop_id } = await ghn.store.createStore(district_id, ward_code, info);
     console.log('create store', 'shop_id', shop_id);
 
     if (shop_id) {
       const phone_number = '0904050607';
-      const staff = await ghn.store.addStaff(shop_id, phone_number);
-      console.log('staff', staff);
+      const { client_shop_id, message } = await ghn.store.addStaff(shop_id, phone_number);
+      console.log(`staff client_shop_id ${client_shop_id} message ${message}`);
     }
 
-    assert.ok(typeof shop_id === 'number');
+    assert.ok(typeof shop_id === 'object');
   });
 });

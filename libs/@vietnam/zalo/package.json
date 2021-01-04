@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "Zalo Node API Client/Wrapper",
   "main": "./build/src/index.js",
+  "types": "./build/src/index.d.ts",
   "author": "Hieu Doan <hieumdoan@gmail.com>",
   "license": "MIT",
   "private": false,

@@ -175,7 +175,6 @@ export const apis = {
 export interface IRequestOptions {
   query?: any;
   body?: any;
-  headers?: any;
 }
 
 export interface IEndpoint {
@@ -269,6 +268,18 @@ export interface IStoreDeliveryAgainResponse {
   result: boolean;
   message: string;
 }
+
+export interface IStoreCreateResponse {
+  shop_id?: number;
+  // Error
+  message?: string;
+}
+
+export interface IStoreClientResponse {
+  client_shop_id?: number;
+  // Error
+  message?: string;
+}
 /**
  * Ticket
  */
@@ -295,6 +306,8 @@ export interface ITicketResponse {
   status_id?: number;
   type?: string;
   updated_at?: string;
+  // Error
+  message?: string;
 }
 
 export interface IFeedbackRequest {
@@ -308,6 +321,8 @@ export interface IFeedbackResponse {
   from_email?: string;
   updated_at?: string;
   user_id?: number;
+  // Error
+  message?: string;
 }
 /**
  * Service
@@ -351,6 +366,8 @@ export interface IServiceCalculateTimeRequest {
 export interface IServiceCalculateTimeResponse {
   leadtime?: number;
   order_date?: number;
+  // Error
+  message?: string;
 }
 /**
  * Order
@@ -477,6 +494,8 @@ export interface IOrder {
   tag?: Array<string>;
   log?: Array<ILog>;
   is_partial_return?: boolean;
+  // Error
+  message?: string;
 }
 
 export interface ILog {
@@ -498,6 +517,8 @@ export interface IOrderFee {
   updated_employee?: number;
   updated_source?: string;
   updated_date?: string;
+  // Error
+  message?: string;
 }
 
 export interface IOrderFeeDetail {
@@ -552,9 +573,9 @@ export interface IOrderUpdateRequest {
 }
 
 export interface IOrderReturnResponse {
-  order_code: string;
-  result: boolean;
-  message: string;
+  order_code?: string;
+  result?: boolean;
+  message?: string;
 }
 
 export interface IOrderCancelResponse {
@@ -563,10 +584,12 @@ export interface IOrderCancelResponse {
   message: string;
 }
 
-export interface IError {
+export interface IOrderPrintResponse {
+  url?: string;
+  // Error
   message?: string;
+}
 
-  id?: number;
-  order_code?: string;
-  client_order_code?: string;
+export interface IOrderUpdateResponse {
+  message: string;
 }
