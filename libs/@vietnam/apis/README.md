@@ -177,12 +177,6 @@ const plates = await licensePlates.getLicensePlates();
 ```ts
 import { maps } from 'vnapis';
  
-// Get Subregions
-const macroRegions = maps.getMacroRegions();
- 
-// Get Regions
-const regions = maps.getRegions();
- 
 // Get Postal Codes
 const postalCodes = maps.getPostalCodes();
  

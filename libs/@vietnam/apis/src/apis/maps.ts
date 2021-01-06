@@ -5,14 +5,6 @@ import Base from './base';
 import { IMapsPostalCode, IMapsProvince, IMapsDistrict, IMapsWard } from '../constants';
 
 export default class Maps extends Base {
-  public async getMacroRegions(): Promise<Array<string>> {
-    return await this.fetch('maps/macro-regions');
-  }
-
-  public async getRegions(): Promise<Array<string>> {
-    return await this.fetch('maps/regions');
-  }
-
   public async getPostalCodes(): Promise<Array<IMapsPostalCode>> {
     return await this.fetch('maps/postal-codes');
   }

@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"sort"
 	"strings"
 
 	"github.com/joho/godotenv"
@@ -16,6 +17,7 @@ import (
 // Status ...
 type Status struct { 
 	Status string `json:"status"`
+	Endpoints []string `json:"endpoints"`
 }
 
 // EthnicMinority ...
@@ -133,20 +135,41 @@ type SportsClub struct {
 }
 
 func main() {
-	var env string = os.Getenv("ENV")
-	fmt.Println(env)
-	if env != "" {
+	loadEnv()
+
+	var port string = os.Getenv("PORT")
+	fmt.Println("Server is running on port", port)
+
+	loadRoutes()
+
+	log.Fatal(http.ListenAndServe(":" + port, nil))
+}
+
+func loadEnv() {
+	var env string = getEnv("ENV", "")
+	fmt.Println("env", env)
+	if env != "production" {
+		fmt.Println("Loading .env")
 		err := godotenv.Load()
 		if err != nil {
 			log.Fatal("Error loading .env file")
 		}
 	}
+}
 
-	var port string = os.Getenv("PORT")
-	fmt.Println("Server is running on port", port)
-	http.HandleFunc("/", getStatus)
+func getEnv(key, fallback string) string {
+	if value, ok := os.LookupEnv(key); ok {
+			return value
+	}
+	return fallback
+}
+
+func loadRoutes() {
+	http.HandleFunc("/", getRoot)
 	// Ethnic Minorities
 	http.HandleFunc("/ethnic-minorities", getEthnicMinorities)
+	// Government
+	http.HandleFunc("/government", getGovernment)
 	// Government (Ministries)
 	http.HandleFunc("/government/ministries", getGovernmentMinistries)
 	// Government (Officials)
@@ -157,10 +180,10 @@ func main() {
 	http.HandleFunc("/government/national-assembly/chairs", getNationalAssemblyChairs)
 	http.HandleFunc("/government/national-assembly/members", getNationalAssemblyMembers)
 	http.HandleFunc("/government/ministers", getGovernmentMinisters)
-
 	// License Plates
 	http.HandleFunc("/license-plates", getLicensePlates)
 	// Maps
+	http.HandleFunc("/maps", getMaps)
 	http.HandleFunc("/maps/provinces", getMapsProvinces)
 	http.HandleFunc("/maps/districts", getMapsDistricts)
 	http.HandleFunc("/maps/wards", getMapsWards)
@@ -168,18 +191,11 @@ func main() {
 	// Technologies
 	http.HandleFunc("/technologies", getTechnologies)
 	// Sports
+	http.HandleFunc("/sports", getSports)
 	http.HandleFunc("/sports/clubs", getSportsClubs)
-	log.Fatal(http.ListenAndServe(":" + port, nil))
 }
 
-func getStatus(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	status := Status { Status: "OK" }
-	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(status)
-}
-
-func openConnection() *sql.DB {
+func openSQLConnection() *sql.DB {
 	// user := os.Getenv("DB_POSTGRE_USER")
 	// host := os.Getenv("DB_POSTGRE_HOST")
 	// dbname := os.Getenv("DB_POSTGRE_DATABASE")
@@ -204,8 +220,27 @@ func openConnection() *sql.DB {
 	return db
 }
 
+func returnJSONresponse(w http.ResponseWriter, response interface{}) {
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(response)
+}
+
+func getRoot(w http.ResponseWriter, r *http.Request) {
+	endpoints := []string {
+		"ethnic-minorities",
+		"government",
+		"license-plates",
+		"maps",
+		"technologies",
+		"sports",
+	}
+	sort.Strings(endpoints)
+	status := Status { Status: "OK", Endpoints: endpoints }
+	returnJSONresponse(w, status)
+}
+
 func getMapsProvinces(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM maps_provinces")
 	if err != nil {
@@ -232,17 +267,14 @@ func getMapsProvinces(w http.ResponseWriter, r *http.Request) {
 		provinces = append(provinces, province)
 	}
 
-	bytes, _ := json.MarshalIndent(provinces, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, provinces)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getMapsDistricts(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM maps_districts")
 	if err != nil {
@@ -265,17 +297,14 @@ func getMapsDistricts(w http.ResponseWriter, r *http.Request) {
 		districts = append(districts, district)
 	}
 
-	bytes, _ := json.MarshalIndent(districts, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, districts)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getMapsWards(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM maps_wards")
 	if err != nil {
@@ -299,48 +328,42 @@ func getMapsWards(w http.ResponseWriter, r *http.Request) {
 		wards = append(wards, ward)
 	}
 
-	bytes, _ := json.MarshalIndent(wards, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, wards)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getMapsPostalCodes(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM maps_postal_codes")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	var postalCodes []MapsPostalCode
+	var codes []MapsPostalCode
 
 	for rows.Next() {
-		var postalCode MapsPostalCode
+		var code MapsPostalCode
 		err = rows.Scan(
-			&postalCode.ID,
-			&postalCode.Code,
-			&postalCode.Province)
+			&code.ID,
+			&code.Code,
+			&code.Province)
 		if err != nil {
 			log.Fatal(err)
 		}
-		postalCodes = append(postalCodes, postalCode)
+		codes = append(codes, code)
 	}
 
-	bytes, _ := json.MarshalIndent(postalCodes, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, codes)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getSportsClubs(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM sports_clubs")
 	if err != nil {
@@ -365,17 +388,14 @@ func getSportsClubs(w http.ResponseWriter, r *http.Request) {
 		clubs = append(clubs, club)
 	}
 
-	bytes, _ := json.MarshalIndent(clubs, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, clubs)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getEthnicMinorities(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM ethnic_minorities")
 	if err != nil {
@@ -398,17 +418,51 @@ func getEthnicMinorities(w http.ResponseWriter, r *http.Request) {
 		ethnicMinorities = append(ethnicMinorities, ethnicMinority)
 	}
 
-	bytes, _ := json.MarshalIndent(ethnicMinorities, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, ethnicMinorities)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
+func getGovernment(w http.ResponseWriter, r *http.Request) {
+	endpoints := []string{
+		"ministries",
+		"incumbents",
+		"general-secretaries",
+		"presidents",
+		"prime-ministers",
+		"national-assembly/chairs",
+		"national-assembly/members",
+		"ministers",
+	}
+	sort.Strings(endpoints)
+	status := Status { Status: "OK", Endpoints: endpoints }
+	returnJSONresponse(w, status)
+}
+
+func getMaps(w http.ResponseWriter, r *http.Request) {
+	endpoints := []string{
+		"postal-codes",
+		"provinces",
+		"districts",
+		"wards",
+	}
+	sort.Strings(endpoints)
+	status := Status { Status: "OK", Endpoints: endpoints }
+	returnJSONresponse(w, status)
+}
+
+func getSports(w http.ResponseWriter, r *http.Request) {
+	endpoints := []string{
+		"clubs",
+	}
+	sort.Strings(endpoints)
+	status := Status { Status: "OK", Endpoints: endpoints }
+	returnJSONresponse(w, status)
+}
+
 func getGovernmentMinistries(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_ministries")
 	if err != nil {
@@ -433,17 +487,14 @@ func getGovernmentMinistries(w http.ResponseWriter, r *http.Request) {
 		ministries = append(ministries, ministry)
 	}
 
-	bytes, _ := json.MarshalIndent(ministries, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, ministries)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getLicensePlates(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM license_plates")
 	if err != nil {
@@ -466,17 +517,14 @@ func getLicensePlates(w http.ResponseWriter, r *http.Request) {
 		plates = append(plates, plate)
 	}
 
-	bytes, _ := json.MarshalIndent(plates, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, plates)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getTechnologies(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM technologies")
 	if err != nil {
@@ -500,17 +548,14 @@ func getTechnologies(w http.ResponseWriter, r *http.Request) {
 		technologies = append(technologies, technology)
 	}
 
-	bytes, _ := json.MarshalIndent(technologies, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, technologies)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getGovernmentIncumbents(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials WHERE end_date = 'incumbent'")
 	if err != nil {
@@ -540,17 +585,14 @@ func getGovernmentIncumbents(w http.ResponseWriter, r *http.Request) {
 		incumbents = append(incumbents, incumbent)
 	}
 
-	bytes, _ := json.MarshalIndent(incumbents, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, incumbents)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getGovernmentGeneralSecretaries(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'general-secretary'")
 	if err != nil {
@@ -580,17 +622,14 @@ func getGovernmentGeneralSecretaries(w http.ResponseWriter, r *http.Request) {
 		secretaries = append(secretaries, secretary)
 	}
 
-	bytes, _ := json.MarshalIndent(secretaries, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, secretaries)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getGovernmentPresidents(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'president'")
 	if err != nil {
@@ -620,17 +659,14 @@ func getGovernmentPresidents(w http.ResponseWriter, r *http.Request) {
 		presidents = append(presidents, president)
 	}
 
-	bytes, _ := json.MarshalIndent(presidents, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, presidents)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getGovernmentPrimeMinisters(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'prime-minister'")
 	if err != nil {
@@ -660,17 +696,14 @@ func getGovernmentPrimeMinisters(w http.ResponseWriter, r *http.Request) {
 		ministers = append(ministers, minister)
 	}
 
-	bytes, _ := json.MarshalIndent(ministers, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, ministers)
 
 	defer rows.Close()
 	defer db.Close()
 }
 
 func getNationalAssemblyChairs(w http.ResponseWriter, r *http.Request) {
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'national-assembly-chair'")
 	if err != nil {
@@ -700,10 +733,7 @@ func getNationalAssemblyChairs(w http.ResponseWriter, r *http.Request) {
 		chairs = append(chairs, chair)
 	}
 
-	bytes, _ := json.MarshalIndent(chairs, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, chairs)
 
 	defer rows.Close()
 	defer db.Close()
@@ -718,7 +748,7 @@ func getGovernmentMinisters(w http.ResponseWriter, r *http.Request) {
 		whereClause = "WHERE title_short = '" + strings.Join(ministry, ",") + "'"
 	}
 
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM government_officials " + whereClause)
 	if err != nil {
@@ -748,10 +778,7 @@ func getGovernmentMinisters(w http.ResponseWriter, r *http.Request) {
 		ministers = append(ministers, minister)
 	}
 
-	bytes, _ := json.MarshalIndent(ministers, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, ministers)
 
 	defer rows.Close()
 	defer db.Close()
@@ -766,7 +793,7 @@ func getNationalAssemblyMembers(w http.ResponseWriter, r *http.Request) {
 		whereClause = "WHERE no = " + strings.Join(no, ",")
 	}
 
-	db := openConnection()
+	db := openSQLConnection()
 
 	rows, err := db.Query("SELECT * FROM national_assembly_members " + whereClause)
 	if err != nil {
@@ -796,10 +823,7 @@ func getNationalAssemblyMembers(w http.ResponseWriter, r *http.Request) {
 		members = append(members, member)
 	}
 
-	bytes, _ := json.MarshalIndent(members, "", "\t")
-
-	w.Header().Set("Content-Type", "application/json")
-	w.Write(bytes)
+	returnJSONresponse(w, members)
 
 	defer rows.Close()
 	defer db.Close()
