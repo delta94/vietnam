@@ -6,6 +6,6 @@ import { ILicensePlate } from '../constants';
 
 export default class LicensePlates extends Base {
   public async getLicensePlates(): Promise<Array<ILicensePlate>> {
-    return await this.fetch('license-plates');
+    return await this.get('license-plates');
   }
 }

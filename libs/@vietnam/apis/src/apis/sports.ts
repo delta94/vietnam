@@ -7,7 +7,7 @@ import { EnumSportEN, ISportsClub } from '../constants';
 export default class Sports extends Base {
   private async getClubsBySport(sport: EnumSportEN): Promise<Array<ISportsClub>> {
     const endpoint: string = `sports/clubs?sport=${sport}`;
-    return await this.fetch(endpoint);
+    return await this.get(endpoint);
   }
 
   public async getBasketballClubs(): Promise<Array<ISportsClub>> {
