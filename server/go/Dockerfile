@@ -28,4 +28,4 @@ WORKDIR /app
 EXPOSE $PORT
 
 # start the app on load and set GO_ENV to production
-CMD ["GO_ENV=production ./main"]
+CMD ["./main"]
