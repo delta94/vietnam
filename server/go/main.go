@@ -154,7 +154,7 @@ func main() {
 }
 
 func loadEnv() {
-	var env string = getEnv("ENV", "")
+	var env string = getEnv("GO_ENV", "")
 	fmt.Println("env", env)
 	if env != "production" {
 		fmt.Println("Loading .env")

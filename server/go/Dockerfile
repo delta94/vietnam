@@ -7,8 +7,8 @@ LABEL maintainer "Hieu <hieumdoan@gmail.com>"
 # Clear cache
 ARG CACHEBUST=1
 
-# Set ENV to production
-ENV ENV production
+# Set GO_ENV to production
+ENV GO_ENV production
 
 # Set WORKDIR
 RUN apk update && apk add --no-cache git
