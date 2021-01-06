@@ -7,9 +7,6 @@ LABEL maintainer "Hieu <hieumdoan@gmail.com>"
 # Clear cache
 ARG CACHEBUST=1
 
-# Set GO_ENV to production
-ENV GO_ENV production
-
 # Set WORKDIR
 RUN apk update && apk add --no-cache git
 RUN mkdir /build
@@ -30,5 +27,5 @@ WORKDIR /app
 # expose port from container so host can access $PORT
 EXPOSE $PORT
 
-# start the app on load
-CMD ["./main"]
+# start the app on load and set GO_ENV to production
+CMD ["GO_ENV=production ./main"]
