@@ -1,4 +1,4 @@
-export const baseURL: string = `https://vietnamd.herokuapp.com/api`;
+export const baseURL: string = `https://vietnamapis.herokuapp.com`;
 
 export interface IEthnicMinority {
   name: string;

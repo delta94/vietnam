@@ -1,22 +1,11 @@
 'use strict';
 
-import fetch from 'node-fetch';
+import Base from './base';
 
-import { baseURL, IEthnicMinority } from '../constants';
+import { IEthnicMinority } from '../constants';
 
-export default class EthnicMinorities {
-  public getEthnicMinorities(): Promise<Array<IEthnicMinority>> {
-    const url = `${baseURL}/ethnic-minorities`;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((ethnicMinorities: Array<IEthnicMinority> = []) => {
-          resolve(ethnicMinorities);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+export default class EthnicMinorities extends Base {
+  public async getEthnicMinorities(): Promise<Array<IEthnicMinority>> {
+    return await this.fetch('ethnic-minorities');
   }
 }

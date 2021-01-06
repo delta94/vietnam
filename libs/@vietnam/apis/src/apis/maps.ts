@@ -1,46 +1,31 @@
 'use strict';
 
-import fetch from 'node-fetch';
+import Base from './base';
 
-import { baseURL, IMapsPostalCode, IMapsProvince, IMapsDistrict, IMapsWard } from '../constants';
+import { IMapsPostalCode, IMapsProvince, IMapsDistrict, IMapsWard } from '../constants';
 
-export default class Maps {
-  private fetch(endpoint: string): Promise<Array<any>> {
-    const url = `${baseURL}/maps/${endpoint}`;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((list: Array<any> = []) => {
-          resolve(list);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
+export default class Maps extends Base {
   public async getMacroRegions(): Promise<Array<string>> {
-    return await this.fetch('macro-regions');
+    return await this.fetch('maps/macro-regions');
   }
 
   public async getRegions(): Promise<Array<string>> {
-    return await this.fetch('regions');
+    return await this.fetch('maps/regions');
   }
 
   public async getPostalCodes(): Promise<Array<IMapsPostalCode>> {
-    return await this.fetch('postal-codes');
+    return await this.fetch('maps/postal-codes');
   }
 
   public async getProvinces(): Promise<Array<IMapsProvince>> {
-    return await this.fetch('provinces');
+    return await this.fetch('maps/provinces');
   }
 
   public async getDistricts(): Promise<Array<IMapsDistrict>> {
-    return await this.fetch('districts');
+    return await this.fetch('maps/districts');
   }
 
   public async getWards(): Promise<Array<IMapsWard>> {
-    return await this.fetch('wards');
+    return await this.fetch('maps/wards');
   }
 }

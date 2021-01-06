@@ -1,23 +1,13 @@
 'use strict';
 
-import fetch from 'node-fetch';
+import Base from './base';
 
-import { baseURL, EnumSportEN, ISportsClub } from '../constants';
+import { EnumSportEN, ISportsClub } from '../constants';
 
-export default class Sports {
-  private getClubsBySport(sport: EnumSportEN): Promise<Array<ISportsClub>> {
-    const url = `${baseURL}/sports/clubs?sport=${sport}`;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((clubs: Array<ISportsClub> = []) => {
-          resolve(clubs);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+export default class Sports extends Base {
+  private async getClubsBySport(sport: EnumSportEN): Promise<Array<ISportsClub>> {
+    const endpoint: string = `sports/clubs?sport=${sport}`;
+    return await this.fetch(endpoint);
   }
 
   public async getBasketballClubs(): Promise<Array<ISportsClub>> {

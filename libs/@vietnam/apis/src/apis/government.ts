@@ -1,55 +1,39 @@
 'use strict';
 
-import fetch from 'node-fetch';
+import Base from './base';
+import { IGovernmentOfficial, IGovernmentMinistry } from '../constants';
 
-import { baseURL, IGovernmentOfficial, IGovernmentMinistry } from '../constants';
-
-export default class Government {
-  private async fetch(endpoint: string): Promise<Array<any>> {
-    const url = `${baseURL}/government/${endpoint}`;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((list: Array<IGovernmentOfficial> = []) => {
-          resolve(list);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
+export default class Government extends Base {
   public async getIncumbents(): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch('incumbents');
+    return await this.fetch('government/incumbents');
   }
 
   public async getGeneralSecretaries(): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch('general-secretaries');
+    return await this.fetch('government/general-secretaries');
   }
 
   public async getPresidents(): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch('presidents');
+    return await this.fetch('government/presidents');
   }
 
   public async getPrimeMinisters(): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch('prime-ministers');
+    return await this.fetch('government/prime-ministers');
   }
 
   public async getNationalAssemblyChairs(): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch('national-assembly/chairs');
+    return await this.fetch('government/national-assembly/chairs');
   }
 
   public async getNationalAssemblyMembers(no: number = 14): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch(`national-assembly/members?no=${no}`);
+    return await this.fetch(`government/national-assembly/members?no=${no}`);
   }
 
   public async getMinistries(): Promise<Array<IGovernmentMinistry>> {
-    return await this.fetch('ministries');
+    return await this.fetch('government/ministries');
   }
 
   private async getMinisters(ministry: string): Promise<Array<IGovernmentOfficial>> {
-    return await this.fetch(`ministers?ministry=${ministry}`);
+    return await this.fetch(`government/ministers?ministry=${ministry}`);
   }
 
   public async getEthnicMinorityAffairsLeaders(): Promise<Array<IGovernmentOfficial>> {
