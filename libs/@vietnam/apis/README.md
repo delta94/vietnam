@@ -195,6 +195,12 @@ const wards = maps.getWards();
 ```ts
 import { phones } from 'vnapis';
  
+// Get Marco Regions
+const marcoRegions: Array<any> = phones.getMarcoRegions();
+ 
+// Get Regions
+const regions: Array<any> = phones.getRegions();
+ 
 // Get Providers
 const providers: Array<any> = phones.getProviders();
  

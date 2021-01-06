@@ -7,19 +7,19 @@ import { phones } from '../src/';
 
 describe('phones', () => {
   it('get providers', async () => {
-    const providers = phones.getProviders();
+    const providers = await phones.getProviders();
     console.log(providers);
     assert.ok(typeof providers === 'object');
   });
 
   it('get prefixes', async () => {
-    const prefixes = phones.getPrefixes();
+    const prefixes = await phones.getPrefixes();
     console.log(prefixes);
     assert.ok(typeof prefixes === 'object');
   });
 
   it('get provider from phone number', async () => {
-    const provider: string = phones.getProviderFromPhoneNumber('+84 (0) 908070605');
+    const provider: string = await phones.getProviderFromPhoneNumber('+84 (0) 908070605');
     console.log('provider', provider);
     assert.ok(provider === 'Mobifone');
   });

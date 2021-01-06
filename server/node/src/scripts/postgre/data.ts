@@ -1,30 +1,41 @@
-import { TechnologySchema } from '../../models/postgre';
+import { PhonesPrefixShema } from '../../models/postgre';
 
-export const table = 'technologies';
+export const table = 'phones_prefixes';
 
-export const schema = TechnologySchema;
+export const schema = PhonesPrefixShema;
 
 export const rows: Array<any> = [
-  { name: 'fpt', type: 'A.I.', url: 'https://docs.fpt.ai/en', npm: '' },
-  { name: 'giaohangnhanh', type: 'Delivery', url: 'https://api.ghn.vn/', npm: 'giaohangnhanh' },
-  {
-    name: 'giaohangtietkiem',
-    type: 'Delivery',
-    url: 'https://docs.giaohangtietkiem.vn/',
-    npm: ''
-  },
-  { name: 'momo', type: 'Payment', url: 'https://developers.momo.vn/#/', npm: '' },
-  { name: 'onepay', type: 'Payment', url: 'https://mtf.onepay.vn/developer/', npm: 'onepay' },
-  { name: 'tiki', type: 'E-commerce', url: 'https://open.tiki.vn/', npm: '' },
-  { name: 'vietcetera', type: 'Blog', url: 'https://vietcetera.com/', npm: 'vietcetera' },
-  { name: 'name', type: 'A.I.', url: 'https://viettelgroup.ai/', npm: '' },
-  { name: 'vnpay', type: 'Payment', url: 'https://sandbox.vnpayment.vn/apis/', npm: 'vnpay' },
-  {
-    name: 'vtcpay',
-    type: 'Payment',
-    url: 'https://vtcpay.vn/tai-lieu-tich-hop-website?l=en',
-    npm: 'vtcpay'
-  },
-  { name: 'zalo', type: 'Messaging', url: 'https://developers.zalo.me/', npm: '' },
-  { name: 'zalopay', type: 'Payment', url: 'https://docs.zalopay.vn/', npm: 'zalopay' }
+  { prefix: '032', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '033', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '034', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '035', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '036', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '037', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '038', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '039', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '056', provider: 'Vietnamobile', provider_id: 'vietnamobile' },
+  { prefix: '058', provider: 'Vietnamobile', provider_id: 'vietnamobile' },
+  { prefix: '059', provider: 'Gmobile', provider_id: 'gmobile' },
+  { prefix: '070', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '076', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '077', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '078', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '079', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '081', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '082', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '083', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '084', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '085', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '086', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '088', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '089', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '090', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '091', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '092', provider: 'Vietnamobile', provider_id: 'vietnamobile' },
+  { prefix: '093', provider: 'Mobifone', provider_id: 'mobifone' },
+  { prefix: '094', provider: 'Vinaphone', provider_id: 'vinaphone' },
+  { prefix: '096', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '097', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '098', provider: 'Viettel', provider_id: 'viettel' },
+  { prefix: '099', provider: 'Gmobile', provider_id: 'gmobile' }
 ];

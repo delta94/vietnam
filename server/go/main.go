@@ -115,13 +115,12 @@ type NationalAssemblyMember struct {
 	Active string `json:"active"`
 }
 
-// Technology .
-type Technology struct {
+// PhonesPrefix .
+type PhonesPrefix struct {
 	ID int `json:"id"`
-	Name string `json:"name"`
-	Type string `json:"type"`
-	URL string `json:"url"`
-	NPM string `json:"npm"`
+	Prefix string `json:"prefix"`
+	Provider string `json:"provider"`
+	ProviderID string `json:"provider_id"`
 }
 
 // SportsClub .
@@ -132,6 +131,15 @@ type SportsClub struct {
 	Competition	string `json:"competition"`
 	City string `json:"city"`
 	Name string `json:"name"`
+}
+
+// Technology .
+type Technology struct {
+	ID int `json:"id"`
+	Name string `json:"name"`
+	Type string `json:"type"`
+	URL string `json:"url"`
+	NPM string `json:"npm"`
 }
 
 func main() {
@@ -188,11 +196,14 @@ func loadRoutes() {
 	http.HandleFunc("/maps/districts", getMapsDistricts)
 	http.HandleFunc("/maps/wards", getMapsWards)
 	http.HandleFunc("/maps/postal-codes", getMapsPostalCodes)
-	// Technologies
-	http.HandleFunc("/technologies", getTechnologies)
+	// Phones
+	http.HandleFunc("/phones", getPhones)
+	http.HandleFunc("/phones/prefixes", getPhonesPrefixes)
 	// Sports
 	http.HandleFunc("/sports", getSports)
 	http.HandleFunc("/sports/clubs", getSportsClubs)
+	// Technologies
+	http.HandleFunc("/technologies", getTechnologies)
 }
 
 func openSQLConnection() *sql.DB {
@@ -231,8 +242,9 @@ func getRoot(w http.ResponseWriter, r *http.Request) {
 		"government",
 		"license-plates",
 		"maps",
-		"technologies",
+		"phones",
 		"sports",
+		"technologies",
 	}
 	sort.Strings(endpoints)
 	status := Status { Status: "OK", Endpoints: endpoints }
@@ -824,6 +836,45 @@ func getNationalAssemblyMembers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	returnJSONresponse(w, members)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getPhones(w http.ResponseWriter, r *http.Request) {
+	endpoints := []string{
+		"prefixes",
+	}
+	sort.Strings(endpoints)
+	status := Status { Status: "OK", Endpoints: endpoints }
+	returnJSONresponse(w, status)
+}
+
+func getPhonesPrefixes(w http.ResponseWriter, r *http.Request) {
+	db := openSQLConnection()
+
+	rows, err := db.Query("SELECT * FROM phones_prefixes")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var prefixes []PhonesPrefix
+
+	for rows.Next() {
+		var prefix PhonesPrefix
+		err = rows.Scan(
+			&prefix.ID,
+			&prefix.Prefix,
+			&prefix.Provider,
+			&prefix.ProviderID,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		prefixes = append(prefixes, prefix)
+	}
+
+	returnJSONresponse(w, prefixes)
 
 	defer rows.Close()
 	defer db.Close()

@@ -1,4 +1,4 @@
-export const baseURL: string = `https://vietnamapis.herokuapp.com`;
+export const baseURL: string = `https://vietnamd.herokuapp.com/api`;
 
 export interface IEthnicMinority {
   name: string;
@@ -85,4 +85,15 @@ export interface ISportsClub {
   sport: string;
   sport_en: EnumSportEN;
   competition: string;
+}
+
+export interface IPhonesProvider {
+  name: string;
+  prefixes: Array<string>;
+}
+
+export interface IPhonesPrefix {
+  prefix: string;
+  provider: string;
+  provider_id: string;
 }

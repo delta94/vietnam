@@ -86,12 +86,11 @@ export const NationalAssemblyMemberSchema = {
   active: { type: 'text' }
 };
 
-export const TechnologySchema = {
+export const PhonesPrefixShema = {
   id: { type: 'int', primary: true, required: true },
-  name: { type: 'text', required: true },
-  type: { type: 'text', required: true },
-  url: { type: 'text', required: true },
-  npm: { type: 'text' }
+  prefix: { type: 'text', required: true },
+  provider: { type: 'text', require: true },
+  provider_id: { type: 'text', required: true }
 };
 
 export const SportsClubShema = {
@@ -101,6 +100,14 @@ export const SportsClubShema = {
   competition: { type: 'text', required: true },
   city: { type: 'text', required: true },
   name: { type: 'text', required: true }
+};
+
+export const TechnologySchema = {
+  id: { type: 'int', primary: true, required: true },
+  name: { type: 'text', required: true },
+  type: { type: 'text', required: true },
+  url: { type: 'text', required: true },
+  npm: { type: 'text' }
 };
 
 export const tables = [
@@ -113,6 +120,7 @@ export const tables = [
   { name: 'maps_districts', schema: MapsDistrictSchema },
   { name: 'maps_wards', schema: MapsWardSchema },
   { name: 'national_assembly_members', schema: NationalAssemblyMemberSchema },
-  { name: 'technologies', schema: TechnologySchema },
-  { name: 'sports_clubs', schema: SportsClubShema }
+  { name: 'phones_prefixes', schema: PhonesPrefixShema },
+  { name: 'sports_clubs', schema: SportsClubShema },
+  { name: 'technologies', schema: TechnologySchema }
 ];

@@ -2,9 +2,9 @@
 
 import { Request, Response } from 'express';
 
-import { phone } from 'vnapis';
+import { phonesService } from '../../../services';
 
 export default async (req: Request, res: Response) => {
-  const providers = phone.getProviders();
+  const providers = await phonesService.getProviders();
   return res.json(providers);
 };
