@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "server/go/**"
-      - ".github/workflows/**"
+      - ".github/workflows/heroku-go.yml"
     branches:
       - master
 

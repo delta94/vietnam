@@ -4,7 +4,7 @@ on:
   push:
     paths:
       - "server/node/**"
-      - ".github/workflows/**"
+      - ".github/workflows/heroku-node.yml"
     branches:
       - master
 
