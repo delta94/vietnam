@@ -1,0 +1,31 @@
+name: Heroku Go Deploy
+
+on:
+  push:
+    paths:
+      - "server/go/**"
+      - ".github/workflows/**"
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Heroku - Login to Container registry
+        working-directory: ./server/go
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:login
+      - name: Heroku - Build and push
+        working-directory: ./server/go
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:push web --app vietnamapis
+      - name: Heroku - Release
+        working-directory: ./server/go
+        env:
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+        run: heroku container:release web --app vietnamapis

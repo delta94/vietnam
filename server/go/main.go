@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	"github.com/joho/godotenv"
 	"github.com/lib/pq"
@@ -38,7 +39,7 @@ type GovernmentMinistry struct {
 // GovernmentOfficial ...
 type GovernmentOfficial struct {
 	ID int `json:"id"`
-	Ranking string `json:"ranking"`
+	Ranking int `json:"ranking"`
 	Title string `json:"title"`
 	TitleEn string `json:"title_en"`
 	TitleShort string `json:"title_short"`
@@ -132,28 +133,37 @@ type SportsClub struct {
 }
 
 func main() {
-	var port string = "8080"
+	var port string = os.Getenv("PORT")
 	fmt.Println("Server is running on port", port)
-	http.HandleFunc("/", basicRequest)
+	http.HandleFunc("/", getStatus)
 	// Ethnic Minorities
-	http.HandleFunc("/api/ethnic-minorities", getEthnicMinorities)
-	// Government
-	http.HandleFunc("/api/government/ministries", getGovernmentMinistries)
+	http.HandleFunc("/ethnic-minorities", getEthnicMinorities)
+	// Government (Ministries)
+	http.HandleFunc("/government/ministries", getGovernmentMinistries)
+	// Government (Officials)
+	http.HandleFunc("/government/incumbents", getGovernmentIncumbents)
+	http.HandleFunc("/government/general-secretaries", getGovernmentGeneralSecretaries)
+	http.HandleFunc("/government/presidents", getGovernmentPresidents)
+	http.HandleFunc("/government/prime-ministers", getGovernmentPrimeMinisters)
+	http.HandleFunc("/government/national-assembly/chairs", getNationalAssemblyChairs)
+	http.HandleFunc("/government/national-assembly/members", getNationalAssemblyMembers)
+	http.HandleFunc("/government/ministers", getGovernmentMinisters)
+
 	// License Plates
-	http.HandleFunc("/api/license-plates", getLicensePlates)
+	http.HandleFunc("/license-plates", getLicensePlates)
 	// Maps
-	http.HandleFunc("/api/maps/provinces", getMapsProvinces)
-	http.HandleFunc("/api/maps/districts", getMapsDistricts)
-	http.HandleFunc("/api/maps/wards", getMapsWards)
-	http.HandleFunc("/api/maps/postal-codes", getMapsPostalCodes)
+	http.HandleFunc("/maps/provinces", getMapsProvinces)
+	http.HandleFunc("/maps/districts", getMapsDistricts)
+	http.HandleFunc("/maps/wards", getMapsWards)
+	http.HandleFunc("/maps/postal-codes", getMapsPostalCodes)
 	// Technologies
-	http.HandleFunc("/api/technologies", getTechnologies)
+	http.HandleFunc("/technologies", getTechnologies)
 	// Sports
-	http.HandleFunc("/api/sports/clubs", getSportsClubs)
+	http.HandleFunc("/sports/clubs", getSportsClubs)
 	log.Fatal(http.ListenAndServe(":" + port, nil))
 }
 
-func basicRequest(w http.ResponseWriter, r *http.Request) {
+func getStatus(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
 	status := Status { Status: "OK" }
 	w.Header().Set("Content-Type", "application/json")
@@ -486,6 +496,302 @@ func getTechnologies(w http.ResponseWriter, r *http.Request) {
 	}
 
 	bytes, _ := json.MarshalIndent(technologies, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getGovernmentIncumbents(w http.ResponseWriter, r *http.Request) {
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials WHERE end_date = 'incumbent'")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var incumbents []GovernmentOfficial
+
+	for rows.Next() {
+		var incumbent GovernmentOfficial
+		err = rows.Scan(
+			&incumbent.ID,
+			&incumbent.Ranking,
+			&incumbent.Title,
+			&incumbent.TitleEn,
+			&incumbent.TitleShort,
+			&incumbent.Name,
+			&incumbent.Gender,
+			&incumbent.GenderEn,
+			&incumbent.StartDate,
+			&incumbent.EndDate,
+			&incumbent.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		incumbents = append(incumbents, incumbent)
+	}
+
+	bytes, _ := json.MarshalIndent(incumbents, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getGovernmentGeneralSecretaries(w http.ResponseWriter, r *http.Request) {
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'general-secretary'")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var secretaries []GovernmentOfficial
+
+	for rows.Next() {
+		var secretary GovernmentOfficial
+		err = rows.Scan(
+			&secretary.ID,
+			&secretary.Ranking,
+			&secretary.Title,
+			&secretary.TitleEn,
+			&secretary.TitleShort,
+			&secretary.Name,
+			&secretary.Gender,
+			&secretary.GenderEn,
+			&secretary.StartDate,
+			&secretary.EndDate,
+			&secretary.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		secretaries = append(secretaries, secretary)
+	}
+
+	bytes, _ := json.MarshalIndent(secretaries, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getGovernmentPresidents(w http.ResponseWriter, r *http.Request) {
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'president'")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var presidents []GovernmentOfficial
+
+	for rows.Next() {
+		var president GovernmentOfficial
+		err = rows.Scan(
+			&president.ID,
+			&president.Ranking,
+			&president.Title,
+			&president.TitleEn,
+			&president.TitleShort,
+			&president.Name,
+			&president.Gender,
+			&president.GenderEn,
+			&president.StartDate,
+			&president.EndDate,
+			&president.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		presidents = append(presidents, president)
+	}
+
+	bytes, _ := json.MarshalIndent(presidents, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getGovernmentPrimeMinisters(w http.ResponseWriter, r *http.Request) {
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'prime-minister'")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var ministers []GovernmentOfficial
+
+	for rows.Next() {
+		var minister GovernmentOfficial
+		err = rows.Scan(
+			&minister.ID,
+			&minister.Ranking,
+			&minister.Title,
+			&minister.TitleEn,
+			&minister.TitleShort,
+			&minister.Name,
+			&minister.Gender,
+			&minister.GenderEn,
+			&minister.StartDate,
+			&minister.EndDate,
+			&minister.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ministers = append(ministers, minister)
+	}
+
+	bytes, _ := json.MarshalIndent(ministers, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getNationalAssemblyChairs(w http.ResponseWriter, r *http.Request) {
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials WHERE title_short = 'national-assembly-chair'")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var chairs []GovernmentOfficial
+
+	for rows.Next() {
+		var chair GovernmentOfficial
+		err = rows.Scan(
+			&chair.ID,
+			&chair.Ranking,
+			&chair.Title,
+			&chair.TitleEn,
+			&chair.TitleShort,
+			&chair.Name,
+			&chair.Gender,
+			&chair.GenderEn,
+			&chair.StartDate,
+			&chair.EndDate,
+			&chair.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		chairs = append(chairs, chair)
+	}
+
+	bytes, _ := json.MarshalIndent(chairs, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getGovernmentMinisters(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+	ministry, present := query["ministry"]
+	var whereClause string
+  if whereClause = ""; present && len(ministry) != 0 {
+		fmt.Println("ministry is present")
+		whereClause = "WHERE title_short = '" + strings.Join(ministry, ",") + "'"
+	}
+
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM government_officials " + whereClause)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var ministers []GovernmentOfficial
+
+	for rows.Next() {
+		var minister GovernmentOfficial
+		err = rows.Scan(
+			&minister.ID,
+			&minister.Ranking,
+			&minister.Title,
+			&minister.TitleEn,
+			&minister.TitleShort,
+			&minister.Name,
+			&minister.Gender,
+			&minister.GenderEn,
+			&minister.StartDate,
+			&minister.EndDate,
+			&minister.Note,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		ministers = append(ministers, minister)
+	}
+
+	bytes, _ := json.MarshalIndent(ministers, "", "\t")
+
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(bytes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getNationalAssemblyMembers(w http.ResponseWriter, r *http.Request) {
+	query := r.URL.Query()
+	no, present := query["no"]
+	var whereClause string
+  if whereClause = ""; present && len(no) != 0 {
+		fmt.Println("no is present")
+		whereClause = "WHERE no = " + strings.Join(no, ",")
+	}
+
+	db := openConnection()
+
+	rows, err := db.Query("SELECT * FROM national_assembly_members " + whereClause)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var members []NationalAssemblyMember
+
+	for rows.Next() {
+		var member NationalAssemblyMember
+		err = rows.Scan(
+			&member.ID,
+			&member.No,
+			&member.Name,
+			&member.DateOfBirth,
+			&member.Gender,
+			&member.Province,
+			&member.Percentage,
+			&member.District,
+			&member.CityOfBirth,
+			&member.Degree,
+			&member.Active,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		members = append(members, member)
+	}
+
+	bytes, _ := json.MarshalIndent(members, "", "\t")
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(bytes)

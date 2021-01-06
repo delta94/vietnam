@@ -1,12 +1,14 @@
 'use strict';
 
-import Calendar from './calendar';
-import EthnicMinorities from './ethnic-minorities';
-import Government from './government';
-import LicensePlates from './license-plates';
-import Maps from './maps';
-import Phones from './phones';
-import Sports from './sports';
+import {
+  Calendar,
+  EthnicMinorities,
+  Government,
+  LicensePlates,
+  Maps,
+  Phones,
+  Sports
+} from './apis';
 
 export const calendar: Calendar = new Calendar();
 export const ethnicMinorities: EthnicMinorities = new EthnicMinorities();
