@@ -37,7 +37,7 @@ export const LicensePlateShema = {
   type: { type: 'text', required: true }
 };
 
-export const MapsPostalCodes = {
+export const MapsPostalCodeShema = {
   id: { type: 'int', primary: true, required: true },
   code: { type: 'text', required: true },
   province: { type: 'text', required: true }
@@ -102,3 +102,17 @@ export const SportsClubShema = {
   city: { type: 'text', required: true },
   name: { type: 'text', required: true }
 };
+
+export const tables = [
+  { name: 'ethnic_minorities', schema: EthnicMinorityShema },
+  { name: 'government_ministries', schema: GovernmentMinistryShema },
+  { name: 'government_officials', schema: GovernmentOfficialShema },
+  { name: 'license_plates', schema: LicensePlateShema },
+  { name: 'maps_postal_codes', schema: MapsPostalCodeShema },
+  { name: 'maps_provinces', schema: MapsProvinceShema },
+  { name: 'maps_districts', schema: MapsDistrictSchema },
+  { name: 'maps_wards', schema: MapsWardSchema },
+  { name: 'national_assembly_members', schema: NationalAssemblyMemberSchema },
+  { name: 'technologies', schema: TechnologySchema },
+  { name: 'sports_clubs', schema: SportsClubShema }
+];
