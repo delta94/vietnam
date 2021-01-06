@@ -133,6 +133,15 @@ type SportsClub struct {
 }
 
 func main() {
+	var env string = os.Getenv("ENV")
+	fmt.Println(env)
+	if env != "" {
+		err := godotenv.Load()
+		if err != nil {
+			log.Fatal("Error loading .env file")
+		}
+	}
+
 	var port string = os.Getenv("PORT")
 	fmt.Println("Server is running on port", port)
 	http.HandleFunc("/", getStatus)
@@ -171,10 +180,6 @@ func getStatus(w http.ResponseWriter, r *http.Request) {
 }
 
 func openConnection() *sql.DB {
-	err := godotenv.Load()
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
 	// user := os.Getenv("DB_POSTGRE_USER")
 	// host := os.Getenv("DB_POSTGRE_HOST")
 	// dbname := os.Getenv("DB_POSTGRE_DATABASE")
