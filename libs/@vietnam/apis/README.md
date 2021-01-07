@@ -9,6 +9,7 @@ If you enjoyed this project — or just feeling generous, consider [buying me a 
 - [VIETNAM APIS](#vietnam-apis)
   - [Installation](#installation)
   - [APIs](#apis)
+  - [Banks](#banks)
     - [Calendar](#calendar)
     - [Ethnic Minorities](#ethnic-minorities)
     - [Government](#government)
@@ -27,6 +28,15 @@ yarn add vnapis
 ```
 
 ## APIs
+
+## Banks
+
+```ts
+import { banks } from 'vnapis';
+
+// Get Banks
+const _banks = await banks.getBanks();
+```
 
 ### Calendar
 
@@ -167,7 +177,7 @@ const ministers = government.getTransportMinisters();
 
 ```ts
 import { licensePlates } from 'vnapis';
- 
+
 // Get License Plates
 const plates = await licensePlates.getLicensePlates();
 ```

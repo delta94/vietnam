@@ -8,12 +8,7 @@ import configs from './configs';
 import { IBank } from './interfaces';
 
 class VietNamBanks {
-  private banks: Array<IBank> = configs.banks;
   private forexBanks: Array<IBank> = configs.forexBanks;
-
-  public getBanks(): Array<IBank> {
-    return this.banks;
-  }
 
   public getForexBanks(): Array<IBank> {
     return this.forexBanks.map(bank => {

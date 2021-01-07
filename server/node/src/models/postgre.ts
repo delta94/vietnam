@@ -1,5 +1,16 @@
 'use strict';
 
+export const BankShema = {
+  id: { type: 'int', primary: true, required: true },
+  code: { type: 'text', required: true },
+  name: { type: 'text', required: true },
+  name_en: { type: 'text', required: true },
+  name_short: { type: 'text', required: true },
+  url: { type: 'text', required: true },
+  type: { type: 'text', required: true },
+  type_en: { type: 'text', required: true }
+};
+
 export const EthnicMinorityShema = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true },
@@ -110,17 +121,21 @@ export const TechnologySchema = {
   npm: { type: 'text' }
 };
 
-export const tables = [
-  { name: 'ethnic_minorities', schema: EthnicMinorityShema },
-  { name: 'government_ministries', schema: GovernmentMinistryShema },
-  { name: 'government_officials', schema: GovernmentOfficialShema },
-  { name: 'license_plates', schema: LicensePlateShema },
-  { name: 'maps_postal_codes', schema: MapsPostalCodeShema },
-  { name: 'maps_provinces', schema: MapsProvinceShema },
-  { name: 'maps_districts', schema: MapsDistrictSchema },
-  { name: 'maps_wards', schema: MapsWardSchema },
-  { name: 'national_assembly_members', schema: NationalAssemblyMemberSchema },
-  { name: 'phones_prefixes', schema: PhonesPrefixShema },
-  { name: 'sports_clubs', schema: SportsClubShema },
-  { name: 'technologies', schema: TechnologySchema }
-];
+export const tables = {
+  banks: { name: 'banks', schema: BankShema },
+  ethnicMinorities: { name: 'ethnic_minorities', schema: EthnicMinorityShema },
+  governmentMinistries: { name: 'government_ministries', schema: GovernmentMinistryShema },
+  governmentOfficials: { name: 'government_officials', schema: GovernmentOfficialShema },
+  licensePlates: { name: 'license_plates', schema: LicensePlateShema },
+  mapsPostalCodes: { name: 'maps_postal_codes', schema: MapsPostalCodeShema },
+  mapsProvinces: { name: 'maps_provinces', schema: MapsProvinceShema },
+  mapsDistricts: { name: 'maps_districts', schema: MapsDistrictSchema },
+  mapsWards: { name: 'maps_wards', schema: MapsWardSchema },
+  nationalAssemblyMembers: {
+    name: 'national_assembly_members',
+    schema: NationalAssemblyMemberSchema
+  },
+  PhonesPrefixes: { name: 'phones_prefixes', schema: PhonesPrefixShema },
+  sportsClubs: { name: 'sports_clubs', schema: SportsClubShema },
+  technologies: { name: 'technologies', schema: TechnologySchema }
+};

@@ -1,6 +1,7 @@
 'use strict';
 
 import {
+  Banks,
   Calendar,
   EthnicMinorities,
   Government,
@@ -10,6 +11,7 @@ import {
   Sports
 } from './apis';
 
+export const banks: Banks = new Banks();
 export const calendar: Calendar = new Calendar();
 export const ethnicMinorities: EthnicMinorities = new EthnicMinorities();
 export const government: Government = new Government();

@@ -7,14 +7,6 @@ import vnb from '../src';
 
 describe('vnb', () => {
   /**
-   * Banks
-   */
-  it('get banks', () => {
-    const banks: Array<any> = vnb.getBanks();
-    console.log(banks);
-    assert.ok(typeof banks === 'object');
-  });
-  /**
    * Forex
    */
   it('get forex banks', async () => {

@@ -33,3 +33,13 @@ export interface ITanVietOptions {
   period?: string;
   unit?: number;
 }
+
+export interface ITelegramMessage {
+  chat_id?: string | number;
+  text?: string;
+  parse_mode?: 'HTML' | 'MarkdownV2' | 'Markdown';
+}
+
+export type TelegramMethod = 'GET' | 'POST';
+
+export type TelegramCommand = 'setWebhook' | 'sendMessage' | 'getMe';

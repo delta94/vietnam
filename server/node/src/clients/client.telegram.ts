@@ -2,15 +2,7 @@
 
 import fetch from 'node-fetch';
 
-type Command = 'setWebhook' | 'sendMessage' | 'getMe';
-
-type Method = 'GET' | 'POST';
-
-interface IMessage {
-  chat_id?: string | number;
-  text?: string;
-  parse_mode?: 'HTML' | 'MarkdownV2' | 'Markdown';
-}
+import { ITelegramMessage, TelegramMethod, TelegramCommand } from '../global/interfaces';
 
 export default class TelegramClient {
   private base: string;
@@ -19,7 +11,11 @@ export default class TelegramClient {
     this.base = `https://api.telegram.org/bot${token}`;
   }
 
-  async apiRequest(command: Command, method: Method = 'GET', data: any = {}): Promise<any> {
+  async apiRequest(
+    command: TelegramCommand,
+    method: TelegramMethod = 'GET',
+    data: any = {}
+  ): Promise<any> {
     const { base } = this;
     const url: string = `${base}/${command}`;
     const headers = { 'Content-Type': 'application/json' };
@@ -43,8 +39,8 @@ export default class TelegramClient {
     return await this.apiRequest('getMe');
   }
 
-  async sendMessage(chat_id: number, text: string, options: IMessage = {}): Promise<any> {
-    const data: IMessage = Object.assign(options, { chat_id, text });
+  async sendMessage(chat_id: number, text: string, options: ITelegramMessage = {}): Promise<any> {
+    const data: ITelegramMessage = Object.assign(options, { chat_id, text });
     return await this.apiRequest('sendMessage', 'POST', data);
   }
 

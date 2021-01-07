@@ -16,9 +16,6 @@ yarn add vietnambanks
 ```ts
 import vnb from 'vietnambanks';
 
-// Get Banks
-const banks: Array<any> = await vnb.getBanks();
-
 // Get Forex Banks
 const banks: Array<any> = await vnb.getForexBanks();
 

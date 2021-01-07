@@ -1,5 +1,16 @@
 export const baseURL: string = `https://vietnamd.herokuapp.com/api`;
 
+export interface IBank {
+  id: number;
+  code: string;
+  name: string;
+  name_en: string;
+  name_short: string;
+  url: string;
+  type: string;
+  type_en: string;
+}
+
 export interface IEthnicMinority {
   name: string;
   type: string;

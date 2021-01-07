@@ -14,13 +14,25 @@ import (
 	"github.com/lib/pq"
 )
 
-// Status ...
+// Status .
 type Status struct { 
 	Status string `json:"status"`
 	Endpoints []string `json:"endpoints"`
 }
 
-// EthnicMinority ...
+// Bank .
+type Bank struct {
+	ID int `json:"id"`
+	Code string `json:"code"`
+	Name string `json:"name"`
+	NameEn string `json:"name_en"`
+	NameShort string `json:"name_short"`
+	URL string `json:"url"`
+	Type string `json:"type"`
+	TypeEn string `json:"type_en"`
+}
+
+// EthnicMinority .
 type EthnicMinority struct {
 	ID int `json:"id"`
 	Name string `json:"name"`
@@ -28,7 +40,7 @@ type EthnicMinority struct {
 	TypeEn string `json:"type_en"`
 }
 
-// GovernmentMinistry ...
+// GovernmentMinistry .
 type GovernmentMinistry struct {
 	ID int `json:"id"`
 	Short string `json:"short"`
@@ -38,7 +50,7 @@ type GovernmentMinistry struct {
 	LevelEn string `json:"level_en"`
 }
 
-// GovernmentOfficial ...
+// GovernmentOfficial .
 type GovernmentOfficial struct {
 	ID int `json:"id"`
 	Ranking int `json:"ranking"`
@@ -53,7 +65,7 @@ type GovernmentOfficial struct {
 	Note string `json:"note"`
 }
 
-// LicensePlate ...
+// LicensePlate .
 type LicensePlate struct {
 	ID int `json:"id"`
 	License string `json:"license"`
@@ -61,7 +73,7 @@ type LicensePlate struct {
 	Type string `json:"type"`
 }
 
-// MapsPostalCode ...
+// MapsPostalCode .
 type MapsPostalCode struct {
 	ID int `json:"id"`
 	Code string `json:"code"`
@@ -81,7 +93,7 @@ type MapsProvince struct {
 	RegionEn string `json:"region_en"`
 }
 
-// MapsDistrict ...
+// MapsDistrict .
 type MapsDistrict struct {
 	ID int `json:"id"`
 	Name string `json:"name"`
@@ -175,6 +187,8 @@ func getEnv(key, fallback string) string {
 
 func loadRoutes() {
 	http.HandleFunc("/", getRoot)
+	// Ethnic Minorities
+	http.HandleFunc("/banks", getBanks)
 	// Ethnic Minorities
 	http.HandleFunc("/ethnic-minorities", getEthnicMinorities)
 	// Government
@@ -876,6 +890,40 @@ func getPhonesPrefixes(w http.ResponseWriter, r *http.Request) {
 	}
 
 	returnJSONresponse(w, prefixes)
+
+	defer rows.Close()
+	defer db.Close()
+}
+
+func getBanks(w http.ResponseWriter, r *http.Request) {
+	db := openSQLConnection()
+
+	rows, err := db.Query("SELECT * FROM banks")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var banks []Bank
+
+	for rows.Next() {
+		var bank Bank
+		err = rows.Scan(
+			&bank.ID,
+			&bank.Code,
+			&bank.Name,
+			&bank.NameEn,
+			&bank.NameShort,
+			&bank.URL,
+			&bank.Type,
+			&bank.TypeEn,
+		)
+		if err != nil {
+			log.Fatal(err)
+		}
+		banks = append(banks, bank)
+	}
+
+	returnJSONresponse(w, banks)
 
 	defer rows.Close()
 	defer db.Close()

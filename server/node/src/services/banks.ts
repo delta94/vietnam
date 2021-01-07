@@ -4,14 +4,19 @@ import * as _ from 'lodash';
 import fetch from 'node-fetch';
 import vnb from 'vietnambanks';
 
-import { esClient, telegramClient } from '../clients';
+import { esClient, telegramClient, postgreClient } from '../clients';
 import { utils } from '../libs';
 import { dsFinanceForexRate } from '../models/data';
 
 const URL_BASE: string = process.env.URL_BASE || '';
 
 export default class BanksService {
-  public getBanks(): Array<any> {
+  public async getBanks(): Promise<Array<any>> {
+    const banks: any = await postgreClient.find('banks');
+    return banks;
+  }
+
+  public getForexBanks(): Array<any> {
     return vnb.getForexBanks();
   }
 
