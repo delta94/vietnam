@@ -17,6 +17,18 @@ export interface IEthnicMinority {
   type_en: string;
 }
 
+export interface IFinanceCompany {
+  symbol: string;
+  industry: string;
+  market: string;
+  name: string;
+  sector: string;
+  subsector: string;
+  supersector: string;
+  group: string;
+  listingDate: string;
+}
+
 export interface IGovernmentOfficial {
   ranking: number;
   title: string;

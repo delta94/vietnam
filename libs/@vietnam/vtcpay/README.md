@@ -1,7 +1,17 @@
 # VTCPay
 
-- [VTCPay](https://vtcpay.vn/)
-- [VTCPay Documents](https://vtcpay.vn/tai-lieu-tich-hop-website?l=en)
+A Node.js API Wrapper Library for [VTCPay](https://vtcpay.vn/)
+
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
+
+- [VTCPay](#vtcpay)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [APIs](#apis)
+    - [Banks](#banks)
+    - [Countries](#countries)
 
 ## Installation
 
@@ -12,6 +22,8 @@ yarn add vtcpay
 ```
 
 ## Usage
+
+### APIs
 
 ```ts
 import VTCPay from 'vtcpay';
@@ -48,7 +60,7 @@ const url: string = vtcpay.createPaymentUrl({
 const response = vnpay.verifyReturnUrl(query); // { code: '', message: '' }
 ```
 
-## Banks
+### Banks
 
 | code             | name                                                                    |
 | ---------------- | ----------------------------------------------------------------------- |
@@ -90,7 +102,7 @@ const response = vnpay.verifyReturnUrl(query); // { code: '', message: '' }
 | VRB              | Vietnam - Russia Joint Venture Bank - VRB                               |
 | PublicBank       | Public Bank                                                             |
 
-## Countries
+### Countries
 
 | code | name                                        |
 | ---- | ------------------------------------------- |

@@ -2,6 +2,10 @@
 
 A Node.js API Wrapper Library for [Giao Hang Nhanh](https://ghn.vn/)
 
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
+
 - [Giao Hang Nhanh](#giao-hang-nhanh)
   - [Installation](#installation)
   - [Usage](#usage)

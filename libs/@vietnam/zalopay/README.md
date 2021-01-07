@@ -1,7 +1,14 @@
 # ZaloPay (formerly 123pay)
 
-- [ZaloPay](https://zalopay.vn/)
-- [ZaloPay Documents](https://docs.zalopay.vn/)
+A Node.js API Wrapper Library for [ZaloPay](https://zalopay.vn/)
+
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
+
+- [ZaloPay (formerly 123pay)](#zalopay-formerly-123pay)
+  - [Installation](#installation)
+  - [Usage](#usage)
 
 ## Installation
 
@@ -12,6 +19,8 @@ yarn add zalopay
 ```
 
 ## Usage
+
+[Full Documentation](https://docs.zalopay.vn/)
 
 ```ts
 import ZaloPay from 'zalopay';

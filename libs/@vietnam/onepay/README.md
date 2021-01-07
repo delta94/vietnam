@@ -1,7 +1,14 @@
 # OnePay
 
-- [OnePay](https://www.onepay.vn/)
-- [OnePay Documents](https://mtf.onepay.vn/developer/)
+A Node.js API Wrapper Library for [OnePay](https://www.onepay.vn/).
+
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
+
+- [OnePay](#onepay)
+  - [Installation](#installation)
+  - [Usage](#usage)
 
 ## Installation
 
@@ -12,6 +19,8 @@ yarn add onepay
 ```
 
 ## Usage
+
+[Full Documentation](https://mtf.onepay.vn/developer/)
 
 ```ts
 import OnePay from 'onepay';

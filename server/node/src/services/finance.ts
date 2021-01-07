@@ -363,8 +363,22 @@ export default class FinanceService {
   public async getCompanies(): Promise<any> {
     const self = this;
     const sort = { symbol: 1, group: 1, market: 1 };
-    const selectedFields = ['symbol', 'name', 'group', 'industry', 'subsector'];
-    const companies = await dsFinanceStockListedCompany.find({}, { sort, selectedFields });
+    const selectedFields: Array<string> = [
+      'symbol',
+      'group',
+      'market',
+      'name',
+      'industry',
+      'sector',
+      'supersector',
+      'subsector',
+      'listingDate'
+    ];
+    const excludedFields: Array<string> = ['_id'];
+    const companies = await dsFinanceStockListedCompany.find(
+      {},
+      { sort, selectedFields, excludedFields }
+    );
     const allIndicators = await self.getStockIndicators();
 
     return companies.map(company => {

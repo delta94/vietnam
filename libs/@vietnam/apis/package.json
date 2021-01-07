@@ -1,7 +1,7 @@
 {
   "name": "vnapis",
   "version": "1.0.0",
-  "description": "Vietnam APIs",
+  "description": "Vietnam Node APIs Client/Wrapper",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",
   "homepage": "https://hieudoanm.github.io/vietnam/",

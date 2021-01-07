@@ -13,32 +13,32 @@ class HomePackages extends Component {
       },
       {
         name: 'calendar',
-        npm: '',
+        npm: 'vnapis#lunar-calendar',
         docs: '/calendar'
       },
       {
         name: 'ethnic-minorities',
-        npm: '',
+        npm: 'vnapis#ethnic-minorities',
         docs: '/ethnic-minorities'
       },
       {
         name: 'finance',
-        npm: '',
+        npm: 'vnapis#finance',
         docs: '/finance'
       },
       {
         name: 'government',
-        npm: 'vietnamgovernment',
+        npm: 'vnapis#government',
         docs: '/government'
       },
       {
         name: 'license-plates',
-        npm: '',
+        npm: 'vnapis#license-plates',
         docs: '/license-plates'
       },
       {
         name: 'maps',
-        npm: '',
+        npm: 'vnapis#maps',
         docs: '/maps'
       },
       {
@@ -48,20 +48,20 @@ class HomePackages extends Component {
       },
       {
         name: 'phones',
-        npm: '',
+        npm: 'vnapis#phones',
         docs: '/phones'
+      },
+      {
+        name: 'sports',
+        npm: 'vnapis#sports',
+        docs: '/sports'
       },
       {
         name: 'technologies',
         npm: '',
         docs: '/technologies'
       },
-      {
-        name: 'sports',
-        npm: '',
-        docs: '/sports'
-      },
-      { name: 'vnltk', npm: 'vnapis', docs: '/vnltk' }
+      { name: 'vnltk', npm: 'vnapis#vnltk', docs: '/vnltk' }
     ].sort((a, b) => (a.name > b.name ? 1 : -1));
 
     this.state = { query: '', apis, filterAPIs: apis };

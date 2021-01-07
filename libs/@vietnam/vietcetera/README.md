@@ -1,6 +1,10 @@
 # Vietcetera
 
-An **Unofficial** Node.js API Client for [Vietcetera](https://vietcetera.com/)
+An **Unofficial** Node.js API Wrapper Library for [Vietcetera](https://vietcetera.com/)
+
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
 
 - [Vietcetera](#vietcetera)
   - [Installation](#installation)

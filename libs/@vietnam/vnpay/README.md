@@ -1,7 +1,10 @@
 # VNPay
 
-- [VNPay](https://vnpay.vn/)
-- [VNPay Documents](https://sandbox.vnpayment.vn/apis/)
+A Node.js API Wrapper Library for [VNPay](https://vnpay.vn/)
+
+If you've found an bug/issue, please [send me an email](mailto:hieumdoan@gmail.com).
+
+If you enjoyed this project — or just feeling generous, consider [buying me a beer](https://www.paypal.com/paypalme/hieudoanm/). Cheers! 🍻
 
 ## Installation
 
@@ -12,6 +15,8 @@ yarn add vnpay
 ```
 
 ## Usage
+
+[Full Documentation](https://sandbox.vnpayment.vn/apis/)
 
 ```ts
 import VNPay from 'vnpay';
