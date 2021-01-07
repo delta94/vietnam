@@ -25,41 +25,43 @@ class GovernmentMinistries extends Component {
 
   renderTable(loading, ministries = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-center text-white bg-danger">
-              Ministries ({ministries.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Level</th>
-                <th>Level (EN)</th>
-                <th>Name</th>
-                <th>Name (EN)</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ministries.length
-                ? ministries.map((ministry, index) => {
-                    const { name = '', name_en = '', level = '', level_en = '' } = ministry;
-                    return (
-                      <tr key={index}>
-                        <td>{level}</td>
-                        <td>{level_en}</td>
-                        <td>{name}</td>
-                        <td>{name_en}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-center text-white bg-danger">
+                Ministries ({ministries.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Level (EN)</th>
+                  <th>Name</th>
+                  <th>Name (EN)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ministries.length
+                  ? ministries.map((ministry, index) => {
+                      const { name = '', name_en = '', level = '', level_en = '' } = ministry;
+                      return (
+                        <tr key={index}>
+                          <td>{level}</td>
+                          <td>{level_en}</td>
+                          <td>{name}</td>
+                          <td>{name_en}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

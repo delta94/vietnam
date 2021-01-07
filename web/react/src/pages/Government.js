@@ -6,6 +6,7 @@ import {
   GovernmentMinisters,
   GovernmentMinistries,
   GovernmentNationalAssemblyChairs,
+  GovernmentNationalAssemblyMembers,
   GovernmentPresidents,
   GovernmentPrimeMinisters
 } from '../components';
@@ -33,6 +34,9 @@ class Government extends Component {
             </Tab>
             <Tab eventKey="ministers" title="Ministers">
               <GovernmentMinisters></GovernmentMinisters>
+            </Tab>
+            <Tab eventKey="nationalAssemblyMembers" title="National Assembly Members">
+              <GovernmentNationalAssemblyMembers></GovernmentNationalAssemblyMembers>
             </Tab>
           </Tabs>
         </main>

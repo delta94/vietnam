@@ -21,3 +21,18 @@ export const periods = [
   { label: '4 Years', value: '4Y' },
   { label: '5 Years', value: '5Y' }
 ];
+
+export const months = [
+  { name: 'january', short: 'jan' },
+  { name: 'february', short: 'feb' },
+  { name: 'march', short: 'mar' },
+  { name: 'april', short: 'apr' },
+  { name: 'may', short: 'may' },
+  { name: 'june', short: 'jun' },
+  { name: 'july', short: 'jul' },
+  { name: 'august', short: 'aug' },
+  { name: 'september', short: 'sep' },
+  { name: 'october', short: 'oct' },
+  { name: 'november', short: 'nov' },
+  { name: 'december', short: 'dec' }
+];

@@ -40,7 +40,7 @@ class LicensePlates extends Component {
     this.setState({ licensePlates, filterLicensePlates, loading: false });
   }
 
-  renderTable(loading, filterLicensePlates) {
+  renderTable(loading, filterLicensePlates = []) {
     return (
       <div id="table">
         {loading && (

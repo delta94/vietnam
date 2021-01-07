@@ -13,7 +13,8 @@ import Code from './globals/Code';
 import GovernmentGeneralSecretaries from './government/GeneralSecretaries';
 import GovernmentMinisters from './government/Ministers';
 import GovernmentMinistries from './government/Ministries';
-import GovernmentNationalAssemblyChairs from './government/NationalAssemblyChairs';
+import GovernmentNationalAssemblyChairs from './government/national-assembly/Chairs';
+import GovernmentNationalAssemblyMembers from './government/national-assembly/Members';
 import GovernmentPresidents from './government/Presidents';
 import GovernmentPrimeMinisters from './government/PrimeMinisters';
 
@@ -49,6 +50,7 @@ export {
   GovernmentMinisters,
   GovernmentMinistries,
   GovernmentNationalAssemblyChairs,
+  GovernmentNationalAssemblyMembers,
   GovernmentPresidents,
   GovernmentPrimeMinisters,
   HomeFooter,

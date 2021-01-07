@@ -11,9 +11,9 @@ export default class TanViet {
   public async getFinancialIndicatores(symbol: string, options: ITanVietOptions): Promise<any> {
     const self = this;
     const { periods } = self;
-    const d = new Date();
-    const currentYear = d.getFullYear();
-    const now = d.getTime();
+    const d: Date = new Date();
+    const currentYear: number = d.getFullYear();
+    const now: number = d.getTime();
     const { year = currentYear, industry = '', period = 'yearly', unit = 1000 } = options;
     const endpoint = industry === 'bank' ? 'chitieutaichinhbank' : 'chitieutaichinh';
     const p = periods[period];

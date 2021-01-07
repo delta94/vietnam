@@ -53,19 +53,19 @@ class BanksHistory extends Component {
   constructor() {
     super();
     this.state = { loading: false, bank: '', banks: [], currency: '', currencies: [] };
-    this.getBanksWithForex = this.getBanksWithForex.bind(this);
+    this.getForexBanks = this.getForexBanks.bind(this);
     this.getFinanceForexRatesData = this.getFinanceForexRatesData.bind(this);
     this.processRates = this.processRates.bind(this);
   }
 
   async componentDidMount() {
-    await this.getBanksWithForex();
+    await this.getForexBanks();
     await this.getFinanceForexRatesData();
   }
 
-  async getBanksWithForex() {
+  async getForexBanks() {
     this.setState({ loading: true });
-    const { bank, banks } = await apis.getBanksWithForex();
+    const { bank, banks } = await apis.getForexBanks();
     this.setState({ bank, banks, loading: false });
   }
 

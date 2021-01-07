@@ -23,39 +23,41 @@ class MapsDistricts extends Component {
     await this.setState({ postalCodes, loading: false });
   }
 
-  renderTable(loading, postalCodes) {
+  renderTable(loading, postalCodes = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-white text-center bg-danger">
-              Postal Codes ({postalCodes.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Code</th>
-                <th>Province</th>
-              </tr>
-            </thead>
-            <tbody>
-              {postalCodes.length
-                ? postalCodes.map((district, index) => {
-                    const { code = '', province = '' } = district;
-                    return (
-                      <tr key={index}>
-                        <td>{code}</td>
-                        <td>{province}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">
+                Postal Codes ({postalCodes.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Code</th>
+                  <th>Province</th>
+                </tr>
+              </thead>
+              <tbody>
+                {postalCodes.length
+                  ? postalCodes.map((district, index) => {
+                      const { code = '', province = '' } = district;
+                      return (
+                        <tr key={index}>
+                          <td>{code}</td>
+                          <td>{province}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

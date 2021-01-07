@@ -36,95 +36,97 @@ class FinanceHighlights extends Component {
     this.setState({ highlights, loading: false });
   }
 
-  renderTable(loading, highlights) {
+  renderTable(loading, highlights = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading ? (
-          <table className="table">
-            <caption className="text-white text-center bg-danger">
-              Highlights ({highlights.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Symbol</th>
-                <th>Name</th>
-                <th>Latest</th>
-                <th>Diff</th>
-                <th>Median</th>
-                <th>Average</th>
-                <th>Middle</th>
-              </tr>
-            </thead>
-            <tbody>
-              {highlights.length
-                ? highlights.map((highlight, index) => {
-                    const {
-                      symbol = '',
-                      group = '',
-                      startDate = '',
-                      name = '',
-                      industry = '',
-                      subsector = '',
-                      low = false,
-                      latest,
-                      latestDate,
-                      min,
-                      minDate,
-                      max,
-                      maxDate,
-                      diff,
-                      diffToMin,
-                      diffToMax,
-                      median,
-                      average,
-                      middle
-                    } = highlight;
-                    return (
-                      <tr key={index}>
-                        <td>
-                          <div>{symbol}</div>
-                          <div>{group}</div>
-                          <div>{startDate}</div>
-                        </td>
-                        <td>
-                          <div>{name}</div>
-                          <div>{industry}</div>
-                          <div>{subsector}</div>
-                        </td>
-                        <td>
-                          <div className={low ? 'text-danger' : 'text-success'}>
-                            <div>
-                              {latest} ({latestDate})
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">
+                Highlights ({highlights.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Symbol</th>
+                  <th>Name</th>
+                  <th>Latest</th>
+                  <th>Diff</th>
+                  <th>Median</th>
+                  <th>Average</th>
+                  <th>Middle</th>
+                </tr>
+              </thead>
+              <tbody>
+                {highlights.length
+                  ? highlights.map((highlight, index) => {
+                      const {
+                        symbol = '',
+                        group = '',
+                        startDate = '',
+                        name = '',
+                        industry = '',
+                        subsector = '',
+                        low = false,
+                        latest,
+                        latestDate,
+                        min,
+                        minDate,
+                        max,
+                        maxDate,
+                        diff,
+                        diffToMin,
+                        diffToMax,
+                        median,
+                        average,
+                        middle
+                      } = highlight;
+                      return (
+                        <tr key={index}>
+                          <td>
+                            <div>{symbol}</div>
+                            <div>{group}</div>
+                            <div>{startDate}</div>
+                          </td>
+                          <td>
+                            <div>{name}</div>
+                            <div>{industry}</div>
+                            <div>{subsector}</div>
+                          </td>
+                          <td>
+                            <div className={low ? 'text-danger' : 'text-success'}>
+                              <div>
+                                {latest} ({latestDate})
+                              </div>
+                              <div>
+                                {min} ({minDate})
+                              </div>
+                              <div>
+                                {max} ({maxDate})
+                              </div>
                             </div>
-                            <div>
-                              {min} ({minDate})
+                          </td>
+                          <td>
+                            <div className={low ? 'text-danger' : 'text-success'}>
+                              <div>{diff}</div>
+                              <div>{diffToMin}</div>
+                              <div>{diffToMax}</div>
                             </div>
-                            <div>
-                              {max} ({maxDate})
-                            </div>
-                          </div>
-                        </td>
-                        <td>
-                          <div className={low ? 'text-danger' : 'text-success'}>
-                            <div>{diff}</div>
-                            <div>{diffToMin}</div>
-                            <div>{diffToMax}</div>
-                          </div>
-                        </td>
-                        <td>{median}</td>
-                        <td>{average}</td>
-                        <td>{middle}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+                          </td>
+                          <td>{median}</td>
+                          <td>{average}</td>
+                          <td>{middle}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         ) : (
           ''
         )}

@@ -85,13 +85,13 @@ export default class BanksService {
   }
 
   public getDefaultTime(): any {
-    const d = new Date();
-    const dy = d.getFullYear();
-    const dm = d.getMonth() + 1;
-    const dd = d.getDate();
-    const dh = d.getHours();
-    const dmi = d.getMinutes();
-    const dt = d.getTime();
+    const d: Date = new Date();
+    const dy: number = d.getFullYear();
+    const dm: number = d.getMonth() + 1;
+    const dd: number = d.getDate();
+    const dh: number = d.getHours();
+    const dmi: number = d.getMinutes();
+    const dt: number = d.getTime();
 
     return { dy, dm, dd, dh, dmi, dt };
   }

@@ -18,47 +18,48 @@ class GovernmentPresidents extends Component {
   }
 
   async getPresidents() {
-    const { ministry } = this.state;
     this.setState({ loading: true });
-    const presidents = await apis.getPresidents(ministry);
+    const presidents = await apis.getPresidents();
     this.setState({ presidents, loading: false });
   }
 
-  renderTable(loading, presidents) {
+  renderTable(loading, presidents = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-center text-white bg-danger">
-              Presidents ({presidents.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
-              </tr>
-            </thead>
-            <tbody>
-              {presidents.length
-                ? presidents.map((minister, index) => {
-                    const { name = '', start_date = '', end_date = '' } = minister;
-                    return (
-                      <tr key={index}>
-                        <td>{name}</td>
-                        <td>{start_date}</td>
-                        <td>{end_date.toUpperCase()}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-center text-white bg-danger">
+                Presidents ({presidents.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Start</th>
+                  <th>End</th>
+                </tr>
+              </thead>
+              <tbody>
+                {presidents.length
+                  ? presidents.map((minister, index) => {
+                      const { name = '', start_date = '', end_date = '' } = minister;
+                      return (
+                        <tr key={index}>
+                          <td>{name}</td>
+                          <td>{start_date}</td>
+                          <td>{end_date.toUpperCase()}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

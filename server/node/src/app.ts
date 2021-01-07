@@ -72,14 +72,16 @@ startServer();
 
 // Handle Uncaught Exception
 process.on('uncaughtException', error => {
-  console.error(new Date().toUTCString() + ' Uncaught Exception');
+  const utc: string = new Date().toUTCString();
+  console.error(`${utc} Uncaught Exception`);
   console.error(error);
   process.exit(1);
 });
 
 // Handle Unhandled Rejection Promise
 process.on('unhandledRejection', error => {
-  console.error(new Date().toUTCString() + 'Unhandled Rejection');
+  const utc: string = new Date().toUTCString();
+  console.error(`${utc} Unhandled Rejection`);
   console.error(error);
   process.exit(1);
 });

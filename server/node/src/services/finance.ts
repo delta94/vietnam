@@ -28,7 +28,7 @@ export default class FinanceService {
   }
 
   private async getFromTime(symbol: string = ''): Promise<any> {
-    const from = new Date(2000, 0, 1, 0, 0, 0, 0).getTime();
+    const from: number = new Date(2000, 0, 1, 0, 0, 0, 0).getTime();
     if (!symbol) return Math.floor(from / 1000);
     const query = { symbol };
     const options = { sort: { timestamp: -1 } };
@@ -341,16 +341,16 @@ export default class FinanceService {
   }
 
   public async getStockIndicators(): Promise<any> {
-    const d = new Date();
-    const month = d.getMonth() + 1;
-    const quarter = month % 3 === 0 ? month / 3 - 1 : month % 3;
-    const year = d.getFullYear();
-    const list = await dsFinanceStockIndicator.find({ year, quarter });
+    const d: Date = new Date();
+    const month: number = d.getMonth() + 1;
+    const quarter: number = month % 3 === 0 ? month / 3 - 1 : month % 3;
+    const year: number = d.getFullYear();
+    const list: Array<any> = await dsFinanceStockIndicator.find({ year, quarter });
 
-    const keys = _.uniq(list.map(item => item.key)).sort();
-    const symbols = _.uniq(list.map(item => item.symbol)).sort();
+    const keys: Array<string> = _.uniq(list.map(item => item.key)).sort();
+    const symbols: Array<string> = _.uniq(list.map(item => item.symbol)).sort();
 
-    return symbols.map(symbol => {
+    return symbols.map((symbol: string) => {
       const o = { symbol };
       for (const key of keys) {
         const { value = 0 } = list.find(item => item.symbol === symbol && item.key === key) || {};
@@ -375,7 +375,7 @@ export default class FinanceService {
       'listingDate'
     ];
     const excludedFields: Array<string> = ['_id'];
-    const companies = await dsFinanceStockListedCompany.find(
+    const companies: Array<any> = await dsFinanceStockListedCompany.find(
       {},
       { sort, selectedFields, excludedFields }
     );

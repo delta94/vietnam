@@ -9,7 +9,6 @@ class Code extends Component {
     const api = `${baseAPI}/${url}`;
     return (
       <div id="Code" className="bg-dark text-white p-3 rounded mb-3">
-        <span className="text-uppercase mr-3">API</span>
         <span className="text-uppercase mr-3">{method}</span>
         <span
           className="cursor-pointer"

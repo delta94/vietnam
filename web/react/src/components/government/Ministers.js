@@ -39,41 +39,43 @@ class GovernmentMinisters extends Component {
     await this.getMinisters();
   }
 
-  renderTable(loading, ministers) {
+  renderTable(loading, ministers = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-center text-white bg-danger">
-              Ministers ({ministers.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Start</th>
-                <th>End</th>
-              </tr>
-            </thead>
-            <tbody>
-              {ministers.length
-                ? ministers.map((minister, index) => {
-                    const { name = '', start_date = '', end_date = '' } = minister;
-                    return (
-                      <tr key={index}>
-                        <td>{name}</td>
-                        <td>{start_date}</td>
-                        <td>{end_date.toUpperCase()}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-center text-white bg-danger">
+                Ministers ({ministers.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Start</th>
+                  <th>End</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ministers.length
+                  ? ministers.map((minister, index) => {
+                      const { name = '', start_date = '', end_date = '' } = minister;
+                      return (
+                        <tr key={index}>
+                          <td>{name}</td>
+                          <td>{start_date}</td>
+                          <td>{end_date.toUpperCase()}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

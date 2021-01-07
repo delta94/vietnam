@@ -46,7 +46,7 @@ class EthnicMinorities extends Component {
     this.setState({ ethnicMinorities, filterEthnicMinorities, loading: false });
   }
 
-  renderTable(loading, filterEthnicMinorities) {
+  renderTable(loading, filterEthnicMinorities = []) {
     return (
       <div id="table">
         {loading && (

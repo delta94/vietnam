@@ -23,7 +23,7 @@ class FinanceCompanies extends Component {
     this.setState({ companies, loading: false });
   }
 
-  renderTable(loading, companies) {
+  renderTable(loading, companies = []) {
     return (
       <div id="table">
         {loading && (

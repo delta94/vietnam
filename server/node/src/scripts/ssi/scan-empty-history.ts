@@ -3,11 +3,9 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
-import { mongooseClient } from '../../database';
+import { mongooseClient } from '../../clients';
 import { dsFinanceStockListedCompany, dsFinanceStockHistoryData } from '../../models/data';
-import SSI from '../../libs/ssi';
-
-const ssi: SSI = new SSI();
+import { ssi } from '../../libs';
 
 const getHistory = async (symbol: string) => {
   const from = await getFromTime();
@@ -18,7 +16,7 @@ const getHistory = async (symbol: string) => {
 };
 
 const getFromTime = async (symbol: string = '') => {
-  const from = new Date(2000, 0, 1, 0, 0, 0, 0).getTime();
+  const from: number = new Date(2000, 0, 1, 0, 0, 0, 0).getTime();
   if (!symbol) return Math.floor(from / 1000);
   const query = { symbol };
   const options = { sort: { timestamp: -1 } };

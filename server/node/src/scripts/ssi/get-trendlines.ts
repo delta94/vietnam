@@ -15,7 +15,7 @@ const getTradingDays = async () => {
 };
 
 const getLastTradingDay = async () => {
-  const d = new Date();
+  const d: Date = new Date();
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const date = d.getDate();
@@ -31,7 +31,7 @@ const getLastTradingDay = async () => {
 };
 
 const getToday = () => {
-  const d = new Date();
+  const d: Date = new Date();
   const tYear = d.getFullYear();
   const tMonth = utils.addZero(d.getMonth() + 1);
   const tDate = utils.addZero(d.getDate());
@@ -39,7 +39,7 @@ const getToday = () => {
 };
 
 const getNextTradingDay = async () => {
-  const d = new Date();
+  const d: Date = new Date();
   const year = d.getFullYear();
   const month = d.getMonth() + 1;
   const date = d.getDate();

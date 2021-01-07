@@ -2,58 +2,64 @@ import { baseAPI } from '../configs';
 
 const endpoints = {
   banks: {
-    get: `${baseAPI}/banks`,
-    forex: {
-      rates: { get: `${baseAPI}/banks/forex/rates` },
-      sync: { post: `${baseAPI}/banks/forex/sync` }
-    }
+    getForexBanks: { url: `${baseAPI}/banks/forex/banks`, method: 'GET' },
+    getForexRates: { method: 'GET', url: `${baseAPI}/banks/forex/rates` },
+    syncForex: { method: 'POST', url: `${baseAPI}/banks/forex/sync` }
+  },
+  calendar: {
+    convertLunarToSolar: { method: 'POST', url: `${baseAPI}/calendar/lunar2solar` },
+    convertSolarToLunar: { method: 'POST', url: `${baseAPI}/calendar/solar2lunar` },
+    getCanChi: { method: 'POST', url: `${baseAPI}/calendar/lunar/can-chi` }
   },
   ethnicMinorities: {
-    get: `${baseAPI}/ethnic-minorities`
+    getEthnicMinorities: { method: 'GET', url: `${baseAPI}/ethnic-minorities` }
   },
   finance: {
-    companies: { get: `${baseAPI}/finance/companies` },
-    highlights: { post: `${baseAPI}/finance/highlights` },
-    history: { post: `${baseAPI}/finance/history` },
-    potentials: { post: `${baseAPI}/finance/potentials` },
-    profit: { post: `${baseAPI}/finance/profit` }
+    getStockCompanies: { method: 'GET', url: `${baseAPI}/finance/companies` },
+    getStockHighlights: { method: 'POST', url: `${baseAPI}/finance/highlights` },
+    getStockHistory: { method: 'POST', url: `${baseAPI}/finance/history` },
+    getStockPotentials: { method: 'POST', url: `${baseAPI}/finance/potentials` },
+    calculateProfit: { method: 'POST', url: `${baseAPI}/finance/profit` }
   },
   government: {
-    generalSecretaries: { get: `${baseAPI}/government/general-secretaries` },
-    presidents: { get: `${baseAPI}/government/presidents` },
-    primeMinisters: { get: `${baseAPI}/government/prime-ministers` },
-    nationalAssemblyChairs: { get: `${baseAPI}/government/national-assembly/chairs` },
-    ministries: { get: `${baseAPI}/government/ministries` },
-    ministers: { get: `${baseAPI}/government/ministers` }
+    getGeneralSecretaries: { method: 'GET', url: `${baseAPI}/government/general-secretaries` },
+    getPresidents: { method: 'GET', url: `${baseAPI}/government/presidents` },
+    getPrimeMinisters: { method: 'GET', url: `${baseAPI}/government/prime-ministers` },
+    getNationalAssemblyChairs: {
+      method: 'GET',
+      url: `${baseAPI}/government/national-assembly/chairs`
+    },
+    getNationalAssemblyMembers: {
+      method: 'GET',
+      url: `${baseAPI}/government/national-assembly/members`
+    },
+    getMinistries: { method: 'GET', url: `${baseAPI}/government/ministries` },
+    getMinisters: { method: 'GET', url: `${baseAPI}/government/ministers` }
   },
   licensePlates: {
-    get: `${baseAPI}/license-plates`
+    getLicensePlates: { method: 'GET', url: `${baseAPI}/license-plates` }
   },
   maps: {
-    postalCodes: { get: `${baseAPI}/maps/postal-codes` },
-    provinces: { get: `${baseAPI}/maps/provinces` },
-    districts: { get: `${baseAPI}/maps/districts` },
-    wards: { get: `${baseAPI}/maps/wards` }
+    getPostalCodes: { method: 'GET', url: `${baseAPI}/maps/postal-codes` },
+    getProvinces: { method: 'GET', url: `${baseAPI}/maps/provinces` },
+    getDistricts: { method: 'GET', url: `${baseAPI}/maps/districts` },
+    getWards: { method: 'GET', url: `${baseAPI}/maps/wards` }
   },
   news: {
-    get: `${baseAPI}/news`,
-    trends: { get: `${baseAPI}/news/trends` },
-    sources: { get: `${baseAPI}/news/sources` },
-    categories: { get: `${baseAPI}/news/categories` }
+    getArticles: { method: 'GET', url: `${baseAPI}/news` },
+    getTrends: { method: 'GET', url: `${baseAPI}/news/trends` },
+    getSources: { method: 'GET', url: `${baseAPI}/news/sources` },
+    getCategories: { method: 'GET', url: `${baseAPI}/news/categories` }
   },
   phones: {
-    providers: { get: `${baseAPI}/phones/providers` }
+    getPhonesProviders: { method: 'GET', url: `${baseAPI}/phones/providers` }
   },
   sports: {
-    clubs: {
-      get: `${baseAPI}/sports/clubs`
-    }
+    getSportsClubs: { method: 'GET', url: `${baseAPI}/sports/clubs` }
   },
   technologies: {
-    get: `${baseAPI}/technologies`,
-    giaohangnhanh: {
-      provinces: { get: `${baseAPI}/technologies/giaohangnhanh/provinces` }
-    }
+    getTechnologies: { method: 'GET', url: `${baseAPI}/technologies` },
+    getGHNProvinces: { method: 'GET', url: `${baseAPI}/technologies/giaohangnhanh/provinces` }
   }
 };
 

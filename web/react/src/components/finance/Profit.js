@@ -7,7 +7,9 @@ import { numberFormatter } from '../../helper';
 class FinanceProfit extends Component {
   constructor() {
     super();
+
     this.state = { buy: 0, sell: 0, volume: 0, profit: 0 };
+
     this.calculateProfit = this.calculateProfit.bind(this);
     this.updateBuy = this.updateBuy.bind(this);
     this.updateSell = this.updateSell.bind(this);

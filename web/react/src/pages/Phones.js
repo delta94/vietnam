@@ -25,7 +25,7 @@ class Phones extends Component {
     this.setState({ providers, loading: false });
   }
 
-  renderTable(loading, providers) {
+  renderTable(loading, providers = []) {
     return (
       <div id="table">
         {loading && (
@@ -48,10 +48,10 @@ class Phones extends Component {
               <tbody>
                 {providers.length
                   ? providers.map((provider, index) => {
-                      const { name = '', prefixes = [] } = provider;
+                      const { provider: _provider = '', prefixes = [] } = provider;
                       return (
                         <tr key={index}>
-                          <td>{name}</td>
+                          <td>{_provider}</td>
                           <td>{prefixes.join(' - ')}</td>
                         </tr>
                       );

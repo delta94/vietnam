@@ -24,41 +24,43 @@ class SportsClubs extends Component {
     this.setState({ clubs, loading: false });
   }
 
-  renderTable(loading, clubs) {
+  renderTable(loading, clubs = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-white text-center bg-danger">Clubs ({clubs.length})</caption>
-            <thead>
-              <tr>
-                <th>Sport</th>
-                <th>Competition</th>
-                <th>City</th>
-                <th>Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clubs.length
-                ? clubs.map((club, index) => {
-                    const { sport = '', name = '', competition = '', city = '' } = club;
-                    return (
-                      <tr key={index}>
-                        <td>{sport}</td>
-                        <td>{competition}</td>
-                        <td>{city}</td>
-                        <td>{name}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">Clubs ({clubs.length})</caption>
+              <thead>
+                <tr>
+                  <th>Sport</th>
+                  <th>Competition</th>
+                  <th>City</th>
+                  <th>Name</th>
+                </tr>
+              </thead>
+              <tbody>
+                {clubs.length
+                  ? clubs.map((club, index) => {
+                      const { sport = '', name = '', competition = '', city = '' } = club;
+                      return (
+                        <tr key={index}>
+                          <td>{sport}</td>
+                          <td>{competition}</td>
+                          <td>{city}</td>
+                          <td>{name}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

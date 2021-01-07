@@ -20,15 +20,14 @@ class GovernmentGeneralSecretaries extends Component {
   }
 
   async getGeneralSecretaries() {
-    const { ministry } = this.state;
     this.setState({ loading: true });
-    const generalSecretaries = await apis.getGeneralSecretaries(ministry);
+    const generalSecretaries = await apis.getGeneralSecretaries();
     this.setState({ generalSecretaries, loading: false });
   }
 
-  renderTable(loading, generalSecretaries) {
+  renderTable(loading, generalSecretaries = []) {
     return (
-      <div>
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>

@@ -410,7 +410,7 @@ export default class SSI {
             const open = parseFloat(o[i] || 0) || 0;
             const timestamp = t[i] * 1000;
             const volume = parseFloat(v[i] || 0) || 0;
-            const d = new Date(timestamp);
+            const d: Date = new Date(timestamp);
             const year = d.getFullYear();
             const month = d.getMonth() + 1;
             const date = d.getDate();

@@ -23,43 +23,45 @@ class MapsProvinces extends Component {
     this.setState({ provinces, loading: false });
   }
 
-  renderTable(loading, provinces) {
+  renderTable(loading, provinces = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-white text-center bg-danger">
-              Provinces ({provinces.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Capital</th>
-                <th>Macro Region</th>
-                <th>Region</th>
-              </tr>
-            </thead>
-            <tbody>
-              {provinces.length
-                ? provinces.map((province, index) => {
-                    const { name = '', capital = '', region = '', macro_region = '' } = province;
-                    return (
-                      <tr key={index}>
-                        <td>{name}</td>
-                        <td>{capital}</td>
-                        <td>{macro_region}</td>
-                        <td>{region}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">
+                Provinces ({provinces.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Capital</th>
+                  <th>Macro Region</th>
+                  <th>Region</th>
+                </tr>
+              </thead>
+              <tbody>
+                {provinces.length
+                  ? provinces.map((province, index) => {
+                      const { name = '', capital = '', region = '', macro_region = '' } = province;
+                      return (
+                        <tr key={index}>
+                          <td>{name}</td>
+                          <td>{capital}</td>
+                          <td>{macro_region}</td>
+                          <td>{region}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

@@ -1,29 +1,30 @@
 import React, { Component } from 'react';
 import { Card, Spinner } from 'react-bootstrap';
 
-import { apis } from '../../services';
+import { apis } from '../../../services';
 
-class GovernmentPrimeMinisters extends Component {
+class GovernmentNationalAssemblyMembers extends Component {
   constructor() {
     super();
 
-    this.state = { primeMinisters: [], loading: true };
+    this.state = { members: [], no: 14, loading: true };
 
-    this.getPrimeMinisters = this.getPrimeMinisters.bind(this);
+    this.getNationalAssemblyMembers = this.getNationalAssemblyMembers.bind(this);
     this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
-    await this.getPrimeMinisters();
+    await this.getNationalAssemblyMembers();
   }
 
-  async getPrimeMinisters() {
+  async getNationalAssemblyMembers() {
+    const { no } = this.state;
     this.setState({ loading: true });
-    const primeMinisters = await apis.getPrimeMinisters();
-    this.setState({ primeMinisters, loading: false });
+    const members = await apis.getNationalAssemblyMembers(no);
+    this.setState({ members, loading: false });
   }
 
-  renderTable(loading, primeMinisters = []) {
+  renderTable(loading, members = []) {
     return (
       <div id="table">
         {loading && (
@@ -34,8 +35,8 @@ class GovernmentPrimeMinisters extends Component {
         {!loading && (
           <div className="table-responsive table-container">
             <table className="table">
-              <caption className="text-white bg-danger text-center">
-                Prime Ministers ({primeMinisters.length})
+              <caption className="text-center text-white bg-danger">
+                National Assembly Members ({members.length})
               </caption>
               <thead>
                 <tr>
@@ -45,9 +46,9 @@ class GovernmentPrimeMinisters extends Component {
                 </tr>
               </thead>
               <tbody>
-                {primeMinisters.length
-                  ? primeMinisters.map((minister, index) => {
-                      const { name = '', start_date = '', end_date = '' } = minister;
+                {members.length
+                  ? members.map((member, index) => {
+                      const { name = '', start_date = '', end_date = '' } = member;
                       return (
                         <tr key={index}>
                           <td>{name}</td>
@@ -66,13 +67,13 @@ class GovernmentPrimeMinisters extends Component {
   }
 
   render() {
-    const { primeMinisters = [], loading = false } = this.state;
+    const { members = [], loading = false } = this.state;
 
     return (
-      <div id="GovernmentPrimeMinisters">
+      <div id="GovernmentNationalAssemblyMembers">
         <div className="mt-3 w-100">
           <Card className="shadow">
-            <Card.Body>{this.renderTable(loading, primeMinisters)}</Card.Body>
+            <Card.Body>{this.renderTable(loading, members)}</Card.Body>
           </Card>
         </div>
       </div>
@@ -80,4 +81,4 @@ class GovernmentPrimeMinisters extends Component {
   }
 }
 
-export default GovernmentPrimeMinisters;
+export default GovernmentNationalAssemblyMembers;

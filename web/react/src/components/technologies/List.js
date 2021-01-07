@@ -46,7 +46,7 @@ class List extends Component {
     this.setState({ technologies, filterTechnologies, loading: false });
   }
 
-  renderTable(loading, filterTechnologies) {
+  renderTable(loading, filterTechnologies = []) {
     return (
       <div id="table">
         {loading && (

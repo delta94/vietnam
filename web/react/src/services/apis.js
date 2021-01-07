@@ -1,310 +1,23 @@
 import endpoints from './apis-configs';
 
 class APIS {
-  getGeneralSecretaries() {
-    const url = endpoints.government.generalSecretaries.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((generalSecretaries = []) => {
-          resolve(generalSecretaries);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  buildQueryString(query = {}) {
+    const keys = Object.keys(query);
+    return keys.map(key => `${key}=${(query[key] || '').toString()}`).join('&');
   }
 
-  getPresidents() {
-    const url = endpoints.government.presidents.get;
-
+  fetch(endpoint, query = {}, body = {}) {
+    let { url, method } = endpoint;
+    url = `${url}?${this.buildQueryString(query)}`;
+    const options =
+      method === 'GET'
+        ? { method, headers: { 'Content-Type': 'application/json' } }
+        : { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
     return new Promise(resolve => {
-      fetch(url)
+      fetch(url, options)
         .then(res => res.json())
-        .then((presidents = []) => {
-          resolve(presidents);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getPrimeMinisters() {
-    const url = endpoints.government.primeMinisters.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((primeMinisters = []) => {
-          resolve(primeMinisters);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getNationalAssemblyChairs() {
-    const url = endpoints.government.nationalAssemblyChairs.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((chairs = []) => {
-          resolve(chairs);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getMinistries() {
-    const url = endpoints.government.ministries.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((ministries = []) => {
-          resolve(ministries);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getMinisters(ministry) {
-    const url = `${endpoints.government.ministers.get}?ministry=${ministry}`;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((ministers = []) => {
-          resolve(ministers);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getGoogleTrends() {
-    const url = endpoints.news.trends.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then(response => {
-          const basicTrends = response || [];
-          const trends = basicTrends.map(text => {
-            const url = `https://www.google.com/search?q=${encodeURI(text)}`;
-            return { text, url };
-          });
-          resolve(trends);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getSources() {
-    const url = endpoints.news.sources.get;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((sources = []) => {
-          resolve(sources);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getCategories() {
-    const url = endpoints.news.categories.get;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((categories = []) => {
-          resolve(categories);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getArticles(options = {}) {
-    const { category, source } = options;
-    const url = `${endpoints.news.get}?category=${category}&sources=${source}`;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((data = {}) => {
-          const { articles = [] } = data;
-          resolve(articles);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  calculateProfit(buy, sell, volume) {
-    const url = endpoints.finance.profit.post;
-    return new Promise(resolve => {
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ buy, sell, volume })
-      })
-        .then(res => res.json())
-        .then((data = []) => {
-          const { profit = 0 } = data;
-          resolve(profit);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve(0);
-        });
-    });
-  }
-
-  getStockHighlights(from, to) {
-    const url = endpoints.finance.highlights.post;
-    return new Promise(resolve => {
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from, to })
-      })
-        .then(res => res.json())
-        .then((highlights = []) => {
-          resolve(highlights);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getStockPotentials(from, to) {
-    const url = endpoints.finance.potentials.post;
-    return new Promise(resolve => {
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ from, to })
-      })
-        .then(res => res.json())
-        .then((potentials = []) => {
-          resolve(potentials);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getStockCompanies() {
-    const url = endpoints.finance.companies.get;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((companies = []) => {
-          companies.sort((a, b) => (a.symbol > b.symbol ? 1 : -1));
-          resolve(companies);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
-  }
-
-  getBanksForexRates() {
-    const url = endpoints.banks.forex.rates.get;
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((response = {}) => {
-          const { data = [], currencies = [] } = response;
-          const currency = currencies[0] || '';
-          resolve({ data, currency, currencies });
-        })
-        .catch(error => {
-          console.error(error);
-          resolve({ data: [], currency: '', currencies: [] });
-        });
-    });
-  }
-
-  getBanksWithForex() {
-    const url = endpoints.banks.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((banks = []) => {
-          const { name: bank = '' } = banks[0];
-          resolve({ bank, banks });
-        })
-        .catch(error => {
-          console.error(error);
-          resolve({ bank: '', banks: [] });
-        });
-    });
-  }
-
-  syncForex(id) {
-    const url = endpoints.banks.forex.sync.post;
-    return new Promise(resolve => {
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id })
-      })
-        .then(res => res.json())
-        .then((data = []) => {
-          const { status = '' } = data;
-          resolve(status);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve(error.stack);
-        });
-    });
-  }
-
-  getStockHistory(symbol, from, to) {
-    const url = endpoints.finance.history.post;
-
-    return new Promise(resolve => {
-      fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ symbol, from, to })
-      })
-        .then(res => res.json())
-        .then((result = {}) => {
-          resolve(result);
+        .then((res = {}) => {
+          resolve(res);
         })
         .catch(error => {
           console.error(error);
@@ -313,164 +26,177 @@ class APIS {
     });
   }
 
-  getPostalCodes() {
-    const url = endpoints.maps.postalCodes.get;
+  async getGeneralSecretaries() {
+    const endpoint = endpoints.government.getGeneralSecretaries;
+    return await this.fetch(endpoint);
+  }
 
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((postalCodes = []) => {
-          resolve(postalCodes);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
+  async getPresidents() {
+    const endpoint = endpoints.government.getPresidents;
+    return await this.fetch(endpoint);
+  }
+
+  async getPrimeMinisters() {
+    const endpoint = endpoints.government.getPrimeMinisters;
+    return await this.fetch(endpoint);
+  }
+
+  async getNationalAssemblyChairs() {
+    const endpoint = endpoints.government.getNationalAssemblyChairs;
+    return await this.fetch(endpoint);
+  }
+
+  async getNationalAssemblyMembers(no) {
+    const endpoint = endpoints.government.getNationalAssemblyMembers;
+    return await this.fetch(endpoint, { no });
+  }
+
+  async getMinistries() {
+    const endpoint = endpoints.government.getMinistries;
+    return await this.fetch(endpoint);
+  }
+
+  async getMinisters(ministry) {
+    const endpoint = endpoints.government.getMinisters;
+    return await this.fetch(endpoint, { ministry });
+  }
+
+  async getGoogleTrends() {
+    const endpoint = endpoints.news.getTrends;
+    const trends = await this.fetch(endpoint);
+    return trends.map(text => {
+      const url = `https://www.google.com/search?q=${encodeURI(text)}`;
+      return { text, url };
     });
   }
 
-  getDistricts() {
-    const url = endpoints.maps.districts.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((districts = []) => {
-          resolve(districts);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getSources() {
+    const endpoint = endpoints.news.getSources;
+    return await this.fetch(endpoint);
   }
 
-  getMapsProvinces() {
-    const url = endpoints.maps.provinces.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((provinces = []) => {
-          resolve(provinces);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getCategories() {
+    const endpoint = endpoints.news.getCategories;
+    return await this.fetch(endpoint);
   }
 
-  getWards() {
-    const url = endpoints.maps.wards.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((wards = []) => {
-          resolve(wards);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getArticles(options = {}) {
+    const { category, source } = options;
+    const endpoint = endpoints.news.getArticles;
+    const { articles = [] } = (await this.fetch(endpoint, { category, source })) || {};
+    return articles;
   }
 
-  getSportsClubs() {
-    const url = endpoints.sports.clubs.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((clubs = []) => {
-          resolve(clubs);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async calculateProfit(buy, sell, volume) {
+    const endpoint = endpoints.finance.calculateProfit;
+    return await this.fetch(endpoint, {}, { buy, sell, volume });
   }
 
-  getLicensePlates() {
-    const url = endpoints.licensePlates.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((licensePlates = []) => {
-          resolve(licensePlates);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getStockHighlights(from, to) {
+    const endpoint = endpoints.finance.getStockHighlights;
+    return await this.fetch(endpoint, {}, { from, to });
   }
 
-  getEthnicMinorities() {
-    const url = endpoints.ethnicMinorities.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((ethnicMinorities = []) => {
-          resolve(ethnicMinorities);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getStockPotentials(from, to) {
+    const endpoint = endpoints.finance.getStockPotentials;
+    return await this.fetch(endpoint, {}, { from, to });
   }
 
-  getTechnologies() {
-    const url = endpoints.technologies.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((technologies = []) => {
-          resolve(technologies);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getStockCompanies() {
+    const endpoint = endpoints.finance.getStockCompanies;
+    return await this.fetch(endpoint);
   }
 
-  getPhonesProviders() {
-    const url = endpoints.phones.providers.get;
-
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((technologies = []) => {
-          resolve(technologies);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getStockHistory(symbol, from, to) {
+    const endpoint = endpoints.finance.getStockHistory;
+    return await this.fetch(endpoint, {}, { symbol, from, to });
   }
 
-  getProvinces() {
-    const url = endpoints.technologies.giaohangnhanh.provinces.get;
+  async getBanksForexRates() {
+    const endpoint = endpoints.banks.getForexRates;
+    const response = await this.fetch(endpoint);
+    const { data = [], currencies = [] } = response;
+    const currency = currencies[0] || '';
+    return { data, currency, currencies };
+  }
 
-    return new Promise(resolve => {
-      fetch(url)
-        .then(res => res.json())
-        .then((provinces = []) => {
-          resolve(provinces);
-        })
-        .catch(error => {
-          console.error(error);
-          resolve([]);
-        });
-    });
+  async getForexBanks() {
+    const endpoint = endpoints.banks.getForexBanks;
+    const banks = await this.fetch(endpoint);
+    const { name: bank = '' } = banks[0] || {};
+    return { bank, banks };
+  }
+
+  async syncForex(id) {
+    const endpoint = endpoints.banks.syncForex;
+    const { status = '' } = await this.fetch(endpoint, {}, { id });
+    return status;
+  }
+
+  async getPostalCodes() {
+    const endpoint = endpoints.maps.getPostalCodes;
+    return await this.fetch(endpoint);
+  }
+
+  async getDistricts() {
+    const endpoint = endpoints.maps.getDistricts;
+    return await this.fetch(endpoint);
+  }
+
+  async getMapsProvinces() {
+    const endpoint = endpoints.maps.getProvinces;
+    return await this.fetch(endpoint);
+  }
+
+  async getWards() {
+    const endpoint = endpoints.maps.getWards;
+    return await this.fetch(endpoint);
+  }
+
+  async getSportsClubs() {
+    const endpoint = endpoints.sports.getSportsClubs;
+    return await this.fetch(endpoint);
+  }
+
+  async getLicensePlates() {
+    const endpoint = endpoints.licensePlates.getLicensePlates;
+    return await this.fetch(endpoint);
+  }
+
+  async getEthnicMinorities() {
+    const endpoint = endpoints.ethnicMinorities.getEthnicMinorities;
+    return await this.fetch(endpoint);
+  }
+
+  async getTechnologies() {
+    const endpoint = endpoints.technologies.getTechnologies;
+    return await this.fetch(endpoint);
+  }
+
+  async getPhonesProviders() {
+    const endpoint = endpoints.phones.getPhonesProviders;
+    return await this.fetch(endpoint);
+  }
+
+  async getGHNProvinces() {
+    const endpoint = endpoints.technologies.getGHNProvinces;
+    return await this.fetch(endpoint);
+  }
+
+  async convertLunarToSolar(body = {}) {
+    const endpoint = endpoints.calendar.convertLunarToSolar;
+    return await this.fetch(endpoint, {}, body);
+  }
+
+  async convertSolarToLunar(body = {}) {
+    const endpoint = endpoints.calendar.convertSolarToLunar;
+    return await this.fetch(endpoint, {}, body);
+  }
+
+  async getCanChi(body = {}) {
+    const endpoint = endpoints.calendar.getCanChi;
+    const { canChi = '' } = await this.fetch(endpoint, {}, body);
+    return canChi;
   }
 }
 

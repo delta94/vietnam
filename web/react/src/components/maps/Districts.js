@@ -23,41 +23,43 @@ class MapsDistricts extends Component {
     await this.setState({ districts, loading: false });
   }
 
-  renderTable(loading, districts) {
+  renderTable(loading, districts = []) {
     return (
-      <div className="table-responsive table-container">
+      <div id="table">
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
         {!loading && (
-          <table className="table">
-            <caption className="text-white text-center bg-danger">
-              Districts ({districts.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Level</th>
-                <th>Province</th>
-              </tr>
-            </thead>
-            <tbody>
-              {districts.length
-                ? districts.map((district, index) => {
-                    const { name = '', level = '', province = '' } = district;
-                    return (
-                      <tr key={index}>
-                        <td>{name}</td>
-                        <td>{level}</td>
-                        <td>{province}</td>
-                      </tr>
-                    );
-                  })
-                : ''}
-            </tbody>
-          </table>
+          <div className="table-responsive table-container">
+            <table className="table">
+              <caption className="text-white text-center bg-danger">
+                Districts ({districts.length})
+              </caption>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Level</th>
+                  <th>Province</th>
+                </tr>
+              </thead>
+              <tbody>
+                {districts.length
+                  ? districts.map((district, index) => {
+                      const { name = '', level = '', province = '' } = district;
+                      return (
+                        <tr key={index}>
+                          <td>{name}</td>
+                          <td>{level}</td>
+                          <td>{province}</td>
+                        </tr>
+                      );
+                    })
+                  : ''}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     );

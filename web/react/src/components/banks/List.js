@@ -9,18 +9,18 @@ class BanksList extends Component {
 
     this.state = { banks: [], loading: false };
 
-    this.getBanksWithForex = this.getBanksWithForex.bind(this);
+    this.getForexBanks = this.getForexBanks.bind(this);
     this.renderTable = this.renderTable.bind(this);
     this.syncForex = this.syncForex.bind(this);
   }
 
   async componentDidMount() {
-    await this.getBanksWithForex();
+    await this.getForexBanks();
   }
 
-  async getBanksWithForex() {
+  async getForexBanks() {
     this.setState({ loading: true });
-    const { banks = [] } = await apis.getBanksWithForex();
+    const { banks = [] } = await apis.getForexBanks();
     this.setState({ banks, loading: false });
   }
 
@@ -29,7 +29,7 @@ class BanksList extends Component {
     alert(message);
   }
 
-  renderTable(loading, banks) {
+  renderTable(loading, banks = []) {
     return (
       <div id="table">
         {loading && (

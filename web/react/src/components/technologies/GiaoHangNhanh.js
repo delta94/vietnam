@@ -9,21 +9,21 @@ class GiaoHangNhanh extends Component {
 
     this.state = { provinces: [], loading: true };
 
-    this.getProvinces = this.getProvinces.bind(this);
+    this.getGHNProvinces = this.getGHNProvinces.bind(this);
     this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
-    await this.getProvinces();
+    await this.getGHNProvinces();
   }
 
-  async getProvinces() {
+  async getGHNProvinces() {
     this.setState({ loading: true });
-    const provinces = await apis.getProvinces();
+    const provinces = await apis.getGHNProvinces();
     this.setState({ provinces, loading: false });
   }
 
-  renderTable(loading, provinces) {
+  renderTable(loading, provinces = []) {
     return (
       <div id="table">
         {loading && (

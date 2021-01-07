@@ -29,11 +29,11 @@ const publicHolidays = [
 const main = async () => {
   const oneDay = 24 * 60 * 60 * 1000;
   const dates = [];
-  let startTime = new Date(2020, 1 - 1, 1, 0, 0, 0, 0).getTime();
-  const endTime = new Date(2021, 12 - 1, 31, 23, 59, 59, 999).getTime();
+  let startTime: number = new Date(2020, 1 - 1, 1, 0, 0, 0, 0).getTime();
+  const endTime: number = new Date(2021, 12 - 1, 31, 23, 59, 59, 999).getTime();
 
   while (startTime < endTime) {
-    const d = new Date(startTime);
+    const d: Date = new Date(startTime);
     const dayIndex = d.getDay();
     startTime += oneDay;
     if (dayIndex === 0 || dayIndex === 6) continue;
