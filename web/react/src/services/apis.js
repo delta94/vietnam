@@ -1,27 +1,29 @@
-import endpoints from './apis-configs';
+import { endpoints } from '../configs';
 
-class APIS {
+export default class APIS {
   buildQueryString(query = {}) {
     const keys = Object.keys(query);
+    if (!keys.length) return '';
     return keys.map(key => `${key}=${(query[key] || '').toString()}`).join('&');
   }
 
   fetch(endpoint, query = {}, body = {}) {
-    let { url, method } = endpoint;
-    url = `${url}?${this.buildQueryString(query)}`;
+    const { url, method } = endpoint;
+    const queryString = this.buildQueryString(query);
+    const input = queryString ? `${url}?${queryString}` : url;
     const options =
       method === 'GET'
         ? { method, headers: { 'Content-Type': 'application/json' } }
         : { method, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
     return new Promise(resolve => {
-      fetch(url, options)
+      fetch(input, options)
         .then(res => res.json())
         .then((res = {}) => {
           resolve(res);
         })
         .catch(error => {
           console.error(error);
-          resolve({});
+          resolve([]);
         });
     });
   }
@@ -127,8 +129,8 @@ class APIS {
     return { bank, banks };
   }
 
-  async syncForex(id) {
-    const endpoint = endpoints.banks.syncForex;
+  async syncForexRates(id) {
+    const endpoint = endpoints.banks.syncForexRates;
     const { status = '' } = await this.fetch(endpoint, {}, { id });
     return status;
   }
@@ -199,7 +201,3 @@ class APIS {
     return canChi;
   }
 }
-
-const apis = new APIS();
-
-export default apis;

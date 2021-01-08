@@ -1,7 +1,7 @@
 'use strict';
 
-import { Request, Response, NextFunction } from 'express';
 import * as _ from 'lodash';
+import { Request, Response, NextFunction } from 'express';
 
 import { telegramClient } from '../clients';
 import { utils } from '../libs';

@@ -1,6 +1,7 @@
 'use strict';
 
 import { Request, Response } from 'express';
+
 import routes from '../routes';
 
 export default app => {
@@ -16,6 +17,7 @@ export default app => {
     const { method, path, middlewares = [] } = route;
     const _method = method.toLowerCase();
     const { default: handler } = require(`./${path}/${_method}`);
+    middlewares.unshift('validation/request');
     const _middlewares = [];
     for (const middleware of middlewares) {
       const { default: _middleware } = require(`../middlewares/${middleware}`);

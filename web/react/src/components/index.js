@@ -1,73 +1,7 @@
-import BanksForex from './banks/Forex';
-import BanksHistory from './banks/History';
-import BanksList from './banks/List';
+import Code from './Code';
+import Doc from './Doc';
+import Table from './Table';
+import Footer from './Footer';
+import Navigation from './Navigation';
 
-import FinanceCompanies from './finance/Companies';
-import FinanceHighlights from './finance/Highlights';
-import FinanceHistory from './finance/History';
-import FinancePotentials from './finance/Potentials';
-import FinanceProfit from './finance/Profit';
-
-import Code from './globals/Code';
-
-import GovernmentGeneralSecretaries from './government/GeneralSecretaries';
-import GovernmentMinisters from './government/Ministers';
-import GovernmentMinistries from './government/Ministries';
-import GovernmentNationalAssemblyChairs from './government/national-assembly/Chairs';
-import GovernmentNationalAssemblyMembers from './government/national-assembly/Members';
-import GovernmentPresidents from './government/Presidents';
-import GovernmentPrimeMinisters from './government/PrimeMinisters';
-
-import HomeFooter from './home/Footer';
-import HomeNavigation from './home/Navigation';
-import HomePackages from './home/Packages';
-
-import MapsDistricts from './maps/Districts';
-import MapsPostalCodes from './maps/PostalCodes';
-import MapsProvinces from './maps/Provinces';
-import MapsWards from './maps/Wards';
-
-import NewsFeed from './news/Feed';
-import NewsSources from './news/Sources';
-import NewsTrends from './news/Trends';
-
-import SportsClubs from './sports/Clubs';
-
-import GiaoHangNhanh from './technologies/GiaoHangNhanh';
-import List from './technologies/List';
-import Vietcetera from './technologies/Vietcetera';
-
-export {
-  BanksForex,
-  BanksHistory,
-  BanksList,
-  FinanceCompanies,
-  FinanceHighlights,
-  FinanceHistory,
-  FinancePotentials,
-  FinanceProfit,
-  GovernmentGeneralSecretaries,
-  GovernmentMinisters,
-  GovernmentMinistries,
-  GovernmentNationalAssemblyChairs,
-  GovernmentNationalAssemblyMembers,
-  GovernmentPresidents,
-  GovernmentPrimeMinisters,
-  HomeFooter,
-  HomeNavigation,
-  HomePackages,
-  MapsDistricts,
-  MapsPostalCodes,
-  MapsProvinces,
-  MapsWards,
-  NewsFeed,
-  NewsSources,
-  NewsTrends,
-  SportsClubs,
-  // Technologies
-  GiaoHangNhanh,
-  List,
-  Vietcetera,
-  // Globals
-  Code
-};
+export { Doc, Footer, Navigation, Code, Table };

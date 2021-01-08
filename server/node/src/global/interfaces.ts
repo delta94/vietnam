@@ -1,9 +1,18 @@
 'use strict';
 
 export interface IRoute {
-  method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE';
+  method: 'GET' | 'POST' | 'PATCH' | 'PUT' | 'DELETE' | 'OPTION';
   path: string;
   middlewares: Array<string>;
+  query: Array<IRouteParameter>;
+  body: Array<IRouteParameter>;
+}
+
+export interface IRouteParameter {
+  name: string;
+  type: any | 'string' | 'number';
+  required: boolean;
+  defaultValue?: string;
 }
 
 export interface IPostgreConfigs {
