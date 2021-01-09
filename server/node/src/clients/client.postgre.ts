@@ -119,11 +119,36 @@ export default class PostgreClient {
     return await this.query(create);
   }
 
-  public async find(table: string, fields: Array<string> = []): Promise<string | Array<any>> {
+  public async find(
+    table: string,
+    filter: any = {},
+    fields: Array<string> = []
+  ): Promise<string | Array<any>> {
+    const whereClause = this.buildWhereClause(filter);
     const tableName: string = table.toUpperCase();
     const columns: string = fields.length ? fields.join(',') : '*';
-    const text = `SELECT ${columns} FROM ${tableName}`;
+    const text = whereClause
+      ? `SELECT ${columns} FROM ${tableName} WHERE ${whereClause}`
+      : `SELECT ${columns} FROM ${tableName}`;
+    console.log('text', text);
     return await this.query(text);
+  }
+
+  private buildWhereClause(filter: any = {}): string {
+    const keys: Array<string> = Object.keys(filter);
+    return keys
+      .map(key => {
+        const value = filter[key];
+        if (!value) return '';
+        if (typeof value === 'string') {
+          const rightSide = value.includes("'") ? `'${value.replace(/'/g, "''")}'` : `'${value}'`;
+          return `${key} = ${rightSide}`;
+        }
+        return `${key} = ${value}`;
+      })
+      .filter(string => string)
+      .join(' AND ')
+      .trim();
   }
 
   public async insert(table: string, row): Promise<string | Array<any>> {
@@ -135,7 +160,13 @@ export default class PostgreClient {
       .map(key => {
         const value = row[key];
         const type = typeof value;
-        return type === 'string' ? `'${value}'` : value;
+        const cell =
+          type === 'string'
+            ? value.includes("'")
+              ? `'${value.replace(/'/g, "''")}'`
+              : `'${value}'`
+            : value;
+        return cell;
       })
       .join(',');
 
@@ -155,7 +186,13 @@ export default class PostgreClient {
           .map(key => {
             const value = row[key];
             const type = typeof value;
-            return type === 'string' ? `'${value}'` : value;
+            const cell =
+              type === 'string'
+                ? value.includes("'")
+                  ? `'${value.replace(/'/g, "''")}'`
+                  : `'${value}'`
+                : value;
+            return cell;
           })
           .join(',');
         return `(${index + 1},${rowValues})`;

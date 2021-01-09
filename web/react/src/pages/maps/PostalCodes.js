@@ -5,22 +5,22 @@ import { apis } from '../../services';
 
 import { Table } from '../../components';
 
-export default class MapsDistricts extends Component {
+export default class MapsPostalCodes extends Component {
   constructor() {
     super();
 
     this.state = { postalCodes: [], loading: true };
 
-    this.getPostalCodes = this.getPostalCodes.bind(this);
+    this.getMapsPostalCodes = this.getMapsPostalCodes.bind(this);
   }
 
   async componentDidMount() {
-    await this.getPostalCodes();
+    await this.getMapsPostalCodes();
   }
 
-  async getPostalCodes() {
+  async getMapsPostalCodes() {
     await this.setState({ loading: true });
-    const postalCodes = await apis.getPostalCodes();
+    const postalCodes = await apis.getMapsPostalCodes();
     await this.setState({ postalCodes, loading: false });
   }
 
@@ -31,7 +31,7 @@ export default class MapsDistricts extends Component {
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsDistricts" className="container">
+      <div id="MapsPostalCodes" className="container">
         <Card className="shadow mt-3">
           <Card.Body>
             <Table

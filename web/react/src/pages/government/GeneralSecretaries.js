@@ -3,7 +3,7 @@ import { Card } from 'react-bootstrap';
 
 import { apis } from '../../services';
 
-import { Code, Table } from '../../components';
+import { Table } from '../../components';
 
 export default class GovernmentGeneralSecretaries extends Component {
   constructor() {
@@ -35,9 +35,6 @@ export default class GovernmentGeneralSecretaries extends Component {
       <div id="GovernmentGeneralSecretaries" className="container">
         <Card className="shadow mt-3">
           <Card.Body>
-            <div className="mb-3">
-              <Code method={'GET'} path={`government/general-secretaries`}></Code>
-            </div>
             <Table
               loading={loading}
               caption={'General Secretaries'}

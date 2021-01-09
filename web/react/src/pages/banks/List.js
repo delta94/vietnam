@@ -44,21 +44,19 @@ export default class BanksList extends Component {
                 <tr>
                   <th>ID</th>
                   <th>Name</th>
-                  <th>Forex</th>
                   <th>Sync</th>
                 </tr>
               </thead>
               <tbody>
                 {banks.length
                   ? banks.map((bank, index) => {
-                      const { id = '', name = '', forex = '' } = bank;
+                      const { id = '', name = '', url = '' } = bank;
                       return (
                         <tr key={index}>
                           <td>{id}</td>
-                          <td>{name}</td>
                           <td>
-                            <a href={forex} target="_blank" rel="noreferrer">
-                              Forex
+                            <a href={url} target="_blank" rel="noreferrer">
+                              {name}
                             </a>
                           </td>
                           <td>

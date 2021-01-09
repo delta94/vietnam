@@ -7,7 +7,8 @@ export default class APIS {
     return keys.map(key => `${key}=${(query[key] || '').toString()}`).join('&');
   }
 
-  fetch(endpoint, query = {}, body = {}) {
+  fetch(endpoint, request = {}) {
+    const { query = {}, body = {} } = request;
     const { url, method } = endpoint;
     const queryString = this.buildQueryString(query);
     const input = queryString ? `${url}?${queryString}` : url;
@@ -50,7 +51,7 @@ export default class APIS {
 
   async getNationalAssemblyMembers(no) {
     const endpoint = endpoints.government.getNationalAssemblyMembers;
-    return await this.fetch(endpoint, { no });
+    return await this.fetch(endpoint, { query: { no } });
   }
 
   async getMinistries() {
@@ -60,12 +61,12 @@ export default class APIS {
 
   async getMinisters(ministry) {
     const endpoint = endpoints.government.getMinisters;
-    return await this.fetch(endpoint, { ministry });
+    return await this.fetch(endpoint, { query: { ministry } });
   }
 
   async getGoogleTrends() {
     const endpoint = endpoints.news.getTrends;
-    const trends = await this.fetch(endpoint);
+    const { trends = [] } = await this.fetch(endpoint);
     return trends.map(text => {
       const url = `https://www.google.com/search?q=${encodeURI(text)}`;
       return { text, url };
@@ -85,23 +86,24 @@ export default class APIS {
   async getArticles(options = {}) {
     const { category, source } = options;
     const endpoint = endpoints.news.getArticles;
-    const { articles = [] } = (await this.fetch(endpoint, { category, source })) || {};
+    const articles = (await this.fetch(endpoint, { query: { category, source } })) || {};
     return articles;
   }
 
   async calculateProfit(buy, sell, volume) {
     const endpoint = endpoints.finance.calculateProfit;
-    return await this.fetch(endpoint, {}, { buy, sell, volume });
+    const { profit = 0 } = await this.fetch(endpoint, { body: { buy, sell, volume } });
+    return profit;
   }
 
   async getStockHighlights(from, to) {
     const endpoint = endpoints.finance.getStockHighlights;
-    return await this.fetch(endpoint, {}, { from, to });
+    return await this.fetch(endpoint, { body: { from, to } });
   }
 
   async getStockPotentials(from, to) {
     const endpoint = endpoints.finance.getStockPotentials;
-    return await this.fetch(endpoint, {}, { from, to });
+    return await this.fetch(endpoint, { body: { from, to } });
   }
 
   async getStockCompanies() {
@@ -111,7 +113,7 @@ export default class APIS {
 
   async getStockHistory(symbol, from, to) {
     const endpoint = endpoints.finance.getStockHistory;
-    return await this.fetch(endpoint, {}, { symbol, from, to });
+    return await this.fetch(endpoint, { body: { symbol, from, to } });
   }
 
   async getBanksForexRates() {
@@ -131,27 +133,27 @@ export default class APIS {
 
   async syncForexRates(id) {
     const endpoint = endpoints.banks.syncForexRates;
-    const { status = '' } = await this.fetch(endpoint, {}, { id });
+    const { status = '' } = await this.fetch(endpoint, { body: { id } });
     return status;
   }
 
-  async getPostalCodes() {
-    const endpoint = endpoints.maps.getPostalCodes;
-    return await this.fetch(endpoint);
-  }
-
-  async getDistricts() {
-    const endpoint = endpoints.maps.getDistricts;
+  async getMapsPostalCodes() {
+    const endpoint = endpoints.maps.getMapsPostalCodes;
     return await this.fetch(endpoint);
   }
 
   async getMapsProvinces() {
-    const endpoint = endpoints.maps.getProvinces;
+    const endpoint = endpoints.maps.getMapsProvinces;
     return await this.fetch(endpoint);
   }
 
-  async getWards() {
-    const endpoint = endpoints.maps.getWards;
+  async getMapsDistricts(province_id) {
+    const endpoint = endpoints.maps.getMapsDistricts;
+    return await this.fetch(endpoint, { query: { province_id } });
+  }
+
+  async getMapsWards() {
+    const endpoint = endpoints.maps.getMapsWards;
     return await this.fetch(endpoint);
   }
 
@@ -180,24 +182,35 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
+  async getPhonesPrefixes() {
+    const endpoint = endpoints.phones.getPhonesPrefixes;
+    return await this.fetch(endpoint);
+  }
+
   async getGHNProvinces() {
     const endpoint = endpoints.technologies.getGHNProvinces;
     return await this.fetch(endpoint);
   }
 
-  async convertLunarToSolar(body = {}) {
+  async convertLunarToSolar(year, month, date) {
     const endpoint = endpoints.calendar.convertLunarToSolar;
-    return await this.fetch(endpoint, {}, body);
+    return await this.fetch(endpoint, { body: { year, month, date } });
   }
 
-  async convertSolarToLunar(body = {}) {
+  async convertSolarToLunar(year, month, date) {
     const endpoint = endpoints.calendar.convertSolarToLunar;
-    return await this.fetch(endpoint, {}, body);
+    return await this.fetch(endpoint, { body: { year, month, date } });
   }
 
-  async getCanChi(body = {}) {
+  async getCanChi(year, month, date) {
     const endpoint = endpoints.calendar.getCanChi;
-    const { canChi = '' } = await this.fetch(endpoint, {}, body);
+    const { canChi = '' } = await this.fetch(endpoint, { body: { year, month, date } });
     return canChi;
+  }
+
+  async getVietceteraArticles(type) {
+    const endpoint = endpoints.technologies.getVietceteraArticles;
+    const articles = (await this.fetch(endpoint, { query: { type } })) || [];
+    return articles;
   }
 }

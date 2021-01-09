@@ -1,10 +1,12 @@
 'use strict';
 
+import * as _ from 'lodash';
 import { Request, Response } from 'express';
 
 import { ethnicMinoritiesService } from '../../services';
 
 export default async (req: Request, res: Response): Promise<Response<any>> => {
-  const ethnicMinorities = await ethnicMinoritiesService.getEthnicMinorities();
+  const type_en = _.get(req, 'query.type_en', '');
+  const ethnicMinorities = await ethnicMinoritiesService.getEthnicMinorities(type_en);
   return res.json(ethnicMinorities);
 };

@@ -27,11 +27,7 @@ export default class CalendarConverter extends Component {
 
     await this.setState({ solarDate, solarString });
 
-    const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar({
-      year,
-      month,
-      date
-    });
+    const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
     const lunarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
 
@@ -43,7 +39,7 @@ export default class CalendarConverter extends Component {
   }
 
   async buildLunarString(year, month, date) {
-    return await apis.getCanChi({ year, month, date });
+    return await apis.getCanChi(year, month, date);
   }
 
   async updateSolarDate(event) {
@@ -52,11 +48,7 @@ export default class CalendarConverter extends Component {
     const solarString = this.buildSolarString(year, parseInt(month, 10), date);
 
     await this.setState({ solarDate, solarString });
-    const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar({
-      year,
-      month,
-      date
-    });
+    const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
     const lunarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
 
@@ -69,11 +61,7 @@ export default class CalendarConverter extends Component {
     const lunarString = await this.buildLunarString(year, month, date);
 
     await this.setState({ lunarDate, lunarString });
-    const { year: yyyy, month: mm, date: dd } = await apis.convertLunarToSolar({
-      year,
-      month,
-      date
-    });
+    const { year: yyyy, month: mm, date: dd } = await apis.convertLunarToSolar(year, month, date);
     const solarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
     const solarString = this.buildSolarString(yyyy, mm, dd);
 

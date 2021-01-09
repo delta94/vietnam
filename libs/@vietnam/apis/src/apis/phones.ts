@@ -1,10 +1,8 @@
 'use strict';
 
-import fetch from 'node-fetch';
-
 import Base from './base';
 
-import { baseURL, IPhonesProvider, IPhonesPrefix } from '../constants';
+import { IPhonesProvider, IPhonesPrefix } from '../constants';
 
 export default class Phones extends Base {
   public async getProviders(): Promise<Array<IPhonesProvider>> {

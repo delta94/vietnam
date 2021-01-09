@@ -9,16 +9,16 @@ export default class MapsWards extends Component {
 
     this.state = { wards: [], loading: true };
 
-    this.getWards = this.getWards.bind(this);
+    this.getMapsWards = this.getMapsWards.bind(this);
   }
 
   async componentDidMount() {
-    await this.getWards();
+    await this.getMapsWards();
   }
 
-  async getWards() {
+  async getMapsWards() {
     this.setState({ loading: true });
-    const wards = await apis.getWards();
+    const wards = await apis.getMapsWards();
     this.setState({ wards, loading: false });
   }
 

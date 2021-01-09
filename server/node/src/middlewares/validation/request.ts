@@ -39,12 +39,11 @@ export default async (req: Request, res: Response, next: NextFunction) => {
 };
 
 const processQueryRequest = (req: Request, query: Array<IRouteParameter> = []): string => {
-  console.log('processQueryRequest');
   for (const parameter of query) {
     const { name, type, required = false, defaultValue = '' } = parameter;
-    if (required && _.isUndefined(req.query[name])) {
+    if (required && (_.isUndefined(req.query[name]) || !req.query[name])) {
       if (!defaultValue) {
-        return `Missing required query "${name}"`;
+        return `Missing required query string "${name}"`;
       } else {
         req.query[name] = defaultValue;
       }
@@ -54,18 +53,15 @@ const processQueryRequest = (req: Request, query: Array<IRouteParameter> = []): 
 };
 
 const processBodyRequest = (req: Request, body: Array<IRouteParameter> = []): string => {
-  console.log('processBodyRequest');
   for (const parameter of body) {
     const { name, type, required = false, defaultValue = '' } = parameter;
-    if (required && _.isUndefined(req.body[name])) {
+    if (required && (_.isUndefined(req.body[name]) || !req.body[name])) {
       if (!defaultValue) {
-        return `Missing required body "${name}"`;
+        return `Missing required request body "${name}"`;
       } else {
         req.body[name] = defaultValue;
       }
     }
   }
-  const requestBody = _.get(req, 'body', {});
-  console.log(body, requestBody);
   return '';
 };

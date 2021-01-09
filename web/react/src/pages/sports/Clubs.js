@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Code, Table } from '../../components';
+import { Table } from '../../components';
 import { apis } from '../../services';
 
 export default class SportsClubs extends Component {
@@ -35,11 +35,8 @@ export default class SportsClubs extends Component {
 
     return (
       <div id="SportsClubs" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-3">
           <Card.Body>
-            <div className="mb-3">
-              <Code method={'GET'} path={`sports/clubs`}></Code>
-            </div>
             <Table loading={loading} caption={'Clubs'} rows={clubs} rowConfigs={rowConfigs}></Table>
           </Card.Body>
         </Card>

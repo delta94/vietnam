@@ -51,11 +51,13 @@ export const LicensePlateShema = {
 export const MapsPostalCodeShema = {
   id: { type: 'int', primary: true, required: true },
   code: { type: 'text', required: true },
-  province: { type: 'text', required: true }
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
 };
 
 export const MapsProvinceShema = {
   id: { type: 'int', primary: true, required: true },
+  province_id: { type: 'text', required: true },
   name: { type: 'text', required: true },
   capital: { type: 'text', required: true },
   level: { type: 'text', required: true },
@@ -71,7 +73,8 @@ export const MapsDistrictSchema = {
   name: { type: 'text', required: true },
   level: { type: 'text', required: true },
   level_en: { type: 'text', required: true },
-  province: { type: 'text', required: true }
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
 };
 
 export const MapsWardSchema = {
@@ -117,6 +120,7 @@ export const TechnologySchema = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true },
   type: { type: 'text', required: true },
+  type_id: { type: 'text', required: true },
   url: { type: 'text', required: true },
   npm: { type: 'text' }
 };

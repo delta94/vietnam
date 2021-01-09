@@ -1,39 +1,26 @@
 import React, { Component } from 'react';
 import { Form, Card, ListGroup, Spinner } from 'react-bootstrap';
-import VietceteraClient from 'vietcetera';
 
-const vietcetera = new VietceteraClient();
+import { apis } from '../../services';
 
 export default class Vietcetera extends Component {
   constructor() {
     super();
     this.state = { articles: [], loading: false };
     this.getArticles = this.getArticles.bind(this);
-    this.processArticles = this.processArticles.bind(this);
   }
 
   async componentDidMount() {
     const type = 'latest';
-    const basicArticles = await vietcetera.getArticles({ type });
-    const articles = this.processArticles(basicArticles);
-    this.setState({ articles });
-  }
-
-  processArticles(articles = []) {
-    return articles.map((article = {}) => {
-      const { title = '', slug = '', language = '', publishDate = '', excerpt = '' } = article;
-      const url =
-        language && slug ? `https://vietcetera.com/${language.toLowerCase()}/${slug}` : '';
-      const description = excerpt.replace('<p>', '').replace('</p>', '');
-      return { title, url, publishDate, description };
-    });
+    await this.setState({ loading: true });
+    const articles = await apis.getVietceteraArticles(type);
+    await this.setState({ articles, loading: false });
   }
 
   async getArticles(event) {
     const { value: type = '' } = event.target;
     await this.setState({ loading: true });
-    const basicArticles = await vietcetera.getArticles({ type });
-    const articles = this.processArticles(basicArticles);
+    const articles = await apis.getVietceteraArticles(type);
     await this.setState({ articles, loading: false });
   }
 

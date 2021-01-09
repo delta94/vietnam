@@ -3,21 +3,36 @@ import { Spinner } from 'react-bootstrap';
 
 export default class Table extends Component {
   render() {
-    const { loading = true, caption = '', rows = [], rowConfigs = [] } = this.props;
+    const {
+      header = '',
+      loading = false,
+      caption = '',
+      rows = [],
+      rowConfigs = [],
+      emptyRowsText = 'No Data'
+    } = this.props;
 
     return (
       <div id="table">
+        {header.length > 0 && <h5>{header}</h5>}
         {loading && (
           <div className="text-center">
             <Spinner animation="border" variant="danger"></Spinner>
           </div>
         )}
-        {!loading && rows.length && rowConfigs.length && (
-          <div className="table-responsive table-container">
+        {!loading && rows.length === 0 && (
+          <div className="border p-3 rounded-lg">
+            <b>{emptyRowsText.toUpperCase()}</b>
+          </div>
+        )}
+        {!loading && rows.length > 0 && rowConfigs.length && (
+          <div className="table-responsive table-container rounded-lg">
             <table className="table">
-              <caption className="text-center bg-danger text-white">
-                {caption} ({rows.length})
-              </caption>
+              {caption.length > 0 && (
+                <caption className="text-center bg-danger text-white">
+                  {caption} ({rows.length})
+                </caption>
+              )}
               {rowConfigs.length && (
                 <thead>
                   <tr>
@@ -34,8 +49,16 @@ export default class Table extends Component {
                     return (
                       <tr key={rowIndex}>
                         {rowConfigs.map((config, cellIndex) => {
-                          const { key } = config;
-                          return <td key={cellIndex}>{(row[key] || '').toString()}</td>;
+                          const { key, className = '' } = config;
+                          const cell =
+                            typeof row[key] === 'boolean'
+                              ? row[key].toString()
+                              : (row[key] || '').toString();
+                          return (
+                            <td key={cellIndex} className={className}>
+                              {cell}
+                            </td>
+                          );
                         })}
                       </tr>
                     );

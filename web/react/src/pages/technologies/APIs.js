@@ -3,8 +3,6 @@ import { Card, Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../services';
 
-import { Code } from '../../components';
-
 export default class APIs extends Component {
   constructor() {
     super();
@@ -108,9 +106,6 @@ export default class APIs extends Component {
       <div id="APIs" className="container">
         <Card className="shadow mt-3">
           <Card.Body>
-            <div className="mb-3">
-              <Code method={'GET'} path={`technologies`}></Code>
-            </div>
             <Form className="mt-3 mb-3 w-100">
               <Form.Control
                 type="text"

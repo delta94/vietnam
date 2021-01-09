@@ -43,6 +43,8 @@ import {
   NewsTrends,
   // Phones
   Phones,
+  PhonesPrefixes,
+  PhonesProviders,
   // Sports
   Sports,
   SportsClubs,
@@ -100,7 +102,7 @@ const routes = [
     path: 'docs',
     text: 'Docs',
     component: Docs,
-    navigation: true
+    navigation: false
   },
   {
     path: 'ethnic-minorities',
@@ -259,6 +261,18 @@ const routes = [
     navigation: true
   },
   {
+    path: 'phones-prefixes',
+    text: 'Phones Prefixes',
+    component: PhonesPrefixes,
+    navigation: false
+  },
+  {
+    path: 'phones-providers',
+    text: 'Phones Providers',
+    component: PhonesProviders,
+    navigation: false
+  },
+  {
     path: 'sports',
     text: 'Sports',
     component: Sports,
@@ -283,7 +297,7 @@ const routes = [
     navigation: false
   },
   {
-    path: 'technologies-ghn',
+    path: 'technologies-ghn-provinces',
     text: 'Technologies GHN',
     component: GiaoHangNhanh,
     navigation: false

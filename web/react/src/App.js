@@ -8,18 +8,16 @@ class App extends Component {
   render() {
     return (
       <div id="App">
-        <div className="pt-5 pb-5">
-          <div className="pt-3 pb-3">
-            <HashRouter basename="/">
-              <Navigation></Navigation>
-              {routes.map((route, index) => {
-                const { path, component } = route;
-                return <Route key={index} path={`/${path}`} component={component} exact></Route>;
-              })}
-              <Footer></Footer>
-            </HashRouter>
+        <HashRouter basename="/">
+          <Navigation></Navigation>
+          <div className="pt-3 pb-5">
+            {routes.map((route, index) => {
+              const { path, component } = route;
+              return <Route key={index} path={`/${path}`} component={component} exact></Route>;
+            })}
           </div>
-        </div>
+          <Footer></Footer>
+        </HashRouter>
       </div>
     );
   }

@@ -45,7 +45,10 @@ import NewsFeed from './news/Feed';
 import NewsSources from './news/Sources';
 import NewsTrends from './news/Trends';
 
+// Phones
 import Phones from './phones/Phones';
+import PhonesPrefixes from './phones/Prefixes';
+import PhonesProviders from './phones/Providers';
 
 // Sports
 import Sports from './sports/Sports';
@@ -101,6 +104,8 @@ export {
   NewsTrends,
   // Phones
   Phones,
+  PhonesPrefixes,
+  PhonesProviders,
   // Sports
   Sports,
   SportsClubs,

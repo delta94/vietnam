@@ -5,7 +5,13 @@ import { IRoute } from '../global/interfaces';
 const prefix: string = 'technologies';
 
 const technologies: Array<IRoute> = [
-  { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: ['track-ip'] },
+  {
+    method: 'GET',
+    query: [{ name: 'type_id', type: 'string', required: false }],
+    body: [],
+    path: `${prefix}`,
+    middlewares: ['track-ip']
+  },
   {
     method: 'GET',
     query: [],
@@ -32,6 +38,13 @@ const technologies: Array<IRoute> = [
     query: [],
     body: [],
     path: `${prefix}/giaohangnhanh/stations`,
+    middlewares: ['track-ip']
+  },
+  {
+    method: 'GET',
+    query: [{ name: 'type', type: 'string', required: true }],
+    body: [],
+    path: `${prefix}/vietcetera`,
     middlewares: ['track-ip']
   }
 ];

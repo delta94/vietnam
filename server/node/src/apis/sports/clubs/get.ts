@@ -6,7 +6,7 @@ import { Request, Response } from 'express';
 import { sportsService } from '../../../services';
 
 export default async (req: Request, res: Response) => {
-  const sport: string = _.get(req, 'query.sport', '');
-  const clubs: string | Array<any> = await sportsService.getClubs(sport);
+  const sport_en: string = _.get(req, 'query.sport_en', '');
+  const clubs: string | Array<any> = await sportsService.getClubs(sport_en);
   return res.json(clubs);
 };

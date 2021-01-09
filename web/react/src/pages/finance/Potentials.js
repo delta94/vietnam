@@ -18,7 +18,7 @@ export default class FinancePotentials extends Component {
   async componentDidMount() {
     const period = '1M';
     const { from, to } = processPeriod(period);
-    this.setState({ from, to });
+    await this.setState({ from, to });
     await this.getStockPotentials();
   }
 

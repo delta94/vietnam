@@ -49,3 +49,9 @@ export const copyToClipboard = text => {
       alert('Error in copying text: ', err);
     });
 };
+
+export const buildQueryString = (query = {}) => {
+  const keys = Object.keys(query);
+  if (!keys.length) return '';
+  return keys.map(key => `${key}=${(query[key] || '').toString()}`).join('&');
+};

@@ -4,8 +4,8 @@ import * as _ from 'lodash';
 import { postgreClient } from '../clients';
 
 export default class PhonesService {
-  public async getPrefixes(): Promise<string | Array<any>> {
-    const prefixes = await postgreClient.find('phones_prefixes');
+  public async getPrefixes(prefix: string = ''): Promise<string | Array<any>> {
+    const prefixes = await postgreClient.find('phones_prefixes', { prefix });
     return prefixes;
   }
 

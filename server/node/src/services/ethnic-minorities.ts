@@ -3,9 +3,13 @@
 import { postgreClient } from '../clients';
 
 export default class EthnicMinoritiesService {
-  public async getEthnicMinorities(): Promise<string | Array<any>> {
+  public async getEthnicMinorities(type_en: string = ''): Promise<Array<any>> {
     const fields: Array<string> = ['name', 'type', 'type_en'];
-    const ethnicMinorities = await postgreClient.find('ethnic_minorities', fields);
+    const ethnicMinorities: any = await postgreClient.find(
+      'ethnic_minorities',
+      { type_en },
+      fields
+    );
     return ethnicMinorities;
   }
 }

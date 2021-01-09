@@ -5,7 +5,13 @@ import { IRoute } from '../global/interfaces';
 const prefix: string = 'government';
 
 const government: Array<IRoute> = [
-  { method: `GET`, query: [], body: [], path: `${prefix}/ministries`, middlewares: ['track-ip'] },
+  {
+    method: `GET`,
+    query: [{ name: 'level_en', type: 'string', required: false }],
+    body: [],
+    path: `${prefix}/ministries`,
+    middlewares: ['track-ip']
+  },
   {
     method: `GET`,
     query: [{ name: 'ministry', type: 'string', required: true }],

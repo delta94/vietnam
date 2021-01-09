@@ -43,7 +43,7 @@ export default class FinanceService {
     const defaultFrom = now - 60 * 60 * 24 * 365 * 1000;
     const defaultTo = now;
     const { symbol = '', from = defaultFrom, to = defaultTo } = options;
-    const selectedFields = ['symbol', 'group', 'ceiling', 'floor', 'name', 'industry', 'subsector'];
+    const selectedFields = ['symbol', 'group', 'name', 'industry', 'subsector'];
     const companiesQuery = symbol ? { symbol } : {};
     const companies = await dsFinanceStockListedCompany.find(companiesQuery, {
       sort: { symbol: 1 },
@@ -56,16 +56,10 @@ export default class FinanceService {
     const docs: Array<any> = await dsFinanceStockHistoryData.find(query, mongoOptions);
 
     const data = symbols.map(symbol => {
-      const {
-        group = '',
-        ceiling = 0,
-        floor = 0,
-        name = '',
-        industry = '',
-        subsector = ''
-      } = companies.find(company => company.symbol === symbol);
+      const { group = '', name = '', industry = '', subsector = '' } =
+        companies.find(company => company.symbol === symbol) || {};
       const history = docs.filter(doc => doc.symbol === symbol);
-      return { symbol, group, history, ceiling, floor, name, industry, subsector };
+      return { symbol, group, history, name, industry, subsector };
     });
 
     return data;
@@ -86,8 +80,6 @@ export default class FinanceService {
           symbol = '',
           group = '',
           history = [],
-          ceiling = 0,
-          floor = 0,
           name = '',
           industry = '',
           subsector = ''
@@ -138,9 +130,7 @@ export default class FinanceService {
         const diffToMin = parseFloat((latest - min).toFixed(2));
         const diffToMax = parseFloat((max - latest).toFixed(2));
 
-        const middle = parseFloat(((floor + ceiling) / 1000 / 2).toFixed(2));
-
-        const low = latest < average || latest < middle;
+        const low = latest < average;
 
         return {
           symbol,
@@ -162,10 +152,7 @@ export default class FinanceService {
           max,
           maxDate,
           low,
-          numberOfDates,
-          middle,
-          ceiling,
-          floor
+          numberOfDates
         };
       })
       .filter(item => !utils.isObjectEmpty(item));

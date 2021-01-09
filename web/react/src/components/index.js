@@ -1,7 +1,8 @@
-import Code from './Code';
+import API from './API';
+import CURL from './CURL';
 import Doc from './Doc';
-import Table from './Table';
 import Footer from './Footer';
 import Navigation from './Navigation';
+import Table from './Table';
 
-export { Doc, Footer, Navigation, Code, Table };
+export { API, CURL, Doc, Footer, Navigation, Table };
