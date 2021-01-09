@@ -53,11 +53,7 @@ import { AppComponent } from './app.component';
     MatSortModule,
     MatTableModule,
     MatTabsModule,
-    MatToolbarModule,
-
-    NgChartjsModule.registerPlugin([]),
-
-    NgbModule
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
