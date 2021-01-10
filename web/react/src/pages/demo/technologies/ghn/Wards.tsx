@@ -34,8 +34,8 @@ export default class Wards extends Component<IWardsProps, IWardsState> {
     const { wards, loading } = this.state;
 
     const rowConfigs = [
+      { header: 'District ID', key: 'district_id' },
       { header: 'Name', key: 'name' },
-      { header: 'Ward ID', key: 'ward_id' },
       { header: 'Code', key: 'code' }
     ];
 
@@ -43,7 +43,7 @@ export default class Wards extends Component<IWardsProps, IWardsState> {
       <div id="Wards" className="container">
         <Card className="shadow mt-3 mb-5">
           <Card.Body>
-            <Card.Title className="text-center mb-3">Giao Hang Nhanh</Card.Title>
+            <Card.Title className="text-center mb-3">GHN Wards</Card.Title>
             <Card.Subtitle className="text-center mb-3">
               <a
                 href={`https://www.npmjs.com/package/giaohangnhanh`}

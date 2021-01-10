@@ -106,7 +106,7 @@ export default class Home extends Component<IHomeProps, IHomeState> {
   renderTable(title: string, packages: Array<any> = []) {
     return (
       <div id="table">
-        <div className="table-responsive table-container h-60vh">
+        <div className="table-responsive table-container">
           <table className="table">
             <caption className="text-white text-center bg-danger">
               {title} ({packages.length})
@@ -156,9 +156,9 @@ export default class Home extends Component<IHomeProps, IHomeState> {
     const { filterAPIs = [] } = this.state;
     return (
       <div id="Home" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
-            <Form className="w-100 mb-3">
+            <Form className="mb-3">
               <Form.Control
                 type="text"
                 placeholder="Query"

@@ -62,7 +62,7 @@ export default class APIs extends Component<IAPIsProps, IAPIsState> {
           </div>
         )}
         {!loading && (
-          <div className="table-responsive table-container h-50vh">
+          <div className="table-responsive table-container">
             <table className="table">
               <caption className="text-center bg-danger text-white">
                 APIs ({filterTechnologies.length})

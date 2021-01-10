@@ -34,16 +34,19 @@ export default class Districts extends Component<IDistrictsProps, IDistrictsStat
     const { districts, loading } = this.state;
 
     const rowConfigs = [
-      { header: 'Name', key: 'name' },
+      { header: 'Province ID', key: 'province_id' },
       { header: 'District ID', key: 'district_id' },
-      { header: 'Code', key: 'code' }
+      { header: 'Name', key: 'name' },
+      { header: 'Code', key: 'code' },
+      { header: 'Type', key: 'type' },
+      { header: 'Support Type', key: 'support_type' }
     ];
 
     return (
       <div id="Districts" className="container">
         <Card className="shadow mt-3 mb-5">
           <Card.Body>
-            <Card.Title className="text-center mb-3">Giao Hang Nhanh</Card.Title>
+            <Card.Title className="text-center mb-3">GHN Districts</Card.Title>
             <Card.Subtitle className="text-center mb-3">
               <a
                 href={`https://www.npmjs.com/package/giaohangnhanh`}

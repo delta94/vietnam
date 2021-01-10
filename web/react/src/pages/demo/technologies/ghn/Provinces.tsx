@@ -43,7 +43,7 @@ export default class Provinces extends Component<IProvincesProps, IProvincesStat
       <div id="Provinces" className="container">
         <Card className="shadow mt-3 mb-5">
           <Card.Body>
-            <Card.Title className="text-center mb-3">Giao Hang Nhanh</Card.Title>
+            <Card.Title className="text-center mb-3">GHN Provinces</Card.Title>
             <Card.Subtitle className="text-center mb-3">
               <a
                 href={`https://www.npmjs.com/package/giaohangnhanh`}
