@@ -354,7 +354,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/ethnic-minorities',
       url: `${baseAPI}/ethnic-minorities`,
-      demo: 'ethnic-minorities',
+      demo: 'ethnic-minorities-list',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [{ name: 'type_en', required: false, type: 'string', description: '' }],
@@ -746,7 +746,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/license-plates',
       url: `${baseAPI}/license-plates`,
-      demo: 'license-plates',
+      demo: 'license-plates-list',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [{ name: 'license', type: 'string', required: false, description: '' }],

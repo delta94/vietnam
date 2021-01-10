@@ -11,6 +11,7 @@ import {
   Docs,
   // Ethnic Minorities
   EthnicMinorities,
+  EthnicMinoritiesList,
   // Finance
   Finance,
   FinanceCompanies,
@@ -30,6 +31,7 @@ import {
   Home,
   // LicensePlates
   LicensePlates,
+  LicensePlatesList,
   // Maps
   Maps,
   MapsPostalCodes,
@@ -109,6 +111,12 @@ const routes = [
     text: 'Ethnic Minorities',
     component: EthnicMinorities,
     navigation: true
+  },
+  {
+    path: 'ethnic-minorities-list',
+    text: 'Ethnic Minorities (List)',
+    component: EthnicMinoritiesList,
+    navigation: false
   },
   {
     path: 'finance',
@@ -199,6 +207,12 @@ const routes = [
     text: 'License Plates',
     component: LicensePlates,
     navigation: true
+  },
+  {
+    path: 'license-plates-list',
+    text: 'License Plates (List)',
+    component: LicensePlatesList,
+    navigation: false
   },
   {
     path: 'maps',
