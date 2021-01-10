@@ -53,7 +53,9 @@ import {
   // Technologies
   Technologies,
   APIs,
-  GiaoHangNhanh,
+  GHNProvinces,
+  GHNDistricts,
+  GHNWards,
   Vietcetera
 } from '../pages';
 
@@ -312,8 +314,20 @@ const routes = [
   },
   {
     path: 'technologies-ghn-provinces',
-    text: 'Technologies GHN',
-    component: GiaoHangNhanh,
+    text: 'Technologies GHN Provinces',
+    component: GHNProvinces,
+    navigation: false
+  },
+  {
+    path: 'technologies-ghn-districts',
+    text: 'Technologies GHN Districts',
+    component: GHNDistricts,
+    navigation: false
+  },
+  {
+    path: 'technologies-ghn-wards',
+    text: 'Technologies GHN Wards',
+    component: GHNWards,
     navigation: false
   },
   {

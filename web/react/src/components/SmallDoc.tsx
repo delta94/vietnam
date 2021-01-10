@@ -65,7 +65,7 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
 
   renderSidebar(endpoints: any) {
     const { group, header } = this.props;
-    const apis = Object.values(endpoints[group]);
+    const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
     return (
       <div>
         <h6>

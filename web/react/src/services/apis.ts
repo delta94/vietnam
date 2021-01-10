@@ -193,11 +193,6 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getGHNProvinces() {
-    const endpoint: IEndpoint = endpoints.technologies.getGHNProvinces;
-    return await this.fetch(endpoint);
-  }
-
   public async convertLunarToSolar(year: number, month: number, date: number) {
     const endpoint: IEndpoint = endpoints.calendar.convertLunarToSolar;
     return await this.fetch(endpoint, { query: {}, body: { year, month, date } });
@@ -218,5 +213,20 @@ export default class APIS {
     const endpoint: IEndpoint = endpoints.technologies.getVietceteraArticles;
     const articles = (await this.fetch(endpoint, { query: { type }, body: {} })) || [];
     return articles;
+  }
+
+  public async getGHNProvinces() {
+    const endpoint: IEndpoint = endpoints.technologies.getGHNProvinces;
+    return await this.fetch(endpoint);
+  }
+
+  public async getGHNDistricts() {
+    const endpoint: IEndpoint = endpoints.technologies.getGHNDistricts;
+    return await this.fetch(endpoint);
+  }
+
+  public async getGHNWards() {
+    const endpoint: IEndpoint = endpoints.technologies.getGHNWards;
+    return await this.fetch(endpoint);
   }
 }

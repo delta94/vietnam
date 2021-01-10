@@ -21,14 +21,14 @@ const technologies: Array<IRoute> = [
   },
   {
     method: 'GET',
-    query: [],
+    query: [{ name: 'province_id', type: 'number', required: false }],
     body: [],
     path: `${prefix}/giaohangnhanh/districts`,
     middlewares: ['track-ip']
   },
   {
     method: 'GET',
-    query: [],
+    query: [{ name: 'district_id', type: 'number', required: false }],
     body: [],
     path: `${prefix}/giaohangnhanh/wards`,
     middlewares: ['track-ip']

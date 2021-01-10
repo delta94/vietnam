@@ -65,7 +65,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
   renderSidebar(endpoints: any) {
     const groups: Array<string> = Object.keys(endpoints);
     const list = groups.map((group: string) => {
-      const apis = Object.values(endpoints[group]);
+      const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
       return { group, apis };
     });
 

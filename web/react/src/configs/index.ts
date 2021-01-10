@@ -128,11 +128,14 @@ interface ISportsEndpoints {
 interface ITechnologiesEndpoints {
   getTechnologies: IEndpoint;
   getGHNProvinces: IEndpoint;
+  getGHNDistricts: IEndpoint;
+  getGHNWards: IEndpoint;
   getVietceteraArticles: IEndpoint;
 }
 
 export interface IEndpoint {
   id: string;
+  public: boolean;
   name: string;
   path: string;
   url: string;
@@ -188,6 +191,7 @@ export const endpoints: IEndpoints = {
     getForexBanks: {
       id: 'getForexBanks',
       name: 'Get Forex Banks',
+      public: true,
       path: '/banks/forex/banks',
       url: `${baseAPI}/banks/forex/banks`,
       demo: 'banks-list',
@@ -215,6 +219,7 @@ export const endpoints: IEndpoints = {
     getForexRates: {
       id: 'getForexRates',
       name: 'Get Forex Rates',
+      public: true,
       method: 'GET',
       path: '/banks/forex/rates',
       url: `${baseAPI}/banks/forex/rates`,
@@ -244,6 +249,7 @@ export const endpoints: IEndpoints = {
     syncForexRates: {
       id: 'syncForexRates',
       name: 'Sync Forex Rates',
+      public: false,
       method: 'POST',
       path: '/banks/forex/sync',
       url: `${baseAPI}/banks/forex/sync`,
@@ -269,6 +275,7 @@ export const endpoints: IEndpoints = {
     convertLunarToSolar: {
       id: 'convertLunarToSolar',
       name: 'Convert Lunar Date to Solar Date',
+      public: true,
       method: 'POST',
       path: '/calendar/lunar2solar',
       url: `${baseAPI}/calendar/lunar2solar`,
@@ -300,6 +307,7 @@ export const endpoints: IEndpoints = {
     convertSolarToLunar: {
       id: 'convertSolarToLunar',
       name: 'Convert Solar Date to Lunar Date',
+      public: true,
       method: 'POST',
       path: '/calendar/solar2lunar',
       url: `${baseAPI}/calendar/solar2lunar`,
@@ -331,6 +339,7 @@ export const endpoints: IEndpoints = {
     getCanChi: {
       id: 'getCanChi',
       name: 'Get Can Chi of Lunar Date',
+      public: true,
       method: 'POST',
       path: '/calendar/lunar/can-chi',
       url: `${baseAPI}/calendar/lunar/can-chi`,
@@ -360,6 +369,7 @@ export const endpoints: IEndpoints = {
     getEthnicMinorities: {
       id: 'getEthnicMinorities',
       name: 'Get Ethnic Minorities',
+      public: true,
       method: 'GET',
       path: '/ethnic-minorities',
       url: `${baseAPI}/ethnic-minorities`,
@@ -389,6 +399,7 @@ export const endpoints: IEndpoints = {
     getStockCompanies: {
       id: 'getStockCompanies',
       name: 'Get Listed Companies',
+      public: true,
       method: 'GET',
       path: '/finance/companies',
       url: `${baseAPI}/finance/companies`,
@@ -434,6 +445,7 @@ export const endpoints: IEndpoints = {
     getStockHistory: {
       id: 'getStockHistory',
       name: 'Get Stock History',
+      public: true,
       method: 'POST',
       path: '/finance/history',
       url: `${baseAPI}/finance/history`,
@@ -475,6 +487,7 @@ export const endpoints: IEndpoints = {
     getStockHighlights: {
       id: 'getStockHighlights',
       name: 'Get Stock Highlights',
+      public: false,
       method: 'POST',
       path: '/finance/highlights',
       url: `${baseAPI}/finance/highlights`,
@@ -545,6 +558,7 @@ export const endpoints: IEndpoints = {
     getStockPotentials: {
       id: 'getStockPotentials',
       name: 'Get Stock Potentials',
+      public: false,
       method: 'POST',
       path: '/finance/potentials',
       url: `${baseAPI}/finance/potentials`,
@@ -615,6 +629,7 @@ export const endpoints: IEndpoints = {
     calculateProfit: {
       id: 'calculateProfit',
       name: 'Calculate Profit',
+      public: false,
       method: 'POST',
       path: '/finance/profit',
       url: `${baseAPI}/finance/profit`,
@@ -644,6 +659,7 @@ export const endpoints: IEndpoints = {
     getGeneralSecretaries: {
       id: 'getGeneralSecretaries',
       name: 'Get General Secretaries',
+      public: true,
       method: 'GET',
       path: '/government/general-secretaries',
       url: `${baseAPI}/government/general-secretaries`,
@@ -687,6 +703,7 @@ export const endpoints: IEndpoints = {
     getPresidents: {
       id: 'getPresidents',
       name: 'Get Presidents',
+      public: true,
       method: 'GET',
       path: '/government/presidents',
       url: `${baseAPI}/government/presidents`,
@@ -730,6 +747,7 @@ export const endpoints: IEndpoints = {
     getPrimeMinisters: {
       id: 'getPrimeMinisters',
       name: 'Get Prime Ministers',
+      public: true,
       method: 'GET',
       path: '/government/prime-ministers',
       url: `${baseAPI}/government/prime-ministers`,
@@ -773,6 +791,7 @@ export const endpoints: IEndpoints = {
     getNationalAssemblyChairs: {
       id: 'getNationalAssemblyChairs',
       name: 'Get National Assembly Chairs',
+      public: true,
       method: 'GET',
       path: '/government/national-assembly/chairs',
       url: `${baseAPI}/government/national-assembly/chairs`,
@@ -816,6 +835,7 @@ export const endpoints: IEndpoints = {
     getNationalAssemblyMembers: {
       id: 'getNationalAssemblyMembers',
       name: 'Get National Assembly Members',
+      public: true,
       method: 'GET',
       path: '/government/national-assembly/members',
       url: `${baseAPI}/government/national-assembly/members`,
@@ -861,6 +881,7 @@ export const endpoints: IEndpoints = {
     getMinistries: {
       id: 'getMinistries',
       name: 'Get Ministries',
+      public: true,
       method: 'GET',
       path: '/government/ministries',
       url: `${baseAPI}/government/ministries`,
@@ -898,6 +919,7 @@ export const endpoints: IEndpoints = {
     getMinisters: {
       id: 'getMinisters',
       name: 'Get Ministers',
+      public: true,
       method: 'GET',
       path: '/government/ministers',
       url: `${baseAPI}/government/ministers`,
@@ -943,6 +965,7 @@ export const endpoints: IEndpoints = {
     getLicensePlates: {
       id: 'getLicensePlates',
       name: 'Get License Plates',
+      public: true,
       method: 'GET',
       path: '/license-plates',
       url: `${baseAPI}/license-plates`,
@@ -972,6 +995,7 @@ export const endpoints: IEndpoints = {
     getMapsPostalCodes: {
       id: 'getMapsPostalCodes',
       name: 'Get Postal Codes',
+      public: true,
       method: 'GET',
       path: '/maps/postal-codes',
       url: `${baseAPI}/maps/postal-codes`,
@@ -1005,10 +1029,11 @@ export const endpoints: IEndpoints = {
     getMapsProvinces: {
       id: 'getMapsProvinces',
       name: 'Get Provinces',
+      public: true,
       method: 'GET',
-      path: '/maps/provinces',
-      url: `${baseAPI}/maps/provinces`,
-      demo: 'maps-provinces',
+      path: '/maps/districts',
+      url: `${baseAPI}/maps/districts`,
+      demo: 'maps-districts',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [
@@ -1053,6 +1078,7 @@ export const endpoints: IEndpoints = {
     getMapsDistricts: {
       id: 'getMapsDistricts',
       name: 'Get Districts',
+      public: true,
       method: 'GET',
       path: '/maps/districts',
       url: `${baseAPI}/maps/districts`,
@@ -1090,6 +1116,7 @@ export const endpoints: IEndpoints = {
     getMapsWards: {
       id: 'getMapsWards',
       name: 'Get Wards',
+      public: true,
       method: 'GET',
       path: '/maps/wards',
       url: `${baseAPI}/maps/wards`,
@@ -1128,6 +1155,7 @@ export const endpoints: IEndpoints = {
     getArticles: {
       id: 'getArticles',
       name: 'Get Articles',
+      public: true,
       method: 'GET',
       path: '/news',
       url: `${baseAPI}/news`,
@@ -1186,6 +1214,7 @@ export const endpoints: IEndpoints = {
     getTrends: {
       id: 'getTrends',
       name: 'Get (Google) Trends',
+      public: true,
       method: 'GET',
       path: '/news/trends',
       url: `${baseAPI}/news/trends`,
@@ -1221,6 +1250,7 @@ export const endpoints: IEndpoints = {
     getSources: {
       id: 'getSources',
       name: 'Get Sources',
+      public: true,
       method: 'GET',
       path: '/news/sources',
       url: `${baseAPI}/news/sources`,
@@ -1258,6 +1288,7 @@ export const endpoints: IEndpoints = {
     getCategories: {
       id: 'getCategories',
       name: 'Get Categories',
+      public: true,
       method: 'GET',
       path: '/news/categories',
       url: `${baseAPI}/news/categories`,
@@ -1289,6 +1320,7 @@ export const endpoints: IEndpoints = {
     getPhonesPrefixes: {
       id: 'getPhonesPrefixes',
       name: 'Get Phone Prefixes',
+      public: true,
       method: 'GET',
       path: '/phones/prefixes',
       url: `${baseAPI}/phones/prefixes`,
@@ -1324,6 +1356,7 @@ export const endpoints: IEndpoints = {
     getPhonesProviders: {
       id: 'getPhonesProviders',
       name: 'Get Phone Providers',
+      public: true,
       method: 'GET',
       path: '/phones/providers',
       url: `${baseAPI}/phones/providers`,
@@ -1357,6 +1390,7 @@ export const endpoints: IEndpoints = {
     getSportsClubs: {
       id: 'getSportsClubs',
       name: 'Get Sports Clubs',
+      public: true,
       method: 'GET',
       path: '/sports/clubs',
       url: `${baseAPI}/sports/clubs`,
@@ -1396,6 +1430,7 @@ export const endpoints: IEndpoints = {
     getTechnologies: {
       id: 'getTechnologies',
       name: 'Get Public APIs',
+      public: true,
       method: 'GET',
       path: '/technologies',
       url: `${baseAPI}/technologies`,
@@ -1433,6 +1468,7 @@ export const endpoints: IEndpoints = {
     getGHNProvinces: {
       id: 'getGHNProvinces',
       name: 'GHN - Get Provinces',
+      public: true,
       method: 'GET',
       path: '/technologies/giaohangnhanh/provinces',
       url: `${baseAPI}/technologies/giaohangnhanh/provinces`,
@@ -1463,9 +1499,84 @@ export const endpoints: IEndpoints = {
         }
       }
     },
+    getGHNDistricts: {
+      id: 'getGHNDistricts',
+      name: 'GHN - Get Districts',
+      public: true,
+      method: 'GET',
+      path: '/technologies/giaohangnhanh/districts',
+      url: `${baseAPI}/technologies/giaohangnhanh/districts`,
+      demo: 'technologies-ghn-districts',
+      request: {
+        headers: [{ key: 'Content-Type', value: 'application/json' }],
+        query: [{ name: 'province_id', type: 'number', required: false, description: '' }],
+        body: []
+      },
+      response: {
+        200: {
+          schema: [
+            { name: 'district_id', type: 'number', description: '' },
+            { name: 'province_id', type: 'number', description: '' },
+            { name: 'name', type: 'string', description: '' },
+            { name: 'code', type: 'string', description: '' },
+            { name: 'type', type: 'number', description: '' },
+            { name: 'support_type', type: 'number', description: '' }
+          ],
+          example: [
+            {
+              district_id: '<string>',
+              province_id: '<string>',
+              name: '<string>',
+              code: '<string>',
+              type: '<number>',
+              support_type: '<number>'
+            }
+          ]
+        },
+        400: {
+          schema: [{ name: 'message', type: 'string', description: '' }],
+          example: { message: '<string>' }
+        }
+      }
+    },
+    getGHNWards: {
+      id: 'getGHNWards',
+      name: 'GHN - Get Wards',
+      public: true,
+      method: 'GET',
+      path: '/technologies/giaohangnhanh/wards',
+      url: `${baseAPI}/technologies/giaohangnhanh/wards`,
+      demo: 'technologies-ghn-wards',
+      request: {
+        headers: [{ key: 'Content-Type', value: 'application/json' }],
+        query: [{ name: 'district_id', type: 'number', required: false, description: '' }],
+        body: []
+      },
+      response: {
+        200: {
+          schema: [
+            { name: 'district_id', type: 'number', description: '' },
+            { name: 'name', type: 'string', description: '' },
+            { name: 'code', type: 'string', description: '' }
+          ],
+          example: [
+            {
+              district_id: '<string>',
+              name: '<string>',
+              code: '<string>'
+            }
+          ]
+        },
+        400: {
+          schema: [{ name: 'message', type: 'string', description: '' }],
+          example: { message: '<string>' }
+        }
+      }
+    },
     getVietceteraArticles: {
       id: 'getVietceteraArticles',
       name: 'Get Vietcetera Articles',
+      public: true,
       method: 'GET',
       path: '/technologies/vietcetera',
       url: `${baseAPI}/technologies/vietcetera`,

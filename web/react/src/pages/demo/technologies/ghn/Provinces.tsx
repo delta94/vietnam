@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { apis } from '../../../../services';
+import { Table } from '../../../../components';
 
-interface IGiaoHangNhanhProps {}
+interface IProvincesProps {}
 
-interface IGiaoHangNhanhState {
+interface IProvincesState {
   provinces: Array<any>;
   loading: boolean;
 }
 
-export default class GiaoHangNhanh extends Component<IGiaoHangNhanhProps, IGiaoHangNhanhState> {
-  constructor(props: IGiaoHangNhanhProps) {
+export default class Provinces extends Component<IProvincesProps, IProvincesState> {
+  constructor(props: IProvincesProps) {
     super(props);
 
     this.state = { provinces: [], loading: true };
@@ -40,7 +40,7 @@ export default class GiaoHangNhanh extends Component<IGiaoHangNhanhProps, IGiaoH
     ];
 
     return (
-      <div id="GiaoHangNhanh" className="container">
+      <div id="Provinces" className="container">
         <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center mb-3">Giao Hang Nhanh</Card.Title>

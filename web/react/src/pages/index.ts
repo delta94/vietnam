@@ -63,7 +63,9 @@ import PhonesProviders from './demo/phones/Providers';
 import SportsClubs from './demo/sports/Clubs';
 
 import APIs from './demo/technologies/APIs';
-import GiaoHangNhanh from './demo/technologies/GiaoHangNhanh';
+import GHNProvinces from './demo/technologies/ghn/Provinces';
+import GHNDistricts from './demo/technologies/ghn/Districts';
+import GHNWards from './demo/technologies/ghn/Wards';
 import Vietcetera from './demo/technologies/Vietcetera';
 
 export {
@@ -121,6 +123,8 @@ export {
   // Technologies
   Technologies,
   APIs,
-  GiaoHangNhanh,
+  GHNProvinces,
+  GHNDistricts,
+  GHNWards,
   Vietcetera
 };
