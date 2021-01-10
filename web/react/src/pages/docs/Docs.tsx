@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { capitalize } from '../../helper';
+import { helper } from '../../services';
 import { endpoints, IEndpoints } from '../../configs';
 import { Doc } from '../../components';
 
@@ -70,7 +70,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
         {list.length > 0 &&
           list.map((item, index) => {
             const { group, apis } = item;
-            const header = capitalize(group);
+            const header = helper.capitalize(group);
             return (
               <div key={index}>
                 <p className="m-0">{header}</p>
@@ -100,7 +100,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
         </div> */}
         {groups.length > 0 &&
           groups.map((group: string, index: number) => {
-            return <Doc key={index} group={group} header={capitalize(group)}></Doc>;
+            return <Doc key={index} group={group} header={helper.capitalize(group)}></Doc>;
           })}
       </div>
     );

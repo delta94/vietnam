@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Card, Form } from 'react-bootstrap';
 
 import { months } from '../../../configs';
-import { addZero, capitalize } from '../../../helper';
-import { apis } from '../../../services';
+import { apis, helper } from '../../../services';
 
 interface ICalendarConverterProps {}
 
@@ -33,23 +32,23 @@ export default class CalendarConverter extends Component<
     const d = new Date();
     const year = d.getFullYear();
     const month = d.getMonth() + 1;
-    const monthString = addZero(month);
+    const monthString = helper.addZero(month);
     const date = d.getDate();
-    const dateString = addZero(date);
+    const dateString = helper.addZero(date);
     const solarDate = `${year}-${monthString}-${dateString}`;
     const solarString = this.buildSolarString(year, month, date);
 
     await this.setState({ solarDate, solarString });
 
     const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
-    const lunarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
+    const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
 
     this.setState({ lunarDate, lunarString });
   }
 
   buildSolarString(year: number, month: number, date: number) {
-    return `${capitalize(months[month - 1].name)} ${date}, ${year}`;
+    return `${helper.capitalize(months[month - 1].name)} ${date}, ${year}`;
   }
 
   async buildLunarString(year: number, month: number, date: number) {
@@ -63,7 +62,7 @@ export default class CalendarConverter extends Component<
 
     await this.setState({ solarDate, solarString });
     const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
-    const lunarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
+    const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
 
     this.setState({ lunarDate, lunarString });
@@ -76,7 +75,7 @@ export default class CalendarConverter extends Component<
 
     await this.setState({ lunarDate, lunarString });
     const { year: yyyy, month: mm, date: dd } = await apis.convertLunarToSolar(year, month, date);
-    const solarDate = `${yyyy}-${addZero(mm)}-${addZero(dd)}`;
+    const solarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const solarString = this.buildSolarString(yyyy, mm, dd);
 
     this.setState({ solarDate, solarString });

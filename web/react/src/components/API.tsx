@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { baseAPI } from '../configs';
-import { copyToClipboard } from '../helper';
+import { helper } from '../services';
 
 interface IAPIProps {
   method: string;
@@ -19,7 +19,7 @@ export default class API extends Component<IAPIProps> {
         <h5 className="d-inline m-0 text-secondary cursor-pointer">
           <span
             onClick={() => {
-              copyToClipboard(api);
+              helper.copyToClipboard(api);
             }}>
             {path}
           </span>

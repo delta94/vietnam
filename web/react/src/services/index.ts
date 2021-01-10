@@ -1,5 +1,9 @@
 import APIS from './apis';
+import GraphQL from './graphql';
+import Helper from './helper';
 
-const apis = new APIS();
+const apis: APIS = new APIS();
+const graphql: GraphQL = new GraphQL();
+const helper: Helper = new Helper();
 
-export { apis };
+export { apis, graphql, helper };

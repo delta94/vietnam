@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Card, Form, Spinner } from 'react-bootstrap';
 
 import { periods } from '../../../configs';
-import { processPeriod } from '../../../helper';
-import { apis } from '../../../services';
+import { apis, helper } from '../../../services';
 
 interface IFinancePotentialsProps {}
 
@@ -30,14 +29,14 @@ export default class FinancePotentials extends Component<
 
   async componentDidMount() {
     const period = '1M';
-    const { from, to } = processPeriod(period);
+    const { from, to } = helper.processPeriod(period);
     await this.setState({ from, to });
     await this.getStockPotentials();
   }
 
   async updatePeriod(event: any) {
     const { value: period } = event.target;
-    const { from, to } = processPeriod(period);
+    const { from, to } = helper.processPeriod(period);
     this.setState({ from, to });
     await this.getStockPotentials();
   }

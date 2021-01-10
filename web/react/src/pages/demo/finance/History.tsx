@@ -3,8 +3,7 @@ import { Card, Form, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 
 import { periods } from '../../../configs';
-import { addZero, processPeriod, deepClone } from '../../../helper';
-import { apis } from '../../../services';
+import { apis, helper } from '../../../services';
 
 const datasetsOptions = {
   fill: false,
@@ -78,14 +77,14 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
     await this.getStockCompanies();
     const period = '1M';
     const symbol = 'VIC';
-    const { from, to } = processPeriod(period);
+    const { from, to } = helper.processPeriod(period);
     this.setState({ from, to, symbol });
     await this.getStockHistory();
   }
 
   async updatePeriod(event: any) {
     const { value: period } = event.target;
-    const { from, to } = processPeriod(period);
+    const { from, to } = helper.processPeriod(period);
     this.setState({ period, from, to });
     await this.getStockHistory();
   }
@@ -130,7 +129,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
     return datasets.map((item: any) => {
       const { label = '', data = [] } = item;
 
-      return deepClone(
+      return helper.deepClone(
         Object.assign(datasetsOptions, {
           label,
           data
@@ -140,15 +139,15 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
   }
 
   processLabels(data: Array<any>) {
-    let labels: Array<any> = [];
+    let labels: Array<string> = [];
     for (const item of data) {
       const { history = [] } = item;
-      const _labels = history.map((value: any) => {
+      const _labels: Array<string> = history.map((value: any) => {
         const { timestamp } = value;
         const d = new Date(timestamp);
-        const year = addZero(d.getFullYear());
-        const month = addZero(d.getMonth() + 1);
-        const date = addZero(d.getDate());
+        const year = helper.addZero(d.getFullYear());
+        const month = helper.addZero(d.getMonth() + 1);
+        const date = helper.addZero(d.getDate());
         return `${year}/${month}/${date}`;
       });
       labels = labels.concat(_labels);

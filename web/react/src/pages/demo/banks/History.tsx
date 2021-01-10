@@ -2,9 +2,7 @@ import React, { Component } from 'react';
 import { Card, Form, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 
-import { apis } from '../../../services';
-import { find } from '../../../graphql';
-import { deepClone } from '../../../helper';
+import { apis, graphql, helper } from '../../../services';
 
 const datasetsOptions = {
   fill: false,
@@ -85,7 +83,7 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
 
     if (!bank) return;
     const options = { sort: 'TIMESTAMP_ASC', filter: { bank } };
-    const data = await find(
+    const data = await graphql.find(
       'financeForexRate',
       ['bank', 'date', 'month', 'year', 'hour', 'minute', 'rates'],
       options
@@ -121,7 +119,7 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
 
     return [buyData, transferData, sellData].map((data, index) => {
       const label = lines[index];
-      return deepClone(
+      return helper.deepClone(
         Object.assign(datasetsOptions, {
           label,
           data

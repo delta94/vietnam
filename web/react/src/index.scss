@@ -48,20 +48,22 @@ table caption {
   caption-side: top ;
 }
 
-#Doc .nav.nav-tabs {
-  border: 0 !important;
-}
+#Doc {
+  .nav.nav-tabs {
+    border: 0 !important;
+  }
 
-#Doc .nav.nav-tabs a {
-  border: 0 !important;
-}
+  .nav.nav-tabs a {
+    border: 0 !important;
+  }
 
-#Doc .nav-tabs .nav-link.active {
-  color: #007bff !important;
-}
+  .nav-tabs .nav-link.active {
+    color: #007bff !important;
+  }
 
-#Doc .nav-tabs .nav-link {
-  color: #495057 !important;
+  .nav-tabs .nav-link {
+    color: #495057 !important;
+  }
 }
 
 .text-yellow {

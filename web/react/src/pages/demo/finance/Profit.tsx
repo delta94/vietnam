@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Card, Form } from 'react-bootstrap';
 
-import { apis } from '../../../services';
-import { numberFormatter } from '../../../helper';
+import { apis, helper } from '../../../services';
 
 interface IFinanceProfitProps {}
 
@@ -59,7 +58,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
             <Form onSubmit={this.calculateProfit} className="row">
               <div className="col-sm-4">
                 <Form.Group>
-                  <Form.Label>Buy: {numberFormatter(buy * volume)}</Form.Label>
+                  <Form.Label>Buy: {helper.numberFormatter(buy * volume)}</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="Buy"
@@ -70,7 +69,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
               </div>
               <div className="col-sm-4">
                 <Form.Group>
-                  <Form.Label>Sell: {numberFormatter(sell * volume)}</Form.Label>
+                  <Form.Label>Sell: {helper.numberFormatter(sell * volume)}</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="Sell"
@@ -81,7 +80,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
               </div>
               <div className="col-sm-4">
                 <Form.Group>
-                  <Form.Label>Volume - Profit: {numberFormatter(profit)}</Form.Label>
+                  <Form.Label>Volume - Profit: {helper.numberFormatter(profit)}</Form.Label>
                   <Form.Control
                     type="number"
                     placeholder="Volume"

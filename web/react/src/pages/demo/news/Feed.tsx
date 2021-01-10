@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { Card, Form, ListGroup, Spinner } from 'react-bootstrap';
 
-import { apis } from '../../../services';
-import { capitalize } from '../../../helper';
+import { apis, helper } from '../../../services';
 
 interface INewsFeedProps {}
 
@@ -92,7 +91,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
                       {categories.map((category, index) => {
                         return (
                           <option key={index} value={category}>
-                            {capitalize(category)}
+                            {helper.capitalize(category)}
                           </option>
                         );
                       })}
