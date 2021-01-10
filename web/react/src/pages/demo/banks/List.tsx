@@ -26,9 +26,9 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
   }
 
   async getForexBanks() {
-    this.setState({ loading: true });
+    await this.setState({ loading: true });
     const { banks = [] } = await apis.getForexBanks();
-    this.setState({ banks, loading: false });
+    await this.setState({ banks, loading: false });
   }
 
   async syncForexRates(id: string) {

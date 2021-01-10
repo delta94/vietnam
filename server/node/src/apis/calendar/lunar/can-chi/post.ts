@@ -10,7 +10,6 @@ export default async (req: Request, res: Response): Promise<Response<any>> => {
   const yyyy: number = parseInt(_.get(req, 'body.year', d.getFullYear().toString()), 10);
   const mm: number = parseInt(_.get(req, 'body.month', (d.getMonth() + 1).toString()), 10);
   const dd: number = parseInt(_.get(req, 'body.date', d.getDate(), toString()), 10);
-  console.log(`${req.path}`, { yyyy, mm, dd });
   const { date, month, year } = calendar.convertSolarToLunar(dd, mm, yyyy);
   const canChiOfYear: string = calendar.getCanChiOfYear(year);
   const canChiOfMonth: string = calendar.getCanChiOfMonth(month, year);

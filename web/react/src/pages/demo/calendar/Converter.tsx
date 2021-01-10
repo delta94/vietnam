@@ -44,7 +44,7 @@ export default class CalendarConverter extends Component<
     const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
 
-    this.setState({ lunarDate, lunarString });
+    await this.setState({ lunarDate, lunarString });
   }
 
   buildSolarString(year: number, month: number, date: number) {

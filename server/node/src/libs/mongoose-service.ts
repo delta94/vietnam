@@ -48,7 +48,17 @@ export default class MongooseService {
     });
   }
 
-  public async find(query: any = {}, options?: IFindOptions): Promise<Array<any>> {
+  public async find(
+    query: any = {},
+    options: IFindOptions = {
+      skip: 0,
+      limit: null,
+      selectedFields: [],
+      excludedFields: [],
+      sort: '',
+      populate: ''
+    }
+  ): Promise<Array<any>> {
     const self = this;
 
     const {

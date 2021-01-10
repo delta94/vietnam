@@ -130,7 +130,6 @@ export default class PostgreClient {
     const text = whereClause
       ? `SELECT ${columns} FROM ${tableName} WHERE ${whereClause}`
       : `SELECT ${columns} FROM ${tableName}`;
-    console.log('text', text);
     return await this.query(text);
   }
 

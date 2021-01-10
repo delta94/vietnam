@@ -29,7 +29,7 @@ export default async () => {
         const time = { year, month, date, hour, minute, timestamp };
         await banksService.syncForexRates(TELEGRAM_CHAT_ID, time);
       }
-      if (day >= 1 && day <= 5 && hour % 4 === 0 && minute === 0) {
+      if (day >= 1 && day <= 5 && hour === 16 && minute === 0) {
         await financeService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
       }
     }

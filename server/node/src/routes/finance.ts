@@ -7,18 +7,18 @@ const prefix: string = 'finance';
 const finance: Array<IRoute> = [
   { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: ['track-ip'] },
   { method: 'GET', query: [], body: [], path: `${prefix}/companies`, middlewares: ['track-ip'] },
-  { method: 'GET', query: [], body: [], path: `${prefix}/top`, middlewares: ['track-ip'] },
   {
-    method: 'POST',
-    query: [],
-    body: [
+    method: 'GET',
+    query: [
       { name: 'symbol', type: 'string', required: true },
       { name: 'from', type: 'number', required: true },
       { name: 'to', type: 'number', required: true }
     ],
+    body: [],
     path: `${prefix}/history`,
     middlewares: ['track-ip']
   },
+  { method: 'GET', query: [], body: [], path: `${prefix}/top`, middlewares: ['track-ip'] },
   {
     method: 'POST',
     query: [],

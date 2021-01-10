@@ -119,7 +119,7 @@ export default class APIS {
 
   public async getStockHistory(symbol: string, from: number, to: number) {
     const endpoint: IEndpoint = endpoints.finance.getStockHistory;
-    return await this.fetch(endpoint, { query: {}, body: { symbol, from, to } });
+    return await this.fetch(endpoint, { body: {}, query: { symbol, from, to } });
   }
 
   public async getBanksForexRates() {

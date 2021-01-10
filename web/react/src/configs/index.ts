@@ -446,18 +446,18 @@ export const endpoints: IEndpoints = {
       id: 'getStockHistory',
       name: 'Get Stock History',
       public: true,
-      method: 'POST',
+      method: 'GET',
       path: '/finance/history',
       url: `${baseAPI}/finance/history`,
       demo: 'finance-history',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
-        query: [],
-        body: [
+        query: [
           { name: 'symbol', type: 'string', required: true, description: '' },
           { name: 'from', type: 'number', required: true, description: '' },
           { name: 'to', type: 'number', required: true, description: '' }
-        ]
+        ],
+        body: []
       },
       response: {
         200: {

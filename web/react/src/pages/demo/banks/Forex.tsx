@@ -17,9 +17,13 @@ interface IBanksForexState {
 export default class BanksForex extends Component<IBanksForexProps, IBanksForexState> {
   constructor(props: IBanksForexProps) {
     super(props);
+
     this.state = { data: [], currency: '', currencies: [], loading: false, sortBy: '', sortDir: 1 };
+
     this.getBanksForexRates = this.getBanksForexRates.bind(this);
     this.sort = this.sort.bind(this);
+    this.renderForm = this.renderForm.bind(this);
+    this.updateCurrency = this.updateCurrency.bind(this);
   }
 
   async componentDidMount() {
@@ -58,7 +62,34 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
       });
     }
 
-    this.setState({ data });
+    await this.setState({ data });
+  }
+
+  async updateCurrency(event: any) {
+    const { value: currency } = event.target;
+    await this.setState({ currency });
+  }
+
+  renderForm(currencies: Array<any>) {
+    return (
+      <Form>
+        <Form.Group>
+          <Form.Control
+            as="select"
+            defaultValue="currency"
+            value={this.state.currency}
+            onChange={this.updateCurrency}>
+            {currencies.map((currency, index) => {
+              return (
+                <option key={index} value={currency}>
+                  {currency.toUpperCase()}
+                </option>
+              );
+            })}
+          </Form.Control>
+        </Form.Group>
+      </Form>
+    );
   }
 
   render() {
@@ -74,21 +105,7 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
               </div>
             )}
 
-            {!loading && (
-              <Form>
-                <Form.Group>
-                  <Form.Control as="select" defaultValue="currency" value={this.state.currency}>
-                    {currencies.map((currency, index) => {
-                      return (
-                        <option key={index} value={currency}>
-                          {currency.toUpperCase()}
-                        </option>
-                      );
-                    })}
-                  </Form.Control>
-                </Form.Group>
-              </Form>
-            )}
+            {!loading && this.renderForm(currencies)}
             {!loading && (
               <div className="table-responsive table-container">
                 <table className="table">

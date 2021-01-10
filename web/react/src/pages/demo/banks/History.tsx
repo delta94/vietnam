@@ -73,9 +73,9 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
   }
 
   async getForexBanks() {
-    this.setState({ loading: true });
+    await this.setState({ loading: true });
     const { bank, banks } = await apis.getForexBanks();
-    this.setState({ bank, banks, loading: false });
+    await this.setState({ bank, banks, loading: false });
   }
 
   async getFinanceForexRatesData() {
@@ -100,7 +100,7 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
 
     const datasets = this.processRates(data, currency);
 
-    this.setState({ currencies, currency, data: { labels, datasets } });
+    await this.setState({ currencies, currency, data: { labels, datasets } });
   }
 
   processRates(data: any, currency: string) {

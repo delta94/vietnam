@@ -93,7 +93,7 @@ export default class Home extends Component<IHomeProps, IHomeState> {
     const { query = '', apis = [], externalPackages = [] } = this.state;
     const filterAPIs = this.filterPackages(apis, query);
     const filterExternalPackages = this.filterPackages(externalPackages, query);
-    this.setState({ filterAPIs, filterExternalPackages });
+    await this.setState({ filterAPIs, filterExternalPackages });
   }
 
   filterPackages(packages: Array<any> = [], query: string = '') {

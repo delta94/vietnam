@@ -78,20 +78,20 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
     const period = '1M';
     const symbol = 'VIC';
     const { from, to } = helper.processPeriod(period);
-    this.setState({ from, to, symbol });
+    await this.setState({ from, to, symbol });
     await this.getStockHistory();
   }
 
   async updatePeriod(event: any) {
     const { value: period } = event.target;
     const { from, to } = helper.processPeriod(period);
-    this.setState({ period, from, to });
+    await this.setState({ period, from, to });
     await this.getStockHistory();
   }
 
   async updateSymbol(event: any) {
     const { value: symbol } = event.target;
-    this.setState({ symbol });
+    await this.setState({ symbol });
     await this.getStockHistory();
   }
 
@@ -159,57 +159,55 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
   render() {
     const { loading = false, data = {}, symbols = [], symbol = '' } = this.state;
     return (
-      <div className="FinanceHistory">
-        <div className="w-100 mt-3">
-          <Card className="shadow">
-            <Card.Body>
-              <Card.Title className="text-center">History ({symbol})</Card.Title>
-              <Form className="row">
-                <div className="col-sm-6">
-                  <Form.Group>
-                    <Form.Control
-                      as="select"
-                      defaultValue="1M"
-                      value={this.state.period}
-                      onChange={this.updatePeriod}>
-                      {periods.map((period, index) => {
-                        const { label, value } = period;
-                        return (
-                          <option key={index} value={value}>
-                            {label}
-                          </option>
-                        );
-                      })}
-                    </Form.Control>
-                  </Form.Group>
-                </div>
-                <div className="col-sm-6">
-                  <Form.Group>
-                    <Form.Control
-                      as="select"
-                      defaultValue="VIC"
-                      value={this.state.symbol}
-                      onChange={this.updateSymbol}>
-                      {symbols.map((symbol, index) => {
-                        return (
-                          <option key={index} value={symbol}>
-                            {symbol}
-                          </option>
-                        );
-                      })}
-                    </Form.Control>
-                  </Form.Group>
-                </div>
-              </Form>
-              {loading && (
-                <div className="text-center">
-                  <Spinner animation="border" variant="danger"></Spinner>
-                </div>
-              )}
-              {!loading ? <Line data={data} options={chartOptions}></Line> : ''}
-            </Card.Body>
-          </Card>
-        </div>
+      <div id="FinanceHistory" className="container">
+        <Card className="shadow mt-3 mb-5">
+          <Card.Body>
+            <Card.Title className="text-center">History ({symbol})</Card.Title>
+            <Form className="row">
+              <div className="col-sm-6">
+                <Form.Group>
+                  <Form.Control
+                    as="select"
+                    defaultValue="1M"
+                    value={this.state.period}
+                    onChange={this.updatePeriod}>
+                    {periods.map((period, index) => {
+                      const { label, value } = period;
+                      return (
+                        <option key={index} value={value}>
+                          {label}
+                        </option>
+                      );
+                    })}
+                  </Form.Control>
+                </Form.Group>
+              </div>
+              <div className="col-sm-6">
+                <Form.Group>
+                  <Form.Control
+                    as="select"
+                    defaultValue="VIC"
+                    value={this.state.symbol}
+                    onChange={this.updateSymbol}>
+                    {symbols.map((symbol, index) => {
+                      return (
+                        <option key={index} value={symbol}>
+                          {symbol}
+                        </option>
+                      );
+                    })}
+                  </Form.Control>
+                </Form.Group>
+              </div>
+            </Form>
+            {loading && (
+              <div className="text-center">
+                <Spinner animation="border" variant="danger"></Spinner>
+              </div>
+            )}
+            {!loading ? <Line data={data} options={chartOptions}></Line> : ''}
+          </Card.Body>
+        </Card>
       </div>
     );
   }
