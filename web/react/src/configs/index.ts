@@ -1096,29 +1096,24 @@ export const endpoints: IEndpoints = {
       demo: 'maps-wards',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
-        query: [],
+        query: [
+          { name: 'skip', type: 'number', required: false, description: '' },
+          { name: 'limit', type: 'number', required: false, description: '' }
+        ],
         body: []
       },
       response: {
         200: {
           schema: [
-            { name: 'name', type: 'string', description: '' },
-            { name: 'level', type: 'string', description: '' },
-            { name: 'level_en', type: 'string', description: '' },
+            { name: 'ward', type: 'string', description: '' },
             { name: 'district', type: 'string', description: '' },
-            { name: 'district_id', type: 'string', description: '' },
-            { name: 'province', type: 'string', description: '' },
-            { name: 'province_id', type: 'string', description: '' }
+            { name: 'province', type: 'string', description: '' }
           ],
           example: [
             {
-              name: '<string>',
-              level: '<string>',
-              level_en: '<string>',
+              ward: '<string>',
               district: '<string>',
-              district_id: '<string>',
-              province: '<string>',
-              province_id: '<string>'
+              province: '<string>'
             }
           ]
         },

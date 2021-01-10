@@ -53,7 +53,7 @@ export default class Vietcetera extends Component<IVietceteraProps, IVietceteraS
     ];
     return (
       <div id="Vietcetera" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center">Vietcetera ({articles.length})</Card.Title>
             <Card.Subtitle className="text-center mb-3">

@@ -140,7 +140,7 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
 
     return (
       <div id="BanksHistory" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title>History</Card.Title>
             <Form className="row">

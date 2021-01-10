@@ -60,7 +60,7 @@ export default class GovernmentMinisters extends Component<
     ];
     return (
       <div id="GovernmentMinisters" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form className="mt-3 w-100">
               <Form.Group>

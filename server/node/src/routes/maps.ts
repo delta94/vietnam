@@ -30,7 +30,16 @@ const maps: Array<IRoute> = [
     path: `${prefix}/districts`,
     middlewares: ['track-ip']
   },
-  { method: 'GET', query: [], body: [], path: `${prefix}/wards`, middlewares: ['track-ip'] },
+  {
+    method: 'GET',
+    query: [
+      { name: 'skip', type: 'number', required: false },
+      { name: 'limit', type: 'number', required: false }
+    ],
+    body: [],
+    path: `${prefix}/wards`,
+    middlewares: ['track-ip']
+  },
   {
     method: 'GET',
     query: [{ name: 'province_id', type: 'string', required: false }],

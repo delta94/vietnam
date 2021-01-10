@@ -97,7 +97,7 @@ export default class NewsSources extends Component<INewsSourcesProps, INewsSourc
 
     return (
       <div id="NewsSources" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>{this.renderTable(loading, sources)}</Card.Body>
         </Card>
       </div>

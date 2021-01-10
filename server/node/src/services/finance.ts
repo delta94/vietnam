@@ -8,7 +8,7 @@ import {
   dsFinanceStockListedCompany,
   dsFinanceStockHistoryData,
   dsFinanceStockIndicator
-} from '../models/data';
+} from '../data';
 
 export default class FinanceService {
   constructor() {}

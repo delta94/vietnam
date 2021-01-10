@@ -66,7 +66,7 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
 
     return (
       <div id="BanksForex" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             {loading && (
               <div className="text-center">

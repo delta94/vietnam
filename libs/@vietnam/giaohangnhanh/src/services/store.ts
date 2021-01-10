@@ -59,8 +59,9 @@ export default class Store extends Base {
   ): Promise<Array<IStoreDeliveryAgainResponse> | any> {
     const endpoint: IEndpoint = apis.store.deliverAgain;
     const response: IResponse = await this.fetch(endpoint, { body: { shop_id, order_codes } });
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     return data;
   }
 }

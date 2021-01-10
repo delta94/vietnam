@@ -41,7 +41,7 @@ export default class GiaoHangNhanh extends Component<IGiaoHangNhanhProps, IGiaoH
 
     return (
       <div id="GiaoHangNhanh" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center mb-3">Giao Hang Nhanh</Card.Title>
             <Card.Subtitle className="text-center mb-3">

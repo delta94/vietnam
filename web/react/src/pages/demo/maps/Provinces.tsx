@@ -40,7 +40,7 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
     ];
     return (
       <div id="MapsProvinces" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Table
               loading={loading}

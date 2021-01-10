@@ -5,7 +5,7 @@ dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
 import { financeService } from '../../services';
-import { dsFinanceStockIndicator, dsFinanceStockListedCompany } from '../../models/data';
+import { dsFinanceStockIndicator, dsFinanceStockListedCompany } from '../../data';
 
 const main = async () => {
   await mongooseClient.init();

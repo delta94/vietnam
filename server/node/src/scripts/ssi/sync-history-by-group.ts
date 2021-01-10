@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
-import { dsFinanceStockListedCompany } from '../../models/data';
+import { dsFinanceStockListedCompany } from '../../data';
 import { financeService } from '../../services';
 
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);

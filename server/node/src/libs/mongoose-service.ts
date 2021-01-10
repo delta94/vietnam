@@ -2,6 +2,15 @@
 
 import * as mongoose from 'mongoose';
 
+interface IFindOptions {
+  skip?: number;
+  limit?: number;
+  selectedFields?: Array<string>;
+  excludedFields?: Array<string>;
+  sort?: any;
+  populate?: string;
+}
+
 export default class MongooseService {
   public model: mongoose.model;
 
@@ -39,7 +48,7 @@ export default class MongooseService {
     });
   }
 
-  public async find(query: any = {}, options: any = {}): Promise<Array<any>> {
+  public async find(query: any = {}, options?: IFindOptions): Promise<Array<any>> {
     const self = this;
 
     const {

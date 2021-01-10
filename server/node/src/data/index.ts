@@ -6,8 +6,9 @@ import {
   FinanceForexRate,
   FinanceStockListedCompany,
   FinanceStockHistoryData,
-  FinanceStockIndicator
-} from './mongodb';
+  FinanceStockIndicator,
+  MapsWard
+} from '../models/mongodb';
 
 export const dsFinanceForexRate: MongooseService = new MongooseService(FinanceForexRate);
 export const dsFinanceStockListedCompany: MongooseService = new MongooseService(
@@ -17,3 +18,4 @@ export const dsFinanceStockHistoryData: MongooseService = new MongooseService(
   FinanceStockHistoryData
 );
 export const dsFinanceStockIndicator: MongooseService = new MongooseService(FinanceStockIndicator);
+export const dsMapsWard: MongooseService = new MongooseService(MapsWard);

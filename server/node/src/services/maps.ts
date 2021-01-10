@@ -3,6 +3,7 @@
 import * as _ from 'lodash';
 
 import { postgreClient } from '../clients';
+import { dsMapsWard } from '../data';
 
 export default class MapsService {
   public async getMacroRegions(): Promise<Array<string>> {
@@ -47,8 +48,8 @@ export default class MapsService {
     return provinces;
   }
 
-  public async getWards(): Promise<Array<any>> {
-    const wards: any = await postgreClient.find('maps_wards');
+  public async getWards(skip: number = 0, limit: number = 100): Promise<Array<any>> {
+    const wards: any = await dsMapsWard.find({}, { skip, limit });
     return wards;
   }
 }

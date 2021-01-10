@@ -80,7 +80,7 @@ export default class PhonesProviders extends Component<
 
     return (
       <div id="PhonesProviders" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>{this.renderTable(loading, providers)}</Card.Body>
         </Card>
       </div>

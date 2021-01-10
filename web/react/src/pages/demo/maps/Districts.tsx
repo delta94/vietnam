@@ -60,7 +60,7 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
     ];
     return (
       <div id="MapsDistricts" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form>
               <Form.Group>

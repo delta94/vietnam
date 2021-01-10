@@ -42,7 +42,7 @@ export default class GovernmentPrimeMinisters extends Component<
     ];
     return (
       <div id="GovernmentPrimeMinisters" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Table
               loading={loading}

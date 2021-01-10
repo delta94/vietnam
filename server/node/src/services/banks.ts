@@ -6,7 +6,7 @@ import vnb from 'vietnambanks';
 
 import { esClient, telegramClient, postgreClient } from '../clients';
 import { utils } from '../libs';
-import { dsFinanceForexRate } from '../models/data';
+import { dsFinanceForexRate } from '../data';
 
 const URL_BASE: string = process.env.URL_BASE || '';
 

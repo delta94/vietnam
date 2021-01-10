@@ -77,7 +77,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
 
     return (
       <div id="NewsFeed" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form className="mt-3 w-100">
               <div className="row mb-3">

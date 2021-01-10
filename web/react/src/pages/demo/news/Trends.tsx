@@ -32,7 +32,7 @@ export default class NewsTrends extends Component<INewsTrendsProps, INewsTrendsS
 
     return (
       <div id="NewsTrends" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center">Trends ({trends.length})</Card.Title>
             {trends.length !== 0 &&

@@ -39,7 +39,7 @@ export default class PhonesPrefixes extends Component<IPhonesPrefixesProps, IPho
     ];
     return (
       <div id="PhonesPrefixes" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Table
               loading={loading}

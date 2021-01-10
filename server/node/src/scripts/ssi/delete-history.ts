@@ -3,8 +3,8 @@
 import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
-import { mongooseClient } from '../../database';
-import { dsFinanceStockHistoryData } from '../../models/data';
+import { mongooseClient } from '../../clients';
+import { dsFinanceStockHistoryData } from '../../data';
 
 const main = async () => {
   await mongooseClient.init();

@@ -61,7 +61,7 @@ export default class LicensePlatesList extends Component<
     ];
     return (
       <div id="LicensePlatesList" className="container">
-        <Card className="shadow mt-3 mb-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form className="mb-3 w-100">
               <Form.Control

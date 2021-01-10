@@ -9,8 +9,7 @@ import {
   IDistrict,
   IWard,
   IStationRequest,
-  IStation,
-  IPagination
+  IStation
 } from '../helper/constants';
 
 export default class Address extends Base {
@@ -21,8 +20,9 @@ export default class Address extends Base {
   public async getProvinces(): Promise<Array<IProvince> | any> {
     const endpoint: IEndpoint = apis.address.getProvinces;
     const response: IResponse = await this.fetch(endpoint);
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     const provinces = data.map(item => {
       const { ProvinceID: province_id, ProvinceName: name, Code: code } = item;
       return { province_id, name, code };
@@ -33,8 +33,9 @@ export default class Address extends Base {
   public async getDistricts(province_id: number): Promise<Array<IDistrict> | any> {
     const endpoint: IEndpoint = apis.address.getDistricts;
     const response: IResponse = await this.fetch(endpoint, { query: { province_id } });
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     const districts = data.map(item => {
       const {
         DistrictID: district_id,
@@ -52,8 +53,9 @@ export default class Address extends Base {
   public async getWards(district_id: number): Promise<Array<IWard> | any> {
     const endpoint: IEndpoint = apis.address.getWards;
     const response: IResponse = await this.fetch(endpoint, { query: { district_id } });
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     const wards = data.map(item => {
       const { DistrictID: district_id, WardName: name, WardCode: code } = item;
       return { district_id, name, code };
@@ -66,8 +68,9 @@ export default class Address extends Base {
     const { district_id = 0, ward_code = '', offset = 0, limit = 1000 } = options;
     const query = { district_id, ward_code, offset, limit };
     const response: IResponse = await this.fetch(endpoint, { query });
-    const { code = 0, message = '', data = [] } = response;
-    if (code !== 200) return { message };
+    let { code = 0, message = '', data = [] } = response;
+    if (code !== 200 || data === null) return { message };
+    data = data || [];
     const stations = data.map(item => {
       const {
         address,

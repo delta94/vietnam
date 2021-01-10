@@ -1,6 +1,6 @@
 {
   "name": "giaohangnhanh",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Giao Hang Nhanh Node API Client/Wrapper",
   "main": "./build/src/index.js",
   "types": "./build/src/index.d.ts",

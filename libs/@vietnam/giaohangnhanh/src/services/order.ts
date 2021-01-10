@@ -90,16 +90,18 @@ export default class Address extends Base {
   public async returnOrder(order_codes: Array<string>): Promise<Array<IOrderReturnResponse> | any> {
     const endpoint: IEndpoint = apis.order.returnOrder;
     const response: IResponse = await this.fetch(endpoint, { body: { order_codes } });
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     return data;
   }
 
   public async cancelOrder(order_codes: Array<string>): Promise<Array<IOrderCancelResponse> | any> {
     const endpoint: IEndpoint = apis.order.cancelOrder;
     const response: IResponse = await this.fetch(endpoint, { body: { order_codes } });
-    const { code = 0, message = '', data = [] } = response;
+    let { code = 0, message = '', data = [] } = response;
     if (code !== 200) return { message };
+    data = data || [];
     return data;
   }
 }

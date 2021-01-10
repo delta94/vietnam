@@ -6,9 +6,9 @@ dotenv.config({ path: './src/environments/dev.env' });
 import * as json2csv from 'json2csv';
 const { parse } = json2csv;
 
-import { mongooseClient } from '../../database';
+import { mongooseClient } from '../../clients';
 import { tanViet } from '../../libs';
-import { dsFinanceStockListedCompany } from '../../models/data';
+import { dsFinanceStockListedCompany } from '../../data';
 
 const main = async () => {
   await mongooseClient.init();

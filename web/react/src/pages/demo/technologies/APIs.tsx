@@ -113,7 +113,7 @@ export default class APIs extends Component<IAPIsProps, IAPIsState> {
 
     return (
       <div id="APIs" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form className="mt-3 mb-3 w-100">
               <Form.Control

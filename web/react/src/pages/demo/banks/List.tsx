@@ -88,7 +88,7 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
 
     return (
       <div id="BanksList" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center">Banks ({banks.length})</Card.Title>
             {this.renderTable(loading, banks)}

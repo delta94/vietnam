@@ -63,3 +63,9 @@ export const FinanceStockIndicator: mongoose.model = mongooseClient.modelize(
     year: { type: Number, default: 0, required: true }
   }
 );
+
+export const MapsWard: mongoose.model = mongooseClient.modelize('MapsWard', {
+  province: { type: String, default: '', required: true },
+  district: { type: String, default: '', required: true },
+  ward: { type: String, default: '', required: true }
+});

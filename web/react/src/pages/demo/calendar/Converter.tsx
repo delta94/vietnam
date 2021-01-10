@@ -86,7 +86,7 @@ export default class CalendarConverter extends Component<
 
     return (
       <div id="CalendarConverter" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Card.Title className="text-center">Calendar</Card.Title>
             <Form>

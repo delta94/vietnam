@@ -9,11 +9,11 @@ const DB_POSTGRE_PORT: number = parseInt(process.env.DB_POSTGRE_PORT, 10) || 543
 const DB_POSTGRE_DATABASE: string = process.env.DB_POSTGRE_DATABASE || '';
 const TELEGRAM_API_KEY: string = process.env.TELEGRAM_API_KEY || '';
 
-import CacheClient from './client.cache';
-import ElasticSearchClient from './client.elasticsearch';
-import MongooseClient from './client.mongoose';
-import PostgreClient from './client.postgre';
-import TelegramClient from './client.telegram';
+import CacheClient from './cache';
+import ElasticSearchClient from './elasticsearch';
+import MongooseClient from './mongoose';
+import PostgreClient from './postgre';
+import TelegramClient from './telegram';
 
 export { CacheClient };
 export const telegramClient: TelegramClient = new TelegramClient(TELEGRAM_API_KEY);

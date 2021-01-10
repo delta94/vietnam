@@ -150,7 +150,7 @@ export default class FinancePotentials extends Component<
     const { loading = false, potentials = [] } = this.state;
     return (
       <div id="FinancePotentials" className="container">
-        <Card className="shadow mt-3">
+        <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form>
               <Form.Group>

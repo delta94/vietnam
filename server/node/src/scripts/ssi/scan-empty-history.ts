@@ -4,7 +4,7 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: './src/environments/dev.env' });
 
 import { mongooseClient } from '../../clients';
-import { dsFinanceStockListedCompany, dsFinanceStockHistoryData } from '../../models/data';
+import { dsFinanceStockListedCompany, dsFinanceStockHistoryData } from '../../data';
 import { ssi } from '../../libs';
 
 const getHistory = async (symbol: string) => {
