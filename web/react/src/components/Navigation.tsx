@@ -40,9 +40,9 @@ export default class Navigation extends Component<INavigationProps, INavigationS
                   {routes
                     .filter(route => route.navigation)
                     .map((route, index) => {
-                      const { path, text } = route;
+                      const { path: pathname, text } = route;
                       return (
-                        <Dropdown.Item key={index} href={'#' + path}>
+                        <Dropdown.Item key={index} as={Link} to={{ pathname }}>
                           {text}
                         </Dropdown.Item>
                       );

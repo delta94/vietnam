@@ -137,7 +137,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
     const { header, group } = this.props;
     const list = Object.values(endpoints[group]);
     return (
-      <div id="Doc" className="mt-3">
+      <div id="Doc">
         <h2 className="mb-3">
           <b>{header}</b>
         </h2>

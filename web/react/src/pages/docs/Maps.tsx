@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import { Doc } from '../../components';
+import { SmallDoc } from '../../components';
 
 export default class Maps extends Component {
   render() {
     return (
       <div id="Maps" className="container">
-        <Doc group={'maps'} header={'Maps'}></Doc>
+        <SmallDoc group={'maps'} header={'Maps'}></SmallDoc>
       </div>
     );
   }

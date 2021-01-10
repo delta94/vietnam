@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 
-import { Doc } from '../../components';
+import { SmallDoc } from '../../components';
 
 export default class Government extends Component {
   render() {
     return (
       <div id="Government" className="container">
-        <Doc group={'government'} header={'Government'}></Doc>
+        <SmallDoc group={'government'} header={'Government'}></SmallDoc>
       </div>
     );
   }

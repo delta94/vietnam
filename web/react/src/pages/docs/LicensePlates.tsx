@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 
-import { Doc } from '../../components';
+import { SmallDoc } from '../../components';
 
-interface ILicensePlatesProps {}
-
-interface ILicensePlatesState {}
-
-export default class LicensePlates extends Component<ILicensePlatesProps, ILicensePlatesState> {
+export default class LicensePlates extends Component {
   render() {
     return (
       <div id="LicensePlates" className="container">
-        <Doc group={'licensePlates'} header={'License Plates'}></Doc>
+        <SmallDoc group={'licensePlates'} header={'License Plates'}></SmallDoc>
       </div>
     );
   }
