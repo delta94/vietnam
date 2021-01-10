@@ -23,7 +23,7 @@ export default class Home extends Component<IHomeProps, IHomeState> {
       },
       {
         name: 'calendar',
-        npm: 'vnapis#lunar-calendar',
+        npm: 'vnapis#calendar',
         docs: '/calendar'
       },
       {
