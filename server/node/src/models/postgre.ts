@@ -83,7 +83,9 @@ export const MapsWardSchema = {
   level: { type: 'text', required: true },
   level_en: { type: 'text', required: true },
   district: { type: 'text', required: true },
-  province: { type: 'text', required: true }
+  district_id: { type: 'text', required: true },
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
 };
 
 export const NationalAssemblyMemberSchema = {

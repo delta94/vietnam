@@ -204,11 +204,11 @@ export const endpoints: IEndpoints = {
             { name: 'name', type: 'string', description: '' },
             { name: 'url', type: 'string', description: '' }
           ],
-          example: {}
+          example: [{ id: '<string>', name: '<string>', url: '<string>' }]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -230,11 +230,14 @@ export const endpoints: IEndpoints = {
             { name: 'currencies', type: 'Array<string>', description: '' },
             { name: 'data', type: 'Array<Rates>', description: '' }
           ],
-          example: {}
+          example: {
+            currencies: '<Array<string>>',
+            data: '<Array<any>>'
+          }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -251,10 +254,13 @@ export const endpoints: IEndpoints = {
         body: [{ name: 'id', required: true, type: 'string', description: '' }]
       },
       response: {
-        200: { schema: [{ name: 'status', type: 'string', description: '' }], example: {} },
+        200: {
+          schema: [{ name: 'status', type: 'string', description: '' }],
+          example: { status: '<string>' }
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -283,11 +289,11 @@ export const endpoints: IEndpoints = {
             { name: 'month', type: 'number', description: '' },
             { name: 'date', type: 'number', description: '' }
           ],
-          example: {}
+          example: { year: '<number>', month: '<number>', date: '<number>' }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -314,11 +320,11 @@ export const endpoints: IEndpoints = {
             { name: 'month', type: 'number', description: '' },
             { name: 'date', type: 'number', description: '' }
           ],
-          example: {}
+          example: { year: '<number>', month: '<number>', date: '<number>' }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -339,10 +345,13 @@ export const endpoints: IEndpoints = {
         ]
       },
       response: {
-        200: { schema: [{ name: 'canChi', type: 'string', description: '' }], example: {} },
+        200: {
+          schema: [{ name: 'canChi', type: 'string', description: '' }],
+          example: { canChi: '<string>' }
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -367,11 +376,11 @@ export const endpoints: IEndpoints = {
             { name: 'type', type: 'string', description: '' },
             { name: 'type_en', type: 'string', description: '' }
           ],
-          example: {}
+          example: [{ name: 'Kinh', type: 'Việt - Mường', type_en: 'Vietic' }]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -402,11 +411,23 @@ export const endpoints: IEndpoints = {
             { name: 'subsector', type: 'string', description: '' },
             { name: 'listingDate', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              market: '<string>',
+              group: '<string>',
+              symbol: '<string>',
+              name: '<string>',
+              industry: '<string>',
+              supersector: '<string>',
+              sector: '<string>',
+              subsector: '<string>',
+              listingDate: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -436,11 +457,18 @@ export const endpoints: IEndpoints = {
             { name: 'subsector', type: 'string', description: '' },
             { name: 'history', type: 'Array<Date>', description: '' }
           ],
-          example: {}
+          example: {
+            symbol: '<string>',
+            name: '<string>',
+            group: '<string>',
+            industry: '<string>',
+            subsector: '<string>',
+            history: '<Array<any>>'
+          }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -460,10 +488,57 @@ export const endpoints: IEndpoints = {
         ]
       },
       response: {
-        200: { schema: [], example: {} },
+        200: {
+          schema: [
+            { name: 'average', type: 'number', description: '' },
+            { name: 'diff', type: 'number', description: '' },
+            { name: 'diffToMax', type: 'number', description: '' },
+            { name: 'diffToMin', type: 'number', description: '' },
+            { name: 'group', type: 'string', description: '' },
+            { name: 'industry', type: 'string', description: '' },
+            { name: 'latest', type: 'number', description: '' },
+            { name: 'latestDate', type: 'string', description: '' },
+            { name: 'low', type: 'boolean', description: '' },
+            { name: 'max', type: 'number', description: '' },
+            { name: 'maxDate', type: 'string', description: '' },
+            { name: 'median', type: 'number', description: '' },
+            { name: 'min', type: 'number', description: '' },
+            { name: 'minDate', type: 'string', description: '' },
+            { name: 'name', type: 'string', description: '' },
+            { name: 'numberOfDates', type: 'number', description: '' },
+            { name: 'start', type: 'number', description: '' },
+            { name: 'startDate', type: 'string', description: '' },
+            { name: 'subsector', type: 'string', description: '' },
+            { name: 'symbol', type: 'string', description: '' }
+          ],
+          example: [
+            {
+              average: '<number>',
+              diff: '<number>',
+              diffToMax: '<number>',
+              diffToMin: '<number>',
+              group: '<string>',
+              industry: '<string>',
+              latest: '<number>',
+              latestDate: '<string>',
+              low: '<boolean>',
+              max: '<number>',
+              maxDate: '<string>',
+              median: '<number>',
+              min: '<number>',
+              minDate: '<string>',
+              name: '<string>',
+              numberOfDates: '<number>',
+              start: '<number>',
+              startDate: '<string>',
+              subsector: '<string>',
+              symbol: '<string>'
+            }
+          ]
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -483,10 +558,57 @@ export const endpoints: IEndpoints = {
         ]
       },
       response: {
-        200: { schema: [], example: {} },
+        200: {
+          schema: [
+            { name: 'average', type: 'number', description: '' },
+            { name: 'diff', type: 'number', description: '' },
+            { name: 'diffToMax', type: 'number', description: '' },
+            { name: 'diffToMin', type: 'number', description: '' },
+            { name: 'group', type: 'string', description: '' },
+            { name: 'industry', type: 'string', description: '' },
+            { name: 'latest', type: 'number', description: '' },
+            { name: 'latestDate', type: 'string', description: '' },
+            { name: 'low', type: 'boolean', description: '' },
+            { name: 'max', type: 'number', description: '' },
+            { name: 'maxDate', type: 'string', description: '' },
+            { name: 'median', type: 'number', description: '' },
+            { name: 'min', type: 'number', description: '' },
+            { name: 'minDate', type: 'string', description: '' },
+            { name: 'name', type: 'string', description: '' },
+            { name: 'numberOfDates', type: 'number', description: '' },
+            { name: 'start', type: 'number', description: '' },
+            { name: 'startDate', type: 'string', description: '' },
+            { name: 'subsector', type: 'string', description: '' },
+            { name: 'symbol', type: 'string', description: '' }
+          ],
+          example: [
+            {
+              average: '<number>',
+              diff: '<number>',
+              diffToMax: '<number>',
+              diffToMin: '<number>',
+              group: '<string>',
+              industry: '<string>',
+              latest: '<number>',
+              latestDate: '<string>',
+              low: '<boolean>',
+              max: '<number>',
+              maxDate: '<string>',
+              median: '<number>',
+              min: '<number>',
+              minDate: '<string>',
+              name: '<string>',
+              numberOfDates: '<number>',
+              start: '<number>',
+              startDate: '<string>',
+              subsector: '<string>',
+              symbol: '<string>'
+            }
+          ]
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -507,10 +629,13 @@ export const endpoints: IEndpoints = {
         ]
       },
       response: {
-        200: { schema: [{ name: 'profit', type: 'number', description: '' }], example: {} },
+        200: {
+          schema: [{ name: 'profit', type: 'number', description: '' }],
+          example: { profit: '<number>' }
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -532,7 +657,7 @@ export const endpoints: IEndpoints = {
         200: {
           schema: [
             { name: 'title', type: 'string', description: '' },
-            { name: 'title_en', type: 'number', description: '' },
+            { name: 'title_en', type: 'string', description: '' },
             { name: 'title_short', type: 'string', description: '' },
             { name: 'name', type: 'string', description: '' },
             { name: 'gender', type: 'string', description: '' },
@@ -540,11 +665,22 @@ export const endpoints: IEndpoints = {
             { name: 'start_date', type: 'string', description: '' },
             { name: 'end_date', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              title_en: '<string>',
+              title_short: '<string>',
+              name: '<string>',
+              gender: '<string>',
+              gender_en: '<string>',
+              start_date: '<string>',
+              end_date: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -572,11 +708,22 @@ export const endpoints: IEndpoints = {
             { name: 'start_date', type: 'string', description: '' },
             { name: 'end_date', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              title_en: '<string>',
+              title_short: '<string>',
+              name: '<string>',
+              gender: '<string>',
+              gender_en: '<string>',
+              start_date: '<string>',
+              end_date: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -604,11 +751,22 @@ export const endpoints: IEndpoints = {
             { name: 'start_date', type: 'string', description: '' },
             { name: 'end_date', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              title_en: '<string>',
+              title_short: '<string>',
+              name: '<string>',
+              gender: '<string>',
+              gender_en: '<string>',
+              start_date: '<string>',
+              end_date: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -636,11 +794,22 @@ export const endpoints: IEndpoints = {
             { name: 'start_date', type: 'string', description: '' },
             { name: 'end_date', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              title_en: '<string>',
+              title_short: '<string>',
+              name: '<string>',
+              gender: '<string>',
+              gender_en: '<string>',
+              start_date: '<string>',
+              end_date: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -669,11 +838,23 @@ export const endpoints: IEndpoints = {
             { name: 'district', type: 'string', description: '' },
             { name: 'percentage', type: 'number', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              no: '<number>',
+              name: '<string>',
+              date_of_birth: '<string>',
+              city_of_birth: '<string>',
+              gender: '<string>',
+              degree: '<string>',
+              province: '<string>',
+              district: '<string>',
+              percentage: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -698,11 +879,19 @@ export const endpoints: IEndpoints = {
             { name: 'level', type: 'string', description: '' },
             { name: 'level_en', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              short: '<string>',
+              name: '<string>',
+              name_en: '<string>',
+              level: '<string>',
+              level_en: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -730,11 +919,22 @@ export const endpoints: IEndpoints = {
             { name: 'start_date', type: 'string', description: '' },
             { name: 'end_date', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              title_en: '<string>',
+              title_short: '<string>',
+              name: '<string>',
+              gender: '<string>',
+              gender_en: '<string>',
+              start_date: '<string>',
+              end_date: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -759,11 +959,11 @@ export const endpoints: IEndpoints = {
             { name: 'definition', type: 'string', description: '' },
             { name: 'type', type: 'string', description: '' }
           ],
-          example: {}
+          example: [{ license: '29', definition: 'Hà Nội', type: 'Tỉnh' }]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -784,16 +984,21 @@ export const endpoints: IEndpoints = {
       response: {
         200: {
           schema: [
-            { name: 'id', type: 'number', description: '' },
             { name: 'code', type: 'string', description: '' },
             { name: 'province', type: 'string', description: '' },
             { name: 'province_id', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              code: '<string>',
+              province: '<string>',
+              province_id: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -815,7 +1020,6 @@ export const endpoints: IEndpoints = {
       response: {
         200: {
           schema: [
-            { name: 'id', type: 'number', description: '' },
             { name: 'province_id', type: 'string', description: '' },
             { name: 'name', type: 'string', description: '' },
             { name: 'capital', type: 'string', description: '' },
@@ -826,11 +1030,23 @@ export const endpoints: IEndpoints = {
             { name: 'region', type: 'string', description: '' },
             { name: 'region_en', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              province_id: '<string>',
+              name: '<string>',
+              capital: '<string>',
+              level: '<string>',
+              level_en: '<string>',
+              macro_region: '<string>',
+              macro_region_en: '<string>',
+              region: '<string>',
+              region_en: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -849,18 +1065,25 @@ export const endpoints: IEndpoints = {
       response: {
         200: {
           schema: [
-            { name: 'id', type: 'number', description: '' },
             { name: 'name', type: 'string', description: '' },
             { name: 'level', type: 'string', description: '' },
             { name: 'level_en', type: 'string', description: '' },
             { name: 'province', type: 'string', description: '' },
             { name: 'province_id', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              name: '<string>',
+              level: '<string>',
+              level_en: '<string>',
+              province: '<string>',
+              province_id: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -877,10 +1100,31 @@ export const endpoints: IEndpoints = {
         body: []
       },
       response: {
-        200: { schema: [], example: {} },
+        200: {
+          schema: [
+            { name: 'name', type: 'string', description: '' },
+            { name: 'level', type: 'string', description: '' },
+            { name: 'level_en', type: 'string', description: '' },
+            { name: 'district', type: 'string', description: '' },
+            { name: 'district_id', type: 'string', description: '' },
+            { name: 'province', type: 'string', description: '' },
+            { name: 'province_id', type: 'string', description: '' }
+          ],
+          example: [
+            {
+              name: '<string>',
+              level: '<string>',
+              level_en: '<string>',
+              district: '<string>',
+              district_id: '<string>',
+              province: '<string>',
+              province_id: '<string>'
+            }
+          ]
+        },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -909,7 +1153,7 @@ export const endpoints: IEndpoints = {
             { name: 'source', type: 'string', description: '' },
             { name: 'description', type: 'string', description: '' },
             { name: 'pubDate', type: 'string', description: '' },
-            { name: 'date', type: 'string', description: '' },
+            { name: 'day', type: 'string', description: '' },
             { name: 'year', type: 'number', description: '' },
             { name: 'month', type: 'number', description: '' },
             { name: 'date', type: 'number', description: '' },
@@ -919,11 +1163,28 @@ export const endpoints: IEndpoints = {
             { name: 'timestamp', type: 'number', description: '' },
             { name: 'dateTimeString', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              url: '<string>',
+              source: '<string>',
+              description: '<string>',
+              pubDate: '<string>',
+              day: '<string>',
+              year: '<number>',
+              month: '<number>',
+              date: '<number>',
+              hours: '<number>',
+              minutes: '<number>',
+              seconds: '<number>',
+              timestamp: '<number>',
+              dateTimeString: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -948,11 +1209,17 @@ export const endpoints: IEndpoints = {
             { name: 'hour', type: 'number', description: '' },
             { name: 'trends', type: 'Array<string>', description: '' }
           ],
-          example: {}
+          example: {
+            year: '<number>',
+            month: '<number>',
+            date: '<number>',
+            hour: '<number>',
+            categories: '<Array<string>>'
+          }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -977,11 +1244,19 @@ export const endpoints: IEndpoints = {
             { name: 'category', type: 'string', description: '' },
             { name: 'categories', type: 'Array<string>', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              id: '<string>',
+              name: '<string>',
+              url: '<string>',
+              category: '<string>',
+              categories: '<Array<string>>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -999,12 +1274,18 @@ export const endpoints: IEndpoints = {
       },
       response: {
         200: {
-          schema: [],
-          example: {}
+          schema: [
+            { name: 'total', type: 'number', description: '' },
+            { name: 'categories', type: 'Array<string>', description: '' }
+          ],
+          example: {
+            total: '<number>',
+            categories: '<Array<string>>'
+          }
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -1030,11 +1311,18 @@ export const endpoints: IEndpoints = {
             { name: 'provider', type: 'string', description: '' },
             { name: 'provider_id', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              id: '<string>',
+              prefix: '<string>',
+              provider: '<string>',
+              provider_id: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -1056,11 +1344,16 @@ export const endpoints: IEndpoints = {
             { name: 'provider', type: 'string', description: '' },
             { name: 'prefixes', type: 'Array<string>', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              provider: '<string>',
+              prefixes: '<Array<string>>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -1087,11 +1380,19 @@ export const endpoints: IEndpoints = {
             { name: 'city', type: 'string', description: '' },
             { name: 'name', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              sport: '<string>',
+              sport_en: '<string>',
+              competition: '<string>',
+              city: '<string>',
+              name: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }
@@ -1112,18 +1413,25 @@ export const endpoints: IEndpoints = {
       response: {
         200: {
           schema: [
-            { name: 'id', type: 'number', description: '' },
             { name: 'name', type: 'string', description: '' },
             { name: 'type', type: 'string', description: '' },
             { name: 'type_id', type: 'string', description: '' },
             { name: 'url', type: 'string', description: '' },
             { name: 'npm', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              name: '<string>',
+              type: '<string>',
+              type_id: '<string>',
+              url: '<string>',
+              npm: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -1146,11 +1454,17 @@ export const endpoints: IEndpoints = {
             { name: 'name', type: 'string', description: '' },
             { name: 'code', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              province_id: '<string>',
+              name: '<string>',
+              code: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     },
@@ -1174,11 +1488,18 @@ export const endpoints: IEndpoints = {
             { name: 'publishDate', type: 'string', description: '' },
             { name: 'description', type: 'string', description: '' }
           ],
-          example: {}
+          example: [
+            {
+              title: '<string>',
+              url: '<string>',
+              publishDate: '<string>',
+              description: '<string>'
+            }
+          ]
         },
         400: {
           schema: [{ name: 'message', type: 'string', description: '' }],
-          example: { message: 'string' }
+          example: { message: '<string>' }
         }
       }
     }

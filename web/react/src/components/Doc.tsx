@@ -26,6 +26,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
     this.renderAPIs = this.renderAPIs.bind(this);
     this.renderRequest = this.renderRequest.bind(this);
     this.renderResponses = this.renderResponses.bind(this);
+    this.buildResponseExample = this.buildResponseExample.bind(this);
   }
 
   renderRequest(request: any, method: string, path: string) {
@@ -57,10 +58,15 @@ export default class Doc extends Component<IDocProps, IDocState> {
           </div>
         )}
         <div className="mb-5">
+          <p>Request Example</p>
           <CURL method={method} path={path} headers={headers} body={body} query={query}></CURL>
         </div>
       </div>
     );
+  }
+
+  buildResponseExample(example: any = {}): string {
+    return JSON.stringify(example, null, 2).replace(/"</g, '<').replace(/>"/g, '>');
   }
 
   renderResponses(response: any) {
@@ -76,11 +82,17 @@ export default class Doc extends Component<IDocProps, IDocState> {
         {responseCodes.length > 0 && (
           <Tabs defaultActiveKey="200" id="responses-tabs">
             {responseCodes.map((code, index) => {
-              const { schema } = response[code] || {};
+              const { schema, example } = response[code] || {};
               return (
                 <Tab key={index} eventKey={code} title={code} className="border-0">
                   <div className="mt-1">
-                    <Table loading={false} rows={schema} rowConfigs={responseRowConfigs}></Table>
+                    <div className="mb-3">
+                      <Table loading={false} rows={schema} rowConfigs={responseRowConfigs}></Table>
+                    </div>
+                    <p>Response Example</p>
+                    <div className="p-3 bg-dark text-white rounded-lg">
+                      <pre className="m-0 text-yellow">{this.buildResponseExample(example)}</pre>
+                    </div>
                   </div>
                 </Tab>
               );

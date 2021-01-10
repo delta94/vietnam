@@ -85,7 +85,8 @@ export default class APIS {
 
   public async getCategories() {
     const endpoint: IEndpoint = endpoints.news.getCategories;
-    return await this.fetch(endpoint);
+    const { categories = [] } = await this.fetch(endpoint);
+    return categories;
   }
 
   public async getArticles(options: any = {}) {
