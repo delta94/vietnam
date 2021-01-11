@@ -20,6 +20,7 @@ import Docs from './docs/Docs';
 import EthnicMinorities from './docs/EthnicMinorities';
 import Finance from './docs/Finance';
 import Government from './docs/Government';
+import History from './docs/History';
 import LicensePlates from './docs/LicensePlates';
 import Music from './docs/Music';
 import News from './docs/News';
@@ -108,6 +109,8 @@ export {
   GovernmentNationalAssemblyMembers,
   GovernmentPresidents,
   GovernmentPrimeMinisters,
+  // History
+  History,
   Home,
   // License Plates
   LicensePlates,

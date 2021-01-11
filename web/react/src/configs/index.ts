@@ -68,6 +68,7 @@ export interface IEndpoints {
   ethnicMinorities: IEthnicMinoritiesEndpoints;
   finance: IFinanceEndpoints;
   government: IGovernmentEndpoints;
+  history: IHistoryEndpoints;
   licensePlates: ILicensePlatesEndpoints;
   music: IMusicEndpoints;
   news: INewsEndpoints;
@@ -113,6 +114,9 @@ interface IGovernmentEndpoints {
   getMinistries: IEndpoint;
   getMinisters: IEndpoint;
 }
+
+interface IHistoryEndpoints {}
+
 interface ILicensePlatesEndpoints {
   getLicensePlates: IEndpoint;
 }
@@ -1154,6 +1158,7 @@ export const endpoints: IEndpoints = {
       }
     }
   },
+  history: {},
   licensePlates: {
     getLicensePlates: {
       id: 'getLicensePlates',

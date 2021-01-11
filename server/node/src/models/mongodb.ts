@@ -69,3 +69,8 @@ export const MapsWard: mongoose.model = mongooseClient.modelize('MapsWard', {
   district: { type: String, default: '', required: true },
   ward: { type: String, default: '', required: true }
 });
+
+export const User: mongoose.model = mongooseClient.modelize('User', {
+  email: { type: String, default: '', required: true, unique: true, index: true },
+  password: { type: String, default: '', required: true }
+});

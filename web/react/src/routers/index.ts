@@ -34,6 +34,8 @@ import {
   GovernmentMinisters,
   GovernmentNationalAssemblyChairs,
   GovernmentNationalAssemblyMembers,
+  // History
+  History,
   Home,
   // LicensePlates
   LicensePlates,
@@ -187,6 +189,12 @@ const routes = [
     path: 'finance-profit',
     text: 'Finance Profit',
     component: FinanceProfit,
+    navigation: false
+  },
+  {
+    path: 'history',
+    text: 'History',
+    component: History,
     navigation: false
   },
   {
