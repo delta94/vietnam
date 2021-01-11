@@ -5,8 +5,8 @@ import { SmallDoc } from '../../components';
 export default class Maps extends Component {
   render() {
     return (
-      <div id="Maps" className="container">
-        <SmallDoc group={'maps'} header={'Maps'}></SmallDoc>
+      <div id="AdministrativeDivisions" className="container">
+        <SmallDoc group={'administrativeDivisions'} header={'Administrative Divisions'}></SmallDoc>
       </div>
     );
   }

@@ -14,7 +14,7 @@ const calendar: Array<IRoute> = [
       { name: 'date', required: true, type: 'number' }
     ],
     path: `${prefix}/solar2lunar`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: `POST`,
@@ -25,10 +25,10 @@ const calendar: Array<IRoute> = [
       { name: 'date', required: true, type: 'number' }
     ],
     path: `${prefix}/lunar2solar`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: `GET`, query: [], body: [], path: `${prefix}/lunar/can`, middlewares: ['track-ip'] },
-  { method: `GET`, query: [], body: [], path: `${prefix}/lunar/chi`, middlewares: ['track-ip'] },
+  { method: `GET`, query: [], body: [], path: `${prefix}/lunar/can`, middlewares: [] },
+  { method: `GET`, query: [], body: [], path: `${prefix}/lunar/chi`, middlewares: [] },
   {
     method: `POST`,
     query: [],
@@ -38,7 +38,7 @@ const calendar: Array<IRoute> = [
       { name: 'date', required: true, type: 'number' }
     ],
     path: `${prefix}/lunar/can-chi`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 

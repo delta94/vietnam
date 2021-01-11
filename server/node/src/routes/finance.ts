@@ -5,8 +5,8 @@ import { IRoute } from '../global/interfaces';
 const prefix: string = 'finance';
 
 const finance: Array<IRoute> = [
-  { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: ['track-ip'] },
-  { method: 'GET', query: [], body: [], path: `${prefix}/companies`, middlewares: ['track-ip'] },
+  { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: [] },
+  { method: 'GET', query: [], body: [], path: `${prefix}/companies`, middlewares: [] },
   {
     method: 'GET',
     query: [
@@ -16,9 +16,9 @@ const finance: Array<IRoute> = [
     ],
     body: [],
     path: `${prefix}/history`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: 'GET', query: [], body: [], path: `${prefix}/top`, middlewares: ['track-ip'] },
+  { method: 'GET', query: [], body: [], path: `${prefix}/top`, middlewares: [] },
   {
     method: 'POST',
     query: [],
@@ -27,7 +27,7 @@ const finance: Array<IRoute> = [
       { name: 'to', type: 'number', required: true }
     ],
     path: `${prefix}/highlights`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: 'POST',
@@ -37,7 +37,7 @@ const finance: Array<IRoute> = [
       { name: 'to', type: 'number', required: true }
     ],
     path: `${prefix}/potentials`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: 'POST',
@@ -48,7 +48,7 @@ const finance: Array<IRoute> = [
       { name: 'volume', type: 'number', required: true }
     ],
     path: `${prefix}/profit`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 

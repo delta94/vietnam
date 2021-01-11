@@ -10,44 +10,44 @@ const government: Array<IRoute> = [
     query: [{ name: 'level_en', type: 'string', required: false }],
     body: [],
     path: `${prefix}/ministries`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: `GET`,
     query: [{ name: 'ministry', type: 'string', required: true }],
     body: [],
     path: `${prefix}/ministers`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: `GET`, query: [], body: [], path: `${prefix}/incumbents`, middlewares: ['track-ip'] },
+  { method: `GET`, query: [], body: [], path: `${prefix}/incumbents`, middlewares: [] },
   {
     method: `GET`,
     query: [],
     body: [],
     path: `${prefix}/general-secretaries`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: `GET`, query: [], body: [], path: `${prefix}/presidents`, middlewares: ['track-ip'] },
+  { method: `GET`, query: [], body: [], path: `${prefix}/presidents`, middlewares: [] },
   {
     method: `GET`,
     query: [],
     body: [],
     path: `${prefix}/prime-ministers`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: `GET`,
     query: [],
     body: [],
     path: `${prefix}/national-assembly/chairs`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: `GET`,
     query: [{ name: 'no', type: 'number', required: true }],
     body: [],
     path: `${prefix}/national-assembly/members`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 

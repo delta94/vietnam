@@ -1,4 +1,10 @@
 import {
+  // Administrative Divisions
+  AdministrativeDivisions,
+  AdministrativeDivisionsPostalCodes,
+  AdministrativeDivisionsProvinces,
+  AdministrativeDivisionsDistricts,
+  AdministrativeDivisionsWards,
   // Banks
   Banks,
   BanksForex,
@@ -32,12 +38,9 @@ import {
   // LicensePlates
   LicensePlates,
   LicensePlatesList,
-  // Maps
-  Maps,
-  MapsPostalCodes,
-  MapsProvinces,
-  MapsDistricts,
-  MapsWards,
+  // Music
+  Music,
+  MusicArtists,
   // News
   News,
   NewsFeed,
@@ -64,6 +67,36 @@ const routes = [
     path: '',
     text: '',
     component: Home,
+    navigation: false
+  },
+  {
+    path: 'administrative-divisions',
+    text: 'Administrative Divisions',
+    component: AdministrativeDivisions,
+    navigation: true
+  },
+  {
+    path: 'administrative-divisions-postal-codes',
+    text: 'Administrative Divisions Postal Codes',
+    component: AdministrativeDivisionsPostalCodes,
+    navigation: false
+  },
+  {
+    path: 'administrative-divisions-provinces',
+    text: 'Administrative Divisions Provinces',
+    component: AdministrativeDivisionsProvinces,
+    navigation: false
+  },
+  {
+    path: 'administrative-divisions-districts',
+    text: 'Administrative Divisions Districts',
+    component: AdministrativeDivisionsDistricts,
+    navigation: false
+  },
+  {
+    path: 'administrative-divisions-wards',
+    text: 'Administrative Divisions Wards',
+    component: AdministrativeDivisionsWards,
     navigation: false
   },
   {
@@ -217,33 +250,15 @@ const routes = [
     navigation: false
   },
   {
-    path: 'maps',
-    text: 'Maps',
-    component: Maps,
+    path: 'music',
+    text: 'Music',
+    component: Music,
     navigation: true
   },
   {
-    path: 'maps-postal-codes',
-    text: 'Maps Postal Codes',
-    component: MapsPostalCodes,
-    navigation: false
-  },
-  {
-    path: 'maps-provinces',
-    text: 'Maps Provinces',
-    component: MapsProvinces,
-    navigation: false
-  },
-  {
-    path: 'maps-districts',
-    text: 'Maps Districts',
-    component: MapsDistricts,
-    navigation: false
-  },
-  {
-    path: 'maps-wards',
-    text: 'Maps Wards',
-    component: MapsWards,
+    path: 'music-artists',
+    text: 'Music Artists',
+    component: MusicArtists,
     navigation: false
   },
   {

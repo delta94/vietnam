@@ -10,7 +10,7 @@ const licensePlates: Array<IRoute> = [
     query: [{ name: 'license', type: 'string', required: false }],
     body: [],
     path: `${prefix}`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 

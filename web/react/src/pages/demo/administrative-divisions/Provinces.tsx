@@ -17,16 +17,16 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
 
     this.state = { provinces: [], loading: true };
 
-    this.getMapsProvinces = this.getMapsProvinces.bind(this);
+    this.getProvinces = this.getProvinces.bind(this);
   }
 
   async componentDidMount() {
-    await this.getMapsProvinces();
+    await this.getProvinces();
   }
 
-  async getMapsProvinces() {
+  async getProvinces() {
     this.setState({ loading: true });
-    const provinces = await apis.getMapsProvinces();
+    const provinces = await apis.getProvinces();
     this.setState({ provinces, loading: false });
   }
 

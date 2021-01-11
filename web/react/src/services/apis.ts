@@ -143,23 +143,23 @@ export default class APIS {
     return status;
   }
 
-  public async getMapsPostalCodes() {
-    const endpoint: IEndpoint = endpoints.maps.getMapsPostalCodes;
+  public async getPostalCodes() {
+    const endpoint: IEndpoint = endpoints.administrativeDivisions.getPostalCodes;
     return await this.fetch(endpoint);
   }
 
-  public async getMapsProvinces() {
-    const endpoint: IEndpoint = endpoints.maps.getMapsProvinces;
+  public async getProvinces() {
+    const endpoint: IEndpoint = endpoints.administrativeDivisions.getProvinces;
     return await this.fetch(endpoint);
   }
 
-  public async getMapsDistricts(province_id: string) {
-    const endpoint: IEndpoint = endpoints.maps.getMapsDistricts;
+  public async getDistricts(province_id: string) {
+    const endpoint: IEndpoint = endpoints.administrativeDivisions.getDistricts;
     return await this.fetch(endpoint, { query: { province_id }, body: {} });
   }
 
-  public async getMapsWards() {
-    const endpoint: IEndpoint = endpoints.maps.getMapsWards;
+  public async getWards() {
+    const endpoint: IEndpoint = endpoints.administrativeDivisions.getWards;
     return await this.fetch(endpoint);
   }
 
@@ -227,6 +227,11 @@ export default class APIS {
 
   public async getGHNWards() {
     const endpoint: IEndpoint = endpoints.technologies.getGHNWards;
+    return await this.fetch(endpoint);
+  }
+
+  public async getMusicArtists() {
+    const endpoint: IEndpoint = endpoints.music.getMusicArtists;
     return await this.fetch(endpoint);
   }
 }

@@ -56,13 +56,13 @@ export interface ILicensePlate {
   type: string;
 }
 
-export interface IMapsPostalCode {
+export interface IAdministrativeDivisionsPostalCode {
   id: number;
   code: string;
   province: string;
 }
 
-export interface IMapsProvince {
+export interface IAdministrativeDivisionsProvince {
   id: number;
   name: string;
   capital: string;
@@ -74,7 +74,7 @@ export interface IMapsProvince {
   region_en: string;
 }
 
-export interface IMapsDistrict {
+export interface IAdministrativeDivisionsDistrict {
   id: number;
   name: string;
   level: string;
@@ -82,7 +82,7 @@ export interface IMapsDistrict {
   province: string;
 }
 
-export interface IMapsWard {
+export interface IAdministrativeDivisionsWard {
   id: number;
   name: string;
   level: string;
@@ -119,4 +119,8 @@ export interface IPhonesPrefix {
   prefix: string;
   provider: string;
   provider_id: string;
+}
+
+export interface IMusicArtist {
+  name: string;
 }

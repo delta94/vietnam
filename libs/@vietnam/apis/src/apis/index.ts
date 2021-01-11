@@ -1,24 +1,26 @@
 'use strict';
 
+import AdministrativeDivisions from './administrative-divisions';
 import Banks from './banks';
 import Calendar from './calendar';
 import EthnicMinorities from './ethnic-minorities';
 import Finance from './finance';
 import Government from './government';
 import LicensePlates from './license-plates';
-import Maps from './maps';
+import Music from './music';
 import Phones from './phones';
 import Sports from './sports';
 import VNLTK from './vnltk';
 
 export {
+  AdministrativeDivisions,
   Banks,
   Calendar,
   EthnicMinorities,
   Finance,
   Government,
   LicensePlates,
-  Maps,
+  Music,
   Phones,
   Sports,
   VNLTK

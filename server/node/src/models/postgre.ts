@@ -48,14 +48,14 @@ export const LicensePlateShema = {
   type: { type: 'text', required: true }
 };
 
-export const MapsPostalCodeShema = {
+export const AdministrativeDivisionsPostalCodeShema = {
   id: { type: 'int', primary: true, required: true },
   code: { type: 'text', required: true },
   province: { type: 'text', required: true },
   province_id: { type: 'text', required: true }
 };
 
-export const MapsProvinceShema = {
+export const AdministrativeDivisionsProvinceShema = {
   id: { type: 'int', primary: true, required: true },
   province_id: { type: 'text', required: true },
   name: { type: 'text', required: true },
@@ -68,7 +68,7 @@ export const MapsProvinceShema = {
   region_en: { type: 'text', required: true }
 };
 
-export const MapsDistrictSchema = {
+export const AdministrativeDivisionsDistrictSchema = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true },
   level: { type: 'text', required: true },
@@ -77,7 +77,7 @@ export const MapsDistrictSchema = {
   province_id: { type: 'text', required: true }
 };
 
-export const MapsWardSchema = {
+export const AdministrativeDivisionsWardSchema = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true },
   level: { type: 'text', required: true },
@@ -86,6 +86,11 @@ export const MapsWardSchema = {
   district_id: { type: 'text', required: true },
   province: { type: 'text', required: true },
   province_id: { type: 'text', required: true }
+};
+
+export const MusicArtists = {
+  id: { type: 'int', primary: true, required: true },
+  name: { type: 'text', required: true }
 };
 
 export const NationalAssemblyMemberSchema = {
@@ -133,10 +138,23 @@ export const tables = {
   governmentMinistries: { name: 'government_ministries', schema: GovernmentMinistryShema },
   governmentOfficials: { name: 'government_officials', schema: GovernmentOfficialShema },
   licensePlates: { name: 'license_plates', schema: LicensePlateShema },
-  mapsPostalCodes: { name: 'maps_postal_codes', schema: MapsPostalCodeShema },
-  mapsProvinces: { name: 'maps_provinces', schema: MapsProvinceShema },
-  mapsDistricts: { name: 'maps_districts', schema: MapsDistrictSchema },
-  mapsWards: { name: 'maps_wards', schema: MapsWardSchema },
+  administrativeDivisionsPostalCodes: {
+    name: 'administrative_divisions_postal_codes',
+    schema: AdministrativeDivisionsPostalCodeShema
+  },
+  administrativeDivisionsProvinces: {
+    name: 'administrative_divisions_provinces',
+    schema: AdministrativeDivisionsProvinceShema
+  },
+  administrativeDivisionsDistricts: {
+    name: 'administrative_divisions_districts',
+    schema: AdministrativeDivisionsDistrictSchema
+  },
+  administrativeDivisionsWards: {
+    name: 'administrative_divisions_wards',
+    schema: AdministrativeDivisionsWardSchema
+  },
+  musicArtists: { name: 'music_artists', schema: MusicArtists },
   nationalAssemblyMembers: {
     name: 'national_assembly_members',
     schema: NationalAssemblyMemberSchema

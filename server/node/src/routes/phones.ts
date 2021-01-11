@@ -10,10 +10,10 @@ const phones: Array<IRoute> = [
     query: [{ name: 'prefix', type: 'string', required: false }],
     body: [],
     path: `${prefix}/prefixes`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: 'GET', query: [], body: [], path: `${prefix}/providers`, middlewares: ['track-ip'] },
-  { method: 'POST', query: [], body: [], path: `${prefix}/provider`, middlewares: ['track-ip'] }
+  { method: 'GET', query: [], body: [], path: `${prefix}/providers`, middlewares: [] },
+  { method: 'POST', query: [], body: [], path: `${prefix}/provider`, middlewares: [] }
 ];
 
 export default phones;

@@ -18,6 +18,7 @@ export default app => {
     const _method = method.toLowerCase();
     const { default: handler } = require(`./${path}/${_method}`);
     middlewares.unshift('validation/request');
+    middlewares.unshift('track-ip');
     const _middlewares = [];
     for (const middleware of middlewares) {
       const { default: _middleware } = require(`../middlewares/${middleware}`);

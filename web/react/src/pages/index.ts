@@ -1,3 +1,9 @@
+// Administrative Divisions
+import AdministrativeDivisionsDistricts from './demo/administrative-divisions/Districts';
+import AdministrativeDivisionsPostalCodes from './demo/administrative-divisions/PostalCodes';
+import AdministrativeDivisionsProvinces from './demo/administrative-divisions/Provinces';
+import AdministrativeDivisionsWards from './demo/administrative-divisions/Wards';
+
 // Banks
 import BanksForex from './demo/banks/Forex';
 import BanksHistory from './demo/banks/History';
@@ -7,6 +13,7 @@ import BanksList from './demo/banks/List';
 import CalendarConverter from './demo/calendar/Converter';
 
 // Docs
+import AdministrativeDivisions from './docs/AdministrativeDivisions';
 import Banks from './docs/Banks';
 import Calendar from './docs/Calendar';
 import Docs from './docs/Docs';
@@ -14,7 +21,7 @@ import EthnicMinorities from './docs/EthnicMinorities';
 import Finance from './docs/Finance';
 import Government from './docs/Government';
 import LicensePlates from './docs/LicensePlates';
-import Maps from './docs/Maps';
+import Music from './docs/Music';
 import News from './docs/News';
 import Phones from './docs/Phones';
 import Sports from './docs/Sports';
@@ -44,11 +51,8 @@ import Home from './Home';
 // License Plates
 import LicensePlatesList from './demo/license-plates/List';
 
-// Maps
-import MapsDistricts from './demo/maps/Districts';
-import MapsPostalCodes from './demo/maps/PostalCodes';
-import MapsProvinces from './demo/maps/Provinces';
-import MapsWards from './demo/maps/Wards';
+// Music
+import MusicArtists from './demo/music/Artists';
 
 // News
 import NewsFeed from './demo/news/Feed';
@@ -69,6 +73,12 @@ import GHNWards from './demo/technologies/ghn/Wards';
 import Vietcetera from './demo/technologies/Vietcetera';
 
 export {
+  // Administrative Divisions
+  AdministrativeDivisions,
+  AdministrativeDivisionsDistricts,
+  AdministrativeDivisionsPostalCodes,
+  AdministrativeDivisionsProvinces,
+  AdministrativeDivisionsWards,
   // Banks
   Banks,
   BanksForex,
@@ -102,12 +112,9 @@ export {
   // License Plates
   LicensePlates,
   LicensePlatesList,
-  // Maps
-  Maps,
-  MapsDistricts,
-  MapsPostalCodes,
-  MapsProvinces,
-  MapsWards,
+  // Music
+  Music,
+  MusicArtists,
   // News
   News,
   NewsFeed,

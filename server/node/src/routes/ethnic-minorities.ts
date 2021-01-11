@@ -10,7 +10,7 @@ const ethnicMinorities: Array<IRoute> = [
     query: [{ name: 'type_en', type: 'string', required: false }],
     body: [],
     path: `${prefix}`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 

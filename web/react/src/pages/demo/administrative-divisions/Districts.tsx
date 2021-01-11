@@ -19,36 +19,36 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
 
     this.state = { provinces: [], province_id: '', districts: [], loading: true };
 
-    this.getMapsProvinces = this.getMapsProvinces.bind(this);
-    this.getMapsDistricts = this.getMapsDistricts.bind(this);
+    this.getProvinces = this.getProvinces.bind(this);
+    this.getDistricts = this.getDistricts.bind(this);
     this.updateProvince = this.updateProvince.bind(this);
   }
 
   async componentDidMount() {
-    await this.getMapsProvinces();
+    await this.getProvinces();
     const { provinces } = this.state;
     const [province = {}] = provinces;
     const { province_id } = province;
     await this.setState({ province_id });
-    await this.getMapsDistricts();
+    await this.getDistricts();
   }
 
-  async getMapsProvinces() {
-    const provinces = await apis.getMapsProvinces();
+  async getProvinces() {
+    const provinces = await apis.getProvinces();
     await this.setState({ provinces });
   }
 
-  async getMapsDistricts() {
+  async getDistricts() {
     const { province_id } = this.state;
     await this.setState({ loading: true });
-    const districts = await apis.getMapsDistricts(province_id);
+    const districts = await apis.getDistricts(province_id);
     await this.setState({ districts, loading: false });
   }
 
   async updateProvince(event: any) {
     const { value: province_id } = event.target;
     await this.setState({ province_id });
-    await this.getMapsDistricts();
+    await this.getDistricts();
   }
 
   render() {

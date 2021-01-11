@@ -17,16 +17,16 @@ export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsStat
 
     this.state = { wards: [], loading: true };
 
-    this.getMapsWards = this.getMapsWards.bind(this);
+    this.getWards = this.getWards.bind(this);
   }
 
   async componentDidMount() {
-    await this.getMapsWards();
+    await this.getWards();
   }
 
-  async getMapsWards() {
+  async getWards() {
     this.setState({ loading: true });
-    const wards = await apis.getMapsWards();
+    const wards = await apis.getWards();
     this.setState({ wards, loading: false });
   }
 

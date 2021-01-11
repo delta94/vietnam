@@ -20,16 +20,16 @@ export default class MapsPostalCodes extends Component<
 
     this.state = { postalCodes: [], loading: true };
 
-    this.getMapsPostalCodes = this.getMapsPostalCodes.bind(this);
+    this.getPostalCodes = this.getPostalCodes.bind(this);
   }
 
   async componentDidMount() {
-    await this.getMapsPostalCodes();
+    await this.getPostalCodes();
   }
 
-  async getMapsPostalCodes() {
+  async getPostalCodes() {
     await this.setState({ loading: true });
-    const postalCodes = await apis.getMapsPostalCodes();
+    const postalCodes = await apis.getPostalCodes();
     await this.setState({ postalCodes, loading: false });
   }
 

@@ -2,17 +2,17 @@
 
 import { IRoute } from '../global/interfaces';
 
-const prefix: string = 'maps';
+const prefix: string = 'administrative-divisions';
 
-const maps: Array<IRoute> = [
+const administrativeDivisions: Array<IRoute> = [
   {
     method: 'GET',
     query: [],
     body: [],
     path: `${prefix}/macro-regions`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: 'GET', query: [], body: [], path: `${prefix}/regions`, middlewares: ['track-ip'] },
+  { method: 'GET', query: [], body: [], path: `${prefix}/regions`, middlewares: [] },
   {
     method: 'GET',
     query: [
@@ -21,14 +21,14 @@ const maps: Array<IRoute> = [
     ],
     body: [],
     path: `${prefix}/provinces`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: 'GET',
     query: [{ name: 'province_id', type: 'string', required: true }],
     body: [],
     path: `${prefix}/districts`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: 'GET',
@@ -38,15 +38,15 @@ const maps: Array<IRoute> = [
     ],
     body: [],
     path: `${prefix}/wards`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
   {
     method: 'GET',
     query: [{ name: 'province_id', type: 'string', required: false }],
     body: [],
     path: `${prefix}/postal-codes`,
-    middlewares: ['track-ip']
+    middlewares: []
   }
 ];
 
-export default maps;
+export default administrativeDivisions;

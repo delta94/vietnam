@@ -5,7 +5,7 @@ import * as _ from 'lodash';
 import { postgreClient } from '../clients';
 import { dsMapsWard } from '../data';
 
-export default class MapsService {
+export default class administrativeDivisionsService {
   public async getMacroRegions(): Promise<Array<string>> {
     const provinces: any = await postgreClient.find('maps_provinces');
     const macroRegion: Array<string> = _.uniq(

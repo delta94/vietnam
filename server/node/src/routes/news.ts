@@ -13,11 +13,11 @@ const news: Array<IRoute> = [
     ],
     body: [],
     path: `${prefix}`,
-    middlewares: ['track-ip']
+    middlewares: []
   },
-  { method: 'GET', query: [], body: [], path: `${prefix}/categories`, middlewares: ['track-ip'] },
-  { method: 'GET', query: [], body: [], path: `${prefix}/sources`, middlewares: ['track-ip'] },
-  { method: 'GET', query: [], body: [], path: `${prefix}/trends`, middlewares: ['track-ip'] }
+  { method: 'GET', query: [], body: [], path: `${prefix}/categories`, middlewares: [] },
+  { method: 'GET', query: [], body: [], path: `${prefix}/sources`, middlewares: [] },
+  { method: 'GET', query: [], body: [], path: `${prefix}/trends`, middlewares: [] }
 ];
 
 export default news;
