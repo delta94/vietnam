@@ -42,6 +42,13 @@ const administrativeDivisions: Array<IRoute> = [
   },
   {
     method: 'GET',
+    query: [],
+    body: [],
+    path: `${prefix}/wards/total`,
+    middlewares: []
+  },
+  {
+    method: 'GET',
     query: [{ name: 'province_id', type: 'string', required: false }],
     body: [],
     path: `${prefix}/postal-codes`,

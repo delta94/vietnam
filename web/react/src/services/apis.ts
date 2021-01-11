@@ -158,9 +158,15 @@ export default class APIS {
     return await this.fetch(endpoint, { query: { province_id }, body: {} });
   }
 
-  public async getWards() {
+  public async getWards(skip: number) {
     const endpoint: IEndpoint = endpoints.administrativeDivisions.getWards;
-    return await this.fetch(endpoint);
+    return await this.fetch(endpoint, { query: { skip }, body: {} });
+  }
+
+  public async getTotalWards(): Promise<number> {
+    const endpoint: IEndpoint = endpoints.administrativeDivisions.getTotalWards;
+    const { total = 0 } = await this.fetch(endpoint);
+    return total;
   }
 
   public async getSportsClubs(): Promise<Array<any>> {

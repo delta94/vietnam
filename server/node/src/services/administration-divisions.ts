@@ -52,4 +52,9 @@ export default class administrativeDivisionsService {
     const wards: any = await dsMapsWard.find({}, { skip, limit });
     return wards;
   }
+
+  public async countWards(): Promise<number> {
+    const total: number = await dsMapsWard.count({});
+    return total;
+  }
 }
