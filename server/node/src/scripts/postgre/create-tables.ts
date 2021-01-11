@@ -4,29 +4,11 @@ import * as dotenv from 'dotenv';
 dotenv.config({ path: '../../environments/dev.env' });
 
 import { postgreClient } from '../../clients';
-import {
-  EthnicMinorityShema,
-  GovernmentMinistryShema,
-  GovernmentOfficialShema,
-  LicensePlateShema,
-  MapsProvinceShema,
-  MapsDistrictSchema,
-  MapsWardSchema,
-  SportsClubShema
-} from '../../models/postgre';
+import { tables } from '../../models/postgre';
 
 const main = async () => {
   await postgreClient.connect();
-  const listOfTables: Array<any> = [
-    { name: 'ethnic_minorities', schema: EthnicMinorityShema },
-    { name: 'government_ministries', schema: GovernmentMinistryShema },
-    { name: 'government_officials', schema: GovernmentOfficialShema },
-    { name: 'license_plates', schema: LicensePlateShema },
-    { name: 'maps_provinces', schema: MapsProvinceShema },
-    { name: 'maps_districts', schema: MapsDistrictSchema },
-    { name: 'maps_wards', schema: MapsWardSchema },
-    { name: 'sports_clubs', schema: SportsClubShema }
-  ];
+  const listOfTables: Array<any> = Object.values(tables);
   for (const table of listOfTables) {
     const { name, schema } = table;
     console.log(name, schema);
@@ -39,8 +21,8 @@ const main = async () => {
   }
 
   // Get Tables
-  const tables: any = await postgreClient.getTables();
-  console.log('tables', tables);
+  const _tables: any = await postgreClient.getTables();
+  console.log('tables', _tables);
 
   process.exit(0);
 };

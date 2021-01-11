@@ -17,6 +17,11 @@ export default class Home extends Component<IHomeProps, IHomeState> {
     super(props);
     const apis = [
       {
+        name: 'administrative-divisions',
+        npm: 'vnapis#administrative-divisions',
+        docs: '/administrative-divisions'
+      },
+      {
         name: 'banks',
         npm: 'vietnambanks',
         docs: '/banks'
@@ -47,9 +52,9 @@ export default class Home extends Component<IHomeProps, IHomeState> {
         docs: '/license-plates'
       },
       {
-        name: 'maps',
-        npm: 'vnapis#maps',
-        docs: '/maps'
+        name: 'music',
+        npm: 'vnapis#music',
+        docs: '/music'
       },
       {
         name: 'news',

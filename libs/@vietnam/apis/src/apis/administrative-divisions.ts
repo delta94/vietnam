@@ -28,11 +28,14 @@ export default class AdministrativeDivisions extends Base {
     return await this.get(`${this.prefix}/provinces`);
   }
 
-  public async getDistricts(): Promise<Array<IAdministrativeDivisionsDistrict>> {
-    return await this.get(`${this.prefix}/districts`);
+  public async getDistricts(province_id: string): Promise<Array<IAdministrativeDivisionsDistrict>> {
+    return await this.get(`${this.prefix}/districts?province_id=${province_id}`);
   }
 
-  public async getWards(): Promise<Array<IAdministrativeDivisionsWard>> {
-    return await this.get(`${this.prefix}/wards`);
+  public async getWards(
+    skip: number = 0,
+    limit: number = 100
+  ): Promise<Array<IAdministrativeDivisionsWard>> {
+    return await this.get(`${this.prefix}/wards?skip=${skip}&limit=${limit}`);
   }
 }

@@ -203,7 +203,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/administrative-divisions/postal-codes',
       url: `${baseAPI}/administrative-divisions/postal-codes`,
-      demo: 'maps-postal-codes',
+      demo: 'administrative-divisions-postal-codes',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [{ name: 'province_id', type: 'string', required: false, description: '' }],
@@ -237,7 +237,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/administrative-divisions/provinces',
       url: `${baseAPI}/administrative-divisions/provinces`,
-      demo: 'maps-provinces',
+      demo: 'administrative-divisions-provinces',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [
@@ -286,7 +286,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/administrative-divisions/districts',
       url: `${baseAPI}/administrative-divisions/districts`,
-      demo: 'maps-districts',
+      demo: 'administrative-divisions-districts',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [{ name: 'province_id', type: 'string', required: true, description: '' }],
@@ -324,7 +324,7 @@ export const endpoints: IEndpoints = {
       method: 'GET',
       path: '/administrative-divisions/wards',
       url: `${baseAPI}/administrative-divisions/wards`,
-      demo: 'maps-wards',
+      demo: 'administrative-divisions-wards',
       request: {
         headers: [{ key: 'Content-Type', value: 'application/json' }],
         query: [

@@ -9,13 +9,14 @@ If you enjoyed this project — or just feeling generous, consider [buying me a 
 - [VIETNAM APIS](#vietnam-apis)
   - [Installation](#installation)
   - [APIs](#apis)
+    - [Administrative Divisions](#administrative-divisions)
     - [Banks](#banks)
     - [Calendar](#calendar)
     - [Ethnic Minorities](#ethnic-minorities)
     - [Finance](#finance)
     - [Government](#government)
     - [License Plates](#license-plates)
-    - [Maps](#maps)
+    - [Music](#music)
     - [Phones](#phones)
     - [Sports](#sports)
     - [VNLTK](#vnltk)
@@ -30,6 +31,33 @@ yarn add vnapis
 ```
 
 ## APIs
+
+### Administrative Divisions
+
+```ts
+import { administrativeDivisions } from 'vnapis';
+ 
+// Get Marco Regions
+const marcoRegions: Array<any> = await administrativeDivisions.getMarcoRegions();
+ 
+// Get Regions
+const regions: Array<any> = await administrativeDivisions.getRegions();
+ 
+// Get Postal Codes
+const postalCodes: Array<any> = await administrativeDivisions.getPostalCodes();
+ 
+// Get Provinces
+const provinces: Array<any> = await administrativeDivisions.getProvinces();
+ 
+// Get Districts
+const province_id: string = 'ha-noi';
+const districts: Array<any> = await administrativeDivisions.getDistricts(province_id);
+ 
+// Get Wards
+const skip: number = 0;
+const limit: number = 100;
+const wards: Array<any> = await administrativeDivisions.getWards(skip, limit);
+```
 
 ### Banks
 
@@ -193,28 +221,13 @@ import { licensePlates } from 'vnapis';
 const plates = await licensePlates.getLicensePlates();
 ```
 
-### Maps
+### Music
 
 ```ts
-import { maps } from 'vnapis';
- 
-// Get Marco Regions
-const marcoRegions: Array<any> = await maps.getMarcoRegions();
- 
-// Get Regions
-const regions: Array<any> = await maps.getRegions();
- 
-// Get Postal Codes
-const postalCodes = await maps.getPostalCodes();
- 
-// Get Provinces
-const provinces = await maps.getProvinces();
- 
-// Get Districts
-const districts = await maps.getDistricts();
- 
-// Get Wards
-const wards = await maps.getWards();
+import { music } from 'vnapis';
+
+// Get Artists
+const artists = await music.getArtists();
 ```
 
 ### Phones
