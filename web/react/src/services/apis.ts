@@ -209,7 +209,7 @@ export default class APIS {
     return await this.fetch(endpoint, { query: {}, body: { year, month, date } });
   }
 
-  public async getCanChi(year: number, month: number, date: number) {
+  public async getCanChi(year: number, month: number, date: number): Promise<string> {
     const endpoint: IEndpoint = endpoints.calendar.getCanChi;
     const { canChi = '' } = await this.fetch(endpoint, { query: {}, body: { year, month, date } });
     return canChi;

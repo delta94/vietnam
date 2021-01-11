@@ -17,10 +17,17 @@ export default class CalendarConverter extends Component<
   ICalendarConverterProps,
   ICalendarConverterState
 > {
+  private loadingText: string = 'LOADING ...';
+
   constructor(props: ICalendarConverterProps) {
     super(props);
 
-    this.state = { solarDate: '', solarString: '', lunarDate: '', lunarString: '' };
+    this.state = {
+      solarDate: '',
+      solarString: this.loadingText,
+      lunarDate: '',
+      lunarString: this.loadingText
+    };
 
     this.updateSolarDate = this.updateSolarDate.bind(this);
     this.buildSolarString = this.buildSolarString.bind(this);
@@ -52,7 +59,8 @@ export default class CalendarConverter extends Component<
   }
 
   async buildLunarString(year: number, month: number, date: number) {
-    return await apis.getCanChi(year, month, date);
+    const canChi: string = await apis.getCanChi(year, month, date);
+    return helper.capitalize(canChi);
   }
 
   async updateSolarDate(event: any) {
@@ -60,7 +68,7 @@ export default class CalendarConverter extends Component<
     const [year, month, date] = solarDate.split('-');
     const solarString = this.buildSolarString(year, parseInt(month, 10), date);
 
-    await this.setState({ solarDate, solarString });
+    await this.setState({ solarDate, solarString, lunarString: this.loadingText });
     const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
     const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
@@ -73,7 +81,7 @@ export default class CalendarConverter extends Component<
     const [year, month, date] = lunarDate.split('-');
     const lunarString = await this.buildLunarString(year, month, date);
 
-    await this.setState({ lunarDate, lunarString });
+    await this.setState({ lunarDate, lunarString, solarString: this.loadingText });
     const { year: yyyy, month: mm, date: dd } = await apis.convertLunarToSolar(year, month, date);
     const solarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const solarString = this.buildSolarString(yyyy, mm, dd);
