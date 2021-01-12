@@ -1,5 +1,45 @@
 'use strict';
 
+export const AdministrativeDivisionsPostalCodeShema = {
+  id: { type: 'int', primary: true, required: true },
+  code: { type: 'text', required: true },
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
+};
+
+export const AdministrativeDivisionsProvinceShema = {
+  id: { type: 'int', primary: true, required: true },
+  province_id: { type: 'text', required: true },
+  name: { type: 'text', required: true },
+  capital: { type: 'text', required: true },
+  level: { type: 'text', required: true },
+  level_en: { type: 'text', required: true },
+  macro_region: { type: 'text', required: true },
+  macro_region_en: { type: 'text', required: true },
+  region: { type: 'text', required: true },
+  region_en: { type: 'text', required: true }
+};
+
+export const AdministrativeDivisionsDistrictSchema = {
+  id: { type: 'int', primary: true, required: true },
+  name: { type: 'text', required: true },
+  level: { type: 'text', required: true },
+  level_en: { type: 'text', required: true },
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
+};
+
+export const AdministrativeDivisionsWardSchema = {
+  id: { type: 'int', primary: true, required: true },
+  name: { type: 'text', required: true },
+  level: { type: 'text', required: true },
+  level_en: { type: 'text', required: true },
+  district: { type: 'text', required: true },
+  district_id: { type: 'text', required: true },
+  province: { type: 'text', required: true },
+  province_id: { type: 'text', required: true }
+};
+
 export const BankShema = {
   id: { type: 'int', primary: true, required: true },
   code: { type: 'text', required: true },
@@ -41,51 +81,22 @@ export const GovernmentOfficialShema = {
   note: { type: 'text' }
 };
 
+export const HistoryDynastyShema = {
+  id: { type: 'int', primary: true, required: true },
+  temple_name: { type: 'text' },
+  birth_name: { type: 'text', required: true },
+  birth: { type: 'int', required: true },
+  death: { type: 'int', required: true },
+  start_year: { type: 'int', required: true },
+  end_year: { type: 'int', required: true },
+  dynasty: { type: 'text', required: true }
+};
+
 export const LicensePlateShema = {
   id: { type: 'int', primary: true, required: true },
   license: { type: 'text', required: true },
   definition: { type: 'text', required: true },
   type: { type: 'text', required: true }
-};
-
-export const AdministrativeDivisionsPostalCodeShema = {
-  id: { type: 'int', primary: true, required: true },
-  code: { type: 'text', required: true },
-  province: { type: 'text', required: true },
-  province_id: { type: 'text', required: true }
-};
-
-export const AdministrativeDivisionsProvinceShema = {
-  id: { type: 'int', primary: true, required: true },
-  province_id: { type: 'text', required: true },
-  name: { type: 'text', required: true },
-  capital: { type: 'text', required: true },
-  level: { type: 'text', required: true },
-  level_en: { type: 'text', required: true },
-  macro_region: { type: 'text', required: true },
-  macro_region_en: { type: 'text', required: true },
-  region: { type: 'text', required: true },
-  region_en: { type: 'text', required: true }
-};
-
-export const AdministrativeDivisionsDistrictSchema = {
-  id: { type: 'int', primary: true, required: true },
-  name: { type: 'text', required: true },
-  level: { type: 'text', required: true },
-  level_en: { type: 'text', required: true },
-  province: { type: 'text', required: true },
-  province_id: { type: 'text', required: true }
-};
-
-export const AdministrativeDivisionsWardSchema = {
-  id: { type: 'int', primary: true, required: true },
-  name: { type: 'text', required: true },
-  level: { type: 'text', required: true },
-  level_en: { type: 'text', required: true },
-  district: { type: 'text', required: true },
-  district_id: { type: 'text', required: true },
-  province: { type: 'text', required: true },
-  province_id: { type: 'text', required: true }
 };
 
 export const MusicArtists = {
@@ -133,11 +144,6 @@ export const TechnologySchema = {
 };
 
 export const tables = {
-  banks: { name: 'banks', schema: BankShema },
-  ethnicMinorities: { name: 'ethnic_minorities', schema: EthnicMinorityShema },
-  governmentMinistries: { name: 'government_ministries', schema: GovernmentMinistryShema },
-  governmentOfficials: { name: 'government_officials', schema: GovernmentOfficialShema },
-  licensePlates: { name: 'license_plates', schema: LicensePlateShema },
   administrativeDivisionsPostalCodes: {
     name: 'administrative_divisions_postal_codes',
     schema: AdministrativeDivisionsPostalCodeShema
@@ -154,6 +160,12 @@ export const tables = {
     name: 'administrative_divisions_wards',
     schema: AdministrativeDivisionsWardSchema
   },
+  banks: { name: 'banks', schema: BankShema },
+  ethnicMinorities: { name: 'ethnic_minorities', schema: EthnicMinorityShema },
+  governmentMinistries: { name: 'government_ministries', schema: GovernmentMinistryShema },
+  governmentOfficials: { name: 'government_officials', schema: GovernmentOfficialShema },
+  historyDynasties: { name: 'history_dynasties', schema: HistoryDynastyShema },
+  licensePlates: { name: 'license_plates', schema: LicensePlateShema },
   musicArtists: { name: 'music_artists', schema: MusicArtists },
   nationalAssemblyMembers: {
     name: 'national_assembly_members',

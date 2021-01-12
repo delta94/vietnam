@@ -180,21 +180,21 @@ export default class PostgreClient {
       .map(key => key.toUpperCase())
       .join(',');
     const values = rows
-      .map((row, index) => {
-        const rowValues = Object.keys(row)
-          .map(key => {
-            const value = row[key];
-            const type = typeof value;
-            const cell =
-              type === 'string'
-                ? value.includes("'")
-                  ? `'${value.replace(/'/g, "''")}'`
-                  : `'${value}'`
-                : value;
-            return cell;
-          })
-          .join(',');
-        return `(${index + 1},${rowValues})`;
+      .map((row: any, index: number) => {
+        const rowValues = Object.keys(row).map(key => {
+          const value = row[key];
+          const type = typeof value;
+          const cell =
+            type === 'string'
+              ? value.includes("'")
+                ? `'${value.replace(/'/g, "''")}'`
+                : `'${value}'`
+              : value;
+          return cell;
+        });
+        const rowValuesString: string = rowValues.join(',');
+        console.log(index, rowValues.length, rowValuesString);
+        return `(${index + 1},${rowValuesString})`;
       })
       .join(',');
 

@@ -2,9 +2,9 @@
 
 import { IRoute } from '../global/interfaces';
 
-const prefix: string = 'technologies';
+const prefix: string = 'open-apis';
 
-const technologies: Array<IRoute> = [
+const openAPIs: Array<IRoute> = [
   {
     method: 'GET',
     query: [{ name: 'type_id', type: 'string', required: false }],
@@ -49,4 +49,4 @@ const technologies: Array<IRoute> = [
   }
 ];
 
-export default technologies;
+export default openAPIs;

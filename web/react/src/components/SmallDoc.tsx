@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Doc from './Doc';
-import { endpoints, IEndpoints } from '../configs';
+import { endpoints } from '../configs';
 
 interface ISmallDocProps {
   group: string;
@@ -9,7 +9,7 @@ interface ISmallDocProps {
 }
 
 interface ISmallDocState {
-  endpoints: IEndpoints;
+  endpoints: any;
 }
 
 export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {

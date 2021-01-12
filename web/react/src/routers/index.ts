@@ -36,6 +36,7 @@ import {
   GovernmentNationalAssemblyMembers,
   // History
   History,
+  HistoryDynasties,
   Home,
   // LicensePlates
   LicensePlates,
@@ -48,6 +49,13 @@ import {
   NewsFeed,
   NewsSources,
   NewsTrends,
+  // Open APIs
+  OpenAPIs,
+  OpenAPIsList,
+  GHNProvinces,
+  GHNDistricts,
+  GHNWards,
+  Vietcetera,
   // Phones
   Phones,
   PhonesPrefixes,
@@ -55,13 +63,12 @@ import {
   // Sports
   Sports,
   SportsClubs,
-  // Technologies
-  Technologies,
-  APIs,
-  GHNProvinces,
-  GHNDistricts,
-  GHNWards,
-  Vietcetera
+  // Weather
+  Weather,
+  WeatherCurrent,
+  YouTube,
+  YouTubeTrending,
+  YouTubeVideoCategories
 } from '../pages';
 
 const routes = [
@@ -195,6 +202,12 @@ const routes = [
     path: 'history',
     text: 'History',
     component: History,
+    navigation: true
+  },
+  {
+    path: 'history-dynasties',
+    text: 'History-dynasties',
+    component: HistoryDynasties,
     navigation: false
   },
   {
@@ -294,6 +307,42 @@ const routes = [
     navigation: false
   },
   {
+    path: 'open-apis',
+    text: 'Open APIs',
+    component: OpenAPIs,
+    navigation: true
+  },
+  {
+    path: 'open-apis-list',
+    text: 'Open APIs List',
+    component: OpenAPIsList,
+    navigation: false
+  },
+  {
+    path: 'open-apis-ghn-provinces',
+    text: 'Open APIs GHN Provinces',
+    component: GHNProvinces,
+    navigation: false
+  },
+  {
+    path: 'open-apis-ghn-districts',
+    text: 'Open APIs GHN Districts',
+    component: GHNDistricts,
+    navigation: false
+  },
+  {
+    path: 'open-apis-ghn-wards',
+    text: 'Open APIs GHN Wards',
+    component: GHNWards,
+    navigation: false
+  },
+  {
+    path: 'open-apis-vietcetera',
+    text: 'Open APIs Vietcetera',
+    component: Vietcetera,
+    navigation: false
+  },
+  {
     path: 'phones',
     text: 'Phones',
     component: Phones,
@@ -324,39 +373,33 @@ const routes = [
     navigation: false
   },
   {
-    path: 'technologies',
-    text: 'Technologies',
-    component: Technologies,
+    path: 'weather',
+    text: 'Weather',
+    component: Weather,
     navigation: true
   },
   {
-    path: 'technologies-apis',
-    text: 'Technologies APIs',
-    component: APIs,
+    path: 'weather-current',
+    text: 'Weather Current',
+    component: WeatherCurrent,
     navigation: false
   },
   {
-    path: 'technologies-ghn-provinces',
-    text: 'Technologies GHN Provinces',
-    component: GHNProvinces,
+    path: 'youtube',
+    text: 'YouTube',
+    component: YouTube,
+    navigation: true
+  },
+  {
+    path: 'youtube-trending',
+    text: 'YouTube Trending',
+    component: YouTubeTrending,
     navigation: false
   },
   {
-    path: 'technologies-ghn-districts',
-    text: 'Technologies GHN Districts',
-    component: GHNDistricts,
-    navigation: false
-  },
-  {
-    path: 'technologies-ghn-wards',
-    text: 'Technologies GHN Wards',
-    component: GHNWards,
-    navigation: false
-  },
-  {
-    path: 'technologies-vietcetera',
-    text: 'Technologies Vietcetera',
-    component: Vietcetera,
+    path: 'youtube-video-categories',
+    text: 'YouTube Video Categories',
+    component: YouTubeVideoCategories,
     navigation: false
   }
 ];

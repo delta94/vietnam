@@ -3,28 +3,28 @@ import { Card, Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface IAPIsProps {}
+interface IOpenAPIsListProps {}
 
-interface IAPIsState {
+interface IOpenAPIsListState {
   query: string;
   technologies: Array<any>;
   filterTechnologies: Array<any>;
   loading: boolean;
 }
 
-export default class APIs extends Component<IAPIsProps, IAPIsState> {
-  constructor(props: IAPIsProps) {
+export default class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
+  constructor(props: IOpenAPIsListProps) {
     super(props);
 
     this.state = { query: '', technologies: [], filterTechnologies: [], loading: true };
 
-    this.getTechnologies = this.getTechnologies.bind(this);
+    this.getOpenAPIs = this.getOpenAPIs.bind(this);
     this.renderTable = this.renderTable.bind(this);
     this.filter = this.filter.bind(this);
   }
 
   async componentDidMount() {
-    await this.getTechnologies();
+    await this.getOpenAPIs();
   }
 
   filter(event: any) {
@@ -40,10 +40,10 @@ export default class APIs extends Component<IAPIsProps, IAPIsState> {
     this.setState({ filterTechnologies });
   }
 
-  async getTechnologies() {
+  async getOpenAPIs() {
     this.setState({ loading: true });
     const { query = '' } = this.state;
-    const technologies = await apis.getTechnologies();
+    const technologies = await apis.getOpenAPIs();
     const filterTechnologies = technologies.filter((technology: any) => {
       const { name, type } = technology;
       const nameFlag = query ? name.toLowerCase().includes(query.toLowerCase()) : true;
@@ -65,7 +65,7 @@ export default class APIs extends Component<IAPIsProps, IAPIsState> {
           <div className="table-responsive table-container">
             <table className="table">
               <caption className="text-center bg-danger text-white">
-                APIs ({filterTechnologies.length})
+                Open APIs ({filterTechnologies.length})
               </caption>
               <thead>
                 <tr>
@@ -112,7 +112,7 @@ export default class APIs extends Component<IAPIsProps, IAPIsState> {
     const { filterTechnologies = [], loading = true } = this.state;
 
     return (
-      <div id="APIs" className="container">
+      <div id="OpenAPIsList" className="container">
         <Card className="shadow mt-3 mb-5">
           <Card.Body>
             <Form className="mt-3 mb-3 w-100">

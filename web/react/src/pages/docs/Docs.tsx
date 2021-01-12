@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import { Accordion, Button } from 'react-bootstrap';
 
 import { helper } from '../../services';
-import { endpoints, IEndpoints } from '../../configs';
+import { endpoints } from '../../configs';
 import { Doc } from '../../components';
 
 interface IDocsProps {}
 
 interface IDocsState {
-  endpoints: IEndpoints;
+  endpoints: any;
 }
 
 export default class Docs extends Component<IDocsProps, IDocsState> {

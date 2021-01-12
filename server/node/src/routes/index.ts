@@ -13,10 +13,12 @@ import history from './history';
 import licensePlates from './license-plates';
 import music from './music';
 import news from './news';
+import openAPIs from './open-apis';
 import phones from './phones';
 import sports from './sports';
-import technologies from './technologies';
 import vnltk from './vnltk';
+import weather from './weather';
+import youtube from './youtube';
 
 const routes: Array<IRoute> = [].concat(
   administrativeDivisions,
@@ -26,13 +28,16 @@ const routes: Array<IRoute> = [].concat(
   ethnicMinorities,
   finance,
   government,
+  history,
   licensePlates,
   music,
   news,
+  openAPIs,
   phones,
   sports,
-  technologies,
-  vnltk
+  vnltk,
+  weather,
+  youtube
 );
 
 export default routes;

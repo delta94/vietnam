@@ -1,4 +1,5 @@
-import { endpoints, IEndpoint } from '../configs';
+import { endpoints } from '../configs';
+import { IEndpoint } from '../configs/interfaces';
 
 interface IRequest {
   query: any;
@@ -184,8 +185,8 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getTechnologies() {
-    const endpoint: IEndpoint = endpoints.technologies.getTechnologies;
+  public async getOpenAPIs() {
+    const endpoint: IEndpoint = endpoints.openAPIs.getOpenAPIs;
     return await this.fetch(endpoint);
   }
 
@@ -216,28 +217,48 @@ export default class APIS {
   }
 
   public async getVietceteraArticles(type: string) {
-    const endpoint: IEndpoint = endpoints.technologies.getVietceteraArticles;
+    const endpoint: IEndpoint = endpoints.openAPIs.getVietceteraArticles;
     const articles = (await this.fetch(endpoint, { query: { type }, body: {} })) || [];
     return articles;
   }
 
   public async getGHNProvinces() {
-    const endpoint: IEndpoint = endpoints.technologies.getGHNProvinces;
+    const endpoint: IEndpoint = endpoints.openAPIs.getGHNProvinces;
     return await this.fetch(endpoint);
   }
 
   public async getGHNDistricts() {
-    const endpoint: IEndpoint = endpoints.technologies.getGHNDistricts;
+    const endpoint: IEndpoint = endpoints.openAPIs.getGHNDistricts;
     return await this.fetch(endpoint);
   }
 
   public async getGHNWards() {
-    const endpoint: IEndpoint = endpoints.technologies.getGHNWards;
+    const endpoint: IEndpoint = endpoints.openAPIs.getGHNWards;
     return await this.fetch(endpoint);
   }
 
   public async getMusicArtists() {
     const endpoint: IEndpoint = endpoints.music.getMusicArtists;
+    return await this.fetch(endpoint);
+  }
+
+  public async getDynasties() {
+    const endpoint: IEndpoint = endpoints.history.getDynasties;
+    return await this.fetch(endpoint);
+  }
+
+  public async getCurrentWeather(city: string) {
+    const endpoint: IEndpoint = endpoints.weather.getCurrentWeather;
+    return await this.fetch(endpoint, { query: { city }, body: {} });
+  }
+
+  public async getYouTubeTrending(categoryId: number = 0, max: number = 50) {
+    const endpoint: IEndpoint = endpoints.youtube.getTrending;
+    return await this.fetch(endpoint, { query: { categoryId, max }, body: {} });
+  }
+
+  public async getYouTubeVideoCategories() {
+    const endpoint: IEndpoint = endpoints.youtube.getVideoCategories;
     return await this.fetch(endpoint);
   }
 }

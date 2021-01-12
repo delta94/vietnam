@@ -62,6 +62,11 @@ export default class Home extends Component<IHomeProps, IHomeState> {
         docs: '/news'
       },
       {
+        name: 'open-apis',
+        npm: '',
+        docs: '/open-apis'
+      },
+      {
         name: 'phones',
         npm: 'vnapis#phones',
         docs: '/phones'
@@ -70,11 +75,6 @@ export default class Home extends Component<IHomeProps, IHomeState> {
         name: 'sports',
         npm: 'vnapis#sports',
         docs: '/sports'
-      },
-      {
-        name: 'technologies',
-        npm: '',
-        docs: '/technologies'
       },
       { name: 'vnltk', npm: 'vnapis#vnltk', docs: '/vnltk' }
     ].sort((a, b) => (a.name > b.name ? 1 : -1));
