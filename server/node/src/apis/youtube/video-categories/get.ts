@@ -3,9 +3,9 @@
 import * as _ from 'lodash';
 import { Request, Response } from 'express';
 
-import { youTube } from '../../../libs';
+import { youTubeService } from '../../../services';
 
 export default async (req: Request, res: Response) => {
-  const categories = await youTube.getVideoCategories();
+  const categories = await youTubeService.getVideoCategories();
   return res.json(categories);
 };

@@ -8,10 +8,7 @@ const youtube: Array<IRoute> = [
   { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: [] },
   {
     method: 'GET',
-    query: [
-      { name: 'categoryId', type: 'number', required: false },
-      { name: 'max', type: 'number', required: false }
-    ],
+    query: [{ name: 'categoryId', type: 'number', required: false }],
     body: [],
     path: `${prefix}/trending`,
     middlewares: []

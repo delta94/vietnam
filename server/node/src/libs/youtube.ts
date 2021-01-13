@@ -13,9 +13,9 @@ export default class YouTube {
     this.key = key;
   }
 
-  getMostPopularVideos(videoCategoryId: number = 0, maxResults: number = 50) {
+  getMostPopularVideos(videoCategoryId: number = 0): Promise<Array<any>> {
     const { key, regionCode, base } = this;
-    const url = `${base}/videos?part=snippet&videoCategoryId=${videoCategoryId}&chart=mostPopular&maxResults=${maxResults}&regionCode=${regionCode}&key=${key}`;
+    const url = `${base}/videos?part=snippet&videoCategoryId=${videoCategoryId}&chart=mostPopular&maxResults=50&regionCode=${regionCode}&key=${key}`;
     return new Promise(resolve => {
       fetch(url)
         .then(res => res.json())

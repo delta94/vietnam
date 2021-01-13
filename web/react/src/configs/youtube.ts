@@ -12,10 +12,7 @@ const youtube: IYouTubeEndpoints = {
     demo: 'youtube-trending',
     request: {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
-      query: [
-        { name: 'categoryId', type: 'number', required: false, description: '' },
-        { name: 'max', type: 'number', required: false, description: '' }
-      ],
+      query: [{ name: 'categoryId', type: 'number', required: false, description: '' }],
       body: []
     },
     response: {

@@ -3,11 +3,10 @@
 import * as _ from 'lodash';
 import { Request, Response } from 'express';
 
-import { youTube } from '../../../libs';
+import { youTubeService } from '../../../services';
 
 export default async (req: Request, res: Response) => {
   const categoryId: number = _.get(req, 'query.categoryId', 0);
-  const max: number = _.get(req, 'query.max', 50);
-  const videos = await youTube.getMostPopularVideos(categoryId, max);
+  const videos = await youTubeService.getTrending(categoryId);
   return res.json(videos);
 };

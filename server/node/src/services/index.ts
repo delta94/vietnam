@@ -13,6 +13,7 @@ import OpenAPIsService from './open-apis';
 import PhonesService from './phones';
 import SportsService from './sports';
 import WeatherService from './weather';
+import YouTubeService from './youtube';
 
 export const administrativeDivisionsService: AdministrativeDivisionsService = new AdministrativeDivisionsService();
 export const banksService: BanksService = new BanksService();
@@ -27,3 +28,4 @@ export const phonesService: PhonesService = new PhonesService();
 export const sportsService: SportsService = new SportsService();
 export const openAPIsService: OpenAPIsService = new OpenAPIsService();
 export const weatherService: WeatherService = new WeatherService();
+export const youTubeService: YouTubeService = new YouTubeService();

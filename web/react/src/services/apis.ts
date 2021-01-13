@@ -252,9 +252,9 @@ export default class APIS {
     return await this.fetch(endpoint, { query: { city }, body: {} });
   }
 
-  public async getYouTubeTrending(categoryId: number = 0, max: number = 50) {
+  public async getYouTubeTrending(categoryId: number = 0) {
     const endpoint: IEndpoint = endpoints.youtube.getTrending;
-    return await this.fetch(endpoint, { query: { categoryId, max }, body: {} });
+    return await this.fetch(endpoint, { query: { categoryId }, body: {} });
   }
 
   public async getYouTubeVideoCategories() {
