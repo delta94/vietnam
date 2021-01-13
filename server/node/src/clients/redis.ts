@@ -22,7 +22,7 @@ export default class Redis {
       this.client.get(key, (error, reply) => {
         if (error) {
           console.error('error', error);
-          return resolve('{}');
+          return resolve('');
         }
         resolve(reply);
       });
