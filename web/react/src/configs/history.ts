@@ -25,7 +25,17 @@ const history = {
           { name: 'end_year', type: 'number', description: '' },
           { name: 'dynasty', type: 'string', description: '' }
         ],
-        example: [{ license: '29', definition: 'Hà Nội', type: 'Tỉnh' }]
+        example: [
+          {
+            temple_name: '<string>',
+            birth_name: '<string>',
+            birth: '<number>',
+            death: '<number>',
+            start_year: '<number>',
+            end_year: '<number>',
+            dynasty: '<string>'
+          }
+        ]
       },
       400: {
         schema: [{ name: 'message', type: 'string', description: '' }],
