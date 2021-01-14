@@ -71,8 +71,8 @@ const _banks: Array<any> = await banks.getBanks();
 const ids: Array<string> = await banks.getForexBankIds();
 
 // Get Forex Rates
-const bankId: string = 'vietcombank';
-const rates: Array<any> = await banks.getForexRates(bankId);
+const id: string = 'vietcombank';
+const rates: Array<any> = await banks.getForexRates(id); // Required - Default is 'vietcombank'
 ```
 
 ### Calendar

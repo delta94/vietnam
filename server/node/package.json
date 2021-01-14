@@ -48,7 +48,7 @@
     "uuid": "^8.3.2",
     "vietcetera": "^1.0.0",
     "vietnamnews": "^1.0.3",
-    "vnapis": "^1.0.1",
+    "vnapis": "^1.0.2",
     "vnpay": "^1.0.2"
   },
   "devDependencies": {
