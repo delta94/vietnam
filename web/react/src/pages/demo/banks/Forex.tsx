@@ -42,23 +42,29 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
     await this.setState({ sortBy: by, sortDir: dir });
     if (by === 'bank') {
       data.sort((a, b) => dir * (a.bank > b.bank ? 1 : -1));
-    } else if (by === 'buy') {
+    } else if (by === 'buyCash') {
       data.sort((a, b) => {
-        const aBuy = a.buy[currency] || 0;
-        const bBuy = b.buy[currency] || 0;
-        return dir * (aBuy > bBuy ? 1 : -1);
+        const aItem = a.buyCash[currency] || 0;
+        const bItem = b.buyCash[currency] || 0;
+        return dir * (aItem > bItem ? 1 : -1);
       });
-    } else if (by === 'sell') {
+    } else if (by === 'sellCash') {
       data.sort((a, b) => {
-        const aSell = a.sell[currency] || 0;
-        const bSell = b.sell[currency] || 0;
-        return dir * (aSell > bSell ? 1 : -1);
+        const aItem = a.sellCash[currency] || 0;
+        const bItem = b.sellCash[currency] || 0;
+        return dir * (aItem > bItem ? 1 : -1);
       });
-    } else if (by === 'transfer') {
+    } else if (by === 'buyTransfer') {
       data.sort((a, b) => {
-        const aTransfer = a.transfer[currency] || 0;
-        const bTransfer = b.transfer[currency] || 0;
-        return dir * (aTransfer > bTransfer ? 1 : -1);
+        const aItem = a.buyTransfer[currency] || 0;
+        const bItem = b.buyTransfer[currency] || 0;
+        return dir * (aItem > bItem ? 1 : -1);
+      });
+    } else if (by === 'sellTransfer') {
+      data.sort((a, b) => {
+        const aItem = a.sellTransfer[currency] || 0;
+        const bItem = b.sellTransfer[currency] || 0;
+        return dir * (aItem > bItem ? 1 : -1);
       });
     }
 
@@ -109,6 +115,9 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
             {!loading && (
               <div className="table-responsive table-container">
                 <table className="table">
+                  <caption className="bg-danger text-center text-white">
+                    Banks ({data.length})
+                  </caption>
                   <thead>
                     <tr>
                       <th>#</th>
@@ -118,18 +127,23 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
                         </span>
                       </th>
                       <th>
-                        <span className="cursor-pointer" onClick={() => this.sort('buy')}>
-                          Buy
+                        <span className="cursor-pointer" onClick={() => this.sort('buyCash')}>
+                          Buy (Cash)
                         </span>
                       </th>
                       <th>
-                        <span className="cursor-pointer" onClick={() => this.sort('transfer')}>
-                          Transfer
+                        <span className="cursor-pointer" onClick={() => this.sort('buyTransfer')}>
+                          Buy (Transfer)
                         </span>
                       </th>
                       <th>
-                        <span className="cursor-pointer" onClick={() => this.sort('sell')}>
-                          Sell
+                        <span className="cursor-pointer" onClick={() => this.sort('sellCash')}>
+                          Sell (Cash)
+                        </span>
+                      </th>
+                      <th>
+                        <span className="cursor-pointer" onClick={() => this.sort('sellTransfer')}>
+                          Sell (Transfer)
                         </span>
                       </th>
                       <th>Last Updated At</th>
@@ -138,16 +152,35 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
                   <tbody>
                     {data.length
                       ? data.map((item, index) => {
-                          const { bank = '', time = '', buy = {}, transfer = {}, sell = {} } = item;
-                          return (
+                          const {
+                            bank = '',
+                            time = '',
+                            buyCash = {},
+                            buyTransfer = {},
+                            sellCash = {},
+                            sellTransfer = {}
+                          } = item;
+                          const buyCashText: string = buyCash[currency] || '';
+                          const buyTransferText: string = buyTransfer[currency] || '';
+                          const sellCashText: string = sellCash[currency] || '';
+                          const sellTransferText: string = sellTransfer[currency] || '';
+                          const displayFlag: boolean =
+                            buyCashText !== '' ||
+                            buyTransferText !== '' ||
+                            sellCashText !== '' ||
+                            sellTransferText !== '';
+                          return displayFlag ? (
                             <tr key={index}>
                               <td>{index + 1}</td>
                               <td>{bank}</td>
-                              <td>{buy[currency] || ''}</td>
-                              <td>{transfer[currency] || ''}</td>
-                              <td>{sell[currency] || ''}</td>
+                              <td>{buyCashText}</td>
+                              <td>{buyTransferText}</td>
+                              <td>{sellCashText}</td>
+                              <td>{sellTransferText}</td>
                               <td>{time}</td>
                             </tr>
+                          ) : (
+                            ''
                           );
                         })
                       : ''}

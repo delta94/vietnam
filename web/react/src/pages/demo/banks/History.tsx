@@ -63,22 +63,23 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
     super(props);
     this.state = { loading: false, bank: '', banks: [], currency: '', currencies: [], data: {} };
     this.getForexBanks = this.getForexBanks.bind(this);
-    this.getFinanceForexRatesData = this.getFinanceForexRatesData.bind(this);
+    this.getForexRates = this.getForexRates.bind(this);
     this.processRates = this.processRates.bind(this);
   }
 
   async componentDidMount() {
     await this.getForexBanks();
-    await this.getFinanceForexRatesData();
+    await this.getForexRates();
   }
 
   async getForexBanks() {
     await this.setState({ loading: true });
-    const { bank, banks } = await apis.getForexBanks();
+    const banks = await apis.getForexBanks();
+    const bank: string = banks[0] || '';
     await this.setState({ bank, banks, loading: false });
   }
 
-  async getFinanceForexRatesData() {
+  async getForexRates() {
     const { bank = '' } = this.state;
 
     if (!bank) return;
@@ -149,8 +150,8 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
                   <Form.Control as="select" defaultValue={bank} value={this.state.bank}>
                     {banks.map((bank, index) => {
                       return (
-                        <option key={index} value={bank.name}>
-                          {bank.name}
+                        <option key={index} value={bank}>
+                          {bank}
                         </option>
                       );
                     })}

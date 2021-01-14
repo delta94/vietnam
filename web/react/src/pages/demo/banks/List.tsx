@@ -6,7 +6,7 @@ import { apis } from '../../../services';
 interface IBanksListProps {}
 
 interface IBanksListState {
-  banks: Array<any>;
+  banks: Array<string>;
   loading: boolean;
 }
 
@@ -19,6 +19,7 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
     this.getForexBanks = this.getForexBanks.bind(this);
     this.renderTable = this.renderTable.bind(this);
     this.syncForexRates = this.syncForexRates.bind(this);
+    this.syncAll = this.syncAll.bind(this);
   }
 
   async componentDidMount() {
@@ -27,13 +28,21 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
 
   async getForexBanks() {
     await this.setState({ loading: true });
-    const { banks = [] } = await apis.getForexBanks();
+    const banks = await apis.getForexBanks();
     await this.setState({ banks, loading: false });
   }
 
   async syncForexRates(id: string) {
     const message = await apis.syncForexRates(id);
     alert(message);
+  }
+
+  async syncAll() {
+    const { banks = [] } = this.state;
+    for (const bank of banks) {
+      const message: string = await apis.syncForexRates(bank);
+      console.log(bank, message);
+    }
   }
 
   renderTable(loading: boolean, banks: Array<any> = []) {
@@ -50,25 +59,22 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
               <thead>
                 <tr>
                   <th>ID</th>
-                  <th>Name</th>
-                  <th>Sync</th>
+                  <th>
+                    <Button variant="danger" onClick={() => this.syncAll()}>
+                      SYNC ALL
+                    </Button>
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {banks.length
                   ? banks.map((bank, index) => {
-                      const { id = '', name = '', url = '' } = bank;
                       return (
                         <tr key={index}>
-                          <td>{id}</td>
+                          <td>{bank}</td>
                           <td>
-                            <a href={url} target="_blank" rel="noreferrer">
-                              {name}
-                            </a>
-                          </td>
-                          <td>
-                            <Button variant="danger" onClick={() => this.syncForexRates(id)}>
-                              Sync
+                            <Button variant="danger" onClick={() => this.syncForexRates(bank)}>
+                              SYNC
                             </Button>
                           </td>
                         </tr>

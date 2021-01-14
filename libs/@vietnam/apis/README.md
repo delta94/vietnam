@@ -65,7 +65,14 @@ const wards: Array<any> = await administrativeDivisions.getWards(skip, limit);
 import { banks } from 'vnapis';
 
 // Get Banks
-const _banks = await banks.getBanks();
+const _banks: Array<any> = await banks.getBanks();
+
+// Get Forex Bank IDs
+const ids: Array<string> = await banks.getForexBankIds();
+
+// Get Forex Rates
+const bankId: string = 'vietcombank';
+const rates: Array<any> = await banks.getForexRates(bankId);
 ```
 
 ### Calendar

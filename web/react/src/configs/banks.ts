@@ -17,11 +17,10 @@ const banks = {
     response: {
       200: {
         schema: [
-          { name: 'id', type: 'string', description: '' },
-          { name: 'name', type: 'string', description: '' },
-          { name: 'url', type: 'string', description: '' }
+          { name: 'total', type: 'number', description: '' },
+          { name: 'banks', type: 'Array<string>', description: '' }
         ],
-        example: [{ id: '<string>', name: '<string>', url: '<string>' }]
+        example: [{ total: '<number>', banks: '<Array<string>>' }]
       },
       400: {
         schema: [{ name: 'message', type: 'string', description: '' }],

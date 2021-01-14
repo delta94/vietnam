@@ -3,6 +3,7 @@
 import SSI from './stock/ssi';
 import TanViet from './stock/tanviet';
 
+import Banks from './banks';
 import OpenWeatherMap from './open-weather-map';
 import Utils from './utils';
 import TaskQueueProcessor from './task-queue-processor';
@@ -12,6 +13,7 @@ import GHN from 'giaohangnhanh';
 
 import Vietcetera from 'vietcetera';
 
+export const banks: Banks = new Banks();
 export const ssi: SSI = new SSI();
 export const tanViet: TanViet = new TanViet();
 

@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 import { baseURL } from '../constants';
 
 export default class Base {
-  public async get(endpoint: string): Promise<Array<any>> {
+  public async get(endpoint: string): Promise<any> {
     const url = `${baseURL}/${endpoint}`;
     return new Promise(resolve => {
       fetch(url)

@@ -8,4 +8,14 @@ export default class Banks extends Base {
   public async getBanks(): Promise<Array<IBank>> {
     return await this.get('banks');
   }
+
+  public async getForexBankIds(): Promise<Array<string>> {
+    const { banks = [] } = (await this.get('banks/forex/banks')) || {};
+    return banks;
+  }
+
+  public async getForexRates(id: string = ''): Promise<Array<any>> {
+    const rates: Array<any> = (await this.get(`banks/forex/rates?id=${id}`)) || [];
+    return rates;
+  }
 }

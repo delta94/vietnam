@@ -131,11 +131,10 @@ export default class APIS {
     return { data, currency, currencies };
   }
 
-  public async getForexBanks() {
+  public async getForexBanks(): Promise<Array<string>> {
     const endpoint: IEndpoint = endpoints.banks.getForexBanks;
-    const banks = await this.fetch(endpoint);
-    const { name: bank = '' } = banks[0] || {};
-    return { bank, banks };
+    const { banks = [] } = (await this.fetch(endpoint)) || {};
+    return banks;
   }
 
   public async syncForexRates(id: string) {
