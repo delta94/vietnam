@@ -25,9 +25,6 @@ jobs:
       - name: App - Build Server
         working-directory: ./server/node
         run: yarn install && yarn build
-      - name: App - Build Web
-        working-directory: ./web/angular
-        run: yarn install && yarn build
       - name: Heroku - Login to Container registry
         working-directory: ./server/node
         env:

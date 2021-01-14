@@ -7,13 +7,8 @@ const prefix: string = `banks`;
 const banks: Array<IRoute> = [
   { method: `GET`, query: [], body: [], path: `${prefix}`, middlewares: [] },
   { method: `GET`, query: [], body: [], path: `${prefix}/forex/banks`, middlewares: [] },
-  {
-    method: `GET`,
-    query: [{ name: 'id', required: false, type: 'string' }],
-    body: [],
-    path: `${prefix}/forex/rates`,
-    middlewares: []
-  },
+  { method: `GET`, query: [], body: [], path: `${prefix}/forex/rates`, middlewares: [] },
+  { method: `GET`, query: [], body: [], path: `${prefix}/forex/rates/:id`, middlewares: [] },
   {
     method: `POST`,
     query: [],

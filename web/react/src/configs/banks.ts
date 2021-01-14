@@ -61,7 +61,7 @@ const banks = {
   syncForexRates: {
     id: 'syncForexRates',
     name: 'Sync Forex Rates',
-    public: false,
+    public: true,
     method: 'POST',
     path: '/banks/forex/sync',
     url: `${baseAPI}/banks/forex/sync`,
