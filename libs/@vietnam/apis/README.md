@@ -68,11 +68,14 @@ import { banks } from 'vnapis';
 const _banks: Array<any> = await banks.getBanks();
 
 // Get Forex Bank IDs
-const ids: Array<string> = await banks.getForexBankIds();
+const ids: Array<string> = await banks.getForexBanks();
 
 // Get Forex Rates
+const rates: Array<any> = await banks.getForexRates();
+
+// Get Forex Rates By Bank
 const id: string = 'vietcombank';
-const rates: Array<any> = await banks.getForexRates(id); // Required - Default is 'vietcombank'
+const rates: Array<any> = await banks.getForexRatesByBank(id); // Required - Default is 'vietcombank'
 ```
 
 ### Calendar

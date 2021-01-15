@@ -1,7 +1,7 @@
 'use strict';
 
 import { redisClient } from '../clients';
-import { youTube } from '../libs';
+import { utils, youTube } from '../libs';
 
 export default class YouTubeService {
   public async getTrending(categoryId: number = 0): Promise<Array<any>> {
@@ -9,7 +9,7 @@ export default class YouTubeService {
     const cache: string = await redisClient.get(key);
     if (cache) {
       console.log(`Get YouTube Trending ${categoryId} from Cache`);
-      return JSON.parse(cache);
+      return utils.parseJSON(cache, []);
     }
     const videos: Array<any> = await youTube.getMostPopularVideos(categoryId);
     await redisClient.setex(key, JSON.stringify(videos), 60 * 60);
@@ -21,7 +21,7 @@ export default class YouTubeService {
     const cache: string = await redisClient.get(key);
     if (cache) {
       console.log('Get YouTube Video Categories from Cache');
-      return JSON.parse(cache);
+      return utils.parseJSON(cache, []);
     }
     const categories = await youTube.getVideoCategories();
     await redisClient.setex(key, JSON.stringify(categories), 60 * 60);

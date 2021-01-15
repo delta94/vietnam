@@ -13,14 +13,20 @@ describe('banks', () => {
   });
 
   it('get forex bank id', async () => {
-    const ids: Array<string> = await banks.getForexBankIds();
+    const ids: Array<string> = await banks.getForexBanks();
     console.log(ids);
     assert.ok(typeof ids === 'object');
   });
 
   it('get forex rates', async () => {
+    const rates: Array<any> = await banks.getForexRates();
+    console.log(rates);
+    assert.ok(typeof rates === 'object');
+  });
+
+  it('get forex rates by bank', async () => {
     const bankId: string = 'vietcombank';
-    const rates: Array<any> = await banks.getForexRates(bankId);
+    const rates: Array<any> = await banks.getForexRatesByBank(bankId);
     console.log(rates);
     assert.ok(typeof rates === 'object');
   });

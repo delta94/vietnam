@@ -124,4 +124,13 @@ export default class Utils {
       return 'Others';
     }
   }
+
+  parseJSON(string: string, fallback: any = {}) {
+    try {
+      return JSON.parse(string);
+    } catch (error) {
+      console.error(`parseJSON error`, error);
+      return fallback;
+    }
+  }
 }

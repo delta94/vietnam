@@ -57,20 +57,6 @@ export default class BanksService {
           resolve([]);
         });
     });
-    for (const id of bankIds) {
-      const key: string = `forex-rates-${id}`;
-      const cache: string = await redisClient.get(key);
-      if (cache) {
-        console.log(`Get Forex Rates ${id} from Cache`);
-        docs.push(JSON.parse(cache));
-        continue;
-      }
-      const doc = await dsFinanceForexRate.findOne({ bank: id }, { sort: { timestamp: -1 } });
-      if (utils.isObjectEmpty(doc)) continue;
-      await redisClient.setex(key, JSON.stringify(doc), 60 * 60);
-      docs.push(doc);
-    }
-    return docs;
   }
 
   private async getForexRatesOfBankFromDB(id: string): Promise<any> {
@@ -78,7 +64,7 @@ export default class BanksService {
     const cache: string = await redisClient.get(key);
     if (cache) {
       console.log(`Get Forex Rates ${id} from Cache`);
-      return JSON.parse(cache);
+      return utils.parseJSON(cache, []);
     }
     const doc = await dsFinanceForexRate.findOne({ bank: id }, { sort: { timestamp: -1 } });
     if (utils.isObjectEmpty(doc)) return {};

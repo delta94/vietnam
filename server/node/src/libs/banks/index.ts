@@ -1,7 +1,9 @@
 'use strict';
 
+import ABBank from './abbank';
 import ACB from './acb';
 import Agribank from './agribank';
+import BaoVietBank from './baovietbank';
 import BIDV from './bidv';
 import CBBank from './cbbank';
 import DongABank from './dongabank';
@@ -12,8 +14,11 @@ import KienLongBank from './kienlongbank';
 import LienVietPostBank from './lienvietpostbank';
 import MSB from './msb';
 import NamABank from './namabank';
+import NCB from './ncb';
 import OCB from './ocb';
 import OceanBank from './oceanbank';
+import PGBank from './pgbank';
+import PVcomBank from './pvcombank';
 import Sacombank from './sacombank';
 import SaigonBank from './saigonbank';
 import SCB from './scb';
@@ -29,8 +34,10 @@ import Vietinbank from './vietinbank';
 import VPBank from './vpbank';
 
 export default class Banks {
+  public abbank: ABBank = new ABBank();
   public acb: ACB = new ACB();
   public agribank: Agribank = new Agribank();
+  public baovietbank: BaoVietBank = new BaoVietBank();
   public bidv: BIDV = new BIDV();
   public cbbank: CBBank = new CBBank();
   public dongabank: DongABank = new DongABank();
@@ -41,8 +48,11 @@ export default class Banks {
   public lienvietpostbank: LienVietPostBank = new LienVietPostBank();
   public msb: MSB = new MSB();
   public namabank: NamABank = new NamABank();
+  public ncb: NCB = new NCB();
   public ocb: OCB = new OCB();
   public oceanbank: OceanBank = new OceanBank();
+  public pgbank: PGBank = new PGBank();
+  public pvcombank: PVcomBank = new PVcomBank();
   public sacombank: Sacombank = new Sacombank();
   public saigonbank: SaigonBank = new SaigonBank();
   public scb: SCB = new SCB();
@@ -58,8 +68,10 @@ export default class Banks {
   public vpbank: VPBank = new VPBank();
 
   public bankIds: Array<string> = [
+    'abbank',
     'acb',
     'agribank',
+    'baovietbank',
     'bidv',
     'cbbank',
     'dongabank',
@@ -70,8 +82,11 @@ export default class Banks {
     'lienvietpostbank',
     'msb',
     'namabank',
+    'ncb',
     'ocb',
     'oceanbank',
+    'pgbank',
+    'pvcombank',
     'sacombank',
     'saigonbank',
     'scb',

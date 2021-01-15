@@ -49,7 +49,8 @@
     "vietcetera": "^1.0.0",
     "vietnamnews": "^1.0.3",
     "vnapis": "^1.0.2",
-    "vnpay": "^1.0.2"
+    "vnpay": "^1.0.2",
+    "xml2json": "^0.12.0"
   },
   "devDependencies": {
     "@types/cheerio": "^0.22.22",
