@@ -192,7 +192,11 @@ export default class BanksService {
     return { dy, dm, dd, dh, dmi, dt };
   }
 
-  public async syncForexRatesByBankId(id: string, options: any = {}): Promise<any> {
+  public async syncForexRatesByBankId(
+    id: string,
+    options: any = {},
+    index: number = 0
+  ): Promise<any> {
     try {
       const self = this;
       const { dy = 0, dm = 0, dd = 0, dh = 0, dmi = 0, dt = 0 } = self.getDefaultTime();
@@ -206,23 +210,28 @@ export default class BanksService {
       const query: any = { year, month, date, hour, minute, bank: id };
       const doc: any = { timestamp, year, month, date, hour, minute, bank: id, rates };
       await dsFinanceForexRate.updateOne(query, doc);
-      // const esIndex = 'finance-forex-rates-v1';
-      // const dateString = `${year}-${utils.addZero(month)}-${utils.addZero(date)}`;
-      // const timeString = `${utils.addZero(hour)}:${utils.addZero(minute)}:00Z`;
-      // const esDate = `${dateString}T${timeString}`;
-      // const res = await esClient.add(esIndex, { bank, rates, date: esDate });
-      // console.log('Res', res);
-      // await esClient.refresh(esIndex);
+      await this.syncForexRatesToES(id, rates, { year, month, date, hour, minute });
       const message = rates
         .map(rate => {
           const { code, buyCash, buyTransfer, sellCash, sellTransfer } = rate;
           return `${code} - ${buyCash} - ${buyTransfer} - ${sellCash} - ${sellTransfer}`;
         })
         .join('\n');
-      await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${id}\n${message}`);
+      await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${index} - ${id}\n${message}`);
     } catch (error) {
       console.error(error);
     }
+  }
+
+  private async syncForexRatesToES(bank: string, rates: Array<any>, time: any = {}) {
+    const { year, month, date, hour, minute } = time;
+    const esIndex = 'finance-forex-rates-v1';
+    const dateString = `${year}-${utils.addZero(month)}-${utils.addZero(date)}`;
+    const timeString = `${utils.addZero(hour)}:${utils.addZero(minute)}:00Z`;
+    const esDate = `${dateString}T${timeString}`;
+    const res = await esClient.add(esIndex, { bank, rates, date: esDate });
+    console.log('syncForexRatesToES() res', res);
+    await esClient.refresh(esIndex);
   }
 
   public async syncForexRates(time: any): Promise<any> {
@@ -234,8 +243,10 @@ export default class BanksService {
 
       const { bankIds = [] } = banks;
 
+      let index = 0;
       for (const id of bankIds) {
-        await self.syncForexRatesByBankId(id, options);
+        index++;
+        await self.syncForexRatesByBankId(id, options, index);
       }
     } catch (error) {
       console.error('syncForexRates() error', error);
