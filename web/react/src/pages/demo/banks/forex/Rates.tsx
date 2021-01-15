@@ -147,12 +147,8 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
                 const buyTransferText: string = buyTransfer[currency] || '';
                 const sellCashText: string = sellCash[currency] || '';
                 const sellTransferText: string = sellTransfer[currency] || '';
-                const displayFlag: boolean =
-                  buyCashText !== '' ||
-                  buyTransferText !== '' ||
-                  sellCashText !== '' ||
-                  sellTransferText !== '';
-                return displayFlag ? (
+
+                return (
                   <tr key={index}>
                     <td>{index + 1}</td>
                     <td>{bank}</td>
@@ -162,8 +158,6 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
                     <td>{sellTransferText}</td>
                     <td>{time}</td>
                   </tr>
-                ) : (
-                  ''
                 );
               })}
             </tbody>
