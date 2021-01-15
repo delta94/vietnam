@@ -9,7 +9,7 @@ export default class MongooseClient {
     this.uri = uri;
   }
 
-  public async init() {
+  public async connect() {
     const self = this;
 
     mongoose.set('useCreateIndex', true);

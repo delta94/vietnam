@@ -76,7 +76,7 @@ const syncCompanies = (profiles, lastSyncedAt) => {
 };
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
   const lastSyncedAt = Date.now();
   const markets = ['hnx', 'hose'];
   let companies = await ssi.getListedCompanies();

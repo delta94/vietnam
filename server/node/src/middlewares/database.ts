@@ -9,7 +9,7 @@ const NODE_ENV: string = process.env.NODE_ENV || 'development';
 const URL_BASE: string = process.env.URL_BASE || '';
 
 export default async app => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
   await postgreClient.connect();
 
   const server = new ApolloServer({

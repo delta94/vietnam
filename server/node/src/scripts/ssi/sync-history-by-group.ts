@@ -10,7 +10,7 @@ import { financeService } from '../../services';
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   let GROUP = process.env.GROUP || '';
   GROUP = GROUP.toUpperCase();
@@ -25,7 +25,7 @@ const main = async () => {
   for (const company of companies) {
     const { symbol } = company;
     console.log(symbol);
-    await financeService.syncHistoryBySymbol(symbol, TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbol(symbol);
   }
 
   process.exit(0);

@@ -7,7 +7,7 @@ import { mongooseClient } from '../../clients';
 import { dsFinanceStockHistoryData } from '../../data';
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   let SYMBOL = process.env.SYMBOL || '';
   const symbol = SYMBOL.toUpperCase();

@@ -11,7 +11,7 @@ import { mongooseClient } from '../../database';
 import { ssiService } from '../../services';
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   let SYMBOL = process.env.SYMBOL || 'VIC';
   SYMBOL = SYMBOL.toUpperCase();

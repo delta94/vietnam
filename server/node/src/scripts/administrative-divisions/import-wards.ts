@@ -8,7 +8,7 @@ import { dsMapsWard } from '../../data';
 import { utils } from '../../libs';
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   await dsMapsWard.delete({});
 

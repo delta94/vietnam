@@ -8,6 +8,7 @@ import { banks, utils } from '../libs';
 import { dsFinanceForexRate } from '../data';
 
 const URL_BASE: string = process.env.URL_BASE || '';
+const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID || '0', 10) || 0;
 
 export default class BanksService {
   public async getBanks(): Promise<Array<any>> {
@@ -195,19 +196,11 @@ export default class BanksService {
     try {
       const self = this;
       const { dy = 0, dm = 0, dd = 0, dh = 0, dmi = 0, dt = 0 } = self.getDefaultTime();
-      const {
-        year = dy,
-        month = dm,
-        date = dd,
-        hour = dh,
-        minute = dmi,
-        timestamp = dt,
-        telegramChatId = 0
-      } = options;
+      const { year = dy, month = dm, date = dd, hour = dh, minute = dmi, timestamp = dt } = options;
       const rates: any = await self.getForexRatesByBank(id);
       console.log(id, rates);
       if (!rates.length) {
-        await telegramClient.sendMarkdownMessage(telegramChatId, `${id}\nNO DATA`);
+        await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${id}\nNO DATA`);
         return;
       }
       const query: any = { year, month, date, hour, minute, bank: id };
@@ -226,18 +219,18 @@ export default class BanksService {
           return `${code} - ${buyCash} - ${buyTransfer} - ${sellCash} - ${sellTransfer}`;
         })
         .join('\n');
-      await telegramClient.sendMarkdownMessage(telegramChatId, `${id}\n${message}`);
+      await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${id}\n${message}`);
     } catch (error) {
       console.error(error);
     }
   }
 
-  public async syncForexRates(telegramChatId: number, time: any): Promise<any> {
+  public async syncForexRates(time: any): Promise<any> {
     const self = this;
     try {
       const { dy = 0, dm = 0, dd = 0, dh = 0, dmi = 0, dt = 0 } = self.getDefaultTime();
       const { year = dy, month = dm, date = dd, hour = dh, minute = dmi, timestamp = dt } = time;
-      const options = { year, month, date, hour, minute, timestamp, telegramChatId };
+      const options = { year, month, date, hour, minute, timestamp };
 
       const { bankIds = [] } = banks;
 
@@ -247,9 +240,9 @@ export default class BanksService {
     } catch (error) {
       console.error('syncForexRates() error', error);
       const message: string = `syncForexRates() error`;
-      await telegramClient.sendMarkdownMessage(telegramChatId, message);
+      await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, message);
       const url: string = `${URL_BASE}/api/banks/forex/sync/retry`;
-      const data: any = { telegramChatId, time };
+      const data: any = { time };
       await fetch(url, {
         method: 'POST',
         body: JSON.stringify(data),

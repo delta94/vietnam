@@ -6,18 +6,16 @@ dotenv.config({ path: './src/environments/dev.env' });
 import { mongooseClient } from '../../clients';
 import { financeService } from '../../services';
 
-const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID, 10);
-
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   let SYMBOL = process.env.SYMBOL || '';
   SYMBOL = SYMBOL.toUpperCase();
 
   if (SYMBOL) {
-    await financeService.syncHistoryBySymbol(SYMBOL, TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbol(SYMBOL);
   } else {
-    await financeService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
+    await financeService.syncHistoryBySymbols();
   }
 
   process.exit(0);

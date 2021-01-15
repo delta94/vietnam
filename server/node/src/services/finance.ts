@@ -10,6 +10,8 @@ import {
   dsFinanceStockIndicator
 } from '../data';
 
+const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID || '0', 10) || 0;
+
 export default class FinanceService {
   constructor() {}
 
@@ -208,14 +210,14 @@ export default class FinanceService {
     await dsFinanceStockHistoryData.bulkWrite(operations);
   }
 
-  public async syncHistoryBySymbol(symbol: string = '', telegramChatId: number = 0): Promise<any> {
+  public async syncHistoryBySymbol(symbol: string = ''): Promise<any> {
     const self = this;
     if (!symbol) return;
     let history = await self.getHistoryFromSSI(symbol);
     const len = history.length;
     if (!history.length) {
       const message = `\`${symbol}\` - (${len})`;
-      return await telegramClient.sendMarkdownMessage(telegramChatId, message);
+      return await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, message);
     }
     await self.importHistoryToDB(history, symbol);
     const last = _.last(history);
@@ -225,10 +227,10 @@ export default class FinanceService {
     const ld = `${lyear}-${utils.addZero(lmonth)}-${utils.addZero(ldate)}`;
     const fd = `${fyear}-${utils.addZero(fmonth)}-${utils.addZero(fdate)}`;
     const message = `\`${symbol}\` - (${fd} - ${ld}) (${len})`;
-    await telegramClient.sendMarkdownMessage(telegramChatId, message);
+    await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, message);
   }
 
-  public async syncHistoryBySymbols(telegramChatId: number) {
+  public async syncHistoryBySymbols() {
     const self = this;
 
     const sort: any = { symbol: 1 };
@@ -246,13 +248,13 @@ export default class FinanceService {
       const { symbol = '' } = company;
       if (!symbol) return;
       console.log(`companies left: ${companies.length}`);
-      return self.syncHistoryBySymbol(symbol, telegramChatId);
+      return self.syncHistoryBySymbol(symbol);
     });
 
-    await self.sendPotentialStocks(telegramChatId);
+    await self.sendPotentialStocks();
   }
 
-  public async sendPotentialStocks(telegramChatId: number) {
+  public async sendPotentialStocks() {
     const self = this;
     const to = Date.now();
     const from = to - 1000 * 60 * 60 * 24 * 30;
@@ -265,7 +267,7 @@ export default class FinanceService {
       })
       .join('\n');
 
-    await telegramClient.sendMarkdownMessage(telegramChatId, message);
+    await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, message);
   }
 
   public calculateProfit(buy: number = 0, sell: number = 0, volume: number = 0): number {

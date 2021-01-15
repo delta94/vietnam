@@ -11,7 +11,7 @@ import { tanViet } from '../../libs';
 import { dsFinanceStockListedCompany } from '../../data';
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   const companies = await dsFinanceStockListedCompany.find({ group: 'VN30' });
 

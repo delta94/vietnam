@@ -11,6 +11,7 @@ export default class OCB {
     const year: number = d.getFullYear();
     const time: number = d.getTime();
     const url: string = `https://www.ocb.com.vn/vi/callchangerate?date=${date}&month=${month}&year=${year}&_=${time}`;
+    console.log(`OCB getForexRates() url ${url}`);
     return new Promise(resolve => {
       fetch(url)
         .then(res => res.text())

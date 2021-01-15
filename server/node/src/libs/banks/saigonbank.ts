@@ -6,8 +6,9 @@ import * as cheerio from 'cheerio';
 export default class SaigonBank {
   public async getForexRates() {
     const url: string = 'https://saigonbank.com.vn/vi/truy-cap-nhanh/ty-gia-ngoai-te';
+    const timeout: number = 1000 * 60 * 6;
     return new Promise(resolve => {
-      fetch(url)
+      fetch(url, { timeout })
         .then(res => res.text())
         .then((body: string) => {
           const $: cheerio.Root = cheerio.load(body);

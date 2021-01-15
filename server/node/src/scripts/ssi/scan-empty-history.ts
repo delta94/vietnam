@@ -51,7 +51,7 @@ const syncHistoryBySymbol = async (symbol, i) => {
 };
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   const companies = await dsFinanceStockListedCompany.find({}, { sort: { listingDate: 1 } });
   console.log(companies.length);

@@ -8,7 +8,7 @@ import { financeService } from '../../services';
 import { dsFinanceStockIndicator, dsFinanceStockListedCompany } from '../../data';
 
 const main = async () => {
-  await mongooseClient.init();
+  await mongooseClient.connect();
 
   const companies = await dsFinanceStockListedCompany.find({});
   console.log(companies.length);

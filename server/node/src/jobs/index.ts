@@ -27,10 +27,10 @@ export default async () => {
       if (minute % 20 === 0) fetch(URL_BASE);
       if (day >= 1 && day <= 5 && hour >= 8 && hour < 18 && minute === 0) {
         const time = { year, month, date, hour, minute, timestamp };
-        await banksService.syncForexRates(TELEGRAM_CHAT_ID, time);
+        await banksService.syncForexRates(time);
       }
       if (day >= 1 && day <= 5 && hour === 16 && minute === 0) {
-        await financeService.syncHistoryBySymbols(TELEGRAM_CHAT_ID);
+        await financeService.syncHistoryBySymbols();
       }
     }
   });
