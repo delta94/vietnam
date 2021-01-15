@@ -4,7 +4,7 @@ export {
   AdministrativeDivisionsProvinces,
   AdministrativeDivisionsWards
 } from './administrative-divisions';
-export { BanksForex, BanksHistory, BanksList } from './banks';
+export { BanksList, BanksForexRates, BanksForexHistory, BanksForexSync } from './banks';
 export { CalendarConverter } from './calendar';
 export {
   FinanceCompanies,

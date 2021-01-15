@@ -7,9 +7,10 @@ import {
   AdministrativeDivisionsWards,
   // Banks
   Banks,
-  BanksForex,
-  BanksHistory,
   BanksList,
+  BanksForexRates,
+  BanksForexHistory,
+  BanksForexSync,
   // Calendar
   Calendar,
   CalendarConverter,
@@ -71,7 +72,14 @@ import {
   YouTubeVideoCategories
 } from '../pages';
 
-const routes = [
+interface IRoute {
+  path: string;
+  text: string;
+  component: any;
+  navigation: boolean;
+}
+
+const routes: Array<IRoute> = [
   {
     path: '',
     text: '',
@@ -115,21 +123,27 @@ const routes = [
     navigation: true
   },
   {
-    path: 'banks-forex',
-    text: 'Banks Forex',
-    component: BanksForex,
-    navigation: false
-  },
-  {
-    path: 'banks-history',
-    text: 'Banks History',
-    component: BanksHistory,
-    navigation: false
-  },
-  {
     path: 'banks-list',
     text: 'Banks List',
     component: BanksList,
+    navigation: false
+  },
+  {
+    path: 'banks-forex-rates',
+    text: 'Banks Forex Rates',
+    component: BanksForexRates,
+    navigation: false
+  },
+  {
+    path: 'banks-forex-history',
+    text: 'Banks Forex History',
+    component: BanksForexHistory,
+    navigation: false
+  },
+  {
+    path: 'banks-forex-sync',
+    text: 'Banks Forex Sync',
+    component: BanksForexSync,
     navigation: false
   },
   {

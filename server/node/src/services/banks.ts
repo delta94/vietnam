@@ -3,7 +3,7 @@
 import * as _ from 'lodash';
 import fetch from 'node-fetch';
 
-import { esClient, telegramClient, postgreClient } from '../clients';
+import { esClient, redisClient, telegramClient, postgreClient } from '../clients';
 import { banks, utils } from '../libs';
 import { dsFinanceForexRate } from '../data';
 
@@ -12,7 +12,16 @@ const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID || '0', 1
 
 export default class BanksService {
   public async getBanks(): Promise<Array<any>> {
-    const banks: any = await postgreClient.find('banks');
+    const fields: Array<string> = [
+      'code',
+      'name',
+      'name_en',
+      'name_short',
+      'url',
+      'type',
+      'type_en'
+    ];
+    const banks: any = await postgreClient.find('banks', {}, fields);
     return banks;
   }
 
@@ -24,21 +33,57 @@ export default class BanksService {
     const self = this;
     const { bankIds = [] } = banks;
 
-    const docs = await self.getMongoDocs(bankIds);
+    const docs: Array<any> = await self.getForexRatesFromDB(bankIds);
     const currencies = self.getCurrencies(docs);
     const data = self.processMongoDocs(docs);
 
     return { currencies, data };
   }
 
-  private async getMongoDocs(bankIds: Array<string> = []) {
+  private async getForexRatesFromDB(bankIds: Array<string> = []): Promise<Array<any>> {
+    const self = this;
     const docs = [];
+    return new Promise(resolve => {
+      Promise.all(
+        bankIds.map(async (id: string) => {
+          return await self.getForexRatesOfBankFromDB(id);
+        })
+      )
+        .then(res => {
+          resolve(res);
+        })
+        .catch((error: Error) => {
+          console.error('getForexRatesFromDB error', error);
+          resolve([]);
+        });
+    });
     for (const id of bankIds) {
+      const key: string = `forex-rates-${id}`;
+      const cache: string = await redisClient.get(key);
+      if (cache) {
+        console.log(`Get Forex Rates ${id} from Cache`);
+        docs.push(JSON.parse(cache));
+        continue;
+      }
       const doc = await dsFinanceForexRate.findOne({ bank: id }, { sort: { timestamp: -1 } });
       if (utils.isObjectEmpty(doc)) continue;
+      await redisClient.setex(key, JSON.stringify(doc), 60 * 60);
       docs.push(doc);
     }
     return docs;
+  }
+
+  private async getForexRatesOfBankFromDB(id: string): Promise<any> {
+    const key: string = `forex-rates-${id}`;
+    const cache: string = await redisClient.get(key);
+    if (cache) {
+      console.log(`Get Forex Rates ${id} from Cache`);
+      return JSON.parse(cache);
+    }
+    const doc = await dsFinanceForexRate.findOne({ bank: id }, { sort: { timestamp: -1 } });
+    if (utils.isObjectEmpty(doc)) return {};
+    await redisClient.setex(key, JSON.stringify(doc), 60 * 60);
+    return doc;
   }
 
   private getCurrencies(docs: Array<any> = []) {
@@ -192,11 +237,11 @@ export default class BanksService {
     return { dy, dm, dd, dh, dmi, dt };
   }
 
-  public async syncForexRatesByBankId(
+  public async syncForexRatesById(
     id: string,
     options: any = {},
     index: number = 0
-  ): Promise<any> {
+  ): Promise<string> {
     try {
       const self = this;
       const { dy = 0, dm = 0, dd = 0, dh = 0, dmi = 0, dt = 0 } = self.getDefaultTime();
@@ -209,8 +254,10 @@ export default class BanksService {
       }
       const query: any = { year, month, date, hour, minute, bank: id };
       const doc: any = { timestamp, year, month, date, hour, minute, bank: id, rates };
+      const key: string = `forex-rates-${id}`;
+      await redisClient.setex(key, JSON.stringify(doc), 60 * 60);
       await dsFinanceForexRate.updateOne(query, doc);
-      await this.syncForexRatesToES(id, rates, { year, month, date, hour, minute });
+      // await this.syncForexRatesToES(id, rates, { year, month, date, hour, minute });
       const message = rates
         .map(rate => {
           const { code, buyCash, buyTransfer, sellCash, sellTransfer } = rate;
@@ -218,8 +265,10 @@ export default class BanksService {
         })
         .join('\n');
       await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${index} - ${id}\n${message}`);
+      return 'OK';
     } catch (error) {
-      console.error(error);
+      console.error('syncForexRatesById() error', error);
+      return error.stack;
     }
   }
 
@@ -246,7 +295,7 @@ export default class BanksService {
       let index = 0;
       for (const id of bankIds) {
         index++;
-        await self.syncForexRatesByBankId(id, options, index);
+        await self.syncForexRatesById(id, options, index);
       }
     } catch (error) {
       console.error('syncForexRates() error', error);

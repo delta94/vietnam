@@ -125,6 +125,11 @@ export default class APIS {
     return await this.fetch(endpoint, { body: {}, query: { symbol, from, to } });
   }
 
+  public async getBanks(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.banks.getBanks;
+    return await this.fetch(endpoint);
+  }
+
   public async getBanksForexRates(): Promise<any> {
     const endpoint: IEndpoint = endpoints.banks.getForexRates;
     const response = await this.fetch(endpoint);
@@ -141,7 +146,7 @@ export default class APIS {
 
   public async syncForexRates(id: string): Promise<string> {
     const endpoint: IEndpoint = endpoints.banks.syncForexRates;
-    const { status = '' } = await this.fetch(endpoint, { query: {}, body: { id } });
+    const { status = 'ERROR' } = await this.fetch(endpoint, { query: {}, body: { id } });
     return status;
   }
 

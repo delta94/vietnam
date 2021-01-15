@@ -6,6 +6,6 @@ import { banksService } from '../../../../services';
 
 export default async (req: Request, res: Response): Promise<Response<any>> => {
   const { id = '' } = req.body;
-  await banksService.syncForexRatesByBankId(id);
-  return res.json({ status: 'OK' });
+  const message: string = await banksService.syncForexRatesById(id);
+  return res.json({ status: message });
 };

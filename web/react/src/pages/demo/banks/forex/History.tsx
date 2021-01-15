@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Card, Form, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 
-import { apis, graphql, helper } from '../../../services';
+import { apis, graphql, helper } from '../../../../services';
 
 const datasetsOptions = {
   fill: false,

@@ -13,7 +13,7 @@ class App extends Component {
           <div className="pt-3 pb-5">
             {routes.map((route, index) => {
               const { path, component } = route;
-              return <Route key={index} path={`/${path}`} component={component} exact></Route>;
+              return <Route exact key={index} path={`/${path}`} component={component}></Route>;
             })}
           </div>
           <Footer></Footer>

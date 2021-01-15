@@ -8,6 +8,7 @@ interface ITableProps {
   rows?: Array<any>;
   rowConfigs?: Array<any>;
   emptyRowsText?: string;
+  rowIndexEnabled?: boolean;
 }
 
 export default class Table extends Component<ITableProps> {
@@ -18,7 +19,8 @@ export default class Table extends Component<ITableProps> {
       caption = '',
       rows = [],
       rowConfigs = [],
-      emptyRowsText = 'No Data'
+      emptyRowsText = 'No Data',
+      rowIndexEnabled = false
     } = this.props;
 
     return (
@@ -44,6 +46,7 @@ export default class Table extends Component<ITableProps> {
               )}
               {rowConfigs.length && (
                 <thead>
+                  {rowIndexEnabled && <td>#</td>}
                   <tr>
                     {rowConfigs.map((config, headerIndex) => {
                       const { header = '' } = config;
@@ -57,6 +60,7 @@ export default class Table extends Component<ITableProps> {
                   {rows.map((row, rowIndex) => {
                     return (
                       <tr key={rowIndex}>
+                        {rowIndexEnabled && <td>{rowIndex + 1}</td>}
                         {rowConfigs.map((config, cellIndex) => {
                           const { key, className = '' } = config;
                           const cell =

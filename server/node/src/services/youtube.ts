@@ -8,7 +8,7 @@ export default class YouTubeService {
     const key: string = `youtube-trending-${categoryId}`;
     const cache: string = await redisClient.get(key);
     if (cache) {
-      console.log('Get YouTube Trending from Cache');
+      console.log(`Get YouTube Trending ${categoryId} from Cache`);
       return JSON.parse(cache);
     }
     const videos: Array<any> = await youTube.getMostPopularVideos(categoryId);

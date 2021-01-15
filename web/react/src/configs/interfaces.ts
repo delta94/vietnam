@@ -35,6 +35,7 @@ export interface IAdministrativeDivisionsEndpoints {
 }
 
 export interface IBanksEndpoints {
+  getBanks: IEndpoint;
   getForexBanks: IEndpoint;
   getForexRates: IEndpoint;
   syncForexRates: IEndpoint;
