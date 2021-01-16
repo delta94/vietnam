@@ -9,6 +9,6 @@ describe('license plates', () => {
   it('get license plates', async () => {
     const plates = await licensePlates.getLicensePlates();
     console.log(plates);
-    assert.ok(typeof plates === 'object');
+    assert.ok(typeof plates === 'object' && plates.length > 0);
   });
 });

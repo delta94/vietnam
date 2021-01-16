@@ -133,3 +133,11 @@ export interface INewsArticle {
   description: string;
   url: string;
 }
+
+export interface IOpenAPI {
+  name: string;
+  type: string;
+  type_en: string;
+  url: string;
+  npm: string;
+}

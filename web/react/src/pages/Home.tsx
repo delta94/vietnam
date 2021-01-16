@@ -23,7 +23,7 @@ export default class Home extends Component<IHomeProps, IHomeState> {
       },
       {
         name: 'banks',
-        npm: 'vietnambanks',
+        npm: 'vnapis#banks',
         docs: '/banks'
       },
       {
@@ -58,12 +58,12 @@ export default class Home extends Component<IHomeProps, IHomeState> {
       },
       {
         name: 'news',
-        npm: 'vietnamnews',
+        npm: 'vnapis#news',
         docs: '/news'
       },
       {
         name: 'open-apis',
-        npm: '',
+        npm: 'vnapis#open-apis',
         docs: '/open-apis'
       },
       {

@@ -9,13 +9,13 @@ describe('phones', () => {
   it('get providers', async () => {
     const providers = await phones.getProviders();
     console.log(providers);
-    assert.ok(typeof providers === 'object');
+    assert.ok(typeof providers === 'object' && providers.length > 0);
   });
 
   it('get prefixes', async () => {
     const prefixes = await phones.getPrefixes();
     console.log(prefixes);
-    assert.ok(typeof prefixes === 'object');
+    assert.ok(typeof prefixes === 'object' && prefixes.length > 0);
   });
 
   it('get provider from phone number', async () => {

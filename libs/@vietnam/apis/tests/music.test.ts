@@ -9,6 +9,6 @@ describe('music', () => {
   it('get artists', async () => {
     const artists = await music.getArtists();
     console.log(artists);
-    assert.ok(typeof artists === 'object');
+    assert.ok(typeof artists === 'object' && artists.length > 0);
   });
 });

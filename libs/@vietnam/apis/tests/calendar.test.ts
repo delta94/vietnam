@@ -21,13 +21,13 @@ describe('calendar', () => {
   it('get list of can', async () => {
     const listOfCan = calendar.getListOfCan();
     console.log(listOfCan);
-    assert.ok(typeof listOfCan === 'object');
+    assert.ok(typeof listOfCan === 'object' && listOfCan.length > 0);
   });
 
   it('get list of chi', async () => {
     const listOfChi = calendar.getListOfChi();
     console.log(listOfChi);
-    assert.ok(typeof listOfChi === 'object');
+    assert.ok(typeof listOfChi === 'object' && listOfChi.length > 0);
   });
 
   it('get can chi of year', async () => {

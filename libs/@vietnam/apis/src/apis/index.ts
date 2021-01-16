@@ -9,6 +9,7 @@ import Government from './government';
 import LicensePlates from './license-plates';
 import Music from './music';
 import News from './news';
+import OpenAPIs from './open-apis';
 import Phones from './phones';
 import Sports from './sports';
 import VNLTK from './vnltk';
@@ -23,6 +24,7 @@ export {
   LicensePlates,
   Music,
   News,
+  OpenAPIs,
   Phones,
   Sports,
   VNLTK

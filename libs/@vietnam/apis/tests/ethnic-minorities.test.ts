@@ -9,6 +9,6 @@ describe('ethnic minorities', () => {
   it('get ethnic minorities', async () => {
     const minorities = await ethnicMinorities.getEthnicMinorities();
     console.log(minorities);
-    assert.ok(typeof minorities === 'object');
+    assert.ok(typeof minorities === 'object' && minorities.length > 0);
   });
 });

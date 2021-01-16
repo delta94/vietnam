@@ -18,6 +18,7 @@ If you enjoyed this project — or just feeling generous, consider [buying me a 
     - [License Plates](#license-plates)
     - [Music](#music)
     - [News](#news)
+    - [Open APIs](#open-apis)
     - [Phones](#phones)
     - [Sports](#sports)
     - [VNLTK](#vnltk)
@@ -262,6 +263,14 @@ const articles = await news.getArticles();
 const source = 'vnexpress';
 const category = 'general';
 const articles = await news.getArticles(source, category);
+```
+
+### Open APIs
+
+```ts
+import { openAPIs } from 'vnapis';
+
+const apis = await openAPIs.getOpenAPIs();
 ```
 
 ### Phones

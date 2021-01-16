@@ -9,37 +9,37 @@ describe('vnltk', () => {
   it('get words', async () => {
     const words = vnltk.getWords();
     console.log(words);
-    assert.ok(typeof words === 'object');
+    assert.ok(typeof words === 'object' && words.length > 0);
   });
 
   it('get stop words', async () => {
     const stopWords = vnltk.getStopWords();
     console.log(stopWords);
-    assert.ok(typeof stopWords === 'object');
+    assert.ok(typeof stopWords === 'object' && stopWords.length > 0);
   });
 
   it('get names', async () => {
     const names = vnltk.getNames();
     console.log(names);
-    assert.ok(typeof names === 'object');
+    assert.ok(typeof names === 'object' && names.length > 0);
   });
 
   it('get family names', async () => {
     const familyNames = vnltk.getFamilyNames();
     console.log(familyNames);
-    assert.ok(typeof familyNames === 'object');
+    assert.ok(typeof familyNames === 'object' && familyNames.length > 0);
   });
 
   it('get first names', async () => {
     const firstNames = vnltk.getFirstNames();
     console.log(firstNames);
-    assert.ok(typeof firstNames === 'object');
+    assert.ok(typeof firstNames === 'object' && firstNames.length > 0);
   });
 
   it('get proverbs', async () => {
     const proverbs = vnltk.getProverbs();
     console.log(proverbs);
-    assert.ok(typeof proverbs === 'object');
+    assert.ok(typeof proverbs === 'object' && proverbs.length > 0);
   });
 
   it('latinize', async () => {

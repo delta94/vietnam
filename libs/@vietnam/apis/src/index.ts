@@ -10,6 +10,7 @@ import {
   LicensePlates,
   Music,
   News,
+  OpenAPIs,
   Phones,
   Sports,
   VNLTK
@@ -24,6 +25,7 @@ export const government: Government = new Government();
 export const licensePlates: LicensePlates = new LicensePlates();
 export const music: Music = new Music();
 export const news: News = new News();
+export const openAPIs: OpenAPIs = new OpenAPIs();
 export const phones: Phones = new Phones();
 export const sports: Sports = new Sports();
 export const vnltk: VNLTK = new VNLTK();
