@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class SaigonBank {
+import Base from './base';
+
+export default class SaigonBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://saigonbank.com.vn/vi/truy-cap-nhanh/ty-gia-ngoai-te';
     const timeout: number = 1000 * 60 * 6;
     return new Promise(resolve => {
@@ -57,7 +60,9 @@ export default class SaigonBank {
               sellCash = 0,
               sellTransfer = 0
             } = rate;
-            return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+            return (
+              code && codes.includes(code) && (buyCash || buyTransfer) && (sellCash || sellTransfer)
+            );
           });
           const codes = filterRates
             .map(rate => rate.code)

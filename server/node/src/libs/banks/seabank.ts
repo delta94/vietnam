@@ -2,8 +2,11 @@
 
 import fetch from 'node-fetch';
 
-export default class SeABank {
+import Base from './base';
+
+export default class SeABank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const d = new Date();
     const cacheBuster = d.getTime();
     const url: string = `https://microservices01.seabank.com.vn/microserviceWebsite/web-api/getRate?cacheBuster=${cacheBuster}`;
@@ -39,7 +42,12 @@ export default class SeABank {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellTransfer || sellCash);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellTransfer || sellCash)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(_rates);

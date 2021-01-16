@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class DongABank {
+import Base from './base';
+
+export default class DongABank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string =
       'https://kinhdoanh.dongabank.com.vn/widget/temp/?p_p_id=DTSCDongaBankEView_WAR_DTSCDongaBankIERateportlet&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view';
     return new Promise(resolve => {
@@ -44,7 +47,12 @@ export default class DongABank {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

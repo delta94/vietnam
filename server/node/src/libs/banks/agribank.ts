@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class Agribank {
+import Base from './base';
+
+export default class Agribank extends Base {
   public async getForexRates() {
+    const { codes = [] } = this;
     const url: string = 'https://www.agribank.com.vn/vn/ty-gia';
     return new Promise(resolve => {
       fetch(url)
@@ -34,7 +37,12 @@ export default class Agribank {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
 

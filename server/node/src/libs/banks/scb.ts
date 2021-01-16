@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class SCB {
+import Base from './base';
+
+export default class SCB extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const tableno: string = await this.getTableNo();
     const url: string = `https://www.scb.com.vn/Handlers/GetForeignExchange.aspx?tableno=${tableno}`;
     console.log('url', url);
@@ -36,7 +39,12 @@ export default class SCB {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

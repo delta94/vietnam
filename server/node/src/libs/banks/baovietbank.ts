@@ -2,10 +2,11 @@
 
 import fetch from 'node-fetch';
 
-import Utils from '../utils';
+import Base from './base';
 
-export default class BaoVietBank extends Utils {
+export default class BaoVietBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const d: Date = new Date();
     const dd: string = this.addZero(d.getDate());
     const mm: string = this.addZero(d.getMonth() + 1);
@@ -37,7 +38,12 @@ export default class BaoVietBank extends Utils {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

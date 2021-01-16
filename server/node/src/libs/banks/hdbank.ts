@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class HDBank {
+import Base from './base';
+
+export default class HDBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://www.hdbank.com.vn/en/corporate/exchange-rate';
     return new Promise(resolve => {
       fetch(url)
@@ -39,7 +42,12 @@ export default class HDBank {
                 sellCash = 0,
                 buyTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

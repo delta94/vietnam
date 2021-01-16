@@ -3,10 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-import Utils from '../utils';
+import Base from './base';
 
-export default class VietBank extends Utils {
+export default class VietBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const d = new Date();
     const dd = this.addZero(d.getDate());
     const mm = this.addZero(d.getMonth() + 1);
@@ -43,7 +44,12 @@ export default class VietBank extends Utils {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class VIB {
+import Base from './base';
+
+export default class VIB extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://www.vib.com.vn/wps/portal/vn/tool-landing';
     return new Promise(resolve => {
       fetch(url)
@@ -40,7 +43,12 @@ export default class VIB {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

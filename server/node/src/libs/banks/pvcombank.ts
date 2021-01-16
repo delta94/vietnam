@@ -3,10 +3,11 @@
 import fetch from 'node-fetch';
 import * as xml2json from 'xml2json';
 
-import Utils from '../utils';
+import Base from './base';
 
-export default class PVcomBank extends Utils {
+export default class PVcomBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://www.pvcombank.com.vn/api/exchange-rate';
     return new Promise(resolve => {
       fetch(url)
@@ -34,7 +35,14 @@ export default class PVcomBank extends Utils {
                   sellCash = 0,
                   sellTransfer = 0
                 } = rate;
-                return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+                return (
+                  code &&
+                  codes.includes(code) &&
+                  code &&
+                  codes.includes(code) &&
+                  (buyCash || buyTransfer) &&
+                  (sellCash || sellTransfer)
+                );
               })
               .sort((a, b) => (a.code > b.code ? 1 : -1));
             resolve(rates);

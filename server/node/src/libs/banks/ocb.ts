@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class OCB {
+import Base from './base';
+
+export default class OCB extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const d: Date = new Date();
     const date: number = d.getDate();
     const month: number = d.getMonth() + 1;
@@ -51,7 +54,11 @@ export default class OCB {
                 sellTransfer = 0
               } = rate;
               return (
-                code !== 'GOL' && code && (buyCash || buyTransfer) && (sellCash || sellTransfer)
+                code !== 'GOL' &&
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
               );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));

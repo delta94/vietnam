@@ -1,10 +1,12 @@
 'use strict';
 
 import fetch from 'node-fetch';
-import * as cheerio from 'cheerio';
 
-export default class Eximbank {
+import Base from './base';
+
+export default class Eximbank extends Base {
   public async getForexRates() {
+    const { codes = [] } = this;
     const url: string = 'https://www.eximbank.com.vn/get-exchange-rate';
     const jsonrpc: string = '2.0';
     const method: string = 'call';
@@ -29,6 +31,21 @@ export default class Eximbank {
               const sellCash: number = parseFloat(CSHSELLRT.replace(/\./g, '')) || 0;
               const sellTransfer: number = parseFloat(TTSELLRT.replace(/\./g, '')) || 0;
               return { code, buyCash, buyTransfer, sellCash, sellTransfer };
+            })
+            .filter((rate: any = {}) => {
+              const {
+                code = '',
+                buyCash = 0,
+                buyTransfer = 0,
+                sellCash = 0,
+                sellTransfer = 0
+              } = rate;
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

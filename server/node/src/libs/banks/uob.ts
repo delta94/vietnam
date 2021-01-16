@@ -2,8 +2,11 @@
 
 import fetch from 'node-fetch';
 
-export default class UOB {
+import Base from './base';
+
+export default class UOB extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://www.uob.com.vn/data-api-rates-vn/data-api/forex-vn?lang=en_VN';
     return new Promise(resolve => {
       fetch(url)
@@ -34,7 +37,12 @@ export default class UOB {
                 buyCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyTransfer || buyCash) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyTransfer || buyCash) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

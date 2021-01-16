@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class PGBank {
+import Base from './base';
+
+export default class PGBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const d: Date = new Date();
     const id: number = d.getTime();
     const url: string = `https://home.pgbank.com.vn/V2018/Pages/ExchangeRate.aspx?id=${id}`;
@@ -42,7 +45,12 @@ export default class PGBank {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
           resolve(rates);

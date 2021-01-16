@@ -3,8 +3,11 @@
 import fetch from 'node-fetch';
 import * as cheerio from 'cheerio';
 
-export default class LienVietPostBank {
+import Base from './base';
+
+export default class LienVietPostBank extends Base {
   public async getForexRates() {
+    const { codes } = this;
     const url: string = 'https://lienvietpostbank.com.vn/ti-gia';
     return new Promise(resolve => {
       fetch(url)
@@ -35,7 +38,12 @@ export default class LienVietPostBank {
                 sellCash = 0,
                 sellTransfer = 0
               } = rate;
-              return code && (buyCash || buyTransfer) && (sellCash || sellTransfer);
+              return (
+                code &&
+                codes.includes(code) &&
+                (buyCash || buyTransfer) &&
+                (sellCash || sellTransfer)
+              );
             })
             .sort((a, b) => (a.code > b.code ? 1 : -1));
 
