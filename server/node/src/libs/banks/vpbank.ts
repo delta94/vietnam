@@ -14,13 +14,14 @@ export default class VPBank {
           const rates = data
             .map(item => {
               const {
-                Symbol: code = '',
+                Symbol = '',
                 NameOfCurrency: name = '',
                 Buy = '',
                 Transfer = '',
                 Sell = '',
                 Icon: icon = ''
               } = item;
+              const code: string = Symbol.trim().toUpperCase();
               const regex: RegExp = /[&#,-]/g;
               const buyCash: number = parseFloat(Buy.replace(regex, '').trim()) || 0;
               const buyTransfer: number = parseFloat(Transfer.replace(regex, '').trim()) || 0;
