@@ -14,7 +14,7 @@ export default class NCB extends Base {
     const mm: string = this.addZero(d.getMonth() + 1);
     const yyyy: number = d.getFullYear();
     const url: string = 'https://www.ncb-bank.vn/vi/ty-gia-tien-te';
-    const date: string = `${dd}-${mm}-${yyyy}`;
+    const date: string = `${dd}/${mm}/${yyyy}`;
     const body = { op: 'ajax', date };
     const httpsAgent = new https.Agent({ rejectUnauthorized: false });
     return new Promise(resolve => {
