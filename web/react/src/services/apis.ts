@@ -83,17 +83,17 @@ export default class APIS {
 
   public async getSources(): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.news.getSources;
-    return await this.fetch(endpoint);
+    const { sources = [] } = await this.fetch(endpoint);
+    return sources;
   }
 
-  public async getCategories(): Promise<Array<any>> {
+  public async getCategories(source: string): Promise<Array<string>> {
     const endpoint: IEndpoint = endpoints.news.getCategories;
-    const { categories = [] } = await this.fetch(endpoint);
+    const { categories = [] } = await this.fetch(endpoint, { query: { source }, body: {} });
     return categories;
   }
 
-  public async getArticles(options: any = {}): Promise<Array<any>> {
-    const { category, source } = options;
+  public async getArticles(source: string, category: string): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.news.getArticles;
     const articles = (await this.fetch(endpoint, { query: { category, source }, body: {} })) || {};
     return articles;

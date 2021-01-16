@@ -17,6 +17,7 @@ If you enjoyed this project — or just feeling generous, consider [buying me a 
     - [Government](#government)
     - [License Plates](#license-plates)
     - [Music](#music)
+    - [News](#news)
     - [Phones](#phones)
     - [Sports](#sports)
     - [VNLTK](#vnltk)
@@ -240,6 +241,29 @@ import { music } from 'vnapis';
 const artists = await music.getArtists();
 ```
 
+### News
+
+```ts
+import { news } from 'vnapis';
+
+// Get Google Trends
+const trends = await news.getGoogleTrends();
+
+// Get Sources
+const sources = news.getSources();
+
+// Get Categories
+const source = 'vnexpress';
+const categories = await news.getCategories(source);
+
+// Get News - Ariticles
+const articles = await news.getArticles();
+// OR
+const source = 'vnexpress';
+const category = 'general';
+const articles = await news.getArticles(source, category);
+```
+
 ### Phones
 
 ```ts
@@ -306,6 +330,6 @@ const words = vnltk.getWords();
 - [giaohangnhanh](https://www.npmjs.com/package/giaohangnhanh)
 - [onepay](https://www.npmjs.com/package/onepay)
 - [vietnambanks](https://www.npmjs.com/package/vietnambanks)
-- [vietnamnews](https://www.npmjs.com/package/vietnamnews)
+- [news](https://www.npmjs.com/package/news)
 - [vnpay](https://www.npmjs.com/package/vnpay)
 - [vtcpay](https://www.npmjs.com/package/vtcpay)

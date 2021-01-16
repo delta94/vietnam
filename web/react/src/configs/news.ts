@@ -1,65 +1,6 @@
 import { baseAPI } from './urls';
 
 const news = {
-  getArticles: {
-    id: 'getArticles',
-    name: 'Get Articles',
-    public: true,
-    method: 'GET',
-    path: '/news',
-    url: `${baseAPI}/news`,
-    demo: 'news-feed',
-    request: {
-      headers: [{ key: 'Content-Type', value: 'application/json' }],
-      query: [
-        { name: 'category', type: 'string', required: true, description: '' },
-        { name: 'source', type: 'string', required: true, description: '' }
-      ],
-      body: []
-    },
-    response: {
-      200: {
-        schema: [
-          { name: 'title', type: 'string', description: '' },
-          { name: 'url', type: 'string', description: '' },
-          { name: 'source', type: 'string', description: '' },
-          { name: 'description', type: 'string', description: '' },
-          { name: 'pubDate', type: 'string', description: '' },
-          { name: 'day', type: 'string', description: '' },
-          { name: 'year', type: 'number', description: '' },
-          { name: 'month', type: 'number', description: '' },
-          { name: 'date', type: 'number', description: '' },
-          { name: 'hours', type: 'number', description: '' },
-          { name: 'minutes', type: 'number', description: '' },
-          { name: 'seconds', type: 'number', description: '' },
-          { name: 'timestamp', type: 'number', description: '' },
-          { name: 'dateTimeString', type: 'string', description: '' }
-        ],
-        example: [
-          {
-            title: '<string>',
-            url: '<string>',
-            source: '<string>',
-            description: '<string>',
-            pubDate: '<string>',
-            day: '<string>',
-            year: '<number>',
-            month: '<number>',
-            date: '<number>',
-            hours: '<number>',
-            minutes: '<number>',
-            seconds: '<number>',
-            timestamp: '<number>',
-            dateTimeString: '<string>'
-          }
-        ]
-      },
-      400: {
-        schema: [{ name: 'message', type: 'string', description: '' }],
-        example: { message: '<string>' }
-      }
-    }
-  },
   getTrends: {
     id: 'getTrends',
     name: 'Get (Google) Trends',
@@ -103,7 +44,7 @@ const news = {
     method: 'GET',
     path: '/news/sources',
     url: `${baseAPI}/news/sources`,
-    demo: 'news-sources',
+    demo: 'news-feed',
     request: {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
       query: [],
@@ -112,21 +53,13 @@ const news = {
     response: {
       200: {
         schema: [
-          { name: 'id', type: 'string', description: '' },
-          { name: 'name', type: 'string', description: '' },
-          { name: 'url', type: 'string', description: '' },
-          { name: 'category', type: 'string', description: '' },
-          { name: 'categories', type: 'Array<string>', description: '' }
+          { name: 'total', type: 'number', description: '' },
+          { name: 'sources', type: 'Array<string>', description: '' }
         ],
-        example: [
-          {
-            id: '<string>',
-            name: '<string>',
-            url: '<string>',
-            category: '<string>',
-            categories: '<Array<string>>'
-          }
-        ]
+        example: {
+          total: '<number>',
+          sources: '<Array<string>>'
+        }
       },
       400: {
         schema: [{ name: 'message', type: 'string', description: '' }],
@@ -141,10 +74,10 @@ const news = {
     method: 'GET',
     path: '/news/categories',
     url: `${baseAPI}/news/categories`,
-    demo: 'news-categories',
+    demo: 'news-feed',
     request: {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
-      query: [],
+      query: [{ name: 'source', type: 'string', required: false, description: '' }],
       body: []
     },
     response: {
@@ -157,6 +90,49 @@ const news = {
           total: '<number>',
           categories: '<Array<string>>'
         }
+      },
+      400: {
+        schema: [{ name: 'message', type: 'string', description: '' }],
+        example: { message: '<string>' }
+      }
+    }
+  },
+  getArticles: {
+    id: 'getArticles',
+    name: 'Get Articles',
+    public: true,
+    method: 'GET',
+    path: '/news/articles',
+    url: `${baseAPI}/news/articles`,
+    demo: 'news-feed',
+    request: {
+      headers: [{ key: 'Content-Type', value: 'application/json' }],
+      query: [
+        { name: 'source', type: 'string', required: false, description: '' },
+        { name: 'category', type: 'string', required: false, description: '' }
+      ],
+      body: []
+    },
+    response: {
+      200: {
+        schema: [
+          { name: 'title', type: 'string', description: '' },
+          { name: 'url', type: 'string', description: '' },
+          { name: 'source', type: 'string', description: '' },
+          { name: 'description', type: 'string', description: '' },
+          { name: 'publishedDate', type: 'string', description: '' },
+          { name: 'sourceURL', type: 'string', description: '' }
+        ],
+        example: [
+          {
+            title: '<string>',
+            url: '<string>',
+            source: '<string>',
+            sourceURL: '<string>',
+            description: '<string>',
+            publishedDate: '<string>'
+          }
+        ]
       },
       400: {
         schema: [{ name: 'message', type: 'string', description: '' }],

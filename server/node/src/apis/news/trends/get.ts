@@ -2,15 +2,17 @@
 
 import { Request, Response } from 'express';
 import * as _ from 'lodash';
-import vnn from 'vietnamnews';
+
+import { newsService } from '../../../services';
 
 export default async (req: Request, res: Response): Promise<Response> => {
   const country: string = _.get(req, 'query.country', 'vietnam') || 'vietnam';
-  const d = new Date();
-  const year = d.getFullYear();
-  const month = d.getMonth() + 1;
-  const date = d.getDate();
-  const hour = d.getHours();
-  const trends = await vnn.getGoogleTrends(country);
-  return res.json({ year, month, date, hour, trends });
+  const d: Date = new Date();
+  const year: number = d.getFullYear();
+  const month: number = d.getMonth() + 1;
+  const date: number = d.getDate();
+  const hour: number = d.getHours();
+  const trends: Array<string> = await newsService.getGoogleTrends(country);
+  const total: number = trends.length;
+  return res.json({ year, month, date, hour, total, trends });
 };

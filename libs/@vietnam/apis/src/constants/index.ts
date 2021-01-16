@@ -124,3 +124,12 @@ export interface IPhonesPrefix {
 export interface IMusicArtist {
   name: string;
 }
+
+export interface INewsArticle {
+  title: string;
+  publishedDate: string;
+  source: string;
+  sourceURL: string;
+  description: string;
+  url: string;
+}

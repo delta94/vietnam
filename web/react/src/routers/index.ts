@@ -48,7 +48,6 @@ import {
   // News
   News,
   NewsFeed,
-  NewsSources,
   NewsTrends,
   // Open APIs
   OpenAPIs,
@@ -306,12 +305,6 @@ const routes: Array<IRoute> = [
     path: 'news-feed',
     text: 'News Feed',
     component: NewsFeed,
-    navigation: false
-  },
-  {
-    path: 'news-sources',
-    text: 'News Sources',
-    component: NewsSources,
     navigation: false
   },
   {

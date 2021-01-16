@@ -1,11 +1,13 @@
 'use strict';
 
-import { Request, Response } from 'express';
 import * as _ from 'lodash';
-import vnn from 'vietnamnews';
+import { Request, Response } from 'express';
+
+import { newsService } from '../../../services';
 
 export default async (req: Request, res: Response): Promise<Response> => {
-  const categories: Array<string> = vnn.getCategories();
+  const source: string = _.get(req, 'query.source', '');
+  const categories: Array<string> = newsService.getCategories(source);
   const total: number = categories.length;
   return res.json({ total, categories });
 };

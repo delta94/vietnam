@@ -62,7 +62,6 @@ export {
   FinancePotentials,
   FinanceProfit,
   NewsFeed,
-  NewsSources,
   NewsTrends,
   PhonesPrefixes,
   PhonesProviders,

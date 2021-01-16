@@ -1,9 +1,11 @@
 'use strict';
 
 import { Request, Response } from 'express';
-import vnn from 'vietnamnews';
+
+import { newsService } from '../../../services';
 
 export default async (req: Request, res: Response): Promise<Response> => {
-  const sources = vnn.getSources();
-  return res.json(sources);
+  const sources = newsService.getSources();
+  const total: number = sources.length;
+  return res.json({ total, sources });
 };

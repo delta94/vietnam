@@ -121,9 +121,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
             <div id={id} key={cardIndex}>
               <div className="pt-3">
                 <div className="mb-5">
-                  <h4 className="mb-3">
-                    <b>{name}</b>
-                  </h4>
+                  <h4 className="mb-3">{name}</h4>
                   <div className="mb-3">
                     <API method={method} path={path} url={url}></API>
                   </div>
@@ -150,9 +148,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
     const list = Object.values(endpoints[group]);
     return (
       <div id="Doc">
-        <h2 className="mb-3">
-          <b>{header}</b>
-        </h2>
+        <h2 className="mb-3">{header}</h2>
         {list.length > 0 && this.renderAPIs(list)}
       </div>
     );

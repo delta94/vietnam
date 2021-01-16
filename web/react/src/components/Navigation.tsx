@@ -25,7 +25,7 @@ export default class Navigation extends Component<INavigationProps, INavigationS
         <Navbar bg="danger" expand="sm" variant="dark">
           <div className="container">
             <Navbar.Brand href="#" className="text-white">
-              VNPM
+              VIETNAM
             </Navbar.Brand>
             <Nav className="mr-auto">
               <Nav.Item>
