@@ -1,31 +1,27 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { postgreClient } from '../clients';
+import { prefixes } from '../constants';
 
 export default class PhonesService {
   public async getPrefixes(prefix: string = ''): Promise<string | Array<any>> {
-    const prefixes = await postgreClient.find('phones_prefixes', { prefix });
-    return prefixes;
+    return prefixes.filter(item => (prefix ? item.prefix === prefix : true));
   }
 
   public async getProviders(): Promise<Array<any>> {
-    const _prefixes: any = await postgreClient.find('phones_prefixes');
-    const providers: Array<any> = _.uniq(_prefixes.map(prefix => prefix.provider)).map(provider => {
-      const prefixes = _prefixes
-        .filter(_prefix => _prefix.provider === provider)
-        .map(_prefix => _prefix.prefix);
-      return { provider, prefixes };
+    return _.uniq(prefixes.map(prefix => prefix.provider)).map(provider => {
+      const _prefixes = prefixes
+        .filter(prefix => prefix.provider === provider)
+        .map(prefix => prefix.prefix);
+      return { provider, prefixes: _prefixes };
     });
-    return providers;
   }
 
   public async getProviderFromPhoneNumber(number: string): Promise<string> {
-    const prefixes: any = await postgreClient.find('phones_prefixes');
     const phoneNumber = this.processPhoneNumber(number);
-    const _prefix = phoneNumber.substring(0, 3);
+    const prefix = phoneNumber.substring(0, 3);
     if (phoneNumber.length !== 10) return '';
-    const { provider = '' } = prefixes.find(prefix => prefix.prefix === _prefix) || {};
+    const { provider = '' } = prefixes.find(item => item.prefix === prefix) || {};
     return provider;
   }
 

@@ -118,13 +118,6 @@ export const NationalAssemblyMemberSchema = {
   active: { type: 'text' }
 };
 
-export const PhonesPrefixShema = {
-  id: { type: 'int', primary: true, required: true },
-  prefix: { type: 'text', required: true },
-  provider: { type: 'text', require: true },
-  provider_id: { type: 'text', required: true }
-};
-
 export const SportsClubShema = {
   id: { type: 'int', primary: true, required: true },
   sport: { type: 'text', required: true },
@@ -171,7 +164,6 @@ export const tables = {
     name: 'national_assembly_members',
     schema: NationalAssemblyMemberSchema
   },
-  PhonesPrefixes: { name: 'phones_prefixes', schema: PhonesPrefixShema },
   sportsClubs: { name: 'sports_clubs', schema: SportsClubShema },
   technologies: { name: 'technologies', schema: TechnologySchema }
 };
