@@ -35,7 +35,7 @@ export default class BanksService {
 
     const docs: Array<any> = await self.getForexRatesFromDB(bankIds);
     const currencies = self.getCurrencies(docs);
-    const data = self.processMongoDocs(docs);
+    const data = self.processForexRates(docs);
 
     return { currencies, data };
   }
@@ -76,14 +76,14 @@ export default class BanksService {
     let currencies = [];
     for (const item of docs) {
       const { rates = [] } = item;
-      const codes = rates.map(rate => rate.code);
+      const codes = rates.map(rate => rate.code.toUpperCase());
       currencies = currencies.concat(codes);
     }
     currencies = _.uniq(currencies).sort();
     return currencies;
   }
 
-  private processMongoDocs(docs: Array<any>): Array<any> {
+  private processForexRates(docs: Array<any>): Array<any> {
     return docs.map(item => {
       const { bank = '', year = 0, month = 0, date = 0, hour = 0, minute = 0, rates = [] } = item;
 
