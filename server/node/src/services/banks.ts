@@ -42,7 +42,6 @@ export default class BanksService {
 
   private async getForexRatesFromDB(bankIds: Array<string> = []): Promise<Array<any>> {
     const self = this;
-    const docs = [];
     return new Promise(resolve => {
       Promise.all(
         bankIds.map(async (id: string) => {
@@ -74,8 +73,8 @@ export default class BanksService {
 
   private getCurrencies(docs: Array<any> = []) {
     let currencies = [];
-    for (const item of docs) {
-      const { rates = [] } = item;
+    for (const doc of docs) {
+      const { rates = [] } = doc;
       const codes = rates.map(rate => rate.code.toUpperCase());
       currencies = currencies.concat(codes);
     }
@@ -84,34 +83,39 @@ export default class BanksService {
   }
 
   private processForexRates(docs: Array<any>): Array<any> {
-    return docs.map(item => {
-      const { bank = '', year = 0, month = 0, date = 0, hour = 0, minute = 0, rates = [] } = item;
+    return docs
+      .filter(doc => {
+        const { rates = [] } = doc;
+        return rates.length > 0;
+      })
+      .map(doc => {
+        const { bank = '', year = 0, month = 0, date = 0, hour = 0, minute = 0, rates = [] } = doc;
 
-      const buyCash = {};
-      const buyTransfer = {};
-      const sellCash = {};
-      const sellTransfer = {};
+        const buyCash = {};
+        const buyTransfer = {};
+        const sellCash = {};
+        const sellTransfer = {};
 
-      for (const rate of rates) {
-        const {
-          buyCash: _buyCash,
-          sellCash: _sellCash,
-          buyTransfer: _buyTransfer,
-          sellTransfer: _sellTransfer,
-          code
-        } = rate;
-        buyCash[code] = utils.numberFormatter(_buyCash);
-        buyTransfer[code] = utils.numberFormatter(_buyTransfer);
-        sellCash[code] = utils.numberFormatter(_sellCash);
-        sellTransfer[code] = utils.numberFormatter(_sellTransfer);
-      }
+        for (const rate of rates) {
+          const {
+            buyCash: _buyCash,
+            sellCash: _sellCash,
+            buyTransfer: _buyTransfer,
+            sellTransfer: _sellTransfer,
+            code
+          } = rate;
+          buyCash[code] = utils.numberFormatter(_buyCash);
+          buyTransfer[code] = utils.numberFormatter(_buyTransfer);
+          sellCash[code] = utils.numberFormatter(_sellCash);
+          sellTransfer[code] = utils.numberFormatter(_sellTransfer);
+        }
 
-      const time =
-        `${year}/${utils.addZero(month)}/${utils.addZero(date)} ` +
-        `${utils.addZero(hour)}:${utils.addZero(minute)}`;
+        const time =
+          `${year}/${utils.addZero(month)}/${utils.addZero(date)} ` +
+          `${utils.addZero(hour)}:${utils.addZero(minute)}`;
 
-      return { bank, buyCash, buyTransfer, sellCash, sellTransfer, time };
-    });
+        return { bank, buyCash, buyTransfer, sellCash, sellTransfer, time };
+      });
   }
 
   public async getForexRatesFromBanks(): Promise<any> {
