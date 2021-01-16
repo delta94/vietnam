@@ -1,19 +1,19 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { prefixes } from '../constants';
+import { phonesPrefixes } from '../constants';
 
 export default class PhonesService {
   public async getPrefixes(prefix: string = ''): Promise<string | Array<any>> {
-    return prefixes.filter(item => (prefix ? item.prefix === prefix : true));
+    return phonesPrefixes.filter(item => (prefix ? item.prefix === prefix : true));
   }
 
   public async getProviders(): Promise<Array<any>> {
-    return _.uniq(prefixes.map(prefix => prefix.provider)).map(provider => {
-      const _prefixes = prefixes
+    return _.uniq(phonesPrefixes.map(prefix => prefix.provider)).map(provider => {
+      const prefixes = phonesPrefixes
         .filter(prefix => prefix.provider === provider)
         .map(prefix => prefix.prefix);
-      return { provider, prefixes: _prefixes };
+      return { provider, prefixes };
     });
   }
 
@@ -21,7 +21,7 @@ export default class PhonesService {
     const phoneNumber = this.processPhoneNumber(number);
     const prefix = phoneNumber.substring(0, 3);
     if (phoneNumber.length !== 10) return '';
-    const { provider = '' } = prefixes.find(item => item.prefix === prefix) || {};
+    const { provider = '' } = phonesPrefixes.find(item => item.prefix === prefix) || {};
     return provider;
   }
 

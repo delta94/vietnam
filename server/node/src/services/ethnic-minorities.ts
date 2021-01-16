@@ -1,15 +1,11 @@
 'use strict';
 
-import { postgreClient } from '../clients';
+import { ethnicMinorities } from '../constants';
 
 export default class EthnicMinoritiesService {
   public async getEthnicMinorities(type_en: string = ''): Promise<Array<any>> {
-    const fields: Array<string> = ['name', 'type', 'type_en'];
-    const ethnicMinorities: any = await postgreClient.find(
-      'ethnic_minorities',
-      { type_en },
-      fields
+    return ethnicMinorities.filter(minority =>
+      type_en ? minority.type_en.toLowerCase().includes(type_en.toLowerCase()) : true
     );
-    return ethnicMinorities;
   }
 }

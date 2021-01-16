@@ -1,3 +1,5 @@
+'use strict';
+
 export default [
   { code: 'AED', name: 'United Arab Emirates dirham' },
   { code: 'AFN', name: 'Afghan afghani' },

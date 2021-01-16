@@ -1,4 +1,6 @@
-export const prefixes = [
+'use strict';
+
+export default [
   { prefix: '032', provider: 'Viettel', provider_id: 'viettel' },
   { prefix: '033', provider: 'Viettel', provider_id: 'viettel' },
   { prefix: '034', provider: 'Viettel', provider_id: 'viettel' },

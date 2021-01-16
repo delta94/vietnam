@@ -51,13 +51,6 @@ export const BankShema = {
   type_en: { type: 'text', required: true }
 };
 
-export const EthnicMinorityShema = {
-  id: { type: 'int', primary: true, required: true },
-  name: { type: 'text', required: true },
-  type: { type: 'text', required: true },
-  type_en: { type: 'text', required: true }
-};
-
 export const GovernmentMinistryShema = {
   id: { type: 'int', primary: true, required: true },
   short: { type: 'text', required: true },
@@ -92,13 +85,6 @@ export const HistoryDynastyShema = {
   dynasty: { type: 'text', required: true }
 };
 
-export const LicensePlateShema = {
-  id: { type: 'int', primary: true, required: true },
-  license: { type: 'text', required: true },
-  definition: { type: 'text', required: true },
-  type: { type: 'text', required: true }
-};
-
 export const MusicArtists = {
   id: { type: 'int', primary: true, required: true },
   name: { type: 'text', required: true }
@@ -127,15 +113,6 @@ export const SportsClubShema = {
   name: { type: 'text', required: true }
 };
 
-export const TechnologySchema = {
-  id: { type: 'int', primary: true, required: true },
-  name: { type: 'text', required: true },
-  type: { type: 'text', required: true },
-  type_id: { type: 'text', required: true },
-  url: { type: 'text', required: true },
-  npm: { type: 'text' }
-};
-
 export const tables = {
   administrativeDivisionsPostalCodes: {
     name: 'administrative_divisions_postal_codes',
@@ -154,16 +131,13 @@ export const tables = {
     schema: AdministrativeDivisionsWardSchema
   },
   banks: { name: 'banks', schema: BankShema },
-  ethnicMinorities: { name: 'ethnic_minorities', schema: EthnicMinorityShema },
   governmentMinistries: { name: 'government_ministries', schema: GovernmentMinistryShema },
   governmentOfficials: { name: 'government_officials', schema: GovernmentOfficialShema },
   historyDynasties: { name: 'history_dynasties', schema: HistoryDynastyShema },
-  licensePlates: { name: 'license_plates', schema: LicensePlateShema },
   musicArtists: { name: 'music_artists', schema: MusicArtists },
   nationalAssemblyMembers: {
     name: 'national_assembly_members',
     schema: NationalAssemblyMemberSchema
   },
-  sportsClubs: { name: 'sports_clubs', schema: SportsClubShema },
-  technologies: { name: 'technologies', schema: TechnologySchema }
+  sportsClubs: { name: 'sports_clubs', schema: SportsClubShema }
 };

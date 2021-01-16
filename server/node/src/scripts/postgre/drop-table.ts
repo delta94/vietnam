@@ -8,7 +8,7 @@ import { postgreClient } from '../../clients';
 const main = async () => {
   await postgreClient.connect();
 
-  const table: string = 'phones_prefixes';
+  const table: string = 'technologies';
   const dropTableResponse = await postgreClient.dropTable(table);
   console.log('dropTableResponse', dropTableResponse);
 
