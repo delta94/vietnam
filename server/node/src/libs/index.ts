@@ -4,6 +4,7 @@ import SSI from './stock/ssi';
 import TanViet from './stock/tanviet';
 
 import Banks from './banks';
+import LiveScore from './livescore';
 import News from './news';
 import Google from './news/google';
 import OpenWeatherMap from './open-weather-map';
@@ -16,6 +17,7 @@ import GHN from 'giaohangnhanh';
 import Vietcetera from 'vietcetera';
 
 export const banks: Banks = new Banks();
+export const livescore: LiveScore = new LiveScore();
 export const news: News = new News();
 export const google: Google = new Google();
 export const ssi: SSI = new SSI();

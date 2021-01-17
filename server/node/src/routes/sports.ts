@@ -12,6 +12,13 @@ const sports: Array<IRoute> = [
     body: [],
     path: `${prefix}/clubs`,
     middlewares: []
+  },
+  {
+    method: 'GET',
+    query: [],
+    body: [],
+    path: `${prefix}/vleague`,
+    middlewares: []
   }
 ];
 
