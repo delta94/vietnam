@@ -65,6 +65,7 @@ export default class LicensePlatesList extends Component<
           <Form.Control
             type="text"
             placeholder="License"
+            aria-labelledby="License"
             value={this.state.query}
             onChange={this.filter}></Form.Control>
         </Form>

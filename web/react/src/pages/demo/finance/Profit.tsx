@@ -62,6 +62,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
                   <Form.Control
                     type="number"
                     placeholder="Buy"
+                    aria-labelledby="Buy"
                     className="text-center"
                     value={this.state.buy}
                     onChange={this.updateBuy}></Form.Control>
@@ -73,6 +74,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
                   <Form.Control
                     type="number"
                     placeholder="Sell"
+                    aria-labelledby="Sell"
                     className="text-center"
                     value={this.state.sell}
                     onChange={this.updateSell}></Form.Control>
@@ -84,6 +86,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
                   <Form.Control
                     type="number"
                     placeholder="Volume"
+                    aria-labelledby="Volume"
                     className="text-center"
                     value={this.state.volume}
                     onChange={this.updateVolume}></Form.Control>

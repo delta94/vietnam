@@ -168,7 +168,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
                 <Form.Group>
                   <Form.Control
                     as="select"
-                    defaultValue="1M"
+                    aria-labelledby="Period"
                     value={this.state.period}
                     onChange={this.updatePeriod}>
                     {periods.map((period, index) => {
@@ -186,7 +186,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
                 <Form.Group>
                   <Form.Control
                     as="select"
-                    defaultValue="VIC"
+                    aria-labelledby="Symbol"
                     value={this.state.symbol}
                     onChange={this.updateSymbol}>
                     {symbols.map((symbol, index) => {

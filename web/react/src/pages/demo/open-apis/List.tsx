@@ -119,6 +119,7 @@ export default class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPI
               <Form.Control
                 type="text"
                 placeholder="Type"
+                aria-labelledby="Type"
                 value={this.state.query}
                 onChange={this.filter}></Form.Control>
             </Form>

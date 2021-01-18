@@ -163,6 +163,7 @@ export default class Home extends Component<IHomeProps, IHomeState> {
           <Form.Control
             type="text"
             placeholder="Query"
+            aria-labelledby="Query"
             value={this.state.query}
             onChange={this.updateQuery}></Form.Control>
         </Form>

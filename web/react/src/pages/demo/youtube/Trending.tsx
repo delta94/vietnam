@@ -74,7 +74,11 @@ export default class YouTubeTrending extends Component<
     return (
       <Form>
         <Form.Group>
-          <Form.Control as="select" value={categoryId} onChange={this.updateVideoCategory}>
+          <Form.Control
+            as="select"
+            aria-labelledby="Category"
+            value={categoryId}
+            onChange={this.updateVideoCategory}>
             <option value={''}>Category</option>
             {categories.map((category, index) => {
               return (

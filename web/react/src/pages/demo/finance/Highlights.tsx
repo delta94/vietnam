@@ -157,7 +157,7 @@ export default class FinanceHighlights extends Component<
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="1M"
+                  aria-labelledby="Period"
                   value={this.state.period}
                   onChange={this.updatePeriod}>
                   {periods.map((period, index) => {

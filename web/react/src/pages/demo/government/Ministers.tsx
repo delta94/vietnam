@@ -66,7 +66,7 @@ export default class GovernmentMinisters extends Component<
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="latest"
+                  aria-labelledby="Ministry"
                   value={this.state.ministry}
                   onChange={this.updateMinistry}>
                   {ministries.map((ministry, index) => {

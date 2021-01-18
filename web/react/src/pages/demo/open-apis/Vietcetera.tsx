@@ -65,7 +65,7 @@ export default class Vietcetera extends Component<IVietceteraProps, IVietceteraS
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="latest"
+                  aria-labelledby="Type"
                   value={this.state.type}
                   onChange={this.getArticles}>
                   {options.map((option, index) => {

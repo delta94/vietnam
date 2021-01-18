@@ -156,7 +156,7 @@ export default class FinancePotentials extends Component<
               <Form.Group>
                 <Form.Control
                   as="select"
-                  defaultValue="1M"
+                  aria-labelledby="Period"
                   value={this.state.period}
                   onChange={this.updatePeriod}>
                   {periods.map((period, index) => {

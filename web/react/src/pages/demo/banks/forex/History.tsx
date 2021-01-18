@@ -147,7 +147,8 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
             <Form className="row">
               <div className="col-sm-6">
                 <Form.Group>
-                  <Form.Control as="select" defaultValue={bank} value={this.state.bank}>
+                  <Form.Control as="select" aria-labelledby="Bank" value={bank}>
+                    <option value={''}>Bank</option>
                     {banks.map((bank, index) => {
                       return (
                         <option key={index} value={bank}>
@@ -160,7 +161,8 @@ export default class BanksHistory extends Component<IBanksHistoryProps, IBanksHi
               </div>
               <div className="col-sm-6">
                 <Form.Group>
-                  <Form.Control as="select" defaultValue={currency} value={this.state.currency}>
+                  <Form.Control as="select" aria-labelledby="Currency" value={currency}>
+                    <option value={''}>Currency</option>
                     {currencies.map((currency, index) => {
                       return (
                         <option key={index} value={currency}>
