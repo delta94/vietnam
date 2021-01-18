@@ -59,8 +59,8 @@ export default class GovernmentMinisters extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentMinisters" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="GovernmentMinisters" className="container-fluid">
+        <Card>
           <Card.Body>
             <Form className="mt-3 w-100">
               <Form.Group>

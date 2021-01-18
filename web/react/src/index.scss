@@ -1,8 +1,14 @@
 body {
+  height: 100vh;
   margin: 0;
   font-family: 'Lato', sans-serif !important;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+main {
+  height: calc(100vh - 112px);
 }
 
 code {
@@ -33,11 +39,6 @@ code {
 .dotted {
   text-decoration: underline;
   text-decoration-style: dotted;
-}
-
-.table-container {
-  border: 1px solid #dee2e6;
-  border-top: none;
 }
 
 .table {

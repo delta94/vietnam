@@ -41,8 +41,8 @@ export default class GovernmentGeneralSecretaries extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentGeneralSecretaries" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="GovernmentGeneralSecretaries" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

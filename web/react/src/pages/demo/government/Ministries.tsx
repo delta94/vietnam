@@ -42,8 +42,8 @@ export default class GovernmentMinistries extends Component<
       { header: 'Name (EN)', key: 'name_en' }
     ];
     return (
-      <div id="GovernmentMinistries" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="GovernmentMinistries" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

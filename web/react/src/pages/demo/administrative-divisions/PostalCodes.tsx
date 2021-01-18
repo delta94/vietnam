@@ -40,8 +40,8 @@ export default class MapsPostalCodes extends Component<
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsPostalCodes" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="MapsPostalCodes" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

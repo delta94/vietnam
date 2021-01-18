@@ -38,8 +38,8 @@ export default class GovernmentNationalAssemblyMembers extends Component<
     const { members = [], loading = false } = this.state;
     const rowConfigs = [{ header: 'Name', key: 'name' }];
     return (
-      <div id="GovernmentNationalAssemblyMembers" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="GovernmentNationalAssemblyMembers" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

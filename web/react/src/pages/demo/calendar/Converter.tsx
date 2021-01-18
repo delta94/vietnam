@@ -93,8 +93,8 @@ export default class CalendarConverter extends Component<
     const { solarDate = '', solarString = '', lunarDate = '', lunarString = '' } = this.state;
 
     return (
-      <div id="CalendarConverter" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="CalendarConverter" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center">Calendar</Card.Title>
             <Form>

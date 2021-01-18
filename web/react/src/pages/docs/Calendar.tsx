@@ -5,7 +5,7 @@ import { SmallDoc } from '../../components';
 export default class Calendar extends Component {
   render() {
     return (
-      <div id="Calendar" className="container">
+      <div id="Calendar" className="container-fluid">
         <SmallDoc group={'calendar'} header={'Calendar'}></SmallDoc>
       </div>
     );

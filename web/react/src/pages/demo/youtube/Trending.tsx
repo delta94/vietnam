@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Card, Form, Spinner, ListGroup } from 'react-bootstrap';
 
-import { Table } from '../../../components';
 import { apis } from '../../../services';
 
 interface IYouTubeTrendingProps {}
@@ -32,6 +31,8 @@ export default class YouTubeTrending extends Component<
     this.getYouTubeTrending = this.getYouTubeTrending.bind(this);
     this.getYouTubeVideoCategories = this.getYouTubeVideoCategories.bind(this);
     this.updateVideoCategory = this.updateVideoCategory.bind(this);
+    this.renderForm = this.renderForm.bind(this);
+    this.renderCards = this.renderCards.bind(this);
   }
 
   async componentDidMount() {
@@ -68,43 +69,73 @@ export default class YouTubeTrending extends Component<
     await this.getYouTubeTrending(categoryId);
   }
 
-  render() {
-    const { trending = [], loading = false, categoryId = '', categories = [] } = this.state;
+  renderForm() {
+    const { categories, categoryId } = this.state;
+    return (
+      <Form>
+        <Form.Group>
+          <Form.Control as="select" value={categoryId} onChange={this.updateVideoCategory}>
+            <option value={''}>Category</option>
+            {categories.map((category, index) => {
+              return (
+                <option key={index} value={category.id}>
+                  {category.id} - {category.title}
+                </option>
+              );
+            })}
+          </Form.Control>
+        </Form.Group>
+      </Form>
+    );
+  }
 
-    const rowConfigs = [
-      { header: 'URL', key: 'url' },
-      { header: 'Title', key: 'title' },
-      { header: 'Category', key: 'category' }
-    ];
+  renderCards() {
+    const { trending = [] } = this.state;
+    return (
+      <div>
+        {trending.length === 0 && (
+          <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
+        )}
+        {trending.length > 0 && (
+          <Card className="h-70vh overflow-auto">
+            <ListGroup className="list-group-flush">
+              {trending.map((video: any, index: number) => {
+                const { title, url, channelId, channelTitle } = video;
+                const channelUrl: string = `https://www.youtube.com/channel/${channelId}`;
+                return (
+                  <ListGroup.Item key={index}>
+                    <h6 className="m-0">
+                      <a href={url} className="text-dark" target="_blank" rel="noreferrer">
+                        {title}
+                      </a>
+                    </h6>
+                    <small>
+                      <a href={channelUrl} className="text-muted" target="_blank" rel="noreferrer">
+                        {channelTitle}
+                      </a>
+                    </small>
+                  </ListGroup.Item>
+                );
+              })}
+            </ListGroup>
+          </Card>
+        )}
+      </div>
+    );
+  }
+
+  render() {
+    const { loading = false } = this.state;
 
     return (
-      <div id="YouTubeTrending" className="container">
-        <Card className="shadow mt-3 mb-5">
-          <Card.Body>
-            <Form>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  defaultValue="ha-noi"
-                  value={categoryId}
-                  onChange={this.updateVideoCategory}>
-                  {categories.map((category, index) => {
-                    return (
-                      <option key={index} value={category.id}>
-                        {category.title}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </Form>
-            <Table
-              loading={loading}
-              caption={'Trending'}
-              rows={trending}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+      <div id="YouTubeTrending" className="container-fluid">
+        {this.renderForm()}
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant="danger"></Spinner>
+          </div>
+        )}
+        {!loading && this.renderCards()}
       </div>
     );
   }

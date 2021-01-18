@@ -159,8 +159,8 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
   render() {
     const { loading = false, data = {}, symbols = [], symbol = '' } = this.state;
     return (
-      <div id="FinanceHistory" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="FinanceHistory" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center">History ({symbol})</Card.Title>
             <Form className="row">

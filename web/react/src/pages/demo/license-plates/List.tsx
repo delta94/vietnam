@@ -60,16 +60,16 @@ export default class LicensePlatesList extends Component<
       { header: 'Type', key: 'type' }
     ];
     return (
-      <div id="LicensePlatesList" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="LicensePlatesList" className="container-fluid">
+        <Form className="mb-3 w-100">
+          <Form.Control
+            type="text"
+            placeholder="License"
+            value={this.state.query}
+            onChange={this.filter}></Form.Control>
+        </Form>
+        <Card className="h-70vh overflow-auto">
           <Card.Body>
-            <Form className="mb-3 w-100">
-              <Form.Control
-                type="text"
-                placeholder="License"
-                value={this.state.query}
-                onChange={this.filter}></Form.Control>
-            </Form>
             <Table
               loading={loading}
               caption={'License Plates'}

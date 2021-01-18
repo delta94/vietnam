@@ -41,10 +41,9 @@ export default class GovernmentNationalAssemblyChairs extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentNationalAssemblyChairs" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="GovernmentNationalAssemblyChairs" className="container-fluid">
+        <Card>
           <Card.Body>
-            {' '}
             <Table
               loading={loading}
               caption={'National Assembly Chairs'}

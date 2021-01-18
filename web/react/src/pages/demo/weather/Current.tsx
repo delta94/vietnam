@@ -38,8 +38,8 @@ export default class WeatherCurrent extends Component<IWeatherCurrentProps, IWea
     const { temp = 0, feels_like = 0, temp_min = 0, temp_max = 0 } = main;
 
     return (
-      <div id="WeatherCurrent" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="WeatherCurrent" className="container-fluid">
+        <Card>
           <Card.Body>
             <div className="mb-3">
               <p className="m-0 text-center">{description.toUpperCase()}</p>

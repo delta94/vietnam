@@ -40,8 +40,8 @@ export default class Wards extends Component<IWardsProps, IWardsState> {
     ];
 
     return (
-      <div id="Wards" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="Wards" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center mb-3">GHN Wards</Card.Title>
             <Card.Subtitle className="text-center mb-3">

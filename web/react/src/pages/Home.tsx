@@ -110,49 +110,47 @@ export default class Home extends Component<IHomeProps, IHomeState> {
 
   renderTable(title: string, packages: Array<any> = []) {
     return (
-      <div id="table">
-        <div className="table-responsive table-container">
-          <table className="table">
-            <caption className="text-white text-center bg-danger">
-              {title} ({packages.length})
-            </caption>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>Package</th>
-                <th>Docs</th>
-              </tr>
-            </thead>
-            <tbody>
-              {packages.length !== 0 &&
-                packages.map((_package, index) => {
-                  const { name = '', npm = '', docs = '' } = _package;
-                  return (
-                    <tr key={index}>
-                      <td>{name}</td>
-                      <td>
-                        {npm && (
-                          <a
-                            href={`https://www.npmjs.com/package/${npm}`}
-                            rel="noreferrer"
-                            target="_blank">
-                            npm
-                          </a>
-                        )}
-                      </td>
-                      <td>
-                        {docs && (
-                          <Link className="ml-1" to={docs}>
-                            Docs
-                          </Link>
-                        )}
-                      </td>
-                    </tr>
-                  );
-                })}
-            </tbody>
-          </table>
-        </div>
+      <div className="table-responsive table-container rounded">
+        <table className="table">
+          <caption className="text-white text-center bg-danger">
+            {title} ({packages.length})
+          </caption>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Package</th>
+              <th>Docs</th>
+            </tr>
+          </thead>
+          <tbody>
+            {packages.length !== 0 &&
+              packages.map((_package, index) => {
+                const { name = '', npm = '', docs = '' } = _package;
+                return (
+                  <tr key={index}>
+                    <td>{name}</td>
+                    <td>
+                      {npm && (
+                        <a
+                          href={`https://www.npmjs.com/package/${npm}`}
+                          rel="noreferrer"
+                          target="_blank">
+                          npm
+                        </a>
+                      )}
+                    </td>
+                    <td>
+                      {docs && (
+                        <Link className="ml-1" to={docs}>
+                          Docs
+                        </Link>
+                      )}
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     );
   }
@@ -160,18 +158,16 @@ export default class Home extends Component<IHomeProps, IHomeState> {
   render() {
     const { filterAPIs = [] } = this.state;
     return (
-      <div id="Home" className="container">
-        <Card className="shadow mt-3 mb-5">
-          <Card.Body>
-            <Form className="mb-3">
-              <Form.Control
-                type="text"
-                placeholder="Query"
-                value={this.state.query}
-                onChange={this.updateQuery}></Form.Control>
-            </Form>
-            {this.renderTable('APIs', filterAPIs)}
-          </Card.Body>
+      <div id="Home" className="container-fluid">
+        <Form className="mb-3">
+          <Form.Control
+            type="text"
+            placeholder="Query"
+            value={this.state.query}
+            onChange={this.updateQuery}></Form.Control>
+        </Form>
+        <Card>
+          <div className="h-70vh overflow-auto">{this.renderTable('APIs', filterAPIs)}</div>
         </Card>
       </div>
     );

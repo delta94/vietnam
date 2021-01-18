@@ -52,8 +52,8 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
   render() {
     const { buy = 0, sell = 0, volume = 0, profit = 0 } = this.state;
     return (
-      <div id="FinanceProfit" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="FinanceProfit" className="container-fluid">
+        <Card>
           <Card.Body>
             <Form onSubmit={this.calculateProfit} className="row">
               <div className="col-sm-4">

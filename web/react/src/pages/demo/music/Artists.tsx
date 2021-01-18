@@ -36,8 +36,8 @@ export default class MusicArtists extends Component<IMusicArtistsProps, IMusicAr
     const rowConfigs = [{ header: 'Name', key: 'name' }];
 
     return (
-      <div id="MusicArtists" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="MusicArtists" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

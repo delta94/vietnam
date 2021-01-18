@@ -127,8 +127,8 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
     const { banks = [], loading = false, syncing = [] } = this.state;
 
     return (
-      <div id="BanksList" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="BanksList" className="container-fluid">
+        <Card>
           <Card.Body>{this.renderTable(loading, banks, syncing)}</Card.Body>
         </Card>
       </div>

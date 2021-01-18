@@ -45,8 +45,8 @@ export default class HistoryDynasties extends Component<
     ];
 
     return (
-      <div id="HistoryDynasties" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="HistoryDynasties" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

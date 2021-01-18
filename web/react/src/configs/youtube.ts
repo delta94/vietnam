@@ -55,7 +55,7 @@ const youtube: IYouTubeEndpoints = {
     method: 'GET',
     path: '/youtube/video-categories',
     url: `${baseAPI}/youtube/video-categories`,
-    demo: 'youtube-video-categories',
+    demo: 'youtube-trending',
     request: {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
       query: [],

@@ -43,8 +43,8 @@ export default class Districts extends Component<IDistrictsProps, IDistrictsStat
     ];
 
     return (
-      <div id="Districts" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="Districts" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center mb-3">GHN Districts</Card.Title>
             <Card.Subtitle className="text-center mb-3">

@@ -79,8 +79,8 @@ export default class PhonesProviders extends Component<
     const { providers = [], loading = true } = this.state;
 
     return (
-      <div id="PhonesProviders" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="PhonesProviders" className="container-fluid">
+        <Card>
           <Card.Body>{this.renderTable(loading, providers)}</Card.Body>
         </Card>
       </div>

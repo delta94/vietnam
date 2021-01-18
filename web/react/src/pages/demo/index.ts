@@ -13,7 +13,7 @@ export {
   FinancePotentials,
   FinanceProfit
 } from './finance';
-export { NewsFeed, NewsTrends } from './news';
+export { NewsFeed } from './news';
 export { PhonesPrefixes, PhonesProviders } from './phones';
 export { SportsClubs, SportsVLeague } from './sports';
-export { YouTubeTrending, YouTubeVideoCategories } from './youtube';
+export { YouTubeTrending } from './youtube';

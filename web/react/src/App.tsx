@@ -10,12 +10,12 @@ class App extends Component {
       <div id="App">
         <HashRouter basename="/">
           <Navigation></Navigation>
-          <div className="pt-3 pb-5">
+          <main className="overflow-auto pt-3 pb-3">
             {routes.map((route, index) => {
               const { path, component } = route;
               return <Route exact key={index} path={`/${path}`} component={component}></Route>;
             })}
-          </div>
+          </main>
           <Footer></Footer>
         </HashRouter>
       </div>

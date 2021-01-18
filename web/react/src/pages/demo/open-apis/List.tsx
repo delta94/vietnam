@@ -112,8 +112,8 @@ export default class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPI
     const { filterTechnologies = [], loading = true } = this.state;
 
     return (
-      <div id="OpenAPIsList" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="OpenAPIsList" className="container-fluid">
+        <Card>
           <Card.Body>
             <Form className="mt-3 mb-3 w-100">
               <Form.Control

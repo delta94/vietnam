@@ -38,8 +38,8 @@ export default class PhonesPrefixes extends Component<IPhonesPrefixesProps, IPho
       { header: 'Provider ID', key: 'provider_id' }
     ];
     return (
-      <div id="PhonesPrefixes" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="PhonesPrefixes" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

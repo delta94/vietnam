@@ -41,8 +41,8 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
       { header: 'Type (EN)', key: 'type_en' }
     ];
     return (
-      <div id="BanksList" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="BanksList" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

@@ -21,38 +21,36 @@ export default class Navigation extends Component<INavigationProps, INavigationS
     const { routes = [] } = this.state;
 
     return (
-      <div id="Navigation">
-        <Navbar bg="danger" expand="sm" variant="dark">
-          <div className="container">
-            <Navbar.Brand href="#" className="text-white">
-              VIETNAM
-            </Navbar.Brand>
-            <Nav className="mr-auto">
-              <Nav.Item>
-                <Link className="text-white" to={{ pathname: 'docs' }}>
-                  DOCS
-                </Link>
-              </Nav.Item>
-            </Nav>
-            <Nav className="ml-auto">
-              <Dropdown>
-                <DropdownButton variant="light" menuAlign="right" title="APIs">
-                  {routes
-                    .filter(route => route.navigation)
-                    .map((route, index) => {
-                      const { path: pathname, text } = route;
-                      return (
-                        <Dropdown.Item key={index} as={Link} to={{ pathname }}>
-                          {text}
-                        </Dropdown.Item>
-                      );
-                    })}
-                </DropdownButton>
-              </Dropdown>
-            </Nav>
-          </div>
-        </Navbar>
-      </div>
+      <Navbar bg="danger" expand="sm" variant="dark">
+        <div className="container-fluid p-0">
+          <Navbar.Brand href="#" className="text-white">
+            VIETNAM
+          </Navbar.Brand>
+          <Nav className="mr-auto">
+            <Nav.Item>
+              <Link className="text-white" to={{ pathname: 'docs' }}>
+                DOCS
+              </Link>
+            </Nav.Item>
+          </Nav>
+          <Nav className="ml-auto">
+            <Dropdown>
+              <DropdownButton variant="light" menuAlign="right" title="APIs">
+                {routes
+                  .filter(route => route.navigation)
+                  .map((route, index) => {
+                    const { path: pathname, text } = route;
+                    return (
+                      <Dropdown.Item key={index} as={Link} to={{ pathname }}>
+                        {text}
+                      </Dropdown.Item>
+                    );
+                  })}
+              </DropdownButton>
+            </Dropdown>
+          </Nav>
+        </div>
+      </Navbar>
     );
   }
 }

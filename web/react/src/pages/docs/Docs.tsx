@@ -99,7 +99,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
     const groups: Array<string> = Object.keys(endpoints);
 
     return (
-      <div id="Docs" className="container">
+      <div id="Docs" className="container-fluid">
         <div className="row">
           <div className="col-md-3 d-none d-md-block">
             <div className="h-80vh overflow-auto">{this.renderSidebar(endpoints)}</div>

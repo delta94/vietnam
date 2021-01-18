@@ -47,8 +47,8 @@ export default class FinanceCompanies extends Component<
       { header: 'P/S', key: 'PS' }
     ];
     return (
-      <div id="FinanceCompanies" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="FinanceCompanies" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

@@ -64,11 +64,11 @@ export default class SaigonBank extends Base {
               code && codes.includes(code) && (buyCash || buyTransfer) && (sellCash || sellTransfer)
             );
           });
-          const codes = filterRates
+          const _codes = filterRates
             .map(rate => rate.code)
             .filter((code, index, array) => array.indexOf(code) === index)
             .sort();
-          const rates = codes.map(code => filterRates.find(rate => rate.code === code));
+          const rates = _codes.map(code => filterRates.find(rate => rate.code === code));
           resolve(rates);
         })
         .catch((error: Error) => {

@@ -5,7 +5,7 @@ import { SmallDoc } from '../../components';
 export default class LicensePlates extends Component {
   render() {
     return (
-      <div id="LicensePlates" className="container">
+      <div id="LicensePlates" className="container-fluid">
         <SmallDoc group={'licensePlates'} header={'License Plates'}></SmallDoc>
       </div>
     );

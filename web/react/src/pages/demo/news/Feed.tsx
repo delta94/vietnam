@@ -3,6 +3,8 @@ import { Card, Form, ListGroup, Spinner } from 'react-bootstrap';
 
 import { apis, helper } from '../../../services';
 
+import Trends from './Trends';
+
 interface INewsFeedProps {}
 
 interface INewsFeedState {
@@ -73,7 +75,8 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
     this.setState({ articles, loading: false });
   }
 
-  renderForm(sources: Array<any>, categories: Array<any>) {
+  renderForm() {
+    const { categories = [], sources = [] } = this.state;
     return (
       <Form className="w-100">
         <div className="row">
@@ -117,66 +120,81 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
     );
   }
 
-  renderArticles(articles: Array<any>) {
+  renderArticles() {
+    const { articles } = this.state;
     return (
-      <ListGroup>
-        <ListGroup.Item className="text-center text-white bg-danger">
-          Articles ({articles.length})
-        </ListGroup.Item>
-        {articles.map((article = {}, index) => {
-          const {
-            title = '',
-            url = '',
-            source = '',
-            publishedDate = '',
-            description = ''
-          } = article;
-          const startIndex: number = description.indexOf('<img');
-          const endIndex: number = description.indexOf('/>');
-          let short = '';
-          if (startIndex > -1 && endIndex > startIndex) {
-            short = `${description.substring(0, startIndex)}${description.substring(
-              endIndex + 2,
-              description.length
-            )}`;
-          }
-          return (
-            <ListGroup.Item key={index}>
-              <Card.Title>
-                <a href={url} target="_blank" rel="noreferrer">
-                  {title}
-                </a>
-              </Card.Title>
-              <Card.Subtitle className="d-block text-muted mb-1">
-                {source && <small>{source}</small>} -{' '}
-                {publishedDate && <small>({publishedDate})</small>}
-              </Card.Subtitle>
-              <Card.Text>
-                <span dangerouslySetInnerHTML={{ __html: short }}></span>
-              </Card.Text>
-            </ListGroup.Item>
-          );
-        })}
-      </ListGroup>
+      <div>
+        {articles.length === 0 && (
+          <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
+        )}
+        {articles.length !== 0 && (
+          <Card className="h-70vh overflow-auto">
+            <ListGroup className="list-group-flush">
+              <ListGroup.Item className="text-center text-white bg-danger">
+                Articles ({articles.length})
+              </ListGroup.Item>
+              {articles.map((article = {}, index) => {
+                const {
+                  title = '',
+                  url = '',
+                  source = '',
+                  publishedDate = '',
+                  description = ''
+                } = article;
+                const startIndex: number = description.indexOf('<img');
+                const endIndex: number = description.indexOf('/>');
+                let short = '';
+                if (startIndex > -1 && endIndex > startIndex) {
+                  short = `${description.substring(0, startIndex)}${description.substring(
+                    endIndex + 2,
+                    description.length
+                  )}`;
+                }
+                return (
+                  <ListGroup.Item key={index}>
+                    <Card.Title>
+                      <a href={url} target="_blank" rel="noreferrer">
+                        {title}
+                      </a>
+                    </Card.Title>
+                    <Card.Subtitle className="d-block text-muted mb-1">
+                      {source && <small>{source}</small>} -{' '}
+                      {publishedDate && <small>({publishedDate})</small>}
+                    </Card.Subtitle>
+                    <Card.Text>
+                      <span dangerouslySetInnerHTML={{ __html: short }}></span>
+                    </Card.Text>
+                  </ListGroup.Item>
+                );
+              })}
+            </ListGroup>
+          </Card>
+        )}
+      </div>
     );
   }
 
   render() {
-    const { articles = [], categories = [], sources = [], loading } = this.state;
+    const { loading = true } = this.state;
 
     return (
-      <div id="NewsFeed" className="container">
-        <Card className="shadow mt-3 mb-5">
-          <Card.Body>
-            {this.renderForm(sources, categories)}
+      <div id="NewsFeed" className="container-fluid">
+        <div className="row">
+          <div className="col-sm-3">
+            <div className="mb-3">
+              <Trends></Trends>
+            </div>
+          </div>
+          <div className="col-sm-9">
+            {this.renderForm()}
             {loading && (
               <div className="text-center">
                 <Spinner animation="border" variant="danger"></Spinner>
               </div>
             )}
-            {!loading && articles.length !== 0 && this.renderArticles(articles)}
-          </Card.Body>
-        </Card>
+            {!loading && this.renderArticles()}
+          </div>
+        </div>
       </div>
     );
   }

@@ -96,12 +96,12 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
     );
   }
 
-  renderTable(data: Array<any> = [], currency: string = '') {
+  renderTable() {
+    const { data = [], currency = '' } = this.state;
     return (
-      <div className="table-responsive table-container">
+      <div className="table-responsive table-container rounded">
         {data.length > 0 && (
           <table className="table">
-            <caption className="bg-danger text-center text-white">Banks ({data.length})</caption>
             <thead>
               <tr>
                 <th>#</th>
@@ -168,19 +168,22 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
   }
 
   render() {
-    const { currency = '', currencies = [], data = [], loading = false } = this.state;
+    const { currency = '', currencies = [], loading = false } = this.state;
 
     return (
-      <div id="BanksForex" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="BanksForex" className="container-fluid">
+        {!loading && this.renderForm(currencies)}
+        <Card className="h-70vh overflow-auto">
           <Card.Body>
+            <Card.Title className="text-center">
+              Forex Rates {currency && <span>({currency.toUpperCase()})</span>}
+            </Card.Title>
             {loading && (
               <div className="text-center">
                 <Spinner animation="border" variant="danger"></Spinner>
               </div>
             )}
-            {!loading && this.renderForm(currencies)}
-            {!loading && this.renderTable(data, currency)}
+            <div>{!loading && this.renderTable()}</div>
           </Card.Body>
         </Card>
       </div>

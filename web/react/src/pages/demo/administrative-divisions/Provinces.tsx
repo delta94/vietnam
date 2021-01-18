@@ -39,8 +39,8 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
       { header: 'Region', key: 'region' }
     ];
     return (
-      <div id="MapsProvinces" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="MapsProvinces" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table
               loading={loading}

@@ -149,8 +149,8 @@ export default class FinanceHighlights extends Component<
   render() {
     const { loading = false, highlights = [] } = this.state;
     return (
-      <div id="FinanceHighlights" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="FinanceHighlights" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center"></Card.Title>
             <Form>

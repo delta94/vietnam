@@ -100,8 +100,8 @@ export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsStat
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsWards" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="MapsWards" className="container-fluid">
+        <Card>
           <Card.Body>
             {this.renderPagination()}
             <Table loading={loading} caption={'Wards'} rows={wards} rowConfigs={rowConfigs}></Table>

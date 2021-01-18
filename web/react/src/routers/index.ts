@@ -48,7 +48,6 @@ import {
   // News
   News,
   NewsFeed,
-  NewsTrends,
   // Open APIs
   OpenAPIs,
   OpenAPIsList,
@@ -68,8 +67,7 @@ import {
   Weather,
   WeatherCurrent,
   YouTube,
-  YouTubeTrending,
-  YouTubeVideoCategories
+  YouTubeTrending
 } from '../pages';
 
 interface IRoute {
@@ -309,12 +307,6 @@ const routes: Array<IRoute> = [
     navigation: false
   },
   {
-    path: 'news-trends',
-    text: 'News Trends',
-    component: NewsTrends,
-    navigation: false
-  },
-  {
     path: 'open-apis',
     text: 'Open APIs',
     component: OpenAPIs,
@@ -408,12 +400,6 @@ const routes: Array<IRoute> = [
     path: 'youtube-trending',
     text: 'YouTube Trending',
     component: YouTubeTrending,
-    navigation: false
-  },
-  {
-    path: 'youtube-video-categories',
-    text: 'YouTube Video Categories',
-    component: YouTubeVideoCategories,
     navigation: false
   }
 ];

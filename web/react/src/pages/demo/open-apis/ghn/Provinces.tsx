@@ -40,8 +40,8 @@ export default class Provinces extends Component<IProvincesProps, IProvincesStat
     ];
 
     return (
-      <div id="Provinces" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="Provinces" className="container-fluid">
+        <Card>
           <Card.Body>
             <Card.Title className="text-center mb-3">GHN Provinces</Card.Title>
             <Card.Subtitle className="text-center mb-3">

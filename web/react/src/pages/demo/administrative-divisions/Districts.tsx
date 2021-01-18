@@ -59,8 +59,8 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsDistricts" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="MapsDistricts" className="container-fluid">
+        <Card>
           <Card.Body>
             <Form>
               <Form.Group>

@@ -71,16 +71,16 @@ export default class EthnicMinoritiesList extends Component<
     ];
 
     return (
-      <div id="EthnicMinoritiesList" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="EthnicMinoritiesList" className="container-fluid">
+        <Form className="mb-3 w-100">
+          <Form.Control
+            type="text"
+            placeholder="Query"
+            value={this.state.query}
+            onChange={this.filter}></Form.Control>
+        </Form>
+        <Card className="h-70vh overflow-auto">
           <Card.Body>
-            <Form className="mb-3 w-100">
-              <Form.Control
-                type="text"
-                placeholder="Query"
-                value={this.state.query}
-                onChange={this.filter}></Form.Control>
-            </Form>
             <Table
               loading={loading}
               caption={'Ethnic Minorities'}

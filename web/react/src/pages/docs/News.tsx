@@ -5,7 +5,7 @@ import { SmallDoc } from '../../components';
 export default class News extends Component {
   render() {
     return (
-      <div id="News" className="container">
+      <div id="News" className="container-fluid">
         <SmallDoc group={'news'} header={'News'}></SmallDoc>
       </div>
     );

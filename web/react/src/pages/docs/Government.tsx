@@ -5,7 +5,7 @@ import { SmallDoc } from '../../components';
 export default class Government extends Component {
   render() {
     return (
-      <div id="Government" className="container">
+      <div id="Government" className="container-fluid">
         <SmallDoc group={'government'} header={'Government'}></SmallDoc>
       </div>
     );

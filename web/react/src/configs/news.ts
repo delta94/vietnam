@@ -8,7 +8,7 @@ const news = {
     method: 'GET',
     path: '/news/trends',
     url: `${baseAPI}/news/trends`,
-    demo: 'news-trends',
+    demo: 'news-feed',
     request: {
       headers: [{ key: 'Content-Type', value: 'application/json' }],
       query: [],

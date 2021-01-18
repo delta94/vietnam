@@ -60,13 +60,11 @@ export {
   FinancePotentials,
   FinanceProfit,
   NewsFeed,
-  NewsTrends,
   PhonesPrefixes,
   PhonesProviders,
   SportsClubs,
   SportsVLeague,
-  YouTubeTrending,
-  YouTubeVideoCategories
+  YouTubeTrending
 } from './demo';
 export {
   // Ethnic Minorities

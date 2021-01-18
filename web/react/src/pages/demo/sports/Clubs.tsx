@@ -41,8 +41,8 @@ export default class SportsClubs extends Component<ISportsClubsProps, ISportsClu
     ];
 
     return (
-      <div id="SportsClubs" className="container">
-        <Card className="shadow mt-3 mb-5">
+      <div id="SportsClubs" className="container-fluid">
+        <Card>
           <Card.Body>
             <Table loading={loading} caption={'Clubs'} rows={clubs} rowConfigs={rowConfigs}></Table>
           </Card.Body>

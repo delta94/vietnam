@@ -57,27 +57,31 @@ export default class SportsVLeague extends Component<ISportsVLeagueProps, ISport
     ];
 
     return (
-      <div id="SportsVLeague" className="container">
-        <Card className="shadow mt-3 mb-5">
-          <Card.Body>
-            <div className="row">
-              <div className="col-sm-6">
+      <div id="SportsVLeague" className="container-fluid">
+        <div className="row">
+          <div className="col-sm-6">
+            <Card className="h-80vh overflow-auto mb-3">
+              <Card.Body>
                 <Table
                   loading={loading}
                   caption={'Matches'}
                   rows={matches}
                   rowConfigs={matchesRowConfigs}></Table>
-              </div>
-              <div className="col-sm-6">
+              </Card.Body>
+            </Card>
+          </div>
+          <div className="col-sm-6">
+            <Card className="h-80vh overflow-auto">
+              <Card.Body>
                 <Table
                   loading={loading}
                   caption={'League Table'}
                   rows={leagueTable}
                   rowConfigs={leagueTableRowConfigs}></Table>
-              </div>
-            </div>
-          </Card.Body>
-        </Card>
+              </Card.Body>
+            </Card>
+          </div>
+        </div>
       </div>
     );
   }
