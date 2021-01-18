@@ -166,11 +166,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
             <Form className="row">
               <div className="col-sm-6">
                 <Form.Group>
-                  <Form.Control
-                    as="select"
-                    aria-labelledby="Period"
-                    value={this.state.period}
-                    onChange={this.updatePeriod}>
+                  <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
                     {periods.map((period, index) => {
                       const { label, value } = period;
                       return (
@@ -184,11 +180,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
               </div>
               <div className="col-sm-6">
                 <Form.Group>
-                  <Form.Control
-                    as="select"
-                    aria-labelledby="Symbol"
-                    value={this.state.symbol}
-                    onChange={this.updateSymbol}>
+                  <Form.Control as="select" value={this.state.symbol} onChange={this.updateSymbol}>
                     {symbols.map((symbol, index) => {
                       return (
                         <option key={index} value={symbol}>

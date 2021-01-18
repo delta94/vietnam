@@ -154,11 +154,7 @@ export default class FinancePotentials extends Component<
           <Card.Body>
             <Form>
               <Form.Group>
-                <Form.Control
-                  as="select"
-                  aria-labelledby="Period"
-                  value={this.state.period}
-                  onChange={this.updatePeriod}>
+                <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
                   {periods.map((period, index) => {
                     const { label, value } = period;
                     return (

@@ -83,11 +83,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
           {sources.length > 0 && (
             <div className="col-sm-6">
               <Form.Group>
-                <Form.Control
-                  as="select"
-                  aria-labelledby="Source"
-                  value={this.state.source}
-                  onChange={this.updateSource}>
+                <Form.Control as="select" value={this.state.source} onChange={this.updateSource}>
                   <option value={''}>Source</option>
                   {sources.map((source, index) => {
                     return (
@@ -105,7 +101,6 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
               <Form.Group>
                 <Form.Control
                   as="select"
-                  aria-labelledby="Category"
                   value={this.state.category}
                   onChange={this.updateCategory}>
                   <option value={''}>Category</option>

@@ -66,7 +66,6 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
               <Form.Group>
                 <Form.Control
                   as="select"
-                  aria-labelledby="Province"
                   value={this.state.province_id}
                   onChange={this.updateProvince}>
                   <option value={''}>Province</option>

@@ -155,11 +155,7 @@ export default class FinanceHighlights extends Component<
             <Card.Title className="text-center"></Card.Title>
             <Form>
               <Form.Group>
-                <Form.Control
-                  as="select"
-                  aria-labelledby="Period"
-                  value={this.state.period}
-                  onChange={this.updatePeriod}>
+                <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
                   {periods.map((period, index) => {
                     const { label, value } = period;
                     return (

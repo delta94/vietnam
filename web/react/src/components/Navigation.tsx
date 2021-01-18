@@ -27,10 +27,19 @@ export default class Navigation extends Component<INavigationProps, INavigationS
             VIETNAM
           </Navbar.Brand>
           <Nav className="mr-auto">
-            <Nav.Item>
+            <Nav.Item className="mr-3">
               <Link className="text-white" to={{ pathname: 'docs' }}>
                 DOCS
               </Link>
+            </Nav.Item>
+            <Nav.Item>
+              <a
+                href="https://www.npmjs.com/package/vnapis"
+                className="text-white text-uppercase"
+                rel="noreferrer"
+                target="_blank">
+                npm
+              </a>
             </Nav.Item>
           </Nav>
           <Nav className="ml-auto">

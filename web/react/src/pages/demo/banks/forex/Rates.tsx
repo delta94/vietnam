@@ -81,11 +81,7 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
     return (
       <Form>
         <Form.Group>
-          <Form.Control
-            as="select"
-            aria-labelledby="Currency"
-            value={this.state.currency}
-            onChange={this.updateCurrency}>
+          <Form.Control as="select" value={this.state.currency} onChange={this.updateCurrency}>
             <option value={''}>Currency</option>
             {currencies.map((currency, index) => {
               return (

@@ -63,11 +63,7 @@ export default class Vietcetera extends Component<IVietceteraProps, IVietceteraS
             </Card.Subtitle>
             <Form className="mt-3 w-100">
               <Form.Group>
-                <Form.Control
-                  as="select"
-                  aria-labelledby="Type"
-                  value={this.state.type}
-                  onChange={this.getArticles}>
+                <Form.Control as="select" value={this.state.type} onChange={this.getArticles}>
                   {options.map((option, index) => {
                     const { text, value } = option;
                     return (

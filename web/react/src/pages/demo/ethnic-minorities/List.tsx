@@ -76,7 +76,6 @@ export default class EthnicMinoritiesList extends Component<
           <Form.Control
             type="text"
             placeholder="Query"
-            aria-labelledby="Query"
             value={this.state.query}
             onChange={this.filter}></Form.Control>
         </Form>
