@@ -181,6 +181,11 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
+  public async getVLeague(): Promise<any> {
+    const endpoint: IEndpoint = endpoints.sports.getVLeague;
+    return await this.fetch(endpoint);
+  }
+
   public async getLicensePlates(): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.licensePlates.getLicensePlates;
     return await this.fetch(endpoint);

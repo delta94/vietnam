@@ -57,7 +57,7 @@ export default class LiveScore extends Utils {
           const leagueTable: Array<any> = _.get(stage, 'LeagueTable.L.0.Tables.0.team', []).map(
             team => {
               const rank: number = _.get(team, 'rnk', 0);
-              const name: string = _.get(team, 'Tnm', '');
+              const name: string = _.get(team, 'Tnm', '').replace(/FC/g, '').replace(/FLC/g, '');
               const point: number = _.get(team, 'pts', 0);
               const win: number = _.get(team, 'win', 0);
               const draw: number = _.get(team, 'drw', 0);

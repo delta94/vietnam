@@ -98,6 +98,7 @@ export interface IPhonesEndpoints {
 }
 export interface ISportsEndpoints {
   getSportsClubs: IEndpoint;
+  getVLeague: IEndpoint;
 }
 
 export interface IWeatherEndpoints {

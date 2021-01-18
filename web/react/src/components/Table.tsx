@@ -63,10 +63,14 @@ export default class Table extends Component<ITableProps> {
                         {rowIndexEnabled && <td>{rowIndex + 1}</td>}
                         {rowConfigs.map((config, cellIndex) => {
                           const { key, className = '' } = config;
-                          const cell =
-                            typeof row[key] === 'boolean'
-                              ? row[key].toString()
-                              : (row[key] || '').toString();
+                          let cell = '';
+                          if (row[key] === 'boolean') {
+                            cell = row[key].toString();
+                          } else if (row[key] === 'string') {
+                            cell = (row[key] || '').toString();
+                          } else {
+                            cell = row[key];
+                          }
                           return (
                             <td key={cellIndex} className={className}>
                               {cell}

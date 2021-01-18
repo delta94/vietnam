@@ -1,6 +1,7 @@
+import { IPhonesEndpoints } from './interfaces';
 import { baseAPI } from './urls';
 
-const phones = {
+const phones: IPhonesEndpoints = {
   getPhonesPrefixes: {
     id: 'getPhonesPrefixes',
     name: 'Get Phone Prefixes',

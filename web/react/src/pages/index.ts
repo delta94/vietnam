@@ -22,8 +22,6 @@ import GHNProvinces from './demo/open-apis/ghn/Provinces';
 import GHNDistricts from './demo/open-apis/ghn/Districts';
 import GHNWards from './demo/open-apis/ghn/Wards';
 import Vietcetera from './demo/open-apis/Vietcetera';
-// Sports
-import SportsClubs from './demo/sports/Clubs';
 // Weather
 import WeatherCurrent from './demo/weather/Current';
 // Docs
@@ -65,6 +63,8 @@ export {
   NewsTrends,
   PhonesPrefixes,
   PhonesProviders,
+  SportsClubs,
+  SportsVLeague,
   YouTubeTrending,
   YouTubeVideoCategories
 } from './demo';
@@ -88,8 +88,6 @@ export {
   MusicArtists,
   // Open APIs
   OpenAPIsList,
-  // Sports
-  SportsClubs,
   // Technologies
   GHNProvinces,
   GHNDistricts,

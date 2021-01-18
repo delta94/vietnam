@@ -63,6 +63,7 @@ import {
   // Sports
   Sports,
   SportsClubs,
+  SportsVLeague,
   // Weather
   Weather,
   WeatherCurrent,
@@ -377,6 +378,12 @@ const routes: Array<IRoute> = [
     path: 'sports-clubs',
     text: 'Sports Clubs',
     component: SportsClubs,
+    navigation: false
+  },
+  {
+    path: 'sports-vleague',
+    text: 'Sports VLeague',
+    component: SportsVLeague,
     navigation: false
   },
   {
