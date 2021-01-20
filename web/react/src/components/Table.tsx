@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 
 interface ITableProps {
@@ -9,9 +10,10 @@ interface ITableProps {
   rowConfigs?: Array<any>;
   emptyRowsText?: string;
   rowIndexEnabled?: boolean;
+  theme: string;
 }
 
-export default class Table extends Component<ITableProps> {
+class Table extends Component<ITableProps> {
   render() {
     const {
       header = '',
@@ -20,15 +22,20 @@ export default class Table extends Component<ITableProps> {
       rows = [],
       rowConfigs = [],
       emptyRowsText = 'No Data',
-      rowIndexEnabled = false
+      rowIndexEnabled = false,
+      theme
     } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
+    const borderColor: string = theme === 'light' ? '' : 'border-white';
+    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
 
     return (
       <div id="table">
-        {header.length > 0 && <h5>{header}</h5>}
+        {header.length > 0 && <h5 className={`${textColor}`}>{header}</h5>}
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant="danger"></Spinner>
+            <Spinner animation="border" variant={spinnerVariant}></Spinner>
           </div>
         )}
         {!loading && rows.length === 0 && (
@@ -37,20 +44,24 @@ export default class Table extends Component<ITableProps> {
           </div>
         )}
         {!loading && rows.length > 0 && rowConfigs.length && (
-          <div className="table-responsive table-container rounded-lg">
+          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
             <table className="table">
               {caption.length > 0 && (
-                <caption className="text-center bg-danger text-white">
+                <caption className={`${bgColor} text-center text-white`}>
                   {caption} ({rows.length})
                 </caption>
               )}
               {rowConfigs.length && (
                 <thead>
-                  {rowIndexEnabled && <td>#</td>}
                   <tr>
+                    {rowIndexEnabled && <th className={`${textColor}`}>#</th>}
                     {rowConfigs.map((config, headerIndex) => {
                       const { header = '' } = config;
-                      return <th key={headerIndex}>{header}</th>;
+                      return (
+                        <th key={headerIndex} className={`${textColor}`}>
+                          {header}
+                        </th>
+                      );
                     })}
                   </tr>
                 </thead>
@@ -60,19 +71,19 @@ export default class Table extends Component<ITableProps> {
                   {rows.map((row, rowIndex) => {
                     return (
                       <tr key={rowIndex}>
-                        {rowIndexEnabled && <td>{rowIndex + 1}</td>}
+                        {rowIndexEnabled && <td className={`${textColor}`}>{rowIndex + 1}</td>}
                         {rowConfigs.map((config, cellIndex) => {
                           const { key, className = '' } = config;
                           let cell = '';
-                          if (row[key] === 'boolean') {
+                          if (typeof row[key] === 'boolean') {
                             cell = row[key].toString();
-                          } else if (row[key] === 'string') {
+                          } else if (typeof row[key] === 'string') {
                             cell = (row[key] || '').toString();
                           } else {
                             cell = row[key];
                           }
                           return (
-                            <td key={cellIndex} className={className}>
+                            <td key={cellIndex} className={`${className} ${textColor}`}>
                               {cell}
                             </td>
                           );
@@ -89,3 +100,10 @@ export default class Table extends Component<ITableProps> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(Table);

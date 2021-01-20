@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -46,15 +45,11 @@ export default class HistoryDynasties extends Component<
 
     return (
       <div id="HistoryDynasties" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Dynasties'}
-              rows={dynasties}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Dynasties'}
+          rows={dynasties}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

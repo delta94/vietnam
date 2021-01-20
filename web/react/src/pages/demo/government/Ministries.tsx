@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -43,15 +42,11 @@ export default class GovernmentMinistries extends Component<
     ];
     return (
       <div id="GovernmentMinistries" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Ministries'}
-              rows={ministries}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Ministries'}
+          rows={ministries}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Pagination } from 'react-bootstrap';
+import { Pagination } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -101,12 +101,11 @@ export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsStat
     ];
     return (
       <div id="MapsWards" className="container-fluid">
-        <Card>
-          <Card.Body>
-            {this.renderPagination()}
-            <Table loading={loading} caption={'Wards'} rows={wards} rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        {this.renderPagination()}
+        <div className="mb-3">
+          <Table loading={loading} caption={'Wards'} rows={wards} rowConfigs={rowConfigs}></Table>
+        </div>
+        {this.renderPagination()}
       </div>
     );
   }

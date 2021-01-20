@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -60,26 +59,22 @@ export default class SportsVLeague extends Component<ISportsVLeagueProps, ISport
       <div id="SportsVLeague" className="container-fluid">
         <div className="row">
           <div className="col-sm-6">
-            <Card className="h-80vh overflow-auto mb-3">
-              <Card.Body>
-                <Table
-                  loading={loading}
-                  caption={'Matches'}
-                  rows={matches}
-                  rowConfigs={matchesRowConfigs}></Table>
-              </Card.Body>
-            </Card>
+            <div className="content-height overflow-auto">
+              <Table
+                loading={loading}
+                caption={'Matches'}
+                rows={matches}
+                rowConfigs={matchesRowConfigs}></Table>
+            </div>
           </div>
           <div className="col-sm-6">
-            <Card className="h-80vh overflow-auto">
-              <Card.Body>
-                <Table
-                  loading={loading}
-                  caption={'League Table'}
-                  rows={leagueTable}
-                  rowConfigs={leagueTableRowConfigs}></Table>
-              </Card.Body>
-            </Card>
+            <div className="content-height overflow-auto">
+              <Table
+                loading={loading}
+                caption={'League Table'}
+                rows={leagueTable}
+                rowConfigs={leagueTableRowConfigs}></Table>
+            </div>
           </div>
         </div>
       </div>

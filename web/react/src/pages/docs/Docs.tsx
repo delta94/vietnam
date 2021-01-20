@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Accordion, Button } from 'react-bootstrap';
 
 import { helper } from '../../services';
 import { endpoints } from '../../configs';
 import { Doc } from '../../components';
 
-interface IDocsProps {}
+interface IDocsProps {
+  theme: string;
+}
 
 interface IDocsState {
   endpoints: any;
 }
 
-export default class Docs extends Component<IDocsProps, IDocsState> {
+class Docs extends Component<IDocsProps, IDocsState> {
   constructor(props: IDocsProps) {
     super(props);
 
@@ -30,6 +33,8 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
   }
 
   renderTable(apis: Array<any>) {
+    const { theme = 'light' } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const colors: any = { get: 'text-success', post: 'text-info' };
     return (
       <div>
@@ -50,7 +55,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
                       </small>
                     </td>
                     <td>
-                      <small>{name}</small>
+                      <small className={`${textColor}`}>{name}</small>
                     </td>
                   </tr>
                 );
@@ -62,12 +67,16 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
     );
   }
 
-  renderSidebar(endpoints: any) {
+  renderSidebar() {
+    const { endpoints } = this.state;
+    const { theme = 'light' } = this.props;
     const groups: Array<string> = Object.keys(endpoints);
     const list = groups.map((group: string) => {
       const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
       return { group, apis };
     });
+
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
 
     return (
       <Accordion defaultActiveKey="0">
@@ -78,7 +87,7 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
             return (
               <div key={index}>
                 <Accordion.Toggle
-                  className="m-0 p-0 text-dark"
+                  className={`${textColor} m-0 p-0`}
                   as={Button}
                   variant="link"
                   eventKey={index.toString()}>
@@ -100,16 +109,18 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
 
     return (
       <div id="Docs" className="container-fluid">
-        <div className="row">
-          <div className="col-md-3 d-none d-md-block">
-            <div className="h-80vh overflow-auto">{this.renderSidebar(endpoints)}</div>
-          </div>
-          <div className="col-md-9">
-            <div className="h-80vh overflow-auto">
-              {groups.length > 0 &&
-                groups.map((group: string, index: number) => {
-                  return <Doc key={index} group={group} header={helper.capitalize(group)}></Doc>;
-                })}
+        <div className="h-100">
+          <div className="row">
+            <div className="col-md-3 d-none d-md-block">
+              <div className="content-height overflow-auto">{this.renderSidebar()}</div>
+            </div>
+            <div className="col-md-9">
+              <div className="content-height overflow-auto">
+                {groups.length > 0 &&
+                  groups.map((group: string, index: number) => {
+                    return <Doc key={index} group={group} header={helper.capitalize(group)}></Doc>;
+                  })}
+              </div>
             </div>
           </div>
         </div>
@@ -117,3 +128,10 @@ export default class Docs extends Component<IDocsProps, IDocsState> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(Docs);

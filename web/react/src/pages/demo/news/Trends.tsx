@@ -1,16 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Badge, Card, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface INewsTrendsProps {}
+interface INewsTrendsProps {
+  theme: string;
+}
 
 interface INewsTrendsState {
   trends: Array<any>;
   loading: boolean;
 }
 
-export default class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
+class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
   constructor(props: INewsTrendsProps) {
     super(props);
 
@@ -31,11 +34,15 @@ export default class NewsTrends extends Component<INewsTrendsProps, INewsTrendsS
 
   render() {
     const { trends = [], loading = true } = this.state;
+    const { theme } = this.props;
+    const borderColor: string = theme === 'light' ? '' : 'border-white';
+    const bgColor: string = theme === 'light' ? 'bg-white' : 'bg-black';
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
 
     return (
-      <Card id="NewsTrends">
+      <Card id="NewsTrends" className={`${bgColor} ${borderColor}`}>
         <Card.Body>
-          <Card.Title className="text-center">Trends ({trends.length})</Card.Title>
+          <Card.Title className={`${textColor} text-center`}>Trends ({trends.length})</Card.Title>
           {loading && (
             <div className="text-center">
               <Spinner animation="border" variant="danger"></Spinner>
@@ -46,12 +53,7 @@ export default class NewsTrends extends Component<INewsTrendsProps, INewsTrendsS
               const { text, url } = trend;
               return (
                 <Badge key={index} variant="danger" className="mr-1">
-                  <a
-                    key={index}
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className=" text-white">
+                  <a key={index} href={url} target="_blank" rel="noreferrer" className="text-white">
                     {text}
                   </a>
                 </Badge>
@@ -62,3 +64,10 @@ export default class NewsTrends extends Component<INewsTrendsProps, INewsTrendsS
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme = '' } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(NewsTrends);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -60,32 +60,25 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
     ];
     return (
       <div id="MapsDistricts" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Form>
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  value={this.state.province_id}
-                  onChange={this.updateProvince}>
-                  <option value={''}>Province</option>
-                  {provinces.map((province, index) => {
-                    return (
-                      <option key={index} value={province.province_id}>
-                        {province.name}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </Form>
-            <Table
-              loading={loading}
-              caption={'Districts'}
-              rows={districts}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Form>
+          <Form.Group>
+            <Form.Control as="select" value={this.state.province_id} onChange={this.updateProvince}>
+              <option value={''}>Province</option>
+              {provinces.map((province, index) => {
+                return (
+                  <option key={index} value={province.province_id}>
+                    {province.name}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Form>
+        <Table
+          loading={loading}
+          caption={'Districts'}
+          rows={districts}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

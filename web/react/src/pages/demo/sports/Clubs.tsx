@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -42,11 +41,7 @@ export default class SportsClubs extends Component<ISportsClubsProps, ISportsClu
 
     return (
       <div id="SportsClubs" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table loading={loading} caption={'Clubs'} rows={clubs} rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table loading={loading} caption={'Clubs'} rows={clubs} rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

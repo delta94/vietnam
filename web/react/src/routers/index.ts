@@ -211,18 +211,6 @@ const routes: Array<IRoute> = [
     navigation: false
   },
   {
-    path: 'history',
-    text: 'History',
-    component: History,
-    navigation: true
-  },
-  {
-    path: 'history-dynasties',
-    text: 'History-dynasties',
-    component: HistoryDynasties,
-    navigation: false
-  },
-  {
     path: 'government',
     text: 'Government',
     component: Government,
@@ -268,6 +256,18 @@ const routes: Array<IRoute> = [
     path: 'government-national-assembly-members',
     text: 'National Assembly Members',
     component: GovernmentNationalAssemblyMembers,
+    navigation: false
+  },
+  {
+    path: 'history',
+    text: 'History',
+    component: History,
+    navigation: true
+  },
+  {
+    path: 'history-dynasties',
+    text: 'History-dynasties',
+    component: HistoryDynasties,
     navigation: false
   },
   {

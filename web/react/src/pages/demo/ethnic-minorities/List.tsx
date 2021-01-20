@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -79,15 +79,11 @@ export default class EthnicMinoritiesList extends Component<
             value={this.state.query}
             onChange={this.filter}></Form.Control>
         </Form>
-        <Card className="h-70vh overflow-auto">
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Ethnic Minorities'}
-              rows={filterEthnicMinorities}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Ethnic Minorities'}
+          rows={filterEthnicMinorities}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

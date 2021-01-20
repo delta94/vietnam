@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -41,15 +40,11 @@ export default class MapsPostalCodes extends Component<
     ];
     return (
       <div id="MapsPostalCodes" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Postal Codes'}
-              rows={postalCodes}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Postal Codes'}
+          rows={postalCodes}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

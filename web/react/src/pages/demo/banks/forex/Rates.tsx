@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
-import { Card, Form, Spinner } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
 
-interface IBanksForexProps {}
+interface IBanksForexRatesProps {
+  theme: string;
+}
 
-interface IBanksForexState {
+interface IBanksForexRatesState {
   data: Array<any>;
   currency: string;
   currencies: Array<string>;
@@ -14,8 +17,8 @@ interface IBanksForexState {
   sortDir: number;
 }
 
-export default class BanksForex extends Component<IBanksForexProps, IBanksForexState> {
-  constructor(props: IBanksForexProps) {
+class BanksForexRates extends Component<IBanksForexRatesProps, IBanksForexRatesState> {
+  constructor(props: IBanksForexRatesProps) {
     super(props);
 
     this.state = { data: [], currency: '', currencies: [], loading: false, sortBy: '', sortDir: 1 };
@@ -97,96 +100,108 @@ export default class BanksForex extends Component<IBanksForexProps, IBanksForexS
   }
 
   renderTable() {
-    const { data = [], currency = '' } = this.state;
+    const { data = [], currency = '', loading } = this.state;
+    const { theme } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
+    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
+    const borderColor: string = theme === 'light' ? '' : 'border-white';
     return (
-      <div className="table-responsive table-container rounded">
-        {data.length > 0 && (
-          <table className="table">
-            <thead>
-              <tr>
-                <th>#</th>
-                <th>
-                  <span className="cursor-pointer" onClick={() => this.sort('bank')}>
-                    Bank
-                  </span>
-                </th>
-                <th>
-                  <span className="cursor-pointer" onClick={() => this.sort('buyCash')}>
-                    Buy (Cash)
-                  </span>
-                </th>
-                <th>
-                  <span className="cursor-pointer" onClick={() => this.sort('buyTransfer')}>
-                    Buy (Transfer)
-                  </span>
-                </th>
-                <th>
-                  <span className="cursor-pointer" onClick={() => this.sort('sellCash')}>
-                    Sell (Cash)
-                  </span>
-                </th>
-                <th>
-                  <span className="cursor-pointer" onClick={() => this.sort('sellTransfer')}>
-                    Sell (Transfer)
-                  </span>
-                </th>
-                <th>Last Updated At</th>
-              </tr>
-            </thead>
-            <tbody>
-              {data.map((item, index) => {
-                const {
-                  bank = '',
-                  time = '',
-                  buyCash = {},
-                  buyTransfer = {},
-                  sellCash = {},
-                  sellTransfer = {}
-                } = item;
-                const buyCashText: string = buyCash[currency] || '';
-                const buyTransferText: string = buyTransfer[currency] || '';
-                const sellCashText: string = sellCash[currency] || '';
-                const sellTransferText: string = sellTransfer[currency] || '';
-
-                return (
-                  <tr key={index}>
-                    <td>{index + 1}</td>
-                    <td>{bank}</td>
-                    <td>{buyCashText}</td>
-                    <td>{buyTransferText}</td>
-                    <td>{sellCashText}</td>
-                    <td>{sellTransferText}</td>
-                    <td>{time}</td>
+      <div>
+        {loading && (
+          <div className="text-center">
+            <Spinner animation="border" variant={spinnerVariant}></Spinner>
+          </div>
+        )}
+        {!loading && (
+          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
+            {data.length > 0 && (
+              <table className="table">
+                <caption className={`${bgColor} text-white text-center`}>
+                  Forex Rates {currency && <span>({currency.toUpperCase()})</span>}
+                </caption>
+                <thead>
+                  <tr>
+                    <th className={textColor}>#</th>
+                    <th className={textColor}>
+                      <span className="cursor-pointer" onClick={() => this.sort('bank')}>
+                        Bank
+                      </span>
+                    </th>
+                    <th className={textColor}>
+                      <span className="cursor-pointer" onClick={() => this.sort('buyCash')}>
+                        Buy (Cash)
+                      </span>
+                    </th>
+                    <th className={textColor}>
+                      <span className="cursor-pointer" onClick={() => this.sort('buyTransfer')}>
+                        Buy (Transfer)
+                      </span>
+                    </th>
+                    <th className={textColor}>
+                      <span className="cursor-pointer" onClick={() => this.sort('sellCash')}>
+                        Sell (Cash)
+                      </span>
+                    </th>
+                    <th className={textColor}>
+                      <span className="cursor-pointer" onClick={() => this.sort('sellTransfer')}>
+                        Sell (Transfer)
+                      </span>
+                    </th>
+                    <th className={textColor}>Last Updated At</th>
                   </tr>
-                );
-              })}
-            </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  {data.map((item, index) => {
+                    const {
+                      bank = '',
+                      time = '',
+                      buyCash = {},
+                      buyTransfer = {},
+                      sellCash = {},
+                      sellTransfer = {}
+                    } = item;
+                    const buyCashText: string = buyCash[currency] || '';
+                    const buyTransferText: string = buyTransfer[currency] || '';
+                    const sellCashText: string = sellCash[currency] || '';
+                    const sellTransferText: string = sellTransfer[currency] || '';
+
+                    return (
+                      <tr key={index}>
+                        <td className={textColor}>{index + 1}</td>
+                        <td className={textColor}>{bank}</td>
+                        <td className={textColor}>{buyCashText}</td>
+                        <td className={textColor}>{buyTransferText}</td>
+                        <td className={textColor}>{sellCashText}</td>
+                        <td className={textColor}>{sellTransferText}</td>
+                        <td className={textColor}>{time}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            )}
+          </div>
         )}
       </div>
     );
   }
 
   render() {
-    const { currency = '', currencies = [], loading = false } = this.state;
+    const { currencies = [], loading = false } = this.state;
 
     return (
-      <div id="BanksForex" className="container-fluid">
+      <div id="BanksForexRates" className="container-fluid">
         {!loading && this.renderForm(currencies)}
-        <Card className="h-70vh overflow-auto">
-          <Card.Body>
-            <Card.Title className="text-center">
-              Forex Rates {currency && <span>({currency.toUpperCase()})</span>}
-            </Card.Title>
-            {loading && (
-              <div className="text-center">
-                <Spinner animation="border" variant="danger"></Spinner>
-              </div>
-            )}
-            <div>{!loading && this.renderTable()}</div>
-          </Card.Body>
-        </Card>
+        <div className="h-70vh overflow-auto">{this.renderTable()}</div>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme = '' } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(BanksForexRates);

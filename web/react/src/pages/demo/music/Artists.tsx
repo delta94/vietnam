@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -37,15 +36,7 @@ export default class MusicArtists extends Component<IMusicArtistsProps, IMusicAr
 
     return (
       <div id="MusicArtists" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Artists'}
-              rows={artists}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table loading={loading} caption={'Artists'} rows={artists} rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

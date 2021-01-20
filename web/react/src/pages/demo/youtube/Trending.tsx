@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Card, Form, Spinner, ListGroup } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Form, Spinner, ListGroup } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface IYouTubeTrendingProps {}
+interface IYouTubeTrendingProps {
+  theme: string;
+}
 
 interface IYouTubeTrendingState {
   categoryId: string;
@@ -13,10 +16,7 @@ interface IYouTubeTrendingState {
   loading: boolean;
 }
 
-export default class YouTubeTrending extends Component<
-  IYouTubeTrendingProps,
-  IYouTubeTrendingState
-> {
+class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingState> {
   constructor(props: IYouTubeTrendingProps) {
     super(props);
 
@@ -91,34 +91,39 @@ export default class YouTubeTrending extends Component<
 
   renderCards() {
     const { trending = [] } = this.state;
+    const { theme = 'light' } = this.props;
+    const border: string = theme === 'light' ? 'border' : 'border border-white';
+    const borderBottom: string = theme === 'light' ? '' : 'border-white';
+    const bgColor: string = theme === 'light' ? 'bg-white' : 'bg-black';
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     return (
       <div>
         {trending.length === 0 && (
           <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
         )}
         {trending.length > 0 && (
-          <Card className="h-70vh overflow-auto">
-            <ListGroup className="list-group-flush">
-              {trending.map((video: any, index: number) => {
-                const { title, url, channelId, channelTitle } = video;
-                const channelUrl: string = `https://www.youtube.com/channel/${channelId}`;
-                return (
-                  <ListGroup.Item key={index}>
-                    <h6 className="m-0">
-                      <a href={url} className="text-dark" target="_blank" rel="noreferrer">
-                        {title}
-                      </a>
-                    </h6>
-                    <small>
-                      <a href={channelUrl} className="text-muted" target="_blank" rel="noreferrer">
-                        {channelTitle}
-                      </a>
-                    </small>
-                  </ListGroup.Item>
-                );
-              })}
-            </ListGroup>
-          </Card>
+          <ListGroup className={`${border} list-group-flush h-70vh overflow-auto rounded-lg`}>
+            {trending.map((video: any, index: number) => {
+              const { title, url, channelId, channelTitle } = video;
+              const channelUrl: string = `https://www.youtube.com/channel/${channelId}`;
+              return (
+                <ListGroup.Item
+                  key={index}
+                  className={`${bgColor} ${textColor} ${borderBottom} d-flex justify-content-between align-items-center`}>
+                  <h6 className="m-0">
+                    <a href={url} className={textColor} target="_blank" rel="noreferrer">
+                      {title}
+                    </a>
+                  </h6>
+                  <small>
+                    <a href={channelUrl} className="text-muted" target="_blank" rel="noreferrer">
+                      {channelTitle}
+                    </a>
+                  </small>
+                </ListGroup.Item>
+              );
+            })}
+          </ListGroup>
         )}
       </div>
     );
@@ -140,3 +145,10 @@ export default class YouTubeTrending extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(YouTubeTrending);

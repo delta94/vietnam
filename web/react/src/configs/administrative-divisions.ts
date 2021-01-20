@@ -175,7 +175,7 @@ const administrativeDivisions = {
     response: {
       200: {
         schema: [{ name: 'total', type: 'number', description: '' }],
-        example: [{ total: '<number>' }]
+        example: { total: '<number>' }
       },
       400: {
         schema: [{ name: 'message', type: 'string', description: '' }],

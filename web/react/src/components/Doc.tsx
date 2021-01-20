@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { Tabs, Tab } from 'react-bootstrap';
 
 import { endpoints } from '../configs';
@@ -11,13 +12,13 @@ import Table from './Table';
 interface IDocProps {
   header?: string;
   group: any;
+  theme: string;
 }
 
 interface IDocState {
   endpoints: any;
 }
-
-export default class Doc extends Component<IDocProps, IDocState> {
+class Doc extends Component<IDocProps, IDocState> {
   constructor(props: IDocProps) {
     super(props);
 
@@ -30,6 +31,8 @@ export default class Doc extends Component<IDocProps, IDocState> {
   }
 
   renderRequest(request: any, method: string, path: string) {
+    const { theme = 'light' } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const { headers = [], query = [], body = [] } = request;
     const requestRowConfigs = [
       { header: 'Name', key: 'name', className: 'font-weight-bold' },
@@ -58,7 +61,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
           </div>
         )}
         <div className="mb-5">
-          <p>Request Example</p>
+          <p className={`${textColor}`}>Request Example</p>
           <CURL method={method} path={path} headers={headers} body={body} query={query}></CURL>
         </div>
       </div>
@@ -70,6 +73,8 @@ export default class Doc extends Component<IDocProps, IDocState> {
   }
 
   renderResponses(response: any) {
+    const { theme = 'light' } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const responseRowConfigs = [
       { header: 'Name', key: 'name', className: 'font-weight-bold' },
       { header: 'Type', key: 'type' },
@@ -78,7 +83,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
     const responseCodes = Object.keys(response);
     return (
       <div id="DocResponses" className="mb-5">
-        <h5>Responses</h5>
+        <h5 className={`${textColor}`}>Responses</h5>
         {responseCodes.length > 0 && (
           <Tabs defaultActiveKey="200" id="responses-tabs">
             {responseCodes.map((code, index) => {
@@ -89,7 +94,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
                     <div className="mb-3">
                       <Table loading={false} rows={schema} rowConfigs={responseRowConfigs}></Table>
                     </div>
-                    <p>Response Example</p>
+                    <p className={`${textColor}`}>Response Example</p>
                     <div className="p-3 bg-dark text-white rounded-lg">
                       <pre className="m-0 text-yellow">{this.buildResponseExample(example)}</pre>
                     </div>
@@ -104,6 +109,8 @@ export default class Doc extends Component<IDocProps, IDocState> {
   }
 
   renderAPIs(list: Array<any>) {
+    const { theme = 'light' } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     return (
       <div id="DocAPIs">
         {list.map((endpoint, cardIndex) => {
@@ -121,7 +128,7 @@ export default class Doc extends Component<IDocProps, IDocState> {
             <div id={id} key={cardIndex}>
               <div className="pt-3">
                 <div className="mb-5">
-                  <h4 className="mb-3">{name}</h4>
+                  <h4 className={`${textColor} mb-3`}>{name}</h4>
                   <div className="mb-3">
                     <API method={method} path={path} url={url}></API>
                   </div>
@@ -144,13 +151,21 @@ export default class Doc extends Component<IDocProps, IDocState> {
 
   render() {
     const { endpoints = {} } = this.state;
-    const { header, group } = this.props;
+    const { header, group, theme } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const list = Object.values(endpoints[group]);
     return (
       <div id="Doc">
-        <h2 className="mb-3">{header}</h2>
+        <h2 className={`${textColor} mb-3`}>{header}</h2>
         {list.length > 0 && this.renderAPIs(list)}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(Doc);

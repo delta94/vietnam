@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -40,15 +39,11 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
     ];
     return (
       <div id="MapsProvinces" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Provinces'}
-              rows={provinces}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Provinces'}
+          rows={provinces}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

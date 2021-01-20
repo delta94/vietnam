@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -60,32 +60,25 @@ export default class GovernmentMinisters extends Component<
     ];
     return (
       <div id="GovernmentMinisters" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Form className="mt-3 w-100">
-              <Form.Group>
-                <Form.Control
-                  as="select"
-                  value={this.state.ministry}
-                  onChange={this.updateMinistry}>
-                  {ministries.map((ministry, index) => {
-                    const { short, name } = ministry;
-                    return (
-                      <option key={index} value={short}>
-                        {name}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </Form>
-            <Table
-              loading={loading}
-              caption={'Ministers'}
-              rows={ministers}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <Form className="mt-3 w-100">
+          <Form.Group>
+            <Form.Control as="select" value={this.state.ministry} onChange={this.updateMinistry}>
+              {ministries.map((ministry, index) => {
+                const { short, name } = ministry;
+                return (
+                  <option key={index} value={short}>
+                    {name}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+        </Form>
+        <Table
+          loading={loading}
+          caption={'Ministers'}
+          rows={ministers}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

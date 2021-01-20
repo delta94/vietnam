@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import { Button, Card, Spinner } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Button, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
 
-interface IBanksListProps {}
+interface IBanksForexSyncProps {
+  theme: string;
+}
 
-interface IBanksListState {
+interface IBanksForexSyncState {
   banks: Array<string>;
   loading: boolean;
   syncing: Array<string>;
 }
 
-export default class BanksList extends Component<IBanksListProps, IBanksListState> {
-  constructor(props: IBanksListProps) {
+class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncState> {
+  constructor(props: IBanksForexSyncProps) {
     super(props);
 
     this.state = { banks: [], syncing: [], loading: false };
@@ -66,26 +69,36 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
     }
   }
 
-  renderTable(loading: boolean, banks: Array<any> = [], syncing: Array<string> = []) {
+  renderTable() {
+    const { banks = [], loading = false, syncing = [] } = this.state;
+    const { theme } = this.props;
+
+    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
+    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
+    const borderColor: string = theme === 'light' ? '' : 'border-white';
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const buttonVariant: string = theme === 'light' ? 'danger' : 'light';
+
     return (
       <div id="table">
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant="danger"></Spinner>
+            <Spinner animation="border" variant={spinnerVariant}></Spinner>
           </div>
         )}
         {!loading && (
-          <div className="table-responsive table-container">
+          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
             {banks.length ? (
               <table className="table">
-                <caption className="bg-danger text-white text-center">
+                <caption className={`${bgColor} text-white text-center`}>
                   Banks ({banks.length})
                 </caption>
                 <thead>
                   <tr>
-                    <th>ID</th>
-                    <th>
-                      <Button variant="danger" onClick={() => this.syncAll()}>
+                    <th>#</th>
+                    <th className={`${textColor}`}>ID</th>
+                    <th className="text-right">
+                      <Button variant={buttonVariant} onClick={() => this.syncAll()}>
                         SYNC ALL
                       </Button>
                     </th>
@@ -96,11 +109,12 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
                     const syncingFlag: boolean = syncing.includes(bank);
                     return (
                       <tr key={index}>
-                        <td>{bank}</td>
-                        <td>
+                        <td>{index + 1}</td>
+                        <td className={`${textColor}`}>{bank}</td>
+                        <td align="right">
                           <Button
                             disabled={syncingFlag}
-                            variant="danger"
+                            variant={buttonVariant}
                             onClick={() => this.syncForexRates(bank)}>
                             {syncingFlag ? (
                               <Spinner animation="border" variant="light"></Spinner>
@@ -124,14 +138,17 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
   }
 
   render() {
-    const { banks = [], loading = false, syncing = [] } = this.state;
-
     return (
-      <div id="BanksList" className="container-fluid">
-        <Card>
-          <Card.Body>{this.renderTable(loading, banks, syncing)}</Card.Body>
-        </Card>
+      <div id="BanksForexSync" className="container-fluid">
+        {this.renderTable()}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme = '' } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(BanksForexSync);

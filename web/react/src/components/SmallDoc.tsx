@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Doc from './Doc';
 import { endpoints } from '../configs';
@@ -6,13 +7,14 @@ import { endpoints } from '../configs';
 interface ISmallDocProps {
   group: string;
   header: string;
+  theme: string;
 }
 
 interface ISmallDocState {
   endpoints: any;
 }
 
-export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
+class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
   constructor(props: ISmallDocProps) {
     super(props);
 
@@ -31,6 +33,8 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
   }
 
   renderTable(apis: Array<any>) {
+    const { theme } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const colors: any = { get: 'text-success', post: 'text-info' };
     return (
       <div>
@@ -51,7 +55,7 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
                       </small>
                     </td>
                     <td>
-                      <small>{name}</small>
+                      <small className={`${textColor}`}>{name}</small>
                     </td>
                   </tr>
                 );
@@ -64,12 +68,13 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
   }
 
   renderSidebar(endpoints: any) {
-    const { group, header } = this.props;
+    const { group, header, theme } = this.props;
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
     return (
       <div>
         <h6>
-          <b>{header}</b>
+          <b className={`${textColor}`}>{header}</b>
         </h6>
         {this.renderTable(apis)}
       </div>
@@ -83,10 +88,10 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
       <div id="SmallDoc">
         <div className="row">
           <div className="col-md-3 d-none d-md-block">
-            <div className="h-80vh overflow-auto">{this.renderSidebar(endpoints)}</div>
+            <div className="content-height overflow-auto">{this.renderSidebar(endpoints)}</div>
           </div>
           <div className="col-md-9">
-            <div className="h-80vh overflow-auto">
+            <div className="content-height overflow-auto">
               <Doc group={group} header={header}></Doc>
             </div>
           </div>
@@ -95,3 +100,10 @@ export default class SmallDoc extends Component<ISmallDocProps, ISmallDocState> 
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(SmallDoc);

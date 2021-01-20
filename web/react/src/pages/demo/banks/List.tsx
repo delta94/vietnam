@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
@@ -42,16 +41,12 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
     ];
     return (
       <div id="BanksList" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Table
-              loading={loading}
-              caption={'Banks'}
-              rows={banks}
-              rowConfigs={rowConfigs}
-              rowIndexEnabled={true}></Table>
-          </Card.Body>
-        </Card>
+        <Table
+          loading={loading}
+          caption={'Banks'}
+          rows={banks}
+          rowConfigs={rowConfigs}
+          rowIndexEnabled={true}></Table>
       </div>
     );
   }

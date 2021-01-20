@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   height: 100vh;
   margin: 0;
@@ -8,7 +12,11 @@ body {
 }
 
 main {
-  height: calc(100vh - 112px);
+  height: calc(100vh - 2 * 57px);
+}
+
+.content-height {
+  height: calc(100vh - 2 * 57px - 2 * 16px);
 }
 
 code {
@@ -60,6 +68,7 @@ table caption {
 
   .nav.nav-tabs a {
     border: 0 !important;
+    border-radius: .25rem !important;
   }
 
   .nav-tabs .nav-link.active {
@@ -73,4 +82,8 @@ table caption {
 
 .text-yellow {
   color: #ffc107;
+}
+
+.bg-black {
+  background-color: #141d26 !important;
 }

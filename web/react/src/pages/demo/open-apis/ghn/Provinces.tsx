@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
 import { Table } from '../../../../components';
@@ -41,24 +40,16 @@ export default class Provinces extends Component<IProvincesProps, IProvincesStat
 
     return (
       <div id="Provinces" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Card.Title className="text-center mb-3">GHN Provinces</Card.Title>
-            <Card.Subtitle className="text-center mb-3">
-              <a
-                href={`https://www.npmjs.com/package/giaohangnhanh`}
-                rel="noreferrer"
-                target="_blank">
-                npm
-              </a>
-            </Card.Subtitle>
-            <Table
-              loading={loading}
-              caption={'Provinces'}
-              rows={provinces}
-              rowConfigs={rowConfigs}></Table>
-          </Card.Body>
-        </Card>
+        <div className="text-center mb-3">
+          <a href={`https://www.npmjs.com/package/giaohangnhanh`} rel="noreferrer" target="_blank">
+            npm
+          </a>
+        </div>
+        <Table
+          loading={loading}
+          caption={'GHN Provinces'}
+          rows={provinces}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

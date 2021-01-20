@@ -1,19 +1,19 @@
 import React, { Component } from 'react';
-import { Card, Spinner } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface IPhonesProvidersProps {}
+interface IPhonesProvidersProps {
+  theme: string;
+}
 
 interface IPhonesProvidersState {
   providers: Array<any>;
   loading: boolean;
 }
 
-export default class PhonesProviders extends Component<
-  IPhonesProvidersProps,
-  IPhonesProvidersState
-> {
+class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersState> {
   constructor(props: IPhonesProvidersProps) {
     super(props);
 
@@ -35,7 +35,12 @@ export default class PhonesProviders extends Component<
     this.setState({ providers, loading: false });
   }
 
-  renderTable(loading: boolean, providers: Array<any> = []) {
+  renderTable() {
+    const { providers = [], loading = true } = this.state;
+    const { theme } = this.props;
+    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
+    const borderColor: string = theme === 'light' ? '' : 'border-white';
+    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
     return (
       <div id="table">
         {loading && (
@@ -44,15 +49,15 @@ export default class PhonesProviders extends Component<
           </div>
         )}
         {!loading && (
-          <div className="table-responsive table-container">
+          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
             <table className="table">
-              <caption className="bg-danger text-center text-white">
+              <caption className={`${bgColor} text-center text-white`}>
                 Providers ({providers.length})
               </caption>
               <thead>
                 <tr>
-                  <th>Name</th>
-                  <th>Prefixes</th>
+                  <th className={`${textColor}`}>Name</th>
+                  <th className={`${textColor}`}>Prefixes</th>
                 </tr>
               </thead>
               <tbody>
@@ -61,8 +66,8 @@ export default class PhonesProviders extends Component<
                       const { provider: _provider = '', prefixes = [] } = provider;
                       return (
                         <tr key={index}>
-                          <td>{_provider}</td>
-                          <td>{prefixes.join(' - ')}</td>
+                          <td className={`${textColor}`}>{_provider}</td>
+                          <td className={`${textColor}`}>{prefixes.join(' - ')}</td>
                         </tr>
                       );
                     })
@@ -76,14 +81,17 @@ export default class PhonesProviders extends Component<
   }
 
   render() {
-    const { providers = [], loading = true } = this.state;
-
     return (
       <div id="PhonesProviders" className="container-fluid">
-        <Card>
-          <Card.Body>{this.renderTable(loading, providers)}</Card.Body>
-        </Card>
+        {this.renderTable()}
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const { theme } = state;
+  return { theme };
+};
+
+export default connect(mapStateToProps)(PhonesProviders);

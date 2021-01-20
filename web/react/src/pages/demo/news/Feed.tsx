@@ -134,13 +134,10 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
                 Articles ({articles.length})
               </ListGroup.Item>
               {articles.map((article = {}, index) => {
-                const {
-                  title = '',
-                  url = '',
-                  source = '',
-                  publishedDate = '',
-                  description = ''
-                } = article;
+                const { title = '', url = '', source = '', publishedDate = '' } = article;
+                let { description = '' } = article;
+                console.log(description);
+                description = description.toString() || '';
                 const startIndex: number = description.indexOf('<img');
                 const endIndex: number = description.indexOf('/>');
                 let short = '';
