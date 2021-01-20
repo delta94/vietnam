@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Spinner } from 'react-bootstrap';
@@ -5,7 +6,10 @@ import { Form, Spinner } from 'react-bootstrap';
 import { apis } from '../../../services';
 
 interface IOpenAPIsListProps {
-  theme: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themeSpinnerVariant: string;
+  themePrimaryBackgroundColor: string;
 }
 
 interface IOpenAPIsListState {
@@ -58,29 +62,31 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
 
   renderTable() {
     const { filterTechnologies = [], loading = true } = this.state;
-    const { theme } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
-    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
-    const borderColor: string = theme === 'light' ? '' : 'border-white';
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
+    const {
+      themeBorder = '',
+      themeTextColor = '',
+      themeSpinnerVariant = '',
+      themePrimaryBackgroundColor = ''
+    } = this.props;
+
     return (
       <div id="table">
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant={spinnerVariant}></Spinner>
+            <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
           </div>
         )}
         {!loading && (
-          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
+          <div className={`table-responsive table-container rounded-lg border ${themeBorder}`}>
             <table className="table">
-              <caption className={`${bgColor} text-center text-white`}>
+              <caption className={`${themePrimaryBackgroundColor} text-center text-white`}>
                 Open APIs ({filterTechnologies.length})
               </caption>
               <thead>
                 <tr>
-                  <th className={`${textColor}`}>Name</th>
-                  <th className={`${textColor}`}>Type</th>
-                  <th className={`${textColor}`}>Package</th>
+                  <th className={`${themeTextColor}`}>Name</th>
+                  <th className={`${themeTextColor}`}>Type</th>
+                  <th className={`${themeTextColor}`}>Package</th>
                 </tr>
               </thead>
               <tbody>
@@ -89,25 +95,25 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
                       const { name = '', type = '', url = '', npm = '' } = ethnicMinority;
                       return (
                         <tr key={index}>
-                          <td className={`${textColor}`}>
+                          <td className={`${themeTextColor}`}>
                             <a
                               href={url}
                               rel="noreferrer"
                               target="_blank"
-                              className={`${textColor}`}>
+                              className={`${themeTextColor}`}>
                               <b>
                                 <u>{name}</u>
                               </b>
                             </a>
                           </td>
-                          <td className={`${textColor}`}>{type}</td>
-                          <td className={`${textColor}`}>
+                          <td className={`${themeTextColor}`}>{type}</td>
+                          <td className={`${themeTextColor}`}>
                             {npm && (
                               <a
                                 href={`https://www.npmjs.com/package/${npm}`}
                                 rel="noreferrer"
                                 target="_blank"
-                                className={`${textColor}`}>
+                                className={`${themeTextColor}`}>
                                 <b>
                                   <u>npm</u>
                                 </b>
@@ -129,7 +135,7 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
   render() {
     return (
       <div id="OpenAPIsList" className="container-fluid">
-        <Form className="mt-3 mb-3 w-100">
+        <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="Type"
@@ -143,8 +149,11 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  return { themeBorder, themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor };
 };
 
 export default connect(mapStateToProps)(OpenAPIsList);

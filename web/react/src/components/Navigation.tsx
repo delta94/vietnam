@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -8,6 +9,8 @@ import * as themeActions from '../redux/actions/theme';
 
 interface INavigationProps {
   theme: string;
+  themeBorderBottom: string;
+  themePrimaryBackgroundColor: string;
   updateTheme: (theme: string) => {};
 }
 
@@ -25,21 +28,20 @@ class Navigation extends Component<INavigationProps, INavigationState> {
   }
 
   async updateTheme() {
-    let { theme = 'light' } = this.props;
-    theme = theme === 'light' ? 'dark' : 'light';
-    this.props.updateTheme(theme);
+    const { theme = 'light' } = this.props;
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    this.props.updateTheme(newTheme);
   }
 
   render() {
     const { routes = [] } = this.state;
-    const { theme = '' } = this.props;
-
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
-    const border: string =
-      theme === 'light' ? 'border-bottom border-danger' : 'border-bottom border-white';
+    const { theme, themeBorderBottom, themePrimaryBackgroundColor } = this.props;
 
     return (
-      <Navbar className={`${bgColor} ${border}`} expand="sm" variant="dark">
+      <Navbar
+        className={`${themePrimaryBackgroundColor} ${themeBorderBottom}`}
+        expand="sm"
+        variant="dark">
         <div className="container-fluid p-0">
           <Navbar.Brand href="#" className="text-white">
             VIETNAM
@@ -96,8 +98,10 @@ class Navigation extends Component<INavigationProps, INavigationState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme = '' } = state;
-  return { theme };
+  const theme = _.get(state, 'theme.theme', '');
+  const themeBorderBottom = _.get(state, 'theme.borderBottom', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  return { theme, themeBorderBottom, themePrimaryBackgroundColor };
 };
 
 const mapDispatchToProps = (dispatch: any) => ({

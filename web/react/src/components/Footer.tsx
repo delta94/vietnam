@@ -1,21 +1,22 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 interface IFooterProps {
-  theme: string;
+  themeBorderTop: string;
+  themePrimaryBackgroundColor: string;
 }
 
 class Footer extends Component<IFooterProps> {
   render() {
-    const { theme } = this.props;
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
-    const border: string =
-      theme === 'light' ? 'border-top border-danger' : 'border-top border-white';
+    const { themeBorderTop, themePrimaryBackgroundColor } = this.props;
 
     const d = new Date();
     const year = d.getFullYear();
     return (
-      <footer id="Footer" className={`${bgColor} ${border} pt-3 pb-3 text-white text-center`}>
+      <footer
+        id="Footer"
+        className={`${themePrimaryBackgroundColor} ${themeBorderTop} pt-3 pb-3 text-white text-center`}>
         &copy;{' '}
         <a
           href="https://www.linkedin.com/in/hieudoanm/"
@@ -31,8 +32,9 @@ class Footer extends Component<IFooterProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeBorderTop = _.get(state, 'theme.borderTop', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  return { themeBorderTop, themePrimaryBackgroundColor };
 };
 
 export default connect(mapStateToProps)(Footer);

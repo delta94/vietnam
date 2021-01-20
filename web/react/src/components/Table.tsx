@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
@@ -10,7 +11,10 @@ interface ITableProps {
   rowConfigs?: Array<any>;
   emptyRowsText?: string;
   rowIndexEnabled?: boolean;
-  theme: string;
+  themeTextColor: string;
+  themeSpinnerVariant: string;
+  themePrimaryBackgroundColor: string;
+  themeBorder: string;
 }
 
 class Table extends Component<ITableProps> {
@@ -23,19 +27,18 @@ class Table extends Component<ITableProps> {
       rowConfigs = [],
       emptyRowsText = 'No Data',
       rowIndexEnabled = false,
-      theme
+      themeTextColor = '',
+      themeSpinnerVariant = '',
+      themePrimaryBackgroundColor = '',
+      themeBorder = ''
     } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
-    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
-    const borderColor: string = theme === 'light' ? '' : 'border-white';
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
 
     return (
       <div id="table">
-        {header.length > 0 && <h5 className={`${textColor}`}>{header}</h5>}
+        {header.length > 0 && <h5 className={`${themeTextColor}`}>{header}</h5>}
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant={spinnerVariant}></Spinner>
+            <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
           </div>
         )}
         {!loading && rows.length === 0 && (
@@ -44,21 +47,21 @@ class Table extends Component<ITableProps> {
           </div>
         )}
         {!loading && rows.length > 0 && rowConfigs.length && (
-          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
+          <div className={`table-responsive table-container rounded-lg border ${themeBorder}`}>
             <table className="table">
               {caption.length > 0 && (
-                <caption className={`${bgColor} text-center text-white`}>
+                <caption className={`${themePrimaryBackgroundColor} text-center text-white`}>
                   {caption} ({rows.length})
                 </caption>
               )}
               {rowConfigs.length && (
                 <thead>
                   <tr>
-                    {rowIndexEnabled && <th className={`${textColor}`}>#</th>}
+                    {rowIndexEnabled && <th className={`${themeTextColor}`}>#</th>}
                     {rowConfigs.map((config, headerIndex) => {
                       const { header = '' } = config;
                       return (
-                        <th key={headerIndex} className={`${textColor}`}>
+                        <th key={headerIndex} className={`${themeTextColor}`}>
                           {header}
                         </th>
                       );
@@ -71,7 +74,7 @@ class Table extends Component<ITableProps> {
                   {rows.map((row, rowIndex) => {
                     return (
                       <tr key={rowIndex}>
-                        {rowIndexEnabled && <td className={`${textColor}`}>{rowIndex + 1}</td>}
+                        {rowIndexEnabled && <td className={`${themeTextColor}`}>{rowIndex + 1}</td>}
                         {rowConfigs.map((config, cellIndex) => {
                           const { key, className = '' } = config;
                           let cell = '';
@@ -83,7 +86,7 @@ class Table extends Component<ITableProps> {
                             cell = row[key];
                           }
                           return (
-                            <td key={cellIndex} className={`${className} ${textColor}`}>
+                            <td key={cellIndex} className={`${className} ${themeTextColor}`}>
                               {cell}
                             </td>
                           );
@@ -102,8 +105,11 @@ class Table extends Component<ITableProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeBorder = _.get(state, 'theme.border', '');
+  return { themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor, themeBorder };
 };
 
 export default connect(mapStateToProps)(Table);

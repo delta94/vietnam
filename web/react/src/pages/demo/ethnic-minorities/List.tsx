@@ -72,7 +72,7 @@ export default class EthnicMinoritiesList extends Component<
 
     return (
       <div id="EthnicMinoritiesList" className="container-fluid">
-        <Form className="mb-3 w-100">
+        <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="Query"

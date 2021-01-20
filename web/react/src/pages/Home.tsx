@@ -1,10 +1,14 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Form, ListGroup } from 'react-bootstrap';
 
 interface IHomeProps {
-  theme: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themeListItemBorderBottom: string;
+  themeSecondaryBackgroundColor: string;
 }
 
 interface IHomeState {
@@ -102,24 +106,26 @@ class Home extends Component<IHomeProps, IHomeState> {
 
   renderTable() {
     const { filterAPIs = [] } = this.state;
-    const { theme = 'light' } = this.props;
-    const border: string = theme === 'light' ? 'border' : 'border border-white';
-    const borderBottom: string = theme === 'light' ? '' : 'border-white';
-    const bgColor: string = theme === 'light' ? 'bg-white' : 'bg-black';
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const {
+      themeTextColor = '',
+      themeBorder = '',
+      themeListItemBorderBottom = '',
+      themeSecondaryBackgroundColor = ''
+    } = this.props;
+
     return (
-      <ListGroup className={`${border} list-group-flush h-65vh overflow-auto rounded-lg`}>
+      <ListGroup className={`${themeBorder} list-group-flush h-65vh overflow-auto rounded-lg`}>
         {filterAPIs.length !== 0 &&
           filterAPIs.map((_package, index) => {
             const { name = '', docs = '' } = _package;
             return (
               <ListGroup.Item
                 key={index}
-                className={`${bgColor} ${textColor} ${borderBottom} d-flex justify-content-between align-items-center`}>
+                className={`${themeSecondaryBackgroundColor} ${themeTextColor} ${themeListItemBorderBottom} d-flex justify-content-between align-items-center`}>
                 {name}
                 <span>
                   {docs && (
-                    <Link className={`${textColor} ml-1`} to={docs}>
+                    <Link className={`${themeTextColor} ml-1`} to={docs}>
                       <u>Docs</u>
                     </Link>
                   )}
@@ -132,12 +138,11 @@ class Home extends Component<IHomeProps, IHomeState> {
   }
 
   render() {
-    const { theme } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const { themeTextColor } = this.props;
     return (
       <div id="Home" className="container-fluid">
         <Form className="mb-3">
-          <Form.Label className={`${textColor}`} htmlFor="query">
+          <Form.Label className={`${themeTextColor}`} htmlFor="query">
             Query
           </Form.Label>
           <Form.Control
@@ -154,8 +159,11 @@ class Home extends Component<IHomeProps, IHomeState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
+  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
+  return { themeTextColor, themeBorder, themeListItemBorderBottom, themeSecondaryBackgroundColor };
 };
 
 export default connect(mapStateToProps)(Home);

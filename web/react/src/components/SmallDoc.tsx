@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -7,7 +8,7 @@ import { endpoints } from '../configs';
 interface ISmallDocProps {
   group: string;
   header: string;
-  theme: string;
+  themeTextColor: string;
 }
 
 interface ISmallDocState {
@@ -33,8 +34,7 @@ class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
   }
 
   renderTable(apis: Array<any>) {
-    const { theme } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const { themeTextColor } = this.props;
     const colors: any = { get: 'text-success', post: 'text-info' };
     return (
       <div>
@@ -55,7 +55,7 @@ class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
                       </small>
                     </td>
                     <td>
-                      <small className={`${textColor}`}>{name}</small>
+                      <small className={`${themeTextColor}`}>{name}</small>
                     </td>
                   </tr>
                 );
@@ -68,13 +68,12 @@ class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
   }
 
   renderSidebar(endpoints: any) {
-    const { group, header, theme } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const { group, header, themeTextColor } = this.props;
     const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
     return (
       <div>
         <h6>
-          <b className={`${textColor}`}>{header}</b>
+          <b className={`${themeTextColor}`}>{header}</b>
         </h6>
         {this.renderTable(apis)}
       </div>
@@ -102,8 +101,8 @@ class SmallDoc extends Component<ISmallDocProps, ISmallDocState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  return { themeTextColor };
 };
 
 export default connect(mapStateToProps)(SmallDoc);

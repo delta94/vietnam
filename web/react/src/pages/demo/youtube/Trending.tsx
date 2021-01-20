@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form, Spinner, ListGroup } from 'react-bootstrap';
@@ -5,7 +6,12 @@ import { Form, Spinner, ListGroup } from 'react-bootstrap';
 import { apis } from '../../../services';
 
 interface IYouTubeTrendingProps {
-  theme: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themeListItemBorderBottom: string;
+  themeSpinnerVariant: string;
+  themeSecondaryBackgroundColor: string;
+  themeMutedTextColor: string;
 }
 
 interface IYouTubeTrendingState {
@@ -91,32 +97,39 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 
   renderCards() {
     const { trending = [] } = this.state;
-    const { theme = 'light' } = this.props;
-    const border: string = theme === 'light' ? 'border' : 'border border-white';
-    const borderBottom: string = theme === 'light' ? '' : 'border-white';
-    const bgColor: string = theme === 'light' ? 'bg-white' : 'bg-black';
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const {
+      themeBorder = '',
+      themeTextColor = '',
+      themeListItemBorderBottom = '',
+      themeSecondaryBackgroundColor = '',
+      themeMutedTextColor = ''
+    } = this.props;
+
     return (
       <div>
         {trending.length === 0 && (
           <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
         )}
         {trending.length > 0 && (
-          <ListGroup className={`${border} list-group-flush h-70vh overflow-auto rounded-lg`}>
+          <ListGroup className={`${themeBorder} list-group-flush h-70vh overflow-auto rounded-lg`}>
             {trending.map((video: any, index: number) => {
               const { title, url, channelId, channelTitle } = video;
               const channelUrl: string = `https://www.youtube.com/channel/${channelId}`;
               return (
                 <ListGroup.Item
                   key={index}
-                  className={`${bgColor} ${textColor} ${borderBottom} d-flex justify-content-between align-items-center`}>
+                  className={`${themeSecondaryBackgroundColor} ${themeTextColor} ${themeListItemBorderBottom} d-flex justify-content-between align-items-center`}>
                   <h6 className="m-0">
-                    <a href={url} className={textColor} target="_blank" rel="noreferrer">
+                    <a href={url} className={themeTextColor} target="_blank" rel="noreferrer">
                       {title}
                     </a>
                   </h6>
-                  <small>
-                    <a href={channelUrl} className="text-muted" target="_blank" rel="noreferrer">
+                  <small className="text-right">
+                    <a
+                      href={channelUrl}
+                      className={`${themeMutedTextColor}`}
+                      target="_blank"
+                      rel="noreferrer">
                       {channelTitle}
                     </a>
                   </small>
@@ -131,13 +144,14 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 
   render() {
     const { loading = false } = this.state;
+    const { themeSpinnerVariant } = this.props;
 
     return (
       <div id="YouTubeTrending" className="container-fluid">
         {this.renderForm()}
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant="danger"></Spinner>
+            <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
           </div>
         )}
         {!loading && this.renderCards()}
@@ -147,8 +161,20 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeMutedTextColor = _.get(state, 'theme.mutedTextColor', '');
+  return {
+    themeMutedTextColor,
+    themeBorder,
+    themeTextColor,
+    themeListItemBorderBottom,
+    themeSecondaryBackgroundColor,
+    themeSpinnerVariant
+  };
 };
 
 export default connect(mapStateToProps)(YouTubeTrending);

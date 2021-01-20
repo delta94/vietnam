@@ -61,7 +61,7 @@ export default class LicensePlatesList extends Component<
     ];
     return (
       <div id="LicensePlatesList" className="container-fluid">
-        <Form className="mb-3 w-100">
+        <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="License"

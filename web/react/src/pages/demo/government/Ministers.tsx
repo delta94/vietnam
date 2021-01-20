@@ -25,6 +25,7 @@ export default class GovernmentMinisters extends Component<
     this.getMinistries = this.getMinistries.bind(this);
     this.getMinisters = this.getMinisters.bind(this);
     this.updateMinistry = this.updateMinistry.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
   async componentDidMount() {
@@ -51,16 +52,11 @@ export default class GovernmentMinisters extends Component<
     await this.getMinisters();
   }
 
-  render() {
-    const { ministers = [], ministries = [], loading = false } = this.state;
-    const rowConfigs = [
-      { header: 'Name', key: 'name' },
-      { header: 'Start', key: 'start_date' },
-      { header: 'End', key: 'end_date' }
-    ];
+  renderForm() {
+    const { ministries = [] } = this.state;
     return (
-      <div id="GovernmentMinisters" className="container-fluid">
-        <Form className="mt-3 w-100">
+      ministries.length > 0 && (
+        <Form>
           <Form.Group>
             <Form.Control as="select" value={this.state.ministry} onChange={this.updateMinistry}>
               {ministries.map((ministry, index) => {
@@ -74,6 +70,20 @@ export default class GovernmentMinisters extends Component<
             </Form.Control>
           </Form.Group>
         </Form>
+      )
+    );
+  }
+
+  render() {
+    const { ministers = [], loading = false } = this.state;
+    const rowConfigs = [
+      { header: 'Name', key: 'name' },
+      { header: 'Start', key: 'start_date' },
+      { header: 'End', key: 'end_date' }
+    ];
+    return (
+      <div id="GovernmentMinisters" className="container-fluid">
+        {this.renderForm()}
         <Table
           loading={loading}
           caption={'Ministers'}

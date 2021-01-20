@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Accordion, Button } from 'react-bootstrap';
@@ -7,7 +8,7 @@ import { endpoints } from '../../configs';
 import { Doc } from '../../components';
 
 interface IDocsProps {
-  theme: string;
+  themeTextColor: string;
 }
 
 interface IDocsState {
@@ -33,8 +34,7 @@ class Docs extends Component<IDocsProps, IDocsState> {
   }
 
   renderTable(apis: Array<any>) {
-    const { theme = 'light' } = this.props;
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const { themeTextColor = '' } = this.props;
     const colors: any = { get: 'text-success', post: 'text-info' };
     return (
       <div>
@@ -55,7 +55,7 @@ class Docs extends Component<IDocsProps, IDocsState> {
                       </small>
                     </td>
                     <td>
-                      <small className={`${textColor}`}>{name}</small>
+                      <small className={`${themeTextColor}`}>{name}</small>
                     </td>
                   </tr>
                 );
@@ -69,14 +69,12 @@ class Docs extends Component<IDocsProps, IDocsState> {
 
   renderSidebar() {
     const { endpoints } = this.state;
-    const { theme = 'light' } = this.props;
+    const { themeTextColor = '' } = this.props;
     const groups: Array<string> = Object.keys(endpoints);
     const list = groups.map((group: string) => {
       const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
       return { group, apis };
     });
-
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
 
     return (
       <Accordion defaultActiveKey="0">
@@ -87,7 +85,7 @@ class Docs extends Component<IDocsProps, IDocsState> {
             return (
               <div key={index}>
                 <Accordion.Toggle
-                  className={`${textColor} m-0 p-0`}
+                  className={`${themeTextColor} m-0 p-0`}
                   as={Button}
                   variant="link"
                   eventKey={index.toString()}>
@@ -130,8 +128,8 @@ class Docs extends Component<IDocsProps, IDocsState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  return { themeTextColor };
 };
 
 export default connect(mapStateToProps)(Docs);

@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Badge, Card, Spinner } from 'react-bootstrap';
@@ -5,7 +6,10 @@ import { Badge, Card, Spinner } from 'react-bootstrap';
 import { apis } from '../../../services';
 
 interface INewsTrendsProps {
-  theme: string;
+  themeSpinnerVariant: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themeSecondaryBackgroundColor: string;
 }
 
 interface INewsTrendsState {
@@ -34,18 +38,22 @@ class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
 
   render() {
     const { trends = [], loading = true } = this.state;
-    const { theme } = this.props;
-    const borderColor: string = theme === 'light' ? '' : 'border-white';
-    const bgColor: string = theme === 'light' ? 'bg-white' : 'bg-black';
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const {
+      themeBorder = '',
+      themeTextColor = '',
+      themeSecondaryBackgroundColor = '',
+      themeSpinnerVariant = ''
+    } = this.props;
 
     return (
-      <Card id="NewsTrends" className={`${bgColor} ${borderColor}`}>
+      <Card id="NewsTrends" className={`${themeSecondaryBackgroundColor} ${themeBorder}`}>
         <Card.Body>
-          <Card.Title className={`${textColor} text-center`}>Trends ({trends.length})</Card.Title>
+          <Card.Title className={`${themeTextColor} text-center`}>
+            Trends ({trends.length})
+          </Card.Title>
           {loading && (
             <div className="text-center">
-              <Spinner animation="border" variant="danger"></Spinner>
+              <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
             </div>
           )}
           {trends.length !== 0 &&
@@ -66,8 +74,11 @@ class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme = '' } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
+  return { themeSpinnerVariant, themeBorder, themeTextColor, themeSecondaryBackgroundColor };
 };
 
 export default connect(mapStateToProps)(NewsTrends);

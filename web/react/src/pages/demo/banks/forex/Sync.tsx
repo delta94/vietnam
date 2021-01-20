@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, Spinner } from 'react-bootstrap';
@@ -5,7 +6,12 @@ import { Button, Spinner } from 'react-bootstrap';
 import { apis } from '../../../../services';
 
 interface IBanksForexSyncProps {
-  theme: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themeSpinnerVariant: string;
+  themeRevertSpinnerVariant: string;
+  themePrimaryBackgroundColor: string;
+  themeButtonVariant: string;
 }
 
 interface IBanksForexSyncState {
@@ -71,34 +77,35 @@ class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncStat
 
   renderTable() {
     const { banks = [], loading = false, syncing = [] } = this.state;
-    const { theme } = this.props;
-
-    const spinnerVariant: string = theme === 'light' ? 'danger' : 'light';
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
-    const borderColor: string = theme === 'light' ? '' : 'border-white';
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
-    const buttonVariant: string = theme === 'light' ? 'danger' : 'light';
+    const {
+      themeBorder = '',
+      themeTextColor = '',
+      themeSpinnerVariant = '',
+      themePrimaryBackgroundColor = '',
+      themeRevertSpinnerVariant = '',
+      themeButtonVariant = ''
+    } = this.props;
 
     return (
       <div id="table">
         {loading && (
           <div className="text-center">
-            <Spinner animation="border" variant={spinnerVariant}></Spinner>
+            <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
           </div>
         )}
         {!loading && (
-          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
+          <div className={`table-responsive table-container rounded-lg border ${themeBorder}`}>
             {banks.length ? (
               <table className="table">
-                <caption className={`${bgColor} text-white text-center`}>
+                <caption className={`${themePrimaryBackgroundColor} text-white text-center`}>
                   Banks ({banks.length})
                 </caption>
                 <thead>
                   <tr>
-                    <th>#</th>
-                    <th className={`${textColor}`}>ID</th>
+                    <th className={`${themeTextColor}`}>#</th>
+                    <th className={`${themeTextColor}`}>ID</th>
                     <th className="text-right">
-                      <Button variant={buttonVariant} onClick={() => this.syncAll()}>
+                      <Button variant={themeButtonVariant} onClick={() => this.syncAll()}>
                         SYNC ALL
                       </Button>
                     </th>
@@ -109,15 +116,17 @@ class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncStat
                     const syncingFlag: boolean = syncing.includes(bank);
                     return (
                       <tr key={index}>
-                        <td>{index + 1}</td>
-                        <td className={`${textColor}`}>{bank}</td>
+                        <td className={`${themeTextColor}`}>{index + 1}</td>
+                        <td className={`${themeTextColor}`}>{bank}</td>
                         <td align="right">
                           <Button
                             disabled={syncingFlag}
-                            variant={buttonVariant}
+                            variant={themeButtonVariant}
                             onClick={() => this.syncForexRates(bank)}>
                             {syncingFlag ? (
-                              <Spinner animation="border" variant="light"></Spinner>
+                              <Spinner
+                                animation="border"
+                                variant={themeRevertSpinnerVariant}></Spinner>
                             ) : (
                               'SYNC'
                             )}
@@ -147,8 +156,20 @@ class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncStat
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme = '' } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themeRevertSpinnerVariant = _.get(state, 'theme.revertSpinnerVariant', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeButtonVariant = _.get(state, 'theme.buttonVariant', '');
+  return {
+    themeBorder,
+    themeTextColor,
+    themeSpinnerVariant,
+    themeRevertSpinnerVariant,
+    themePrimaryBackgroundColor,
+    themeButtonVariant
+  };
 };
 
 export default connect(mapStateToProps)(BanksForexSync);

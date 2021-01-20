@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -8,18 +9,18 @@ interface IAPIProps {
   method: string;
   url: string;
   path: string;
-  theme: string;
+  themeTextColor: string;
 }
 
 class API extends Component<IAPIProps> {
   render() {
-    const { method = '', url = '', path = '', theme = 'light' } = this.props;
-    const textColor: string = theme === 'light' ? 'text-secondary' : 'text-white';
+    const { method = '', url = '', path = '', themeTextColor = '' } = this.props;
+
     const api = url ? url : `${baseAPI}/${path}`;
     return (
       <div id="API">
         <h3 className="d-inline m-0 text-success text-uppercase mr-3">{method}</h3>
-        <h5 className={`${textColor} d-inline m-0 cursor-pointer`}>
+        <h5 className={`${themeTextColor} d-inline m-0 cursor-pointer`}>
           <span
             onClick={() => {
               helper.copyToClipboard(api);
@@ -33,8 +34,8 @@ class API extends Component<IAPIProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  return { themeTextColor };
 };
 
 export default connect(mapStateToProps)(API);

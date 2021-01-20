@@ -1,11 +1,21 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Form, ListGroup, Spinner } from 'react-bootstrap';
 
 import { apis, helper } from '../../../services';
 
 import Trends from './Trends';
 
-interface INewsFeedProps {}
+interface INewsFeedProps {
+  themeTextColor: string;
+  themeMutedTextColor: string;
+  themeBorder: string;
+  themeSpinnerVariant: string;
+  themeListItemBorderBottom: string;
+  themePrimaryBackgroundColor: string;
+  themeSecondaryBackgroundColor: string;
+}
 
 interface INewsFeedState {
   category: string;
@@ -16,7 +26,7 @@ interface INewsFeedState {
   loading: boolean;
 }
 
-export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> {
+class NewsFeed extends Component<INewsFeedProps, INewsFeedState> {
   constructor(props: INewsFeedProps) {
     super(props);
 
@@ -78,7 +88,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
   renderForm() {
     const { categories = [], sources = [] } = this.state;
     return (
-      <Form className="w-100">
+      <Form>
         <div className="row">
           {sources.length > 0 && (
             <div className="col-sm-6">
@@ -122,6 +132,13 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
 
   renderArticles() {
     const { articles } = this.state;
+    const {
+      themePrimaryBackgroundColor = '',
+      themeTextColor = '',
+      themeSecondaryBackgroundColor = '',
+      themeListItemBorderBottom = '',
+      themeMutedTextColor = ''
+    } = this.props;
     return (
       <div>
         {articles.length === 0 && (
@@ -130,7 +147,8 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
         {articles.length !== 0 && (
           <Card className="h-70vh overflow-auto">
             <ListGroup className="list-group-flush">
-              <ListGroup.Item className="text-center text-white bg-danger">
+              <ListGroup.Item
+                className={`${themePrimaryBackgroundColor} ${themeListItemBorderBottom} text-white text-center`}>
                 Articles ({articles.length})
               </ListGroup.Item>
               {articles.map((article = {}, index) => {
@@ -148,17 +166,23 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
                   )}`;
                 }
                 return (
-                  <ListGroup.Item key={index}>
+                  <ListGroup.Item
+                    key={index}
+                    className={`${themeSecondaryBackgroundColor} ${themeListItemBorderBottom}`}>
                     <Card.Title>
-                      <a href={url} target="_blank" rel="noreferrer">
-                        {title}
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className={`${themeTextColor}`}>
+                        <u>{title}</u>
                       </a>
                     </Card.Title>
-                    <Card.Subtitle className="d-block text-muted mb-1">
+                    <Card.Subtitle className={`${themeMutedTextColor} mb-1`}>
                       {source && <small>{source}</small>} -{' '}
                       {publishedDate && <small>({publishedDate})</small>}
                     </Card.Subtitle>
-                    <Card.Text>
+                    <Card.Text className={`${themeTextColor}`}>
                       <span dangerouslySetInnerHTML={{ __html: short }}></span>
                     </Card.Text>
                   </ListGroup.Item>
@@ -173,7 +197,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
 
   render() {
     const { loading = true } = this.state;
-
+    const { themeSpinnerVariant = '' } = this.props;
     return (
       <div id="NewsFeed" className="container-fluid">
         <div className="row">
@@ -186,7 +210,7 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
             {this.renderForm()}
             {loading && (
               <div className="text-center">
-                <Spinner animation="border" variant="danger"></Spinner>
+                <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
               </div>
             )}
             {!loading && this.renderArticles()}
@@ -196,3 +220,24 @@ export default class NewsFeed extends Component<INewsFeedProps, INewsFeedState> 
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeMutedTextColor = _.get(state, 'theme.mutedTextColor', '');
+  return {
+    themeMutedTextColor,
+    themeTextColor,
+    themeBorder,
+    themeListItemBorderBottom,
+    themePrimaryBackgroundColor,
+    themeSpinnerVariant,
+    themeSecondaryBackgroundColor
+  };
+};
+
+export default connect(mapStateToProps)(NewsFeed);

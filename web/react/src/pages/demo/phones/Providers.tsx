@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
@@ -5,7 +6,9 @@ import { Spinner } from 'react-bootstrap';
 import { apis } from '../../../services';
 
 interface IPhonesProvidersProps {
-  theme: string;
+  themeBorder: string;
+  themeTextColor: string;
+  themePrimaryBackgroundColor: string;
 }
 
 interface IPhonesProvidersState {
@@ -37,10 +40,8 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
 
   renderTable() {
     const { providers = [], loading = true } = this.state;
-    const { theme } = this.props;
-    const bgColor: string = theme === 'light' ? 'bg-danger' : 'bg-black';
-    const borderColor: string = theme === 'light' ? '' : 'border-white';
-    const textColor: string = theme === 'light' ? 'text-dark' : 'text-white';
+    const { themeBorder = '', themeTextColor = '', themePrimaryBackgroundColor = '' } = this.props;
+
     return (
       <div id="table">
         {loading && (
@@ -49,15 +50,15 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
           </div>
         )}
         {!loading && (
-          <div className={`table-responsive table-container rounded-lg border ${borderColor}`}>
+          <div className={`table-responsive table-container rounded-lg border ${themeBorder}`}>
             <table className="table">
-              <caption className={`${bgColor} text-center text-white`}>
+              <caption className={`${themePrimaryBackgroundColor} text-center text-white`}>
                 Providers ({providers.length})
               </caption>
               <thead>
                 <tr>
-                  <th className={`${textColor}`}>Name</th>
-                  <th className={`${textColor}`}>Prefixes</th>
+                  <th className={`${themeTextColor}`}>Name</th>
+                  <th className={`${themeTextColor}`}>Prefixes</th>
                 </tr>
               </thead>
               <tbody>
@@ -66,8 +67,8 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
                       const { provider: _provider = '', prefixes = [] } = provider;
                       return (
                         <tr key={index}>
-                          <td className={`${textColor}`}>{_provider}</td>
-                          <td className={`${textColor}`}>{prefixes.join(' - ')}</td>
+                          <td className={`${themeTextColor}`}>{_provider}</td>
+                          <td className={`${themeTextColor}`}>{prefixes.join(' - ')}</td>
                         </tr>
                       );
                     })
@@ -90,8 +91,10 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
 }
 
 const mapStateToProps = (state: any) => {
-  const { theme } = state;
-  return { theme };
+  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  return { themeBorder, themeTextColor, themePrimaryBackgroundColor };
 };
 
 export default connect(mapStateToProps)(PhonesProviders);
