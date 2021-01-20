@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/vietnam/static/css/main.7b6867a1.chunk.css",
-    "main.js": "/vietnam/static/js/main.74975cd8.chunk.js",
-    "main.js.map": "/vietnam/static/js/main.74975cd8.chunk.js.map",
-    "runtime-main.js": "/vietnam/static/js/runtime-main.c03eff99.js",
-    "runtime-main.js.map": "/vietnam/static/js/runtime-main.c03eff99.js.map",
-    "static/css/2.ae9f1eb3.chunk.css": "/vietnam/static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.3397c649.chunk.js": "/vietnam/static/js/2.3397c649.chunk.js",
-    "static/js/2.3397c649.chunk.js.map": "/vietnam/static/js/2.3397c649.chunk.js.map",
-    "static/js/3.08fe452f.chunk.js": "/vietnam/static/js/3.08fe452f.chunk.js",
-    "static/js/3.08fe452f.chunk.js.map": "/vietnam/static/js/3.08fe452f.chunk.js.map",
+    "main.css": "/vietnam/static/css/main.b39f3138.chunk.css",
+    "main.js": "/vietnam/static/js/main.f7e0f40d.chunk.js",
+    "main.js.map": "/vietnam/static/js/main.f7e0f40d.chunk.js.map",
+    "runtime-main.js": "/vietnam/static/js/runtime-main.6d767ba4.js",
+    "runtime-main.js.map": "/vietnam/static/js/runtime-main.6d767ba4.js.map",
+    "static/css/2.150d169a.chunk.css": "/vietnam/static/css/2.150d169a.chunk.css",
+    "static/js/2.85f46212.chunk.js": "/vietnam/static/js/2.85f46212.chunk.js",
+    "static/js/2.85f46212.chunk.js.map": "/vietnam/static/js/2.85f46212.chunk.js.map",
+    "static/js/3.a7ee02ae.chunk.js": "/vietnam/static/js/3.a7ee02ae.chunk.js",
+    "static/js/3.a7ee02ae.chunk.js.map": "/vietnam/static/js/3.a7ee02ae.chunk.js.map",
     "index.html": "/vietnam/index.html",
     "service-worker.js": "/vietnam/service-worker.js",
     "service-worker.js.map": "/vietnam/service-worker.js.map",
-    "static/css/2.ae9f1eb3.chunk.css.map": "/vietnam/static/css/2.ae9f1eb3.chunk.css.map",
-    "static/css/main.7b6867a1.chunk.css.map": "/vietnam/static/css/main.7b6867a1.chunk.css.map",
-    "static/js/2.3397c649.chunk.js.LICENSE.txt": "/vietnam/static/js/2.3397c649.chunk.js.LICENSE.txt"
+    "static/css/2.150d169a.chunk.css.map": "/vietnam/static/css/2.150d169a.chunk.css.map",
+    "static/css/main.b39f3138.chunk.css.map": "/vietnam/static/css/main.b39f3138.chunk.css.map",
+    "static/js/2.85f46212.chunk.js.LICENSE.txt": "/vietnam/static/js/2.85f46212.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.c03eff99.js",
-    "static/css/2.ae9f1eb3.chunk.css",
-    "static/js/2.3397c649.chunk.js",
-    "static/css/main.7b6867a1.chunk.css",
-    "static/js/main.74975cd8.chunk.js"
+    "static/js/runtime-main.6d767ba4.js",
+    "static/css/2.150d169a.chunk.css",
+    "static/js/2.85f46212.chunk.js",
+    "static/css/main.b39f3138.chunk.css",
+    "static/js/main.f7e0f40d.chunk.js"
   ]
 }
