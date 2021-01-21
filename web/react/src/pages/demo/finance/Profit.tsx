@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Card, Form } from 'react-bootstrap';
 
 import { apis, helper } from '../../../services';
 
-interface IFinanceProfitProps {}
+interface IProfitProps {}
 
-interface IFinanceProfitState {
+interface IProfitState {
   buy: number;
   sell: number;
   volume: number;
   profit: number;
 }
 
-export default class FinanceProfit extends Component<IFinanceProfitProps, IFinanceProfitState> {
-  constructor(props: IFinanceProfitProps) {
+class Profit extends Component<IProfitProps, IProfitState> {
+  constructor(props: IProfitProps) {
     super(props);
 
     this.state = { buy: 0, sell: 0, volume: 0, profit: 0 };
@@ -52,7 +53,7 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
   render() {
     const { buy = 0, sell = 0, volume = 0, profit = 0 } = this.state;
     return (
-      <div id="FinanceProfit" className="container-fluid">
+      <div id="Profit" className="container-fluid">
         <Card>
           <Card.Body>
             <Form onSubmit={this.calculateProfit} className="row">
@@ -101,3 +102,9 @@ export default class FinanceProfit extends Component<IFinanceProfitProps, IFinan
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Profit);

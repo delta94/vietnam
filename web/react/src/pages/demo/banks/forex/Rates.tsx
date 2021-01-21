@@ -5,14 +5,14 @@ import { Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
 
-interface IBanksForexRatesProps {
+interface IRatesProps {
   themeBorder: string;
   themeTextColor: string;
   themeSpinnerVariant: string;
   themePrimaryBackgroundColor: string;
 }
 
-interface IBanksForexRatesState {
+interface IRatesState {
   data: Array<any>;
   currency: string;
   currencies: Array<string>;
@@ -21,8 +21,8 @@ interface IBanksForexRatesState {
   sortDir: number;
 }
 
-class BanksForexRates extends Component<IBanksForexRatesProps, IBanksForexRatesState> {
-  constructor(props: IBanksForexRatesProps) {
+class Rates extends Component<IRatesProps, IRatesState> {
+  constructor(props: IRatesProps) {
     super(props);
 
     this.state = { data: [], currency: '', currencies: [], loading: false, sortBy: '', sortDir: 1 };
@@ -197,7 +197,7 @@ class BanksForexRates extends Component<IBanksForexRatesProps, IBanksForexRatesS
     const { currencies = [], loading = false } = this.state;
 
     return (
-      <div id="BanksForexRates" className="container-fluid">
+      <div id="Rates" className="container-fluid">
         {!loading && this.renderForm(currencies)}
         <div className="h-70vh overflow-auto">{this.renderTable()}</div>
       </div>
@@ -206,11 +206,11 @@ class BanksForexRates extends Component<IBanksForexRatesProps, IBanksForexRatesS
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
   return { themeBorder, themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor };
 };
 
-export default connect(mapStateToProps)(BanksForexRates);
+export default connect(mapStateToProps)(Rates);

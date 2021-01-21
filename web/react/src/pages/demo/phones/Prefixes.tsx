@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IPhonesPrefixesProps {}
+interface IPrefixesProps {}
 
-interface IPhonesPrefixesState {
+interface IPrefixesState {
   prefixes: Array<any>;
   loading: boolean;
 }
 
-export default class PhonesPrefixes extends Component<IPhonesPrefixesProps, IPhonesPrefixesState> {
-  constructor(props: IPhonesPrefixesProps) {
+class Prefixes extends Component<IPrefixesProps, IPrefixesState> {
+  constructor(props: IPrefixesProps) {
     super(props);
 
     this.state = { prefixes: [], loading: true };
 
-    this.getPhonesPrefixes = this.getPhonesPrefixes.bind(this);
+    this.getPrefixes = this.getPrefixes.bind(this);
   }
 
   async componentDidMount() {
-    await this.getPhonesPrefixes();
+    await this.getPrefixes();
   }
 
-  async getPhonesPrefixes() {
+  async getPrefixes() {
     await this.setState({ loading: true });
-    const prefixes = await apis.getPhonesPrefixes();
+    const prefixes = await apis.getPrefixes();
     await this.setState({ prefixes, loading: false });
   }
 
@@ -37,7 +38,7 @@ export default class PhonesPrefixes extends Component<IPhonesPrefixesProps, IPho
       { header: 'Provider ID', key: 'provider_id' }
     ];
     return (
-      <div id="PhonesPrefixes" className="container-fluid">
+      <div id="Prefixes" className="container-fluid">
         <Table
           loading={loading}
           caption={'Phone Prefixes'}
@@ -47,3 +48,9 @@ export default class PhonesPrefixes extends Component<IPhonesPrefixesProps, IPho
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Prefixes);

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Form, ListGroup } from 'react-bootstrap';
 
 interface IHomeProps {
+  themeInput: string;
   themeBorder: string;
   themeTextColor: string;
   themeListItemBorderBottom: string;
@@ -26,54 +27,18 @@ class Home extends Component<IHomeProps, IHomeState> {
   constructor(props: IHomeProps) {
     super(props);
     const apis: Array<IAPI> = [
-      {
-        name: 'administrative-divisions',
-        docs: '/administrative-divisions'
-      },
-      {
-        name: 'banks',
-        docs: '/banks'
-      },
-      {
-        name: 'calendar',
-        docs: '/calendar'
-      },
-      {
-        name: 'ethnic-minorities',
-        docs: '/ethnic-minorities'
-      },
-      {
-        name: 'finance',
-        docs: '/finance'
-      },
-      {
-        name: 'government',
-        docs: '/government'
-      },
-      {
-        name: 'license-plates',
-        docs: '/license-plates'
-      },
-      {
-        name: 'music',
-        docs: '/music'
-      },
-      {
-        name: 'news',
-        docs: '/news'
-      },
-      {
-        name: 'open-apis',
-        docs: '/open-apis'
-      },
-      {
-        name: 'phones',
-        docs: '/phones'
-      },
-      {
-        name: 'sports',
-        docs: '/sports'
-      },
+      { name: 'administrative-divisions', docs: '/administrative-divisions' },
+      { name: 'banks', docs: '/banks' },
+      { name: 'calendar', docs: '/calendar' },
+      { name: 'ethnic-minorities', docs: '/ethnic-minorities' },
+      { name: 'finance', docs: '/finance' },
+      { name: 'government', docs: '/government' },
+      { name: 'license-plates', docs: '/license-plates' },
+      { name: 'music', docs: '/music' },
+      { name: 'news', docs: '/news' },
+      { name: 'open-apis', docs: '/open-apis' },
+      { name: 'phones', docs: '/phones' },
+      { name: 'sports', docs: '/sports' },
       { name: 'vnltk', docs: '/vnltk' }
     ].sort((a, b) => (a.name > b.name ? 1 : -1));
 
@@ -138,7 +103,7 @@ class Home extends Component<IHomeProps, IHomeState> {
   }
 
   render() {
-    const { themeTextColor } = this.props;
+    const { themeTextColor, themeInput } = this.props;
     return (
       <div id="Home" className="container-fluid">
         <Form className="mb-3">
@@ -149,6 +114,7 @@ class Home extends Component<IHomeProps, IHomeState> {
             id="query"
             type="text"
             placeholder="Query"
+            className={`${themeInput}`}
             value={this.state.query}
             onChange={this.updateQuery}></Form.Control>
         </Form>
@@ -159,11 +125,18 @@ class Home extends Component<IHomeProps, IHomeState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
-  return { themeTextColor, themeBorder, themeListItemBorderBottom, themeSecondaryBackgroundColor };
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return {
+    themeTextColor,
+    themeBorder,
+    themeListItemBorderBottom,
+    themeSecondaryBackgroundColor,
+    themeInput
+  };
 };
 
 export default connect(mapStateToProps)(Home);

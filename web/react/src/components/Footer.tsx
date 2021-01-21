@@ -32,8 +32,8 @@ class Footer extends Component<IFooterProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorderTop = _.get(state, 'theme.borderTop', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeBorderTop: string = _.get(state, 'theme.borderTop', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
   return { themeBorderTop, themePrimaryBackgroundColor };
 };
 

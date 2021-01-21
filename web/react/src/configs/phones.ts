@@ -2,9 +2,9 @@ import { IPhonesEndpoints } from './interfaces';
 import { baseAPI } from './urls';
 
 const phones: IPhonesEndpoints = {
-  getPhonesPrefixes: {
-    id: 'getPhonesPrefixes',
-    name: 'Get Phone Prefixes',
+  getPrefixes: {
+    id: 'getPrefixes',
+    name: 'Get Prefixes',
     public: true,
     method: 'GET',
     path: '/phones/prefixes',
@@ -38,9 +38,9 @@ const phones: IPhonesEndpoints = {
       }
     }
   },
-  getPhonesProviders: {
-    id: 'getPhonesProviders',
-    name: 'Get Phone Providers',
+  getProviders: {
+    id: 'getProviders',
+    name: 'Get Providers',
     public: true,
     method: 'GET',
     path: '/phones/providers',

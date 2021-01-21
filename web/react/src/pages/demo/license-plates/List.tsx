@@ -1,23 +1,24 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface LicensePlatesListProps {}
+interface ListProps {
+  themeInput: string;
+}
 
-interface LicensePlatesListState {
+interface ListState {
   query: string;
   licensePlates: Array<any>;
   filterLicensePlates: Array<any>;
   loading: boolean;
 }
 
-export default class LicensePlatesList extends Component<
-  LicensePlatesListProps,
-  LicensePlatesListState
-> {
-  constructor(props: LicensePlatesListProps) {
+class List extends Component<ListProps, ListState> {
+  constructor(props: ListProps) {
     super(props);
 
     this.state = { query: '', licensePlates: [], filterLicensePlates: [], loading: true };
@@ -35,7 +36,8 @@ export default class LicensePlatesList extends Component<
     this.setState({ query });
     const { licensePlates = [] } = this.state;
     const filterLicensePlates = licensePlates.filter(licensePlate => {
-      const { license } = licensePlate;
+      let { license = '' } = licensePlate;
+      license = license.toString();
       return query ? license.toLowerCase().includes(query.toLowerCase()) : true;
     });
     this.setState({ filterLicensePlates });
@@ -49,23 +51,25 @@ export default class LicensePlatesList extends Component<
       const { license } = licensePlate;
       return query ? license.toLowerCase().includes(query.toLowerCase()) : true;
     });
-    this.setState({ licensePlates, filterLicensePlates, loading: false });
+    await this.setState({ licensePlates, filterLicensePlates, loading: false });
   }
 
   render() {
     const { filterLicensePlates = [], loading = true } = this.state;
+    const { themeInput = '' } = this.props;
     const rowConfigs = [
       { header: 'License', key: 'license' },
       { header: 'Definition', key: 'definition' },
       { header: 'Type', key: 'type' }
     ];
     return (
-      <div id="LicensePlatesList" className="container-fluid">
+      <div id="List" className="container-fluid">
         <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="License"
             value={this.state.query}
+            className={`${themeInput}`}
             onChange={this.filter}></Form.Control>
         </Form>
         <Table
@@ -77,3 +81,10 @@ export default class LicensePlatesList extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return { themeInput };
+};
+
+export default connect(mapStateToProps)(List);

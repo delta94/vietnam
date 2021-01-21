@@ -41,7 +41,7 @@ class App extends Component<IAppProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
   return { themeSecondaryBackgroundColor };
 };
 

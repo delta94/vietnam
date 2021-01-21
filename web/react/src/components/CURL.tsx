@@ -1,4 +1,5 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { baseAPI } from '../configs';
 
@@ -11,7 +12,7 @@ interface ICURLProps {
   body?: Array<any>;
 }
 
-export default class CURL extends Component<ICURLProps> {
+class CURL extends Component<ICURLProps> {
   constructor(props: ICURLProps) {
     super(props);
 
@@ -76,3 +77,9 @@ export default class CURL extends Component<ICURLProps> {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(CURL);

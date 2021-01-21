@@ -74,7 +74,7 @@ export interface ILicensePlatesEndpoints {
 }
 
 export interface IMusicEndpoints {
-  getMusicArtists: IEndpoint;
+  getArtists: IEndpoint;
 }
 
 export interface INewsEndpoints {
@@ -93,8 +93,8 @@ export interface IOpenAPIs {
 }
 
 export interface IPhonesEndpoints {
-  getPhonesPrefixes: IEndpoint;
-  getPhonesProviders: IEndpoint;
+  getPrefixes: IEndpoint;
+  getProviders: IEndpoint;
 }
 export interface ISportsEndpoints {
   getSportsClubs: IEndpoint;

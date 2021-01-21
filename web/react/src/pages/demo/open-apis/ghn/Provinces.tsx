@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
 import { Table } from '../../../../components';
@@ -10,7 +11,7 @@ interface IProvincesState {
   loading: boolean;
 }
 
-export default class Provinces extends Component<IProvincesProps, IProvincesState> {
+class Provinces extends Component<IProvincesProps, IProvincesState> {
   constructor(props: IProvincesProps) {
     super(props);
 
@@ -54,3 +55,9 @@ export default class Provinces extends Component<IProvincesProps, IProvincesStat
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Provinces);

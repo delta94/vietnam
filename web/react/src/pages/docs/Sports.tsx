@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { SmallDoc } from '../../components';
 
-export default class Sports extends Component {
+class Sports extends Component {
   render() {
     return (
       <div id="Sports" className="container-fluid">
@@ -11,3 +12,9 @@ export default class Sports extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Sports);

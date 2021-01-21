@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IMapsDistrictsProps {}
+interface IDistrictsProps {}
 
-interface IMapsDistrictsState {
+interface IDistrictsState {
   provinces: Array<any>;
   province_id: string;
   districts: Array<any>;
   loading: boolean;
 }
 
-export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsDistrictsState> {
-  constructor(props: IMapsDistrictsProps) {
+class Districts extends Component<IDistrictsProps, IDistrictsState> {
+  constructor(props: IDistrictsProps) {
     super(props);
 
     this.state = { provinces: [], province_id: '', districts: [], loading: true };
@@ -59,7 +60,7 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsDistricts" className="container-fluid">
+      <div id="Districts" className="container-fluid">
         <Form>
           <Form.Group>
             <Form.Control as="select" value={this.state.province_id} onChange={this.updateProvince}>
@@ -83,3 +84,9 @@ export default class MapsDistricts extends Component<IMapsDistrictsProps, IMapsD
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Districts);

@@ -201,13 +201,13 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getPhonesProviders(): Promise<Array<any>> {
-    const endpoint: IEndpoint = endpoints.phones.getPhonesProviders;
+  public async getProviders(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.phones.getProviders;
     return await this.fetch(endpoint);
   }
 
-  public async getPhonesPrefixes(): Promise<Array<any>> {
-    const endpoint: IEndpoint = endpoints.phones.getPhonesPrefixes;
+  public async getPrefixes(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.phones.getPrefixes;
     return await this.fetch(endpoint);
   }
 
@@ -248,8 +248,8 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getMusicArtists(): Promise<Array<any>> {
-    const endpoint: IEndpoint = endpoints.music.getMusicArtists;
+  public async getArtists(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.music.getArtists;
     return await this.fetch(endpoint);
   }
 

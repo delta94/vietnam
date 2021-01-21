@@ -1,23 +1,24 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IEthnicMinoritiesListProps {}
+interface IListProps {
+  themeInput: string;
+}
 
-interface IEthnicMinoritiesListState {
+interface IListState {
   query: string;
   ethnicMinorities: Array<any>;
   filterEthnicMinorities: Array<any>;
   loading: boolean;
 }
 
-export default class EthnicMinoritiesList extends Component<
-  IEthnicMinoritiesListProps,
-  IEthnicMinoritiesListState
-> {
-  constructor(props: IEthnicMinoritiesListProps) {
+class List extends Component<IListProps, IListState> {
+  constructor(props: IListProps) {
     super(props);
 
     this.state = {
@@ -63,7 +64,7 @@ export default class EthnicMinoritiesList extends Component<
 
   render() {
     const { filterEthnicMinorities = [], loading = true } = this.state;
-
+    const { themeInput } = this.props;
     const rowConfigs = [
       { header: 'Name', key: 'name' },
       { header: 'Type', key: 'type' },
@@ -71,11 +72,12 @@ export default class EthnicMinoritiesList extends Component<
     ];
 
     return (
-      <div id="EthnicMinoritiesList" className="container-fluid">
+      <div id="List" className="container-fluid">
         <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="Query"
+            className={`${themeInput}`}
             value={this.state.query}
             onChange={this.filter}></Form.Control>
         </Form>
@@ -88,3 +90,10 @@ export default class EthnicMinoritiesList extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return { themeInput };
+};
+
+export default connect(mapStateToProps)(List);

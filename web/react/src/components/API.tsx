@@ -34,7 +34,7 @@ class API extends Component<IAPIProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeTextColor = _.get(state, 'theme.textColor', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
   return { themeTextColor };
 };
 

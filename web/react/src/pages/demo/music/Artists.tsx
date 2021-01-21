@@ -1,31 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
 
-interface IMusicArtistsProps {}
+interface IArtistsProps {}
 
-interface IMusicArtistsState {
+interface IArtistsState {
   artists: Array<any>;
   loading: boolean;
 }
 
-export default class MusicArtists extends Component<IMusicArtistsProps, IMusicArtistsState> {
-  constructor(props: IMusicArtistsProps) {
+class Artists extends Component<IArtistsProps, IArtistsState> {
+  constructor(props: IArtistsProps) {
     super(props);
 
     this.state = { artists: [], loading: true };
 
-    this.getMusicArtists = this.getMusicArtists.bind(this);
+    this.getArtists = this.getArtists.bind(this);
   }
 
   async componentDidMount() {
-    await this.getMusicArtists();
+    await this.getArtists();
   }
 
-  async getMusicArtists() {
+  async getArtists() {
     this.setState({ loading: true });
-    const artists: Array<any> = await apis.getMusicArtists();
+    const artists: Array<any> = await apis.getArtists();
     this.setState({ artists, loading: false });
   }
 
@@ -35,9 +36,15 @@ export default class MusicArtists extends Component<IMusicArtistsProps, IMusicAr
     const rowConfigs = [{ header: 'Name', key: 'name' }];
 
     return (
-      <div id="MusicArtists" className="container-fluid">
+      <div id="Artists" className="container-fluid">
         <Table loading={loading} caption={'Artists'} rows={artists} rowConfigs={rowConfigs}></Table>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Artists);

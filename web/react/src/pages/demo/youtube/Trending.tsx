@@ -161,12 +161,12 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
-  const themeMutedTextColor = _.get(state, 'theme.mutedTextColor', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
     themeMutedTextColor,
     themeBorder,

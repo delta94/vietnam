@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IBanksListProps {}
+interface IListProps {}
 
-interface IBanksListState {
+interface IListState {
   banks: Array<any>;
   loading: boolean;
 }
 
-export default class BanksList extends Component<IBanksListProps, IBanksListState> {
-  constructor(props: IBanksListProps) {
+class List extends Component<IListProps, IListState> {
+  constructor(props: IListProps) {
     super(props);
 
     this.state = { banks: [], loading: false };
@@ -40,7 +41,7 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
       { header: 'Type (EN)', key: 'type_en' }
     ];
     return (
-      <div id="BanksList" className="container-fluid">
+      <div id="List" className="container-fluid">
         <Table
           loading={loading}
           caption={'Banks'}
@@ -51,3 +52,9 @@ export default class BanksList extends Component<IBanksListProps, IBanksListStat
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(List);

@@ -5,22 +5,23 @@ import { Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface IOpenAPIsListProps {
+interface IListProps {
+  themeInput: string;
   themeBorder: string;
   themeTextColor: string;
   themeSpinnerVariant: string;
   themePrimaryBackgroundColor: string;
 }
 
-interface IOpenAPIsListState {
+interface IListState {
   query: string;
   technologies: Array<any>;
   filterTechnologies: Array<any>;
   loading: boolean;
 }
 
-class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
-  constructor(props: IOpenAPIsListProps) {
+class List extends Component<IListProps, IListState> {
+  constructor(props: IListProps) {
     super(props);
 
     this.state = { query: '', technologies: [], filterTechnologies: [], loading: true };
@@ -133,12 +134,14 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
   }
 
   render() {
+    const { themeInput = '' } = this.props;
     return (
-      <div id="OpenAPIsList" className="container-fluid">
+      <div id="List" className="container-fluid">
         <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="Type"
+            className={`${themeInput}`}
             value={this.state.query}
             onChange={this.filter}></Form.Control>
         </Form>
@@ -149,11 +152,18 @@ class OpenAPIsList extends Component<IOpenAPIsListProps, IOpenAPIsListState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
-  return { themeBorder, themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor };
+  const themeInput: string = _.get(state, 'theme.input', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
+  return {
+    themeInput,
+    themeBorder,
+    themeTextColor,
+    themeSpinnerVariant,
+    themePrimaryBackgroundColor
+  };
 };
 
-export default connect(mapStateToProps)(OpenAPIsList);
+export default connect(mapStateToProps)(List);

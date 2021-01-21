@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { SmallDoc } from '../../components';
 
-export default class Calendar extends Component {
+class Calendar extends Component {
   render() {
     return (
       <div id="Calendar" className="container-fluid">
@@ -11,3 +12,9 @@ export default class Calendar extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Calendar);

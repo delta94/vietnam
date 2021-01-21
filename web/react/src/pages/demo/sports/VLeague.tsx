@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -11,7 +12,7 @@ interface ISportsVLeagueState {
   loading: boolean;
 }
 
-export default class SportsVLeague extends Component<ISportsVLeagueProps, ISportsVLeagueState> {
+class SportsVLeague extends Component<ISportsVLeagueProps, ISportsVLeagueState> {
   constructor(props: ISportsVLeagueProps) {
     super(props);
 
@@ -81,3 +82,9 @@ export default class SportsVLeague extends Component<ISportsVLeagueProps, ISport
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(SportsVLeague);

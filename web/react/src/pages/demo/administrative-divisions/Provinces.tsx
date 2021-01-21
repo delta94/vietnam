@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IMapsProvincesProps {}
+interface IProvincesProps {}
 
-interface IMapsProvincesState {
+interface IProvincesState {
   provinces: Array<any>;
   loading: boolean;
 }
 
-export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsProvincesState> {
-  constructor(props: IMapsProvincesProps) {
+class Provinces extends Component<IProvincesProps, IProvincesState> {
+  constructor(props: IProvincesProps) {
     super(props);
 
     this.state = { provinces: [], loading: true };
@@ -38,7 +39,7 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
       { header: 'Region', key: 'region' }
     ];
     return (
-      <div id="MapsProvinces" className="container-fluid">
+      <div id="Provinces" className="container-fluid">
         <Table
           loading={loading}
           caption={'Provinces'}
@@ -48,3 +49,9 @@ export default class MapsProvinces extends Component<IMapsProvincesProps, IMapsP
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Provinces);

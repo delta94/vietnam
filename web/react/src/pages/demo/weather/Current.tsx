@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card } from 'react-bootstrap';
 
 import { apis } from '../../../services';
@@ -10,7 +11,7 @@ interface IWeatherCurrentState {
   loading: boolean;
 }
 
-export default class WeatherCurrent extends Component<IWeatherCurrentProps, IWeatherCurrentState> {
+class WeatherCurrent extends Component<IWeatherCurrentProps, IWeatherCurrentState> {
   constructor(props: IWeatherCurrentProps) {
     super(props);
 
@@ -58,3 +59,9 @@ export default class WeatherCurrent extends Component<IWeatherCurrentProps, IWea
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(WeatherCurrent);

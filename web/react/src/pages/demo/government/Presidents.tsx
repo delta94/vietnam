@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IGovernmentPresidentsProps {}
+interface IPresidentsProps {}
 
-interface IGovernmentPresidentsState {
+interface IPresidentsState {
   presidents: Array<any>;
   loading: boolean;
 }
 
-export default class GovernmentPresidents extends Component<
-  IGovernmentPresidentsProps,
-  IGovernmentPresidentsState
-> {
-  constructor(props: IGovernmentPresidentsProps) {
+class Presidents extends Component<IPresidentsProps, IPresidentsState> {
+  constructor(props: IPresidentsProps) {
     super(props);
 
     this.state = { presidents: [], loading: true };
@@ -40,7 +38,7 @@ export default class GovernmentPresidents extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentPresidents" className="container-fluid">
+      <div id="Presidents" className="container-fluid">
         <Table
           loading={loading}
           caption={'Presidents'}
@@ -50,3 +48,9 @@ export default class GovernmentPresidents extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Presidents);

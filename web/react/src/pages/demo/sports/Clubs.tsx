@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
@@ -10,7 +11,7 @@ interface ISportsClubsState {
   loading: boolean;
 }
 
-export default class SportsClubs extends Component<ISportsClubsProps, ISportsClubsState> {
+class SportsClubs extends Component<ISportsClubsProps, ISportsClubsState> {
   constructor(props: ISportsClubsProps) {
     super(props);
 
@@ -46,3 +47,9 @@ export default class SportsClubs extends Component<ISportsClubsProps, ISportsClu
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(SportsClubs);

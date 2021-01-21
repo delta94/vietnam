@@ -105,10 +105,10 @@ class Table extends Component<ITableProps> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
-  const themeBorder = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
   return { themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor, themeBorder };
 };
 

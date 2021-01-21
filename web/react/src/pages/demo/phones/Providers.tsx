@@ -5,35 +5,35 @@ import { Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface IPhonesProvidersProps {
+interface IProvidersProps {
   themeBorder: string;
   themeTextColor: string;
   themePrimaryBackgroundColor: string;
 }
 
-interface IPhonesProvidersState {
+interface IProvidersState {
   providers: Array<any>;
   loading: boolean;
 }
 
-class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersState> {
-  constructor(props: IPhonesProvidersProps) {
+class Providers extends Component<IProvidersProps, IProvidersState> {
+  constructor(props: IProvidersProps) {
     super(props);
 
     this.state = { providers: [], loading: true };
 
-    this.getPhonesProviders = this.getPhonesProviders.bind(this);
+    this.getProviders = this.getProviders.bind(this);
     this.renderTable = this.renderTable.bind(this);
   }
 
   async componentDidMount() {
-    await this.getPhonesProviders();
+    await this.getProviders();
   }
 
-  async getPhonesProviders() {
+  async getProviders() {
     this.setState({ loading: true });
 
-    const providers = await apis.getPhonesProviders();
+    const providers = await apis.getProviders();
 
     this.setState({ providers, loading: false });
   }
@@ -83,7 +83,7 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
 
   render() {
     return (
-      <div id="PhonesProviders" className="container-fluid">
+      <div id="Providers" className="container-fluid">
         {this.renderTable()}
       </div>
     );
@@ -91,10 +91,10 @@ class PhonesProviders extends Component<IPhonesProvidersProps, IPhonesProvidersS
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
   return { themeBorder, themeTextColor, themePrimaryBackgroundColor };
 };
 
-export default connect(mapStateToProps)(PhonesProviders);
+export default connect(mapStateToProps)(Providers);

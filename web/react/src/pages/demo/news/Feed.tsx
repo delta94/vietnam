@@ -7,7 +7,7 @@ import { apis, helper } from '../../../services';
 
 import Trends from './Trends';
 
-interface INewsFeedProps {
+interface IFeedProps {
   themeTextColor: string;
   themeMutedTextColor: string;
   themeBorder: string;
@@ -17,7 +17,7 @@ interface INewsFeedProps {
   themeSecondaryBackgroundColor: string;
 }
 
-interface INewsFeedState {
+interface IFeedState {
   category: string;
   categories: Array<any>;
   source: string;
@@ -26,8 +26,8 @@ interface INewsFeedState {
   loading: boolean;
 }
 
-class NewsFeed extends Component<INewsFeedProps, INewsFeedState> {
-  constructor(props: INewsFeedProps) {
+class Feed extends Component<IFeedProps, IFeedState> {
+  constructor(props: IFeedProps) {
     super(props);
 
     this.state = {
@@ -199,7 +199,7 @@ class NewsFeed extends Component<INewsFeedProps, INewsFeedState> {
     const { loading = true } = this.state;
     const { themeSpinnerVariant = '' } = this.props;
     return (
-      <div id="NewsFeed" className="container-fluid">
+      <div id="Feed" className="container-fluid">
         <div className="row">
           <div className="col-sm-3">
             <div className="mb-3">
@@ -222,13 +222,13 @@ class NewsFeed extends Component<INewsFeedProps, INewsFeedState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
-  const themeMutedTextColor = _.get(state, 'theme.mutedTextColor', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
     themeMutedTextColor,
     themeTextColor,
@@ -240,4 +240,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(NewsFeed);
+export default connect(mapStateToProps)(Feed);

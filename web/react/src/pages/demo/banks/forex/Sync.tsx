@@ -5,7 +5,7 @@ import { Button, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
 
-interface IBanksForexSyncProps {
+interface ISyncProps {
   themeBorder: string;
   themeTextColor: string;
   themeSpinnerVariant: string;
@@ -14,14 +14,14 @@ interface IBanksForexSyncProps {
   themeButtonVariant: string;
 }
 
-interface IBanksForexSyncState {
+interface ISyncState {
   banks: Array<string>;
   loading: boolean;
   syncing: Array<string>;
 }
 
-class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncState> {
-  constructor(props: IBanksForexSyncProps) {
+class Sync extends Component<ISyncProps, ISyncState> {
+  constructor(props: ISyncProps) {
     super(props);
 
     this.state = { banks: [], syncing: [], loading: false };
@@ -148,7 +148,7 @@ class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncStat
 
   render() {
     return (
-      <div id="BanksForexSync" className="container-fluid">
+      <div id="Sync" className="container-fluid">
         {this.renderTable()}
       </div>
     );
@@ -156,12 +156,12 @@ class BanksForexSync extends Component<IBanksForexSyncProps, IBanksForexSyncStat
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themeRevertSpinnerVariant = _.get(state, 'theme.revertSpinnerVariant', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
-  const themeButtonVariant = _.get(state, 'theme.buttonVariant', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themeRevertSpinnerVariant: string = _.get(state, 'theme.revertSpinnerVariant', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
+  const themeButtonVariant: string = _.get(state, 'theme.buttonVariant', '');
   return {
     themeBorder,
     themeTextColor,
@@ -172,4 +172,4 @@ const mapStateToProps = (state: any) => {
   };
 };
 
-export default connect(mapStateToProps)(BanksForexSync);
+export default connect(mapStateToProps)(Sync);

@@ -5,20 +5,21 @@ import { Badge, Card, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 
-interface INewsTrendsProps {
+interface ITrendsProps {
+  themeBadge: string;
   themeSpinnerVariant: string;
   themeBorder: string;
   themeTextColor: string;
   themeSecondaryBackgroundColor: string;
 }
 
-interface INewsTrendsState {
+interface ITrendsState {
   trends: Array<any>;
   loading: boolean;
 }
 
-class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
-  constructor(props: INewsTrendsProps) {
+class Trends extends Component<ITrendsProps, ITrendsState> {
+  constructor(props: ITrendsProps) {
     super(props);
 
     this.state = { trends: [], loading: true };
@@ -42,11 +43,12 @@ class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
       themeBorder = '',
       themeTextColor = '',
       themeSecondaryBackgroundColor = '',
-      themeSpinnerVariant = ''
+      themeSpinnerVariant = '',
+      themeBadge = ''
     } = this.props;
 
     return (
-      <Card id="NewsTrends" className={`${themeSecondaryBackgroundColor} ${themeBorder}`}>
+      <Card id="Trends" className={`${themeSecondaryBackgroundColor} ${themeBorder}`}>
         <Card.Body>
           <Card.Title className={`${themeTextColor} text-center`}>
             Trends ({trends.length})
@@ -60,7 +62,7 @@ class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
             trends.map((trend, index) => {
               const { text, url } = trend;
               return (
-                <Badge key={index} variant="danger" className="mr-1">
+                <Badge key={index} variant={themeBadge} className="mr-1">
                   <a key={index} href={url} target="_blank" rel="noreferrer" className="text-white">
                     {text}
                   </a>
@@ -74,11 +76,18 @@ class NewsTrends extends Component<INewsTrendsProps, INewsTrendsState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeBorder = _.get(state, 'theme.border', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
-  return { themeSpinnerVariant, themeBorder, themeTextColor, themeSecondaryBackgroundColor };
+  const themeBadge: string = _.get(state, 'theme.badge', '');
+  const themeBorder: string = _.get(state, 'theme.border', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
+  return {
+    themeBadge,
+    themeSpinnerVariant,
+    themeBorder,
+    themeTextColor,
+    themeSecondaryBackgroundColor
+  };
 };
 
-export default connect(mapStateToProps)(NewsTrends);
+export default connect(mapStateToProps)(Trends);

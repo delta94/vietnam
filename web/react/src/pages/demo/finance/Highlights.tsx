@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Form, Spinner } from 'react-bootstrap';
 
 import { periods } from '../../../configs';
 import { apis, helper } from '../../../services';
 
-interface IFinanceHighlightsProps {}
+interface IHighlightsProps {}
 
-interface IFinanceHighlightsState {
+interface IHighlightsState {
   loading: boolean;
   highlights: Array<any>;
   from: number;
@@ -14,11 +15,8 @@ interface IFinanceHighlightsState {
   period: string;
 }
 
-export default class FinanceHighlights extends Component<
-  IFinanceHighlightsProps,
-  IFinanceHighlightsState
-> {
-  constructor(props: IFinanceHighlightsProps) {
+class Highlights extends Component<IHighlightsProps, IHighlightsState> {
+  constructor(props: IHighlightsProps) {
     super(props);
 
     this.state = { loading: false, highlights: [], from: 0, to: 0, period: '' };
@@ -149,7 +147,7 @@ export default class FinanceHighlights extends Component<
   render() {
     const { loading = false, highlights = [] } = this.state;
     return (
-      <div id="FinanceHighlights" className="container-fluid">
+      <div id="Highlights" className="container-fluid">
         <Card>
           <Card.Body>
             <Card.Title className="text-center"></Card.Title>
@@ -174,3 +172,9 @@ export default class FinanceHighlights extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Highlights);

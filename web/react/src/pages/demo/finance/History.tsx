@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Form, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 
@@ -48,9 +49,9 @@ const chartOptions = {
   }
 };
 
-interface IFinanceHistoryProps {}
+interface IHistoryProps {}
 
-interface IFinanceHistoryState {
+interface IHistoryState {
   loading: boolean;
   data: any;
   symbols: Array<any>;
@@ -59,9 +60,8 @@ interface IFinanceHistoryState {
   to: number;
   period: string;
 }
-
-export default class FinanceHistory extends Component<IFinanceHistoryProps, IFinanceHistoryState> {
-  constructor(props: IFinanceHistoryProps) {
+class History extends Component<IHistoryProps, IHistoryState> {
+  constructor(props: IHistoryProps) {
     super(props);
 
     this.state = { loading: false, data: {}, symbols: [], symbol: '', from: 0, to: 0, period: '' };
@@ -159,7 +159,7 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
   render() {
     const { loading = false, data = {}, symbols = [], symbol = '' } = this.state;
     return (
-      <div id="FinanceHistory" className="container-fluid">
+      <div id="History" className="container-fluid">
         <Card>
           <Card.Body>
             <Card.Title className="text-center">History ({symbol})</Card.Title>
@@ -204,3 +204,9 @@ export default class FinanceHistory extends Component<IFinanceHistoryProps, IFin
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(History);

@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Card, Form, Spinner } from 'react-bootstrap';
 
 import { periods } from '../../../configs';
 import { apis, helper } from '../../../services';
 
-interface IFinancePotentialsProps {}
+interface IPotentialsProps {}
 
-interface IFinancePotentialsState {
+interface IPotentialsState {
   loading: boolean;
   potentials: Array<any>;
   from: number;
@@ -14,11 +15,8 @@ interface IFinancePotentialsState {
   period: string;
 }
 
-export default class FinancePotentials extends Component<
-  IFinancePotentialsProps,
-  IFinancePotentialsState
-> {
-  constructor(props: IFinancePotentialsProps) {
+class Potentials extends Component<IPotentialsProps, IPotentialsState> {
+  constructor(props: IPotentialsProps) {
     super(props);
 
     this.state = { loading: false, potentials: [], from: 0, to: 0, period: '' };
@@ -149,7 +147,7 @@ export default class FinancePotentials extends Component<
   render() {
     const { loading = false, potentials = [] } = this.state;
     return (
-      <div id="FinancePotentials" className="container-fluid">
+      <div id="Potentials" className="container-fluid">
         <Card>
           <Card.Body>
             <Form>
@@ -173,3 +171,9 @@ export default class FinancePotentials extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Potentials);

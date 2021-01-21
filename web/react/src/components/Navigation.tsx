@@ -98,9 +98,9 @@ class Navigation extends Component<INavigationProps, INavigationState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const theme = _.get(state, 'theme.theme', '');
-  const themeBorderBottom = _.get(state, 'theme.borderBottom', '');
-  const themePrimaryBackgroundColor = _.get(state, 'theme.primaryBackgroundColor', '');
+  const theme: string = _.get(state, 'theme.theme', '');
+  const themeBorderBottom: string = _.get(state, 'theme.borderBottom', '');
+  const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
   return { theme, themeBorderBottom, themePrimaryBackgroundColor };
 };
 

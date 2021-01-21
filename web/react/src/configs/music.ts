@@ -1,9 +1,9 @@
 import { baseAPI } from './urls';
 
 const music = {
-  getMusicArtists: {
-    id: 'getMusicArtists',
-    name: 'Get Music Artists',
+  getArtists: {
+    id: 'getArtists',
+    name: 'Get Artists',
     public: true,
     method: 'GET',
     path: '/music/artists',

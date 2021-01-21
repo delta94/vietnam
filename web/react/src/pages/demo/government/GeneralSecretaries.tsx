@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IGovernmentGeneralSecretariesProps {}
+interface IGeneralSecretariesProps {}
 
-interface IGovernmentGeneralSecretariesState {
+interface IGeneralSecretariesState {
   generalSecretaries: Array<any>;
   loading: boolean;
 }
 
-export default class GovernmentGeneralSecretaries extends Component<
-  IGovernmentGeneralSecretariesProps,
-  IGovernmentGeneralSecretariesState
-> {
-  constructor(props: IGovernmentGeneralSecretariesProps) {
+class GeneralSecretaries extends Component<IGeneralSecretariesProps, IGeneralSecretariesState> {
+  constructor(props: IGeneralSecretariesProps) {
     super(props);
 
     this.state = { generalSecretaries: [], loading: true };
@@ -40,7 +38,7 @@ export default class GovernmentGeneralSecretaries extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentGeneralSecretaries" className="container-fluid">
+      <div id="GeneralSecretaries" className="container-fluid">
         <Table
           loading={loading}
           caption={'General Secretaries'}
@@ -50,3 +48,9 @@ export default class GovernmentGeneralSecretaries extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(GeneralSecretaries);

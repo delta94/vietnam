@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { SmallDoc } from '../../components';
 
-export default class Government extends Component {
+class Government extends Component {
   render() {
     return (
       <div id="Government" className="container-fluid">
@@ -11,3 +12,9 @@ export default class Government extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Government);

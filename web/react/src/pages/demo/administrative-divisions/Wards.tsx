@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Pagination } from 'react-bootstrap';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IMapsWardsProps {}
+interface IWardsProps {}
 
-interface IMapsWardsState {
+interface IWardsState {
   wards: Array<any>;
   loading: boolean;
   total: number;
   active: number;
 }
 
-export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsState> {
-  constructor(props: IMapsWardsProps) {
+class Wards extends Component<IWardsProps, IWardsState> {
+  constructor(props: IWardsProps) {
     super(props);
 
     this.state = { wards: [], loading: true, total: 0, active: 1 };
@@ -100,7 +101,7 @@ export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsStat
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsWards" className="container-fluid">
+      <div id="Wards" className="container-fluid">
         {this.renderPagination()}
         <div className="mb-3">
           <Table loading={loading} caption={'Wards'} rows={wards} rowConfigs={rowConfigs}></Table>
@@ -110,3 +111,9 @@ export default class MapsWards extends Component<IMapsWardsProps, IMapsWardsStat
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Wards);

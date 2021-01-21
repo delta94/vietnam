@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { SmallDoc } from '../../components';
 
-export default class EthnicMinorities extends Component {
+class EthnicMinorities extends Component {
   render() {
     return (
       <div id="EthnicMinorities" className="container-fluid">
@@ -11,3 +12,9 @@ export default class EthnicMinorities extends Component {
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(EthnicMinorities);

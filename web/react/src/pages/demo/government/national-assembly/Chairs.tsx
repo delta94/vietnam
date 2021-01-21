@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
 import { Table } from '../../../../components';
 
-interface IGovernmentNationalAssemblyChairsProps {}
+interface IChairsProps {}
 
-interface IGovernmentNationalAssemblyChairsState {
+interface IChairsState {
   loading: boolean;
   chairs: Array<any>;
 }
 
-export default class GovernmentNationalAssemblyChairs extends Component<
-  IGovernmentNationalAssemblyChairsProps,
-  IGovernmentNationalAssemblyChairsState
-> {
-  constructor(props: IGovernmentNationalAssemblyChairsProps) {
+class Chairs extends Component<IChairsProps, IChairsState> {
+  constructor(props: IChairsProps) {
     super(props);
 
     this.state = { chairs: [], loading: true };
@@ -40,7 +38,7 @@ export default class GovernmentNationalAssemblyChairs extends Component<
       { header: 'End', key: 'end_date' }
     ];
     return (
-      <div id="GovernmentNationalAssemblyChairs" className="container-fluid">
+      <div id="Chairs" className="container-fluid">
         <Table
           loading={loading}
           caption={'National Assembly Chairs'}
@@ -50,3 +48,9 @@ export default class GovernmentNationalAssemblyChairs extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Chairs);

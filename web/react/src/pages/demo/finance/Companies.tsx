@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IFinanceCompaniesProps {}
+interface ICompaniesProps {}
 
-interface IFinanceCompaniesState {
+interface ICompaniesState {
   companies: Array<any>;
   loading: boolean;
 }
 
-export default class FinanceCompanies extends Component<
-  IFinanceCompaniesProps,
-  IFinanceCompaniesState
-> {
-  constructor(props: IFinanceCompaniesProps) {
+class Companies extends Component<ICompaniesProps, ICompaniesState> {
+  constructor(props: ICompaniesProps) {
     super(props);
 
     this.state = { companies: [], loading: false };
@@ -46,7 +44,7 @@ export default class FinanceCompanies extends Component<
       { header: 'P/S', key: 'PS' }
     ];
     return (
-      <div id="FinanceCompanies" className="container-fluid">
+      <div id="Companies" className="container-fluid">
         <Table
           loading={loading}
           caption={'Companies'}
@@ -56,3 +54,9 @@ export default class FinanceCompanies extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Companies);

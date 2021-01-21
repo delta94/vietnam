@@ -1,32 +1,30 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Table } from '../../../components';
 import { apis } from '../../../services';
 
-interface IHistoryDynastiesProps {}
+interface IDynastiesProps {}
 
-interface IHistoryDynastiesState {
+interface IDynastiesState {
   dynasties: Array<any>;
   loading: boolean;
 }
 
-export default class HistoryDynasties extends Component<
-  IHistoryDynastiesProps,
-  IHistoryDynastiesState
-> {
-  constructor(props: IHistoryDynastiesProps) {
+class Dynasties extends Component<IDynastiesProps, IDynastiesState> {
+  constructor(props: IDynastiesProps) {
     super(props);
 
     this.state = { dynasties: [], loading: true };
 
-    this.getHistoryDynasties = this.getHistoryDynasties.bind(this);
+    this.getDynasties = this.getDynasties.bind(this);
   }
 
   async componentDidMount() {
-    await this.getHistoryDynasties();
+    await this.getDynasties();
   }
 
-  async getHistoryDynasties() {
+  async getDynasties() {
     this.setState({ loading: true });
     const dynasties: Array<any> = await apis.getDynasties();
     this.setState({ dynasties, loading: false });
@@ -44,7 +42,7 @@ export default class HistoryDynasties extends Component<
     ];
 
     return (
-      <div id="HistoryDynasties" className="container-fluid">
+      <div id="Dynasties" className="container-fluid">
         <Table
           loading={loading}
           caption={'Dynasties'}
@@ -54,3 +52,9 @@ export default class HistoryDynasties extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Dynasties);

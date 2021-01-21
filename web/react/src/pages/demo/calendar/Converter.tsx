@@ -1,25 +1,27 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
-import { Card, Form } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Form } from 'react-bootstrap';
 
 import { months } from '../../../configs';
 import { apis, helper } from '../../../services';
 
-interface ICalendarConverterProps {}
+interface IConverterProps {
+  themeInput: string;
+  themeTextColor: string;
+}
 
-interface ICalendarConverterState {
+interface IConverterState {
   solarDate: string;
   solarString: string;
   lunarDate: string;
   lunarString: string;
 }
 
-export default class CalendarConverter extends Component<
-  ICalendarConverterProps,
-  ICalendarConverterState
-> {
+class Converter extends Component<IConverterProps, IConverterState> {
   private loadingText: string = 'LOADING ...';
 
-  constructor(props: ICalendarConverterProps) {
+  constructor(props: IConverterProps) {
     super(props);
 
     this.state = {
@@ -91,38 +93,48 @@ export default class CalendarConverter extends Component<
 
   render() {
     const { solarDate = '', solarString = '', lunarDate = '', lunarString = '' } = this.state;
+    const { themeInput = '', themeTextColor = '' } = this.props;
 
     return (
-      <div id="CalendarConverter" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Card.Title className="text-center">Calendar</Card.Title>
-            <Form>
-              <Form.Group controlId="SolarDate">
-                <Form.Label>Solar Date: {solarString}</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Solar Date"
-                  pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])/(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])/(?:30))|(?:(?:0\[13578\]|1\[02\])-31))"
-                  value={solarDate}
-                  onChange={this.updateSolarDate}
-                />
-              </Form.Group>
-              <hr></hr>
-              <Form.Group controlId="LunarDate">
-                <Form.Label>Lunar Date: {lunarString}</Form.Label>
-                <Form.Control
-                  type="date"
-                  placeholder="Lunar Date"
-                  pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])/(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])/(?:30))|(?:(?:0\[13578\]|1\[02\])-31))"
-                  value={lunarDate}
-                  onChange={this.updateLunarDate}
-                />
-              </Form.Group>
-            </Form>
-          </Card.Body>
-        </Card>
+      <div id="Converter" className="container-fluid">
+        <h3 className={`${themeTextColor} text-center`}>Calendar</h3>
+        <Form className="row">
+          <div className="col-sm-6">
+            <Form.Group controlId="SolarDate">
+              <Form.Label className={themeTextColor}>Solar Date: {solarString}</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="Solar Date"
+                pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])/(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])/(?:30))|(?:(?:0\[13578\]|1\[02\])-31))"
+                className={`${themeInput}`}
+                value={solarDate}
+                onChange={this.updateSolarDate}
+              />
+            </Form.Group>
+          </div>
+          <div className="col-sm-6">
+            <Form.Group controlId="LunarDate">
+              <Form.Label className={themeTextColor}>Lunar Date: {lunarString}</Form.Label>
+              <Form.Control
+                type="date"
+                placeholder="Lunar Date"
+                pattern="(?:19|20)\[0-9\]{2}-(?:(?:0\[1-9\]|1\[0-2\])/(?:0\[1-9\]|1\[0-9\]|2\[0-9\])|(?:(?!02)(?:0\[1-9\]|1\[0-2\])/(?:30))|(?:(?:0\[13578\]|1\[02\])-31))"
+                className={`${themeInput}`}
+                value={lunarDate}
+                onChange={this.updateLunarDate}
+              />
+            </Form.Group>
+          </div>
+        </Form>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  return { themeInput, themeTextColor };
+};
+
+export default connect(mapStateToProps)(Converter);

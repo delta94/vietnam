@@ -34,6 +34,12 @@ const DARK_SECONDARY_BACKGROUND_COLOR: string = 'bg-black';
 const LIGHT_LIST_ITEM_BORDER_BOTTOM: string = 'border-bottom';
 const DARK_LIST_ITEM_BORDER_BOTTOM: string = 'border-bottom border-white';
 
+const LIGHT_INPUT: string = '';
+const DARK_INPUT: string = 'bg-black text-white';
+
+const LIGHT_BADGE: string = 'danger';
+const DARK_BADGE: string = 'dark';
+
 interface IThemeState {
   theme: string;
   textColor: string;
@@ -47,6 +53,8 @@ interface IThemeState {
   primaryBackgroundColor: string;
   secondaryBackgroundColor: string;
   listItemBorderBottom: string;
+  input: string;
+  badge: string;
 }
 
 const initialState: IThemeState = {
@@ -61,7 +69,9 @@ const initialState: IThemeState = {
   borderBottom: LIGHT_BORDER_BOTTOM,
   primaryBackgroundColor: LIGHT_PRIMARY_BACKGROUND_COLOR,
   secondaryBackgroundColor: LIGHT_SECONDARY_BACKGROUND_COLOR,
-  listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM
+  listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM,
+  input: LIGHT_INPUT,
+  badge: LIGHT_BADGE
 };
 
 const themeReducer = (state: IThemeState = initialState, action: any) => {
@@ -80,7 +90,9 @@ const themeReducer = (state: IThemeState = initialState, action: any) => {
         borderBottom: LIGHT_BORDER_BOTTOM,
         primaryBackgroundColor: LIGHT_PRIMARY_BACKGROUND_COLOR,
         secondaryBackgroundColor: LIGHT_SECONDARY_BACKGROUND_COLOR,
-        listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM
+        listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM,
+        input: LIGHT_INPUT,
+        badge: LIGHT_BADGE
       };
     case DARK_THEME:
       return {
@@ -96,7 +108,9 @@ const themeReducer = (state: IThemeState = initialState, action: any) => {
         borderBottom: DARK_BORDER_BOTTOM,
         primaryBackgroundColor: DARK_PRIMARY_BACKGROUND_COLOR,
         secondaryBackgroundColor: DARK_SECONDARY_BACKGROUND_COLOR,
-        listItemBorderBottom: DARK_LIST_ITEM_BORDER_BOTTOM
+        listItemBorderBottom: DARK_LIST_ITEM_BORDER_BOTTOM,
+        input: DARK_INPUT,
+        badge: DARK_BADGE
       };
     default:
       return state;

@@ -1,20 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
 import { Table } from '../../../components';
 
-interface IMapsPostalCodesProps {}
+interface IPostalCodesProps {}
 
-interface IMapsPostalCodesState {
+interface IPostalCodesState {
   postalCodes: Array<any>;
   loading: boolean;
 }
 
-export default class MapsPostalCodes extends Component<
-  IMapsPostalCodesProps,
-  IMapsPostalCodesState
-> {
-  constructor(props: IMapsPostalCodesProps) {
+class PostalCodes extends Component<IPostalCodesProps, IPostalCodesState> {
+  constructor(props: IPostalCodesProps) {
     super(props);
 
     this.state = { postalCodes: [], loading: true };
@@ -39,7 +37,7 @@ export default class MapsPostalCodes extends Component<
       { header: 'Province', key: 'province' }
     ];
     return (
-      <div id="MapsPostalCodes" className="container-fluid">
+      <div id="PostalCodes" className="container-fluid">
         <Table
           loading={loading}
           caption={'Postal Codes'}
@@ -49,3 +47,9 @@ export default class MapsPostalCodes extends Component<
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(PostalCodes);

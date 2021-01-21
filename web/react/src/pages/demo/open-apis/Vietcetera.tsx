@@ -124,11 +124,11 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
 }
 
 const mapStateToProps = (state: any) => {
-  const themeTextColor = _.get(state, 'theme.textColor', '');
-  const themeSpinnerVariant = _.get(state, 'theme.spinnerVariant', '');
-  const themeListItemBorderBottom = _.get(state, 'theme.listItemBorderBottom', '');
-  const themeSecondaryBackgroundColor = _.get(state, 'theme.secondaryBackgroundColor', '');
-  const themeMutedTextColor = _.get(state, 'theme.mutedTextColor', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
+  const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
+  const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
+  const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
     themeTextColor,
     themeSpinnerVariant,

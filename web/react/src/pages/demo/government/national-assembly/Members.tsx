@@ -1,20 +1,19 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
 import { Table } from '../../../../components';
 
-interface IGovernmentNationalAssemblyMembersProps {}
+interface IMembersProps {}
 
-interface IGovernmentNationalAssemblyMembersState {
+interface IMembersState {
   loading: boolean;
   members: Array<any>;
   no: number;
 }
-export default class GovernmentNationalAssemblyMembers extends Component<
-  IGovernmentNationalAssemblyMembersProps,
-  IGovernmentNationalAssemblyMembersState
-> {
-  constructor(props: IGovernmentNationalAssemblyMembersProps) {
+
+class Members extends Component<IMembersProps, IMembersState> {
+  constructor(props: IMembersProps) {
     super(props);
 
     this.state = { members: [], no: 14, loading: true };
@@ -37,9 +36,15 @@ export default class GovernmentNationalAssemblyMembers extends Component<
     const { members = [], loading = false } = this.state;
     const rowConfigs = [{ header: 'Name', key: 'name' }];
     return (
-      <div id="GovernmentNationalAssemblyMembers" className="container-fluid">
+      <div id="Members" className="container-fluid">
         <Table loading={loading} caption={'Members'} rows={members} rowConfigs={rowConfigs}></Table>
       </div>
     );
   }
 }
+
+const mapStateToProps = (state: any) => {
+  return {};
+};
+
+export default connect(mapStateToProps)(Members);
