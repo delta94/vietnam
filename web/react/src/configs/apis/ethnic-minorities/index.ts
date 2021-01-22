@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IEthnicMinoritiesEndpoints } from '../../interfaces';
 
-const ethnicMinorities = {
+const ethnicMinorities: IEthnicMinoritiesEndpoints = {
   getEthnicMinorities: {
     id: 'getEthnicMinorities',
     name: 'Get Ethnic Minorities',

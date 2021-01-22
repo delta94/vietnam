@@ -19,7 +19,7 @@ export interface IEndpoints {
   licensePlates: ILicensePlatesEndpoints;
   music: IMusicEndpoints;
   news: INewsEndpoints;
-  openAPIs: IOpenAPIs;
+  openAPIs: IOpenAPIsEndpoints;
   phones: IPhonesEndpoints;
   sports: ISportsEndpoints;
   weather: IWeatherEndpoints;
@@ -84,7 +84,7 @@ export interface INewsEndpoints {
   getCategories: IEndpoint;
 }
 
-export interface IOpenAPIs {
+export interface IOpenAPIsEndpoints {
   getOpenAPIs: IEndpoint;
   getGHNProvinces: IEndpoint;
   getGHNDistricts: IEndpoint;

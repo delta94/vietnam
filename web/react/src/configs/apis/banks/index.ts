@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IBanksEndpoints } from '../../interfaces';
 
-const banks = {
+const banks: IBanksEndpoints = {
   getBanks: {
     id: 'getBanks',
     name: 'Get Banks',

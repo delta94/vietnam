@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IFinanceEndpoints } from '../../interfaces';
 
-const finance = {
+const finance: IFinanceEndpoints = {
   getStockCompanies: {
     id: 'getStockCompanies',
     name: 'Get Listed Companies',

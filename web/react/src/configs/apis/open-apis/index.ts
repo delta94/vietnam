@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IOpenAPIsEndpoints } from '../../interfaces';
 
-const openAPIs = {
+const openAPIs: IOpenAPIsEndpoints = {
   getOpenAPIs: {
     id: 'getOpenAPIs',
     name: 'Get Open APIs',

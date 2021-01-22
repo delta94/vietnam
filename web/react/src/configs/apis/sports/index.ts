@@ -1,5 +1,5 @@
-import { baseAPI } from './urls';
-import { ISportsEndpoints } from './interfaces';
+import { baseAPI } from '../../urls';
+import { ISportsEndpoints } from '../../interfaces';
 
 const sports: ISportsEndpoints = {
   getSportsClubs: {

@@ -1,5 +1,5 @@
-import { IPhonesEndpoints } from './interfaces';
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IPhonesEndpoints } from '../../interfaces';
 
 const phones: IPhonesEndpoints = {
   getPrefixes: {

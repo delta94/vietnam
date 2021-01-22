@@ -50,4 +50,8 @@ export default class Helper {
         alert(`Error in copying text: ${err.stack}`);
       });
   }
+
+  public camelize(str: string = ''): string {
+    return (str.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g) || []).join(' ');
+  }
 }

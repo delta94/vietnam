@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { ICalendarEndpoints } from '../../interfaces';
 
-const calendar = {
+const calendar: ICalendarEndpoints = {
   convertLunarToSolar: {
     id: 'convertLunarToSolar',
     name: 'Convert Lunar Date to Solar Date',

@@ -81,7 +81,7 @@ class Docs extends Component<IDocsProps, IDocsState> {
         {list.length > 0 &&
           list.map((item, index: number) => {
             const { group, apis } = item;
-            const header = helper.capitalize(group);
+            const header = helper.camelize(helper.capitalize(group));
             return (
               <div key={index}>
                 <Accordion.Toggle
@@ -116,7 +116,12 @@ class Docs extends Component<IDocsProps, IDocsState> {
               <div className="content-height overflow-auto">
                 {groups.length > 0 &&
                   groups.map((group: string, index: number) => {
-                    return <Doc key={index} group={group} header={helper.capitalize(group)}></Doc>;
+                    return (
+                      <Doc
+                        key={index}
+                        group={group}
+                        header={helper.camelize(helper.capitalize(group))}></Doc>
+                    );
                   })}
               </div>
             </div>

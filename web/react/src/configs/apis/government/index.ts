@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IGovernmentEndpoints } from '../../interfaces';
 
-const government = {
+const government: IGovernmentEndpoints = {
   getGeneralSecretaries: {
     id: 'getGeneralSecretaries',
     name: 'Get General Secretaries',

@@ -1,6 +1,7 @@
-import { baseAPI } from './urls';
+import { baseAPI } from '../../urls';
+import { IWeatherEndpoints } from '../../interfaces';
 
-const weather = {
+const weather: IWeatherEndpoints = {
   getCurrentWeather: {
     id: 'getCurrentWeather',
     name: 'Get Current Weather',
