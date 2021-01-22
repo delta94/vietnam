@@ -6,12 +6,11 @@ dotenv.config({ path: '../../environments/dev.env' });
 import { mongooseClient } from '../../clients';
 import { dsFinanceForexRate } from '../../data';
 import { banks } from '../../libs';
+import { banksService } from '../../services';
 
 const main = async () => {
   await mongooseClient.connect();
   const ID: string = process.env.ID;
-  const rates = await banks[ID].getForexRates();
-  console.log(ID, rates);
 
   const d = new Date();
   const year: number = d.getFullYear();
@@ -21,9 +20,16 @@ const main = async () => {
   const minute: number = d.getMinutes();
   const timestamp: number = d.getTime();
 
-  const query: any = { year, month, date, hour, minute, bank: ID };
-  const doc: any = { timestamp, year, month, date, hour, minute, bank: ID, rates };
-  await dsFinanceForexRate.updateOne(query, doc);
+  if (ID) {
+    const rates = await banks[ID].getForexRates();
+    console.log(ID, rates);
+
+    const query: any = { year, month, date, hour, minute, bank: ID };
+    const doc: any = { timestamp, year, month, date, hour, minute, bank: ID, rates };
+    await dsFinanceForexRate.updateOne(query, doc);
+  } else {
+    await banksService.syncForexRates({ year, month, date, hour, minute, timestamp });
+  }
 
   process.exit(0);
 };

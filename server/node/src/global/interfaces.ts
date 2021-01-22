@@ -52,3 +52,22 @@ export interface ITelegramMessage {
 export type TelegramMethod = 'GET' | 'POST';
 
 export type TelegramCommand = 'setWebhook' | 'sendMessage' | 'getMe';
+
+export interface IYouTubeVideo {
+  id: string;
+  channelId: string;
+  title: string;
+  publishedAt: string;
+  description: string;
+  channelTitle: string;
+  tags: Array<string>;
+  categoryId: string;
+  url: string;
+}
+
+export interface IYouTubeVideoCategory {
+  id: string;
+  title: string;
+  assignable: boolean;
+  channelId: string;
+}

@@ -10,6 +10,15 @@ import { dsFinanceForexRate } from '../data';
 const URL_BASE: string = process.env.URL_BASE || '';
 const TELEGRAM_CHAT_ID: number = parseInt(process.env.TELEGRAM_CHAT_ID || '0', 10) || 0;
 
+interface ITime {
+  year: number;
+  month: number;
+  date: number;
+  hour: number;
+  minute: number;
+  timestamp: number;
+}
+
 export default class BanksService {
   public async getBanks(): Promise<Array<any>> {
     const fields: Array<string> = [
@@ -273,7 +282,7 @@ export default class BanksService {
     await esClient.refresh(esIndex);
   }
 
-  public async syncForexRates(time: any): Promise<any> {
+  public async syncForexRates(time: ITime): Promise<any> {
     const self = this;
     try {
       const { dy = 0, dm = 0, dd = 0, dh = 0, dmi = 0, dt = 0 } = self.getDefaultTime();

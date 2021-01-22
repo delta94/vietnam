@@ -18,9 +18,14 @@ export default class NCB extends Base {
     const body = { op: 'ajax', date };
     const httpsAgent = new https.Agent({ rejectUnauthorized: false });
     return new Promise(resolve => {
-      fetch(url, { method: 'POST', body: JSON.stringify(body), agent: httpsAgent })
+      fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(body),
+        agent: httpsAgent
+      })
         .then(res => res.text())
         .then((body: string) => {
+          console.log('body', body);
           const $: cheerio.Root = cheerio.load(body);
           const rates = $('.tb-tygia table.tb-content tbody tr')
             .get()

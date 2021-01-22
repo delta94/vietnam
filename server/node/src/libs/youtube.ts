@@ -2,6 +2,8 @@
 
 import fetch from 'node-fetch';
 
+import { IYouTubeVideo, IYouTubeVideoCategory } from '../global/interfaces';
+
 type Units = 'standard' | 'metric' | 'imperial';
 
 export default class YouTube {
@@ -13,7 +15,7 @@ export default class YouTube {
     this.key = key;
   }
 
-  getMostPopularVideos(videoCategoryId: number = 0): Promise<Array<any>> {
+  getMostPopularVideos(videoCategoryId: number = 0): Promise<Array<IYouTubeVideo>> {
     const { key, regionCode, base } = this;
     const url = `${base}/videos?part=snippet&videoCategoryId=${videoCategoryId}&chart=mostPopular&maxResults=50&regionCode=${regionCode}&key=${key}`;
     return new Promise(resolve => {
@@ -54,7 +56,7 @@ export default class YouTube {
     });
   }
 
-  async getVideoCategories(): Promise<Array<any>> {
+  async getVideoCategories(): Promise<Array<IYouTubeVideoCategory>> {
     const { key, regionCode, base } = this;
     const url = `${base}/videoCategories?regionCode=${regionCode}&key=${key}`;
     return new Promise(resolve => {
