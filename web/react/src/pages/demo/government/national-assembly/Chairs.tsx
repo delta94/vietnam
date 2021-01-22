@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
-import { Table } from '../../../../components';
+import { Table, NavPills } from '../../../../components';
 
 interface IChairsProps {}
 
@@ -39,6 +39,7 @@ class Chairs extends Component<IChairsProps, IChairsState> {
     ];
     return (
       <div id="Chairs" className="container-fluid">
+        <NavPills group={'government'}></NavPills>
         <Table
           loading={loading}
           caption={'National Assembly Chairs'}

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
-import { Table } from '../../../../components';
+import { Table, NavPills } from '../../../../components';
 
 interface IMembersProps {}
 
@@ -37,6 +37,7 @@ class Members extends Component<IMembersProps, IMembersState> {
     const rowConfigs = [{ header: 'Name', key: 'name' }];
     return (
       <div id="Members" className="container-fluid">
+        <NavPills group={'government'}></NavPills>
         <Table loading={loading} caption={'Members'} rows={members} rowConfigs={rowConfigs}></Table>
       </div>
     );

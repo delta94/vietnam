@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IProvincesProps {}
 
@@ -40,6 +40,7 @@ class Provinces extends Component<IProvincesProps, IProvincesState> {
     ];
     return (
       <div id="Provinces" className="container-fluid">
+        <NavPills group={'administrative-divisions'}></NavPills>
         <Table
           loading={loading}
           caption={'Provinces'}

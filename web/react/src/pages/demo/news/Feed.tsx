@@ -8,6 +8,7 @@ import { apis, helper } from '../../../services';
 import Trends from './Trends';
 
 interface IFeedProps {
+  themeInput: string;
   themeTextColor: string;
   themeMutedTextColor: string;
   themeBorder: string;
@@ -86,14 +87,19 @@ class Feed extends Component<IFeedProps, IFeedState> {
   }
 
   renderForm() {
-    const { categories = [], sources = [] } = this.state;
+    const { categories = [], sources = [], source = '', category = '' } = this.state;
+    const { themeInput } = this.props;
     return (
       <Form>
         <div className="row">
           {sources.length > 0 && (
             <div className="col-sm-6">
               <Form.Group>
-                <Form.Control as="select" value={this.state.source} onChange={this.updateSource}>
+                <Form.Control
+                  as="select"
+                  className={themeInput}
+                  value={source}
+                  onChange={this.updateSource}>
                   <option value={''}>Source</option>
                   {sources.map((source, index) => {
                     return (
@@ -111,7 +117,8 @@ class Feed extends Component<IFeedProps, IFeedState> {
               <Form.Group>
                 <Form.Control
                   as="select"
-                  value={this.state.category}
+                  className={themeInput}
+                  value={category}
                   onChange={this.updateCategory}>
                   <option value={''}>Category</option>
                   {categories.map((category, index) => {
@@ -145,51 +152,45 @@ class Feed extends Component<IFeedProps, IFeedState> {
           <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
         )}
         {articles.length !== 0 && (
-          <Card className="h-70vh overflow-auto">
-            <ListGroup className="list-group-flush">
-              <ListGroup.Item
-                className={`${themePrimaryBackgroundColor} ${themeListItemBorderBottom} text-white text-center`}>
-                Articles ({articles.length})
-              </ListGroup.Item>
-              {articles.map((article = {}, index) => {
-                const { title = '', url = '', source = '', publishedDate = '' } = article;
-                let { description = '' } = article;
-                console.log(description);
-                description = description.toString() || '';
-                const startIndex: number = description.indexOf('<img');
-                const endIndex: number = description.indexOf('/>');
-                let short = '';
-                if (startIndex > -1 && endIndex > startIndex) {
-                  short = `${description.substring(0, startIndex)}${description.substring(
-                    endIndex + 2,
-                    description.length
-                  )}`;
-                }
-                return (
-                  <ListGroup.Item
-                    key={index}
-                    className={`${themeSecondaryBackgroundColor} ${themeListItemBorderBottom}`}>
-                    <Card.Title>
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={`${themeTextColor}`}>
-                        <u>{title}</u>
-                      </a>
-                    </Card.Title>
-                    <Card.Subtitle className={`${themeMutedTextColor} mb-1`}>
-                      {source && <small>{source}</small>} -{' '}
-                      {publishedDate && <small>({publishedDate})</small>}
-                    </Card.Subtitle>
-                    <Card.Text className={`${themeTextColor}`}>
-                      <span dangerouslySetInnerHTML={{ __html: short }}></span>
-                    </Card.Text>
-                  </ListGroup.Item>
-                );
-              })}
-            </ListGroup>
-          </Card>
+          <ListGroup>
+            <ListGroup.Item
+              className={`${themePrimaryBackgroundColor} ${themeListItemBorderBottom} text-white text-center`}>
+              Articles ({articles.length})
+            </ListGroup.Item>
+            {articles.map((article = {}, index) => {
+              const { title = '', url = '', source = '', publishedDate = '' } = article;
+              let { description = '' } = article;
+              console.log(description);
+              description = description.toString() || '';
+              const startIndex: number = description.indexOf('<img');
+              const endIndex: number = description.indexOf('/>');
+              let short = '';
+              if (startIndex > -1 && endIndex > startIndex) {
+                short = `${description.substring(0, startIndex)}${description.substring(
+                  endIndex + 2,
+                  description.length
+                )}`;
+              }
+              return (
+                <ListGroup.Item
+                  key={index}
+                  className={`${themeSecondaryBackgroundColor} ${themeListItemBorderBottom}`}>
+                  <Card.Title>
+                    <a href={url} target="_blank" rel="noreferrer" className={`${themeTextColor}`}>
+                      <u>{title}</u>
+                    </a>
+                  </Card.Title>
+                  <Card.Subtitle className={`${themeMutedTextColor} mb-1`}>
+                    {source && <small>{source}</small>} -{' '}
+                    {publishedDate && <small>({publishedDate})</small>}
+                  </Card.Subtitle>
+                  <Card.Text className={`${themeTextColor}`}>
+                    <span dangerouslySetInnerHTML={{ __html: short }}></span>
+                  </Card.Text>
+                </ListGroup.Item>
+              );
+            })}
+          </ListGroup>
         )}
       </div>
     );
@@ -222,6 +223,7 @@ class Feed extends Component<IFeedProps, IFeedState> {
 }
 
 const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
   const themeBorder: string = _.get(state, 'theme.border', '');
   const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
   const themeTextColor: string = _.get(state, 'theme.textColor', '');
@@ -230,6 +232,7 @@ const mapStateToProps = (state: any) => {
   const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
   const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
+    themeInput,
     themeMutedTextColor,
     themeTextColor,
     themeBorder,

@@ -79,7 +79,7 @@ class Home extends Component<IHomeProps, IHomeState> {
     } = this.props;
 
     return (
-      <ListGroup className={`${themeBorder} list-group-flush h-65vh overflow-auto rounded-lg`}>
+      <ListGroup className={`${themeBorder} list-group-flush rounded-lg`}>
         {filterAPIs.length !== 0 &&
           filterAPIs.map((_package, index) => {
             const { name = '', docs = '' } = _package;
@@ -103,6 +103,7 @@ class Home extends Component<IHomeProps, IHomeState> {
   }
 
   render() {
+    const { query } = this.state;
     const { themeTextColor, themeInput } = this.props;
     return (
       <div id="Home" className="container-fluid">
@@ -115,7 +116,7 @@ class Home extends Component<IHomeProps, IHomeState> {
             type="text"
             placeholder="Query"
             className={`${themeInput}`}
-            value={this.state.query}
+            value={query}
             onChange={this.updateQuery}></Form.Control>
         </Form>
         {this.renderTable()}

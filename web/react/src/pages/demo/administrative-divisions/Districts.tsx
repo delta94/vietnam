@@ -1,11 +1,14 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
-interface IDistrictsProps {}
+interface IDistrictsProps {
+  themeInput: string;
+}
 
 interface IDistrictsState {
   provinces: Array<any>;
@@ -23,6 +26,7 @@ class Districts extends Component<IDistrictsProps, IDistrictsState> {
     this.getProvinces = this.getProvinces.bind(this);
     this.getDistricts = this.getDistricts.bind(this);
     this.updateProvince = this.updateProvince.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
   async componentDidMount() {
@@ -52,8 +56,33 @@ class Districts extends Component<IDistrictsProps, IDistrictsState> {
     await this.getDistricts();
   }
 
+  renderForm() {
+    const { provinces = [], province_id = '' } = this.state;
+    const { themeInput = '' } = this.props;
+    return (
+      <Form>
+        <Form.Group>
+          <Form.Control
+            as="select"
+            className={themeInput}
+            value={province_id}
+            onChange={this.updateProvince}>
+            <option value={''}>Province</option>
+            {provinces.map((province, index) => {
+              return (
+                <option key={index} value={province.province_id}>
+                  {province.name}
+                </option>
+              );
+            })}
+          </Form.Control>
+        </Form.Group>
+      </Form>
+    );
+  }
+
   render() {
-    const { provinces = [], districts = [], loading = true } = this.state;
+    const { districts = [], loading = true } = this.state;
     const rowConfigs = [
       { header: 'Name', key: 'name' },
       { header: 'Level', key: 'level' },
@@ -61,20 +90,8 @@ class Districts extends Component<IDistrictsProps, IDistrictsState> {
     ];
     return (
       <div id="Districts" className="container-fluid">
-        <Form>
-          <Form.Group>
-            <Form.Control as="select" value={this.state.province_id} onChange={this.updateProvince}>
-              <option value={''}>Province</option>
-              {provinces.map((province, index) => {
-                return (
-                  <option key={index} value={province.province_id}>
-                    {province.name}
-                  </option>
-                );
-              })}
-            </Form.Control>
-          </Form.Group>
-        </Form>
+        <NavPills group={'administrative-divisions'}></NavPills>
+        {this.renderForm()}
         <Table
           loading={loading}
           caption={'Districts'}
@@ -86,7 +103,8 @@ class Districts extends Component<IDistrictsProps, IDistrictsState> {
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return { themeInput };
 };
 
 export default connect(mapStateToProps)(Districts);

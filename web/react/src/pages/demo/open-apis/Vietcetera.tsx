@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { Form, Card, ListGroup, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
+import { NavPills } from '../../../components';
 
 interface IVietceteraProps {
+  themeInput: string;
   themeTextColor: string;
   themeSpinnerVariant: string;
   themeListItemBorderBottom: string;
@@ -44,6 +46,8 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
   }
 
   renderForm() {
+    const { type } = this.state;
+    const { themeInput } = this.props;
     const options = [
       { value: 'latest', text: 'Latest' },
       { value: 'popular', text: 'Popular' },
@@ -52,7 +56,7 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
     return (
       <Form>
         <Form.Group>
-          <Form.Control as="select" value={this.state.type} onChange={this.getArticles}>
+          <Form.Control as="select" className={themeInput} value={type} onChange={this.getArticles}>
             {options.map((option, index) => {
               const { text, value } = option;
               return (
@@ -78,6 +82,7 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
     } = this.props;
     return (
       <div id="Vietcetera" className="container-fluid">
+        <NavPills group={'open-apis'}></NavPills>
         <div className="text-center mb-3">
           <a href={`https://www.npmjs.com/package/vietcetera`} rel="noreferrer" target="_blank">
             npm
@@ -91,32 +96,26 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
           </div>
         )}
         {!loading && articles.length !== 0 && (
-          <Card className="h-55vh overflow-auto">
-            <ListGroup className="list-group-flush">
-              {articles.map((article, index) => {
-                const { title = '', url = '', publishDate = '', description = '' } = article;
-                return (
-                  <ListGroup.Item
-                    key={index}
-                    className={`${themeSecondaryBackgroundColor} ${themeListItemBorderBottom}`}>
-                    <Card.Title>
-                      <a
-                        href={url}
-                        target="_blank"
-                        rel="noreferrer"
-                        className={`${themeTextColor}`}>
-                        {title}
-                      </a>
-                    </Card.Title>
-                    <Card.Subtitle className={`${themeMutedTextColor} mb-1`}>
-                      <small>{publishDate}</small>
-                    </Card.Subtitle>
-                    <Card.Text className={themeTextColor}>{description}</Card.Text>
-                  </ListGroup.Item>
-                );
-              })}
-            </ListGroup>
-          </Card>
+          <ListGroup>
+            {articles.map((article, index) => {
+              const { title = '', url = '', publishDate = '', description = '' } = article;
+              return (
+                <ListGroup.Item
+                  key={index}
+                  className={`${themeSecondaryBackgroundColor} ${themeListItemBorderBottom}`}>
+                  <Card.Title>
+                    <a href={url} target="_blank" rel="noreferrer" className={`${themeTextColor}`}>
+                      {title}
+                    </a>
+                  </Card.Title>
+                  <Card.Subtitle className={`${themeMutedTextColor} mb-1`}>
+                    <small>{publishDate}</small>
+                  </Card.Subtitle>
+                  <Card.Text className={themeTextColor}>{description}</Card.Text>
+                </ListGroup.Item>
+              );
+            })}
+          </ListGroup>
         )}
       </div>
     );
@@ -124,12 +123,14 @@ class Vietcetera extends Component<IVietceteraProps, IVietceteraState> {
 }
 
 const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
   const themeTextColor: string = _.get(state, 'theme.textColor', '');
   const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
   const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
   const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
   const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
+    themeInput,
     themeTextColor,
     themeSpinnerVariant,
     themeListItemBorderBottom,

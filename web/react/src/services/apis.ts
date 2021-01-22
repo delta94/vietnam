@@ -263,6 +263,16 @@ export default class APIS {
     return await this.fetch(endpoint, { query: { city }, body: {} });
   }
 
+  public async getAirVisual(city: string): Promise<any> {
+    const endpoint: IEndpoint = endpoints.weather.getAirVisual;
+    return await this.fetch(endpoint, { query: { city }, body: {} });
+  }
+
+  public async getAirVisualCities(): Promise<any> {
+    const endpoint: IEndpoint = endpoints.weather.getAirVisualCities;
+    return await this.fetch(endpoint);
+  }
+
   public async getYouTubeTrending(categoryId: number = 0): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.youtube.getTrending;
     return await this.fetch(endpoint, { query: { categoryId }, body: {} });

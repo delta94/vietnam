@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IListProps {}
 
@@ -42,6 +42,7 @@ class List extends Component<IListProps, IListState> {
     ];
     return (
       <div id="List" className="container-fluid">
+        <NavPills group={'banks'}></NavPills>
         <Table
           loading={loading}
           caption={'Banks'}

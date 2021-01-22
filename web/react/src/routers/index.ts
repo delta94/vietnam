@@ -65,7 +65,9 @@ import {
   SportsVLeague,
   // Weather
   Weather,
+  WeatherAirVisual,
   WeatherCurrent,
+  // Weather
   YouTube,
   YouTubeTrending
 } from '../pages';
@@ -75,6 +77,8 @@ interface IRoute {
   text: string;
   component: any;
   navigation: boolean;
+  demo: boolean;
+  group: string;
 }
 
 const routes: Array<IRoute> = [
@@ -82,325 +86,441 @@ const routes: Array<IRoute> = [
     path: '',
     text: '',
     component: Home,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: ''
   },
   {
     path: 'administrative-divisions',
     text: 'Administrative Divisions',
     component: AdministrativeDivisions,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'administrative-divisions'
   },
   {
     path: 'administrative-divisions-postal-codes',
-    text: 'Administrative Divisions Postal Codes',
+    text: 'Postal Codes',
     component: AdministrativeDivisionsPostalCodes,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'administrative-divisions'
   },
   {
     path: 'administrative-divisions-provinces',
-    text: 'Administrative Divisions Provinces',
+    text: 'Provinces',
     component: AdministrativeDivisionsProvinces,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'administrative-divisions'
   },
   {
     path: 'administrative-divisions-districts',
-    text: 'Administrative Divisions Districts',
+    text: 'Districts',
     component: AdministrativeDivisionsDistricts,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'administrative-divisions'
   },
   {
     path: 'administrative-divisions-wards',
-    text: 'Administrative Divisions Wards',
+    text: 'Wards',
     component: AdministrativeDivisionsWards,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'administrative-divisions'
   },
   {
     path: 'banks',
     text: 'Banks',
     component: Banks,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'banks'
   },
   {
     path: 'banks-list',
     text: 'Banks List',
     component: BanksList,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'banks'
   },
   {
     path: 'banks-forex-rates',
-    text: 'Banks Forex Rates',
+    text: 'Banks Forex',
     component: BanksForexRates,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'banks'
   },
   {
     path: 'banks-forex-history',
-    text: 'Banks Forex History',
+    text: 'Forex History',
     component: BanksForexHistory,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'banks'
   },
   {
     path: 'banks-forex-sync',
-    text: 'Banks Forex Sync',
+    text: 'Sync Forex',
     component: BanksForexSync,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'banks'
   },
   {
     path: 'calendar',
     text: 'Calendar',
     component: Calendar,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'calendar'
   },
   {
     path: 'calendar-converter',
-    text: 'Calendar Converter',
+    text: 'Converter',
     component: CalendarConverter,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'calendar'
   },
   {
     path: 'docs',
     text: 'Docs',
     component: Docs,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'docs'
   },
   {
     path: 'ethnic-minorities',
     text: 'Ethnic Minorities',
     component: EthnicMinorities,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'ethnic-minorities'
   },
   {
     path: 'ethnic-minorities-list',
-    text: 'Ethnic Minorities (List)',
+    text: 'List',
     component: EthnicMinoritiesList,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'ethnic-minorities'
   },
   {
     path: 'finance',
     text: 'Finance',
     component: Finance,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'finance'
   },
   {
     path: 'finance-companies',
-    text: 'Finance Companies',
+    text: 'Companies',
     component: FinanceCompanies,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'finance'
   },
   {
     path: 'finance-history',
-    text: 'Finance History',
+    text: 'History',
     component: FinanceHistory,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'finance'
   },
   {
     path: 'finance-highlights',
-    text: 'Finance Highlights',
+    text: 'Highlights',
     component: FinanceHighlights,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'finance'
   },
   {
     path: 'finance-potentials',
-    text: 'Finance Potentials',
+    text: 'Potentials',
     component: FinancePotentials,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'finance'
   },
   {
     path: 'finance-profit',
-    text: 'Finance Profit',
+    text: 'Profit',
     component: FinanceProfit,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'finance'
   },
   {
     path: 'government',
     text: 'Government',
     component: Government,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'government'
   },
   {
     path: 'government-general-secretaries',
-    text: 'Government General Secretaries',
+    text: 'General Secretaries',
     component: GovernmentGeneralSecretaries,
-    navigation: false
+    navigation: false,
+    demo: false,
+    group: 'government'
   },
   {
     path: 'government-presidents',
-    text: 'Government Presidents',
+    text: 'Presidents',
     component: GovernmentPresidents,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'government-prime-ministers',
-    text: 'Government Prime Ministers',
+    text: 'Prime Ministers',
     component: GovernmentPrimeMinisters,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'government-ministries',
     text: 'Ministries',
     component: GovernmentMinistries,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'government-ministers',
     text: 'Ministers',
     component: GovernmentMinisters,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'government-national-assembly-chairs',
     text: 'National Assembly Chairs',
     component: GovernmentNationalAssemblyChairs,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'government-national-assembly-members',
     text: 'National Assembly Members',
     component: GovernmentNationalAssemblyMembers,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'government'
   },
   {
     path: 'history',
     text: 'History',
     component: History,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'history'
   },
   {
     path: 'history-dynasties',
-    text: 'History-dynasties',
+    text: 'Dynasties',
     component: HistoryDynasties,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'history'
   },
   {
     path: 'license-plates',
     text: 'License Plates',
     component: LicensePlates,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'license-plates'
   },
   {
     path: 'license-plates-list',
-    text: 'License Plates (List)',
+    text: 'List',
     component: LicensePlatesList,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'license-plates'
   },
   {
     path: 'music',
     text: 'Music',
     component: Music,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'music'
   },
   {
     path: 'music-artists',
-    text: 'Music Artists',
+    text: 'Artists',
     component: MusicArtists,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'music'
   },
   {
     path: 'news',
     text: 'News',
     component: News,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'news'
   },
   {
     path: 'news-feed',
-    text: 'News Feed',
+    text: 'Feed',
     component: NewsFeed,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'news'
   },
   {
     path: 'open-apis',
     text: 'Open APIs',
     component: OpenAPIs,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'open-apis'
   },
   {
     path: 'open-apis-list',
-    text: 'Open APIs List',
+    text: 'List',
     component: OpenAPIsList,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'open-apis'
   },
   {
     path: 'open-apis-ghn-provinces',
-    text: 'Open APIs GHN Provinces',
+    text: 'GHN Provinces',
     component: GHNProvinces,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'open-apis'
   },
   {
     path: 'open-apis-ghn-districts',
-    text: 'Open APIs GHN Districts',
+    text: 'GHN Districts',
     component: GHNDistricts,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'open-apis'
   },
   {
     path: 'open-apis-ghn-wards',
-    text: 'Open APIs GHN Wards',
+    text: 'GHN Wards',
     component: GHNWards,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'open-apis'
   },
   {
     path: 'open-apis-vietcetera',
-    text: 'Open APIs Vietcetera',
+    text: 'Vietcetera',
     component: Vietcetera,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'open-apis'
   },
   {
     path: 'phones',
     text: 'Phones',
     component: Phones,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'phones'
   },
   {
     path: 'phones-prefixes',
-    text: 'Phones Prefixes',
+    text: 'Prefixes',
     component: PhonesPrefixes,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'phones'
   },
   {
     path: 'phones-providers',
-    text: 'Phones Providers',
+    text: 'Providers',
     component: PhonesProviders,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'phones'
   },
   {
     path: 'sports',
     text: 'Sports',
     component: Sports,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'sports'
   },
   {
     path: 'sports-clubs',
-    text: 'Sports Clubs',
+    text: 'Clubs',
     component: SportsClubs,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'sports'
   },
   {
     path: 'sports-vleague',
-    text: 'Sports VLeague',
+    text: 'VLeague',
     component: SportsVLeague,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'sports'
   },
   {
     path: 'weather',
     text: 'Weather',
     component: Weather,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'weather'
+  },
+  {
+    path: 'weather-air-visual',
+    text: 'Air Visual',
+    component: WeatherAirVisual,
+    navigation: false,
+    demo: true,
+    group: 'weather'
   },
   {
     path: 'weather-current',
-    text: 'Weather Current',
+    text: 'Current',
     component: WeatherCurrent,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'weather'
   },
   {
     path: 'youtube',
     text: 'YouTube',
     component: YouTube,
-    navigation: true
+    navigation: true,
+    demo: false,
+    group: 'youtube'
   },
   {
     path: 'youtube-trending',
-    text: 'YouTube Trending',
+    text: 'Trending',
     component: YouTubeTrending,
-    navigation: false
+    navigation: false,
+    demo: true,
+    group: 'youtube'
   }
 ];
 

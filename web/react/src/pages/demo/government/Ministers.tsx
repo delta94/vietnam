@@ -1,11 +1,14 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
-interface IMinistersProps {}
+interface IMinistersProps {
+  themeInput: string;
+}
 
 interface IMinistersState {
   ministry: string;
@@ -51,12 +54,17 @@ class Ministers extends Component<IMinistersProps, IMinistersState> {
   }
 
   renderForm() {
-    const { ministries = [] } = this.state;
+    const { ministries = [], ministry = '' } = this.state;
+    const { themeInput } = this.props;
     return (
       ministries.length > 0 && (
         <Form>
           <Form.Group>
-            <Form.Control as="select" value={this.state.ministry} onChange={this.updateMinistry}>
+            <Form.Control
+              as="select"
+              className={themeInput}
+              value={ministry}
+              onChange={this.updateMinistry}>
               {ministries.map((ministry, index) => {
                 const { short, name } = ministry;
                 return (
@@ -81,6 +89,7 @@ class Ministers extends Component<IMinistersProps, IMinistersState> {
     ];
     return (
       <div id="Ministers" className="container-fluid">
+        <NavPills group={'government'}></NavPills>
         {this.renderForm()}
         <Table
           loading={loading}
@@ -93,7 +102,8 @@ class Ministers extends Component<IMinistersProps, IMinistersState> {
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return { themeInput };
 };
 
 export default connect(mapStateToProps)(Ministers);

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Button, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
+import { NavPills } from '../../../../components';
 
 interface ISyncProps {
   themeBorder: string;
@@ -149,6 +150,7 @@ class Sync extends Component<ISyncProps, ISyncState> {
   render() {
     return (
       <div id="Sync" className="container-fluid">
+        <NavPills group={'banks'}></NavPills>
         {this.renderTable()}
       </div>
     );

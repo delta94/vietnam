@@ -23,6 +23,7 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
 
     this.updatePeriod = this.updatePeriod.bind(this);
     this.renderTable = this.renderTable.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
   async componentDidMount() {
@@ -46,7 +47,8 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
     this.setState({ highlights, loading: false });
   }
 
-  renderTable(loading: boolean, highlights: Array<any> = []) {
+  renderTable() {
+    const { loading = false, highlights = [] } = this.state;
     return (
       <div id="table">
         {loading && (
@@ -144,28 +146,34 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
     );
   }
 
+  renderForm() {
+    const { period = '' } = this.state;
+    return (
+      <Form>
+        <Form.Group>
+          <Form.Control as="select" value={period} onChange={this.updatePeriod}>
+            {periods.map((period, index) => {
+              const { label, value } = period;
+              return (
+                <option key={index} value={value}>
+                  {label}
+                </option>
+              );
+            })}
+          </Form.Control>
+        </Form.Group>
+      </Form>
+    );
+  }
+
   render() {
-    const { loading = false, highlights = [] } = this.state;
     return (
       <div id="Highlights" className="container-fluid">
         <Card>
           <Card.Body>
             <Card.Title className="text-center"></Card.Title>
-            <Form>
-              <Form.Group>
-                <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
-                  {periods.map((period, index) => {
-                    const { label, value } = period;
-                    return (
-                      <option key={index} value={value}>
-                        {label}
-                      </option>
-                    );
-                  })}
-                </Form.Control>
-              </Form.Group>
-            </Form>
-            {this.renderTable(loading, highlights)}
+            {this.renderForm()}
+            {this.renderTable()}
           </Card.Body>
         </Card>
       </div>

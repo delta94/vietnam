@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
+import { NavPills } from '../../../components';
 
 interface IProvidersProps {
   themeBorder: string;
@@ -84,6 +85,7 @@ class Providers extends Component<IProvidersProps, IProvidersState> {
   render() {
     return (
       <div id="Providers" className="container-fluid">
+        <NavPills group={'phones'}></NavPills>
         {this.renderTable()}
       </div>
     );

@@ -16,7 +16,7 @@ export default class YouTubeService {
     return videos;
   }
 
-  public async getVideoCategories() {
+  public async getVideoCategories(): Promise<Array<any>> {
     const key: string = 'youtube-video-categories';
     const cache: string = await redisClient.get(key);
     if (cache) {

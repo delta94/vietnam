@@ -1,7 +1,7 @@
 'use strict';
 
 import * as dotenv from 'dotenv';
-dotenv.config({ path: '../../environments/dev.env' });
+dotenv.config({ path: './src/environments/dev.env' });
 
 import * as fs from 'fs';
 

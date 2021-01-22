@@ -40,6 +40,9 @@ const DARK_INPUT: string = 'bg-black text-white';
 const LIGHT_BADGE: string = 'danger';
 const DARK_BADGE: string = 'dark';
 
+const LIGHT_LINK: string = 'text-primary';
+const DARK_LINK: string = 'text-white';
+
 interface IThemeState {
   theme: string;
   textColor: string;
@@ -55,6 +58,7 @@ interface IThemeState {
   listItemBorderBottom: string;
   input: string;
   badge: string;
+  link: string;
 }
 
 const initialState: IThemeState = {
@@ -71,7 +75,8 @@ const initialState: IThemeState = {
   secondaryBackgroundColor: LIGHT_SECONDARY_BACKGROUND_COLOR,
   listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM,
   input: LIGHT_INPUT,
-  badge: LIGHT_BADGE
+  badge: LIGHT_BADGE,
+  link: LIGHT_LINK
 };
 
 const themeReducer = (state: IThemeState = initialState, action: any) => {
@@ -92,7 +97,8 @@ const themeReducer = (state: IThemeState = initialState, action: any) => {
         secondaryBackgroundColor: LIGHT_SECONDARY_BACKGROUND_COLOR,
         listItemBorderBottom: LIGHT_LIST_ITEM_BORDER_BOTTOM,
         input: LIGHT_INPUT,
-        badge: LIGHT_BADGE
+        badge: LIGHT_BADGE,
+        link: LIGHT_LINK
       };
     case DARK_THEME:
       return {
@@ -110,7 +116,8 @@ const themeReducer = (state: IThemeState = initialState, action: any) => {
         secondaryBackgroundColor: DARK_SECONDARY_BACKGROUND_COLOR,
         listItemBorderBottom: DARK_LIST_ITEM_BORDER_BOTTOM,
         input: DARK_INPUT,
-        badge: DARK_BADGE
+        badge: DARK_BADGE,
+        link: DARK_LINK
       };
     default:
       return state;

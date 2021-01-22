@@ -55,7 +55,7 @@ class List extends Component<ListProps, ListState> {
   }
 
   render() {
-    const { filterLicensePlates = [], loading = true } = this.state;
+    const { filterLicensePlates = [], loading = true, query = '' } = this.state;
     const { themeInput = '' } = this.props;
     const rowConfigs = [
       { header: 'License', key: 'license' },
@@ -68,7 +68,7 @@ class List extends Component<ListProps, ListState> {
           <Form.Control
             type="text"
             placeholder="License"
-            value={this.state.query}
+            value={query}
             className={`${themeInput}`}
             onChange={this.filter}></Form.Control>
         </Form>

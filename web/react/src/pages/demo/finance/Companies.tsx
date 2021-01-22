@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface ICompaniesProps {}
 
@@ -45,6 +45,7 @@ class Companies extends Component<ICompaniesProps, ICompaniesState> {
     ];
     return (
       <div id="Companies" className="container-fluid">
+        <NavPills group={'finance'}></NavPills>
         <Table
           loading={loading}
           caption={'Companies'}

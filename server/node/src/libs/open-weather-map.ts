@@ -12,7 +12,7 @@ export default class OpenWeatherMap {
     this.appId = appId;
   }
 
-  getCurrentWeather(q: string) {
+  getCurrentWeather(q: string): Promise<any> {
     const { appId, base } = this;
     const url = `${base}/weather?units=metric&q=${q}&appid=${appId}`;
     return new Promise(resolve => {

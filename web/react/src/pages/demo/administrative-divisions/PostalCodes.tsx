@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IPostalCodesProps {}
 
@@ -38,6 +38,7 @@ class PostalCodes extends Component<IPostalCodesProps, IPostalCodesState> {
     ];
     return (
       <div id="PostalCodes" className="container-fluid">
+        <NavPills group={'administrative-divisions'}></NavPills>
         <Table
           loading={loading}
           caption={'Postal Codes'}

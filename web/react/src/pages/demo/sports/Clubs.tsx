@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 import { apis } from '../../../services';
 
 interface ISportsClubsProps {}
@@ -42,6 +42,7 @@ class SportsClubs extends Component<ISportsClubsProps, ISportsClubsState> {
 
     return (
       <div id="SportsClubs" className="container-fluid">
+        <NavPills group={'sports'}></NavPills>
         <Table loading={loading} caption={'Clubs'} rows={clubs} rowConfigs={rowConfigs}></Table>
       </div>
     );

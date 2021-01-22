@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../services';
+import { NavPills } from '../../../components';
 
 interface IListProps {
   themeInput: string;
@@ -134,15 +135,17 @@ class List extends Component<IListProps, IListState> {
   }
 
   render() {
+    const { query } = this.state;
     const { themeInput = '' } = this.props;
     return (
       <div id="List" className="container-fluid">
+        <NavPills group={'open-apis'}></NavPills>
         <Form className="mb-3">
           <Form.Control
             type="text"
             placeholder="Type"
             className={`${themeInput}`}
-            value={this.state.query}
+            value={query}
             onChange={this.filter}></Form.Control>
         </Form>
         {this.renderTable()}

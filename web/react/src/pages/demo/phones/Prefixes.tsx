@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IPrefixesProps {}
 
@@ -39,6 +39,7 @@ class Prefixes extends Component<IPrefixesProps, IPrefixesState> {
     ];
     return (
       <div id="Prefixes" className="container-fluid">
+        <NavPills group={'phones'}></NavPills>
         <Table
           loading={loading}
           caption={'Phone Prefixes'}

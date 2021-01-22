@@ -54,7 +54,7 @@ export default class YouTube {
     });
   }
 
-  getVideoCategories() {
+  async getVideoCategories(): Promise<Array<any>> {
     const { key, regionCode, base } = this;
     const url = `${base}/videoCategories?regionCode=${regionCode}&key=${key}`;
     return new Promise(resolve => {

@@ -22,8 +22,6 @@ import GHNProvinces from './demo/open-apis/ghn/Provinces';
 import GHNDistricts from './demo/open-apis/ghn/Districts';
 import GHNWards from './demo/open-apis/ghn/Wards';
 import Vietcetera from './demo/open-apis/Vietcetera';
-// Weather
-import WeatherCurrent from './demo/weather/Current';
 // Docs
 export {
   AdministrativeDivisions,
@@ -64,7 +62,10 @@ export {
   PhonesProviders,
   SportsClubs,
   SportsVLeague,
-  YouTubeTrending
+  YouTubeTrending,
+  // Weather
+  WeatherAirVisual,
+  WeatherCurrent
 } from './demo';
 export {
   // Ethnic Minorities
@@ -90,7 +91,5 @@ export {
   GHNProvinces,
   GHNDistricts,
   GHNWards,
-  Vietcetera,
-  // Weather
-  WeatherCurrent
+  Vietcetera
 };

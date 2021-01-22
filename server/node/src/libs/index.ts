@@ -3,6 +3,7 @@
 import SSI from './stock/ssi';
 import TanViet from './stock/tanviet';
 
+import AirVisual from './air-visual';
 import Banks from './banks';
 import LiveScore from './livescore';
 import News from './news';
@@ -36,3 +37,6 @@ export const vietcetera: Vietcetera = new Vietcetera();
 
 const YOUTUBE_API: string = process.env.YOUTUBE_API || '';
 export const youTube: YouTube = new YouTube(YOUTUBE_API);
+
+const AIR_VISUAL_API: string = process.env.AIR_VISUAL_API || '';
+export const airVisual: AirVisual = new AirVisual(AIR_VISUAL_API);

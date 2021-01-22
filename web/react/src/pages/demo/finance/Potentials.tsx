@@ -46,7 +46,8 @@ class Potentials extends Component<IPotentialsProps, IPotentialsState> {
     this.setState({ potentials, loading: false });
   }
 
-  renderTable(loading: boolean, potentials: Array<any> = []) {
+  renderTable() {
+    const { loading = false, potentials = [] } = this.state;
     return (
       <div id="table">
         {loading && (
@@ -145,14 +146,14 @@ class Potentials extends Component<IPotentialsProps, IPotentialsState> {
   }
 
   render() {
-    const { loading = false, potentials = [] } = this.state;
+    const { period } = this.state;
     return (
       <div id="Potentials" className="container-fluid">
         <Card>
           <Card.Body>
             <Form>
               <Form.Group>
-                <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
+                <Form.Control as="select" value={period} onChange={this.updatePeriod}>
                   {periods.map((period, index) => {
                     const { label, value } = period;
                     return (
@@ -164,7 +165,7 @@ class Potentials extends Component<IPotentialsProps, IPotentialsState> {
                 </Form.Control>
               </Form.Group>
             </Form>
-            {this.renderTable(loading, potentials)}
+            {this.renderTable()}
           </Card.Body>
         </Card>
       </div>

@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Pagination } from 'react-bootstrap';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IWardsProps {}
 
@@ -102,6 +102,7 @@ class Wards extends Component<IWardsProps, IWardsState> {
     ];
     return (
       <div id="Wards" className="container-fluid">
+        <NavPills group={'administrative-divisions'}></NavPills>
         {this.renderPagination()}
         <div className="mb-3">
           <Table loading={loading} caption={'Wards'} rows={wards} rowConfigs={rowConfigs}></Table>

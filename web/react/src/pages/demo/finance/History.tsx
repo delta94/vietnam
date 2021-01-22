@@ -1,9 +1,11 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, Form, Spinner } from 'react-bootstrap';
 import { Line } from 'react-chartjs-2';
 
 import { periods } from '../../../configs';
+import { NavPills } from '../../../components';
 import { apis, helper } from '../../../services';
 
 const datasetsOptions = {
@@ -49,7 +51,10 @@ const chartOptions = {
   }
 };
 
-interface IHistoryProps {}
+interface IHistoryProps {
+  themeInput: string;
+  themeTextColor: string;
+}
 
 interface IHistoryState {
   loading: boolean;
@@ -58,19 +63,30 @@ interface IHistoryState {
   symbol: string;
   from: number;
   to: number;
+  periods: Array<any>;
   period: string;
 }
 class History extends Component<IHistoryProps, IHistoryState> {
   constructor(props: IHistoryProps) {
     super(props);
 
-    this.state = { loading: false, data: {}, symbols: [], symbol: '', from: 0, to: 0, period: '' };
+    this.state = {
+      periods: periods,
+      loading: false,
+      data: {},
+      symbols: [],
+      symbol: '',
+      from: 0,
+      to: 0,
+      period: ''
+    };
 
     this.updateSymbol = this.updateSymbol.bind(this);
     this.updatePeriod = this.updatePeriod.bind(this);
     this.processLabels = this.processLabels.bind(this);
     this.processDatasets = this.processDatasets.bind(this);
     this.getStockCompanies = this.getStockCompanies.bind(this);
+    this.renderForm = this.renderForm.bind(this);
   }
 
   async componentDidMount() {
@@ -156,42 +172,60 @@ class History extends Component<IHistoryProps, IHistoryState> {
     return labels.filter((value, index, array) => array.indexOf(value) === index).sort();
   }
 
+  renderForm() {
+    const { periods = [], period = '', symbols = [], symbol = '' } = this.state;
+    const { themeInput = '' } = this.props;
+    return (
+      <Form className="row">
+        <div className="col-sm-6">
+          <Form.Group>
+            <Form.Control
+              as="select"
+              className={themeInput}
+              value={period}
+              onChange={this.updatePeriod}>
+              {periods.map((item: any, index: number) => {
+                const { label, value } = item;
+                return (
+                  <option key={index} value={value}>
+                    {label}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+        </div>
+        <div className="col-sm-6">
+          <Form.Group>
+            <Form.Control
+              as="select"
+              className={themeInput}
+              value={symbol}
+              onChange={this.updateSymbol}>
+              {symbols.map((item, index) => {
+                return (
+                  <option key={index} value={item}>
+                    {item}
+                  </option>
+                );
+              })}
+            </Form.Control>
+          </Form.Group>
+        </div>
+      </Form>
+    );
+  }
+
   render() {
-    const { loading = false, data = {}, symbols = [], symbol = '' } = this.state;
+    const { loading = false, data = {}, symbol = '' } = this.state;
+    const { themeTextColor = '' } = this.props;
     return (
       <div id="History" className="container-fluid">
+        <NavPills group={'finance'}></NavPills>
+        <h3 className={`${themeTextColor} text-center`}>History ({symbol})</h3>
+        {this.renderForm()}
         <Card>
           <Card.Body>
-            <Card.Title className="text-center">History ({symbol})</Card.Title>
-            <Form className="row">
-              <div className="col-sm-6">
-                <Form.Group>
-                  <Form.Control as="select" value={this.state.period} onChange={this.updatePeriod}>
-                    {periods.map((period, index) => {
-                      const { label, value } = period;
-                      return (
-                        <option key={index} value={value}>
-                          {label}
-                        </option>
-                      );
-                    })}
-                  </Form.Control>
-                </Form.Group>
-              </div>
-              <div className="col-sm-6">
-                <Form.Group>
-                  <Form.Control as="select" value={this.state.symbol} onChange={this.updateSymbol}>
-                    {symbols.map((symbol, index) => {
-                      return (
-                        <option key={index} value={symbol}>
-                          {symbol}
-                        </option>
-                      );
-                    })}
-                  </Form.Control>
-                </Form.Group>
-              </div>
-            </Form>
             {loading && (
               <div className="text-center">
                 <Spinner animation="border" variant="danger"></Spinner>
@@ -206,7 +240,9 @@ class History extends Component<IHistoryProps, IHistoryState> {
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  const themeInput: string = _.get(state, 'theme.input', '');
+  const themeTextColor: string = _.get(state, 'theme.textColor', '');
+  return { themeInput, themeTextColor };
 };
 
 export default connect(mapStateToProps)(History);

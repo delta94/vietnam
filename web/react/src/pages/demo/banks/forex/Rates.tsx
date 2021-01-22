@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import { Form, Spinner } from 'react-bootstrap';
 
 import { apis } from '../../../../services';
+import { NavPills } from '../../../../components';
 
 interface IRatesProps {
+  themeInput: string;
   themeBorder: string;
   themeTextColor: string;
   themeSpinnerVariant: string;
@@ -84,11 +86,17 @@ class Rates extends Component<IRatesProps, IRatesState> {
     await this.setState({ currency });
   }
 
-  renderForm(currencies: Array<any>) {
+  renderForm() {
+    const { currencies = [], currency = '' } = this.state;
+    const { themeInput } = this.props;
     return (
       <Form>
         <Form.Group>
-          <Form.Control as="select" value={this.state.currency} onChange={this.updateCurrency}>
+          <Form.Control
+            as="select"
+            className={themeInput}
+            value={currency}
+            onChange={this.updateCurrency}>
             <option value={''}>Currency</option>
             {currencies.map((currency, index) => {
               return (
@@ -194,23 +202,31 @@ class Rates extends Component<IRatesProps, IRatesState> {
   }
 
   render() {
-    const { currencies = [], loading = false } = this.state;
+    const { loading = false } = this.state;
 
     return (
       <div id="Rates" className="container-fluid">
-        {!loading && this.renderForm(currencies)}
-        <div className="h-70vh overflow-auto">{this.renderTable()}</div>
+        <NavPills group={'banks'}></NavPills>
+        {!loading && this.renderForm()}
+        {this.renderTable()}
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
   const themeBorder: string = _.get(state, 'theme.border', '');
   const themeTextColor: string = _.get(state, 'theme.textColor', '');
   const themeSpinnerVariant: string = _.get(state, 'theme.spinnerVariant', '');
   const themePrimaryBackgroundColor: string = _.get(state, 'theme.primaryBackgroundColor', '');
-  return { themeBorder, themeTextColor, themeSpinnerVariant, themePrimaryBackgroundColor };
+  return {
+    themeInput,
+    themeBorder,
+    themeTextColor,
+    themeSpinnerVariant,
+    themePrimaryBackgroundColor
+  };
 };
 
 export default connect(mapStateToProps)(Rates);

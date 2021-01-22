@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card } from 'react-bootstrap';
 
+import { NavPills } from '../../../components';
 import { apis } from '../../../services';
 
-interface IWeatherCurrentProps {}
+interface ICurrentProps {}
 
-interface IWeatherCurrentState {
+interface ICurrentState {
   result: any;
   loading: boolean;
 }
 
-class WeatherCurrent extends Component<IWeatherCurrentProps, IWeatherCurrentState> {
-  constructor(props: IWeatherCurrentProps) {
+class Current extends Component<ICurrentProps, ICurrentState> {
+  constructor(props: ICurrentProps) {
     super(props);
 
     this.state = { result: {}, loading: true };
 
-    this.getWeatherCurrent = this.getWeatherCurrent.bind(this);
+    this.getCurrent = this.getCurrent.bind(this);
   }
 
   async componentDidMount() {
-    await this.getWeatherCurrent();
+    await this.getCurrent();
   }
 
-  async getWeatherCurrent() {
+  async getCurrent() {
     this.setState({ loading: true });
     const result: Array<any> = await apis.getCurrentWeather('hanoi');
     this.setState({ result, loading: false });
@@ -39,7 +40,8 @@ class WeatherCurrent extends Component<IWeatherCurrentProps, IWeatherCurrentStat
     const { temp = 0, feels_like = 0, temp_min = 0, temp_max = 0 } = main;
 
     return (
-      <div id="WeatherCurrent" className="container-fluid">
+      <div id="Current" className="container-fluid">
+        <NavPills group={'weather'}></NavPills>
         <Card>
           <Card.Body>
             <div className="mb-3">
@@ -64,4 +66,4 @@ const mapStateToProps = (state: any) => {
   return {};
 };
 
-export default connect(mapStateToProps)(WeatherCurrent);
+export default connect(mapStateToProps)(Current);

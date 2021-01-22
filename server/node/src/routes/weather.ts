@@ -11,6 +11,20 @@ const weather: Array<IRoute> = [
     body: [],
     path: `${prefix}`,
     middlewares: []
+  },
+  {
+    method: 'GET',
+    query: [{ name: 'city', type: 'string', required: true }],
+    body: [],
+    path: `${prefix}/air-visual`,
+    middlewares: []
+  },
+  {
+    method: 'GET',
+    query: [],
+    body: [],
+    path: `${prefix}/air-visual/cities`,
+    middlewares: []
   }
 ];
 

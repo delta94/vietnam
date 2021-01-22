@@ -63,7 +63,7 @@ class List extends Component<IListProps, IListState> {
   }
 
   render() {
-    const { filterEthnicMinorities = [], loading = true } = this.state;
+    const { filterEthnicMinorities = [], loading = true, query = '' } = this.state;
     const { themeInput } = this.props;
     const rowConfigs = [
       { header: 'Name', key: 'name' },
@@ -78,7 +78,7 @@ class List extends Component<IListProps, IListState> {
             type="text"
             placeholder="Query"
             className={`${themeInput}`}
-            value={this.state.query}
+            value={query}
             onChange={this.filter}></Form.Control>
         </Form>
         <Table

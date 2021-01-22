@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../services';
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 
 interface IPrimeMinistersProps {}
 
@@ -39,6 +39,7 @@ class PrimeMinisters extends Component<IPrimeMinistersProps, IPrimeMinistersStat
     ];
     return (
       <div id="PrimeMinisters" className="container-fluid">
+        <NavPills group={'government'}></NavPills>
         <Table
           loading={loading}
           caption={'Prime Ministers'}

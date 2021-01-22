@@ -6,6 +6,7 @@ import { Form, Spinner, ListGroup } from 'react-bootstrap';
 import { apis } from '../../../services';
 
 interface IYouTubeTrendingProps {
+  themeInput: string;
   themeBorder: string;
   themeTextColor: string;
   themeListItemBorderBottom: string;
@@ -77,10 +78,15 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 
   renderForm() {
     const { categories, categoryId } = this.state;
+    const { themeInput = '' } = this.props;
     return (
       <Form>
         <Form.Group>
-          <Form.Control as="select" value={categoryId} onChange={this.updateVideoCategory}>
+          <Form.Control
+            className={themeInput}
+            as="select"
+            value={categoryId}
+            onChange={this.updateVideoCategory}>
             <option value={''}>Category</option>
             {categories.map((category, index) => {
               return (
@@ -111,7 +117,7 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
           <div className="p-3 text-center text-uppercase rounded border">NO VIDEOS</div>
         )}
         {trending.length > 0 && (
-          <ListGroup className={`${themeBorder} list-group-flush h-70vh overflow-auto rounded-lg`}>
+          <ListGroup className={`${themeBorder} list-group-flush rounded-lg`}>
             {trending.map((video: any, index: number) => {
               const { title, url, channelId, channelTitle } = video;
               const channelUrl: string = `https://www.youtube.com/channel/${channelId}`;
@@ -161,6 +167,7 @@ class YouTubeTrending extends Component<IYouTubeTrendingProps, IYouTubeTrendingS
 }
 
 const mapStateToProps = (state: any) => {
+  const themeInput: string = _.get(state, 'theme.input', '');
   const themeBorder: string = _.get(state, 'theme.border', '');
   const themeTextColor: string = _.get(state, 'theme.textColor', '');
   const themeListItemBorderBottom: string = _.get(state, 'theme.listItemBorderBottom', '');
@@ -168,6 +175,7 @@ const mapStateToProps = (state: any) => {
   const themeSecondaryBackgroundColor: string = _.get(state, 'theme.secondaryBackgroundColor', '');
   const themeMutedTextColor: string = _.get(state, 'theme.mutedTextColor', '');
   return {
+    themeInput,
     themeMutedTextColor,
     themeBorder,
     themeTextColor,

@@ -103,6 +103,8 @@ export interface ISportsEndpoints {
 
 export interface IWeatherEndpoints {
   getCurrentWeather: IEndpoint;
+  getAirVisual: IEndpoint;
+  getAirVisualCities: IEndpoint;
 }
 
 export interface IYouTubeEndpoints {

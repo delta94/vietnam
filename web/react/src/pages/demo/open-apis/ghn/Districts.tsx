@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { apis } from '../../../../services';
-import { Table } from '../../../../components';
+import { Table, NavPills } from '../../../../components';
 
 interface IDistrictsProps {}
 
@@ -44,6 +44,7 @@ class Districts extends Component<IDistrictsProps, IDistrictsState> {
 
     return (
       <div id="Districts" className="container-fluid">
+        <NavPills group={'open-apis'}></NavPills>
         <div className="text-center mb-3">
           <a href={`https://www.npmjs.com/package/giaohangnhanh`} rel="noreferrer" target="_blank">
             npm

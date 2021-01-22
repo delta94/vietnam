@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { Table } from '../../../components';
+import { Table, NavPills } from '../../../components';
 import { apis } from '../../../services';
 
 interface ISportsVLeagueProps {}
@@ -58,6 +58,7 @@ class SportsVLeague extends Component<ISportsVLeagueProps, ISportsVLeagueState> 
 
     return (
       <div id="SportsVLeague" className="container-fluid">
+        <NavPills group={'sports'}></NavPills>
         <div className="row">
           <div className="col-sm-6">
             <div className="content-height overflow-auto">
