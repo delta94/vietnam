@@ -19,21 +19,19 @@ class NavPills extends Component<INavPillsProps, INavPillsState> {
     const items = routes.filter((route: any) => route.demo && route.group === group);
     const total: number = items.length;
     return (
-      <div className="mb-3">
-        <Nav className="justify-content-center">
-          {items.map((item: any, index: number) => {
-            const { path: pathname = '', text = '' } = item;
-            const margin = index + 1 === total ? '' : 'mr-3';
-            return (
-              <Nav.Item className={`${margin}`} key={index}>
-                <Nav.Link className={`${themeLink} border rounded`} as={Link} to={{ pathname }}>
-                  {text}
-                </Nav.Link>
-              </Nav.Item>
-            );
-          })}
-        </Nav>
-      </div>
+      <Nav className="justify-content-center">
+        {items.map((item: any, index: number) => {
+          const { path: pathname = '', text = '' } = item;
+          const marginRight: string = index + 1 === total ? '' : 'mr-3';
+          return (
+            <Nav.Item className={`${marginRight} mb-3`} key={index}>
+              <Nav.Link className={`${themeLink} border rounded`} as={Link} to={{ pathname }}>
+                {text}
+              </Nav.Link>
+            </Nav.Item>
+          );
+        })}
+      </Nav>
     );
   }
 }
