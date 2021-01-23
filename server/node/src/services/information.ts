@@ -3,8 +3,8 @@
 import * as _ from 'lodash';
 import { phonesPrefixes } from '../constants';
 
-export default class PhonesService {
-  public async getPrefixes(prefix: string = ''): Promise<string | Array<any>> {
+export default class InformationService {
+  public async getPrefixes(prefix: string = ''): Promise<Array<any>> {
     return phonesPrefixes.filter(item => (prefix ? item.prefix === prefix : true));
   }
 

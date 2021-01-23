@@ -5,10 +5,11 @@ import TanViet from './stock/tanviet';
 
 import AirVisual from './air-visual';
 import Banks from './banks';
-import LiveScore from './livescore';
+import LiveScore from './live-score';
 import News from './news';
 import Google from './news/google';
 import OpenWeatherMap from './open-weather-map';
+import PassportIndex from './passport-index';
 import Utils from './utils';
 import TaskQueueProcessor from './task-queue-processor';
 import YouTube from './youtube';
@@ -18,11 +19,12 @@ import GHN from 'giaohangnhanh';
 import Vietcetera from 'vietcetera';
 
 export const banks: Banks = new Banks();
-export const livescore: LiveScore = new LiveScore();
+export const liveScore: LiveScore = new LiveScore();
 export const news: News = new News();
 export const google: Google = new Google();
 export const ssi: SSI = new SSI();
 export const tanViet: TanViet = new TanViet();
+export const passportIndex: PassportIndex = new PassportIndex();
 
 const OPEN_WEATHER_MAP_API: string = process.env.OPEN_WEATHER_MAP_API || '';
 export const openWeatherMap: OpenWeatherMap = new OpenWeatherMap(OPEN_WEATHER_MAP_API);

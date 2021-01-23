@@ -57,7 +57,11 @@ export default class LiveScore extends Utils {
           const leagueTable: Array<any> = _.get(stage, 'LeagueTable.L.0.Tables.0.team', []).map(
             team => {
               const rank: number = _.get(team, 'rnk', 0);
-              const name: string = _.get(team, 'Tnm', '').replace(/FC/g, '').replace(/FLC/g, '');
+              const name: string = _.get(team, 'Tnm', '')
+                .replace(/FC/g, '')
+                .replace(/FLC/g, '')
+                .trim();
+              const played: number = _.get(team, 'pld', 0);
               const point: number = _.get(team, 'pts', 0);
               const win: number = _.get(team, 'win', 0);
               const draw: number = _.get(team, 'drw', 0);
@@ -65,7 +69,18 @@ export default class LiveScore extends Utils {
               const goal: number = _.get(team, 'gf', 0);
               const goalAgainst: number = _.get(team, 'ga', 0);
               const goalDifference: number = _.get(team, 'gd', 0);
-              return { rank, name, point, win, draw, lost, goal, goalAgainst, goalDifference };
+              return {
+                rank,
+                name,
+                point,
+                played,
+                win,
+                draw,
+                lost,
+                goal,
+                goalAgainst,
+                goalDifference
+              };
             }
           );
           resolve({ matches, leagueTable });

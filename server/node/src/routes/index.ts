@@ -10,12 +10,14 @@ import ethnicMinorities from './ethnic-minorities';
 import finance from './finance';
 import government from './government';
 import history from './history';
+import information from './information';
 import licensePlates from './license-plates';
 import music from './music';
 import news from './news';
 import openAPIs from './open-apis';
-import phones from './phones';
+import proxy from './proxy';
 import sports from './sports';
+import telegram from './telegram';
 import vnltk from './vnltk';
 import weather from './weather';
 import youtube from './youtube';
@@ -29,12 +31,14 @@ const routes: Array<IRoute> = [].concat(
   finance,
   government,
   history,
+  information,
   licensePlates,
   music,
   news,
   openAPIs,
-  phones,
+  proxy,
   sports,
+  telegram,
   vnltk,
   weather,
   youtube

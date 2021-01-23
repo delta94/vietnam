@@ -17,7 +17,7 @@ export default class Redis {
     });
   }
 
-  async get(key: string): Promise<string> {
+  public async get(key: string): Promise<string> {
     return new Promise(resolve => {
       this.client.get(key, (error, reply) => {
         if (error) {
@@ -29,11 +29,15 @@ export default class Redis {
     });
   }
 
-  async set(key: string, value: string): Promise<void> {
+  public async set(key: string, value: string): Promise<void> {
     return await this.client.set(key, value);
   }
 
-  async setex(key: string, value: string, expiredSeconds: number = 0): Promise<void> {
+  public async setex(key: string, value: string, expiredSeconds: number = 0): Promise<void> {
     return await this.client.setex(key, expiredSeconds, value);
+  }
+
+  public async del(key: string): Promise<void> {
+    return await this.client.del(key);
   }
 }

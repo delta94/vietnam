@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiURL: 'https://vietnamd.herokuapp.com/api',
-  graphURL: 'https://vietnamd.herokuapp.com/graphql'
+  apiURL: 'https://vietzam.herokuapp.com/api',
+  graphURL: 'https://vietzam.herokuapp.com/graphql'
 };

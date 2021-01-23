@@ -1,6 +1,12 @@
 'use strict';
 
-export default [
+export interface ILicensePlate {
+  license: string | number;
+  definition: string;
+  type: string;
+}
+
+export const licensePlates: Array<ILicensePlate> = [
   { license: 11, definition: 'Cao Bằng', type: 'Tỉnh' },
   { license: 12, definition: 'Lạng Sơn', type: 'Tỉnh' },
   { license: 13, definition: 'Bắc Ninh', type: 'Tỉnh' },

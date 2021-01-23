@@ -282,4 +282,9 @@ export default class APIS {
     const endpoint: IEndpoint = endpoints.youtube.getVideoCategories;
     return await this.fetch(endpoint);
   }
+
+  public async getVisas(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.visas.getVisas;
+    return await this.fetch(endpoint);
+  }
 }

@@ -63,11 +63,14 @@ import {
   Sports,
   SportsClubs,
   SportsVLeague,
+  // Visas
+  Visas,
+  VisasList,
   // Weather
   Weather,
   WeatherAirVisual,
   WeatherCurrent,
-  // Weather
+  // YouTube
   YouTube,
   YouTubeTrending
 } from '../pages';
@@ -481,6 +484,22 @@ const routes: Array<IRoute> = [
     navigation: false,
     demo: true,
     group: 'sports'
+  },
+  {
+    path: 'visas',
+    text: 'Visas',
+    component: Visas,
+    navigation: true,
+    demo: false,
+    group: 'sports'
+  },
+  {
+    path: 'visas-list',
+    text: 'List',
+    component: VisasList,
+    navigation: false,
+    demo: true,
+    group: 'weather'
   },
   {
     path: 'weather',

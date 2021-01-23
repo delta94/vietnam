@@ -12,8 +12,16 @@ import * as path from 'path';
 import { AddressInfo } from 'net';
 
 import apis from './apis';
+import { telegramClient } from './clients';
 import middlewares from './middlewares';
 import jobs from './jobs';
+
+const setTelegramWebhook = async () => {
+  const URL_BASE: string =
+    NODE_ENV === 'production' ? process.env.URL_BASE : 'https://74776db9f859.ngrok.io';
+  const telegramWebhook: string = `${URL_BASE}/api/telegram`;
+  await telegramClient.setWebhook(telegramWebhook);
+};
 
 const serverOnError: any = (error: any = {}) => {
   if (error.syscall !== 'listen') throw error;
@@ -62,10 +70,11 @@ const startServer: Function = async () => {
   const server: http.Server = http.createServer(app);
   server.timeout = 1000 * 60 * 6; // 6 minutes
   server
-    .listen(PORT, () => {
+    .listen(PORT, async () => {
       const addr: string | AddressInfo = server.address();
       const bind: string = typeof addr === 'string' ? `PIPE ${addr}` : `PORT ${addr.port}`;
       console.log(`LISTENING ON ${bind}`);
+      await setTelegramWebhook();
     })
     .on('error', serverOnError);
 };

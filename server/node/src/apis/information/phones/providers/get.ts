@@ -2,9 +2,9 @@
 
 import { Request, Response } from 'express';
 
-import { phonesService } from '../../../services';
+import { informationService } from '../../../../services';
 
 export default async (req: Request, res: Response) => {
-  const providers = await phonesService.getProviders();
+  const providers = await informationService.getProviders();
   return res.json(providers);
 };

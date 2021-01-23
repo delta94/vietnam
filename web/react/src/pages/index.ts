@@ -38,6 +38,7 @@ export {
   OpenAPIs,
   Phones,
   Sports,
+  Visas,
   Weather,
   YouTube
 } from './docs';
@@ -62,10 +63,10 @@ export {
   PhonesProviders,
   SportsClubs,
   SportsVLeague,
-  YouTubeTrending,
-  // Weather
+  VisasList,
   WeatherAirVisual,
-  WeatherCurrent
+  WeatherCurrent,
+  YouTubeTrending
 } from './demo';
 export {
   // Ethnic Minorities

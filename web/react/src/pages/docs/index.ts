@@ -13,6 +13,7 @@ import News from './News';
 import OpenAPIs from './OpenAPIs';
 import Phones from './Phones';
 import Sports from './Sports';
+import Visas from './Visas';
 import Weather from './Weather';
 import YouTube from './YouTube';
 
@@ -31,6 +32,7 @@ export {
   OpenAPIs,
   Phones,
   Sports,
+  Visas,
   Weather,
   YouTube
 };

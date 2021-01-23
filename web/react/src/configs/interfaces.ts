@@ -22,6 +22,7 @@ export interface IEndpoints {
   openAPIs: IOpenAPIsEndpoints;
   phones: IPhonesEndpoints;
   sports: ISportsEndpoints;
+  visas: IVisasEndpoints;
   weather: IWeatherEndpoints;
   youtube: IYouTubeEndpoints;
 }
@@ -105,6 +106,10 @@ export interface IWeatherEndpoints {
   getCurrentWeather: IEndpoint;
   getAirVisual: IEndpoint;
   getAirVisualCities: IEndpoint;
+}
+
+export interface IVisasEndpoints {
+  getVisas: IEndpoint;
 }
 
 export interface IYouTubeEndpoints {

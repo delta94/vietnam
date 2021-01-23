@@ -1,9 +1,9 @@
 'use strict';
 
-import { licensePlates } from '../constants';
+import { licensePlates, ILicensePlate } from '../constants/license-plates';
 
 export default class LicensePlatesService {
-  public async getLicensePlates(license: string): Promise<string | Array<any>> {
+  public getLicensePlates(license: string): Array<ILicensePlate> {
     return licensePlates.filter(plate =>
       license ? plate.license.toString().toLowerCase().includes(license.toLowerCase()) : true
     );

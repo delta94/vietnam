@@ -2,9 +2,10 @@
 
 import { IRoute } from '../global/interfaces';
 
-const languages: Array<IRoute> = [
-  { method: 'POST', query: [], body: [], path: 'vnltk/number2text', middlewares: [] },
-  { method: 'POST', query: [], body: [], path: 'vnltk/latinize', middlewares: [] }
+const prefix: string = 'visas';
+
+const visas: Array<IRoute> = [
+  { method: 'GET', query: [], body: [], path: `${prefix}`, middlewares: [] }
 ];
 
-export default languages;
+export default visas;

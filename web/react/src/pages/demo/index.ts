@@ -16,5 +16,6 @@ export {
 export { NewsFeed } from './news';
 export { PhonesPrefixes, PhonesProviders } from './phones';
 export { SportsClubs, SportsVLeague } from './sports';
+export { VisasList } from './visas';
 export { YouTubeTrending } from './youtube';
 export { WeatherAirVisual, WeatherCurrent } from './weather';

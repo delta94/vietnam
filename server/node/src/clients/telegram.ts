@@ -49,6 +49,9 @@ export default class TelegramClient {
   }
 
   async setWebhook(url: string): Promise<any> {
-    return await this.apiRequest('setWebhook', 'POST', { url });
+    console.log('setWebhook() url', url);
+    const result = await this.apiRequest('setWebhook', 'POST', { url });
+    console.log(result);
+    return result;
   }
 }

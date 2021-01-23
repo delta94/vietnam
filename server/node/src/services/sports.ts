@@ -1,7 +1,7 @@
 'use strict';
 
 import { postgreClient } from '../clients';
-import { livescore } from '../libs';
+import { liveScore } from '../libs';
 
 export default class SportsService {
   public async getClubs(sport_en: string): Promise<Array<any>> {
@@ -10,7 +10,7 @@ export default class SportsService {
     return clubs;
   }
 
-  public async getVLeague() {
-    return livescore.getVLeague();
+  public async getVLeague(): Promise<any> {
+    return liveScore.getVLeague();
   }
 }

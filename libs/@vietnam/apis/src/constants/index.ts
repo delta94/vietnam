@@ -1,4 +1,4 @@
-export const baseURL: string = `https://vietnamd.herokuapp.com/api`;
+export const baseURL: string = `https://vietzam.herokuapp.com/api`;
 
 export interface IBank {
   id: number;

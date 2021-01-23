@@ -71,8 +71,11 @@ export default class BanksService {
     const key: string = `forex-rates-${id}`;
     const cache: string = await redisClient.get(key);
     if (cache) {
-      console.log(`Get Forex Rates ${id} from Cache`);
-      return utils.parseJSON(cache, []);
+      console.log(`Get Forex Rates ${id} from Cache`, cache);
+      const json = utils.parseJSON(cache, {});
+      if (!_.isEmpty(json)) {
+        return json;
+      }
     }
     const doc = await dsFinanceForexRate.findOne({ bank: id }, { sort: { timestamp: -1 } });
     if (utils.isObjectEmpty(doc)) return {};

@@ -24,6 +24,7 @@ class List extends Component<ListProps, ListState> {
     this.state = { query: '', licensePlates: [], filterLicensePlates: [], loading: true };
 
     this.getLicensePlates = this.getLicensePlates.bind(this);
+    this.renderForm = this.renderForm.bind(this);
     this.filter = this.filter.bind(this);
   }
 
@@ -54,9 +55,23 @@ class List extends Component<ListProps, ListState> {
     await this.setState({ licensePlates, filterLicensePlates, loading: false });
   }
 
-  render() {
-    const { filterLicensePlates = [], loading = true, query = '' } = this.state;
+  renderForm() {
+    const { query = '' } = this.state;
     const { themeInput = '' } = this.props;
+    return (
+      <Form className="mb-3">
+        <Form.Control
+          type="text"
+          placeholder="License"
+          value={query}
+          className={`${themeInput}`}
+          onChange={this.filter}></Form.Control>
+      </Form>
+    );
+  }
+
+  render() {
+    const { filterLicensePlates = [], loading = true } = this.state;
     const rowConfigs = [
       { header: 'License', key: 'license' },
       { header: 'Definition', key: 'definition' },
@@ -64,14 +79,7 @@ class List extends Component<ListProps, ListState> {
     ];
     return (
       <div id="List" className="container-fluid">
-        <Form className="mb-3">
-          <Form.Control
-            type="text"
-            placeholder="License"
-            value={query}
-            className={`${themeInput}`}
-            onChange={this.filter}></Form.Control>
-        </Form>
+        {this.renderForm()}
         <Table
           loading={loading}
           caption={'License Plates'}

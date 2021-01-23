@@ -1,9 +1,9 @@
 'use strict';
 
-import { livescore } from '../../libs';
+import { liveScore } from '../../libs';
 
 const main = async () => {
-  const res = await livescore.getVLeague();
+  const res = await liveScore.getVLeague();
   console.log(res);
 };
 

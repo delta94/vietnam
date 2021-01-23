@@ -4,16 +4,16 @@ import { connect } from 'react-redux';
 import { Table, NavPills } from '../../../components';
 import { apis } from '../../../services';
 
-interface ISportsVLeagueProps {}
+interface IVLeagueProps {}
 
-interface ISportsVLeagueState {
+interface IVLeagueState {
   matches: Array<any>;
   leagueTable: Array<any>;
   loading: boolean;
 }
 
-class SportsVLeague extends Component<ISportsVLeagueProps, ISportsVLeagueState> {
-  constructor(props: ISportsVLeagueProps) {
+class VLeague extends Component<IVLeagueProps, IVLeagueState> {
+  constructor(props: IVLeagueProps) {
     super(props);
 
     this.state = { matches: [], leagueTable: [], loading: true };
@@ -57,7 +57,7 @@ class SportsVLeague extends Component<ISportsVLeagueProps, ISportsVLeagueState> 
     ];
 
     return (
-      <div id="SportsVLeague" className="container-fluid">
+      <div id="VLeague" className="container-fluid">
         <NavPills group={'sports'}></NavPills>
         <div className="row">
           <div className="col-sm-6">
@@ -88,4 +88,4 @@ const mapStateToProps = (state: any) => {
   return {};
 };
 
-export default connect(mapStateToProps)(SportsVLeague);
+export default connect(mapStateToProps)(VLeague);
