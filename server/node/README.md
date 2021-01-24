@@ -16,7 +16,7 @@
 14. News
 15. Open APIs
 16. Proxy
-17. Q
+17. Quotes
 18. R
 19. Sports
 20. Telegram

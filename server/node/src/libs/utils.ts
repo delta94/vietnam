@@ -38,7 +38,7 @@ export default class Utils {
    * JSON
    */
   public async convertCSVtoJSON(csvFilePath: string = '', jsonFilePath: string = ''): Promise<any> {
-    const json: any = await csvToJSON().fromFile(csvFilePath);
+    const json: any = await csvToJSON({ checkType: true }).fromFile(csvFilePath);
     const jsonString: string = JSON.stringify(json, null, 2);
     if (jsonFilePath) await fs.writeFileSync(jsonFilePath, jsonString);
     return json;

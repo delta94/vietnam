@@ -1,13 +1,17 @@
 'use strict';
 
+import * as fs from 'fs';
 import * as dotenv from 'dotenv';
 dotenv.config({ path: '../../environments/dev.env' });
 
 import { postgreClient } from '../../clients';
 import { table, schema, rows } from './data';
+import { utils } from '../../libs';
 
 const main = async () => {
   await postgreClient.connect();
+
+  const rows = await utils.convertCSVtoJSON('./nam.csv');
 
   const dropTableResponse = await postgreClient.dropTable(table);
   console.log('dropTableResponse', dropTableResponse);

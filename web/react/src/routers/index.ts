@@ -274,7 +274,7 @@ const routes: Array<IRoute> = [
     text: 'General Secretaries',
     component: GovernmentGeneralSecretaries,
     navigation: false,
-    demo: false,
+    demo: true,
     group: 'government'
   },
   {

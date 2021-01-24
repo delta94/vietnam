@@ -16,6 +16,7 @@ import music from './music';
 import news from './news';
 import openAPIs from './open-apis';
 import proxy from './proxy';
+import quotes from './quotes';
 import sports from './sports';
 import telegram from './telegram';
 import vnltk from './vnltk';
@@ -37,6 +38,7 @@ const routes: Array<IRoute> = [].concat(
   news,
   openAPIs,
   proxy,
+  quotes,
   sports,
   telegram,
   vnltk,
