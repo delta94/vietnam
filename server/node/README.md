@@ -20,7 +20,7 @@
 18. R
 19. Sports
 20. Telegram
-21. U
+21. U.S.A.
 22. Visas
 23. Weather
 24. X

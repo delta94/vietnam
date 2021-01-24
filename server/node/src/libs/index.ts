@@ -10,6 +10,7 @@ import News from './news';
 import Google from './news/google';
 import OpenWeatherMap from './open-weather-map';
 import PassportIndex from './passport-index';
+import ProPublica from './propublica';
 import Utils from './utils';
 import TaskQueueProcessor from './task-queue-processor';
 import YouTube from './youtube';
@@ -42,3 +43,6 @@ export const youTube: YouTube = new YouTube(YOUTUBE_API);
 
 const AIR_VISUAL_API: string = process.env.AIR_VISUAL_API || '';
 export const airVisual: AirVisual = new AirVisual(AIR_VISUAL_API);
+
+const PROPUBLICA_API: string = process.env.PROPUBLICA_API || '';
+export const proPublica: ProPublica = new ProPublica(PROPUBLICA_API);

@@ -5,9 +5,9 @@ import * as _ from 'lodash';
 import { postgreClient } from '../clients';
 import { dsMapsWard } from '../data';
 
-export default class administrativeDivisionsService {
+export default class AdministrativeDivisionsService {
   public async getMacroRegions(): Promise<Array<string>> {
-    const provinces: any = await postgreClient.find('maps_provinces');
+    const provinces: any = await postgreClient.find('administrative_divisions_provinces');
     const macroRegion: Array<string> = _.uniq(
       provinces.map(province => province.macro_region)
     ).sort();
@@ -15,14 +15,18 @@ export default class administrativeDivisionsService {
   }
 
   public async getRegions(): Promise<Array<string>> {
-    const provinces: any = await postgreClient.find('maps_provinces');
+    const provinces: any = await postgreClient.find('administrative_divisions_provinces');
     const regions: Array<string> = _.uniq(provinces.map(province => province.region)).sort();
     return regions;
   }
 
   public async getPostalCodes(province_id: string): Promise<Array<any>> {
     const fields: Array<string> = ['code', 'province', 'province_id'];
-    const postalCodes: any = await postgreClient.find('maps_postal_codes', { province_id }, fields);
+    const postalCodes: any = await postgreClient.find(
+      'administrative_divisions_postal_codes',
+      { province_id },
+      fields
+    );
     return postalCodes;
   }
 
@@ -38,13 +42,21 @@ export default class administrativeDivisionsService {
       'region',
       'region_en'
     ];
-    const provinces: any = await postgreClient.find('maps_provinces', filter, fields);
+    const provinces: any = await postgreClient.find(
+      'administrative_divisions_provinces',
+      filter,
+      fields
+    );
     return provinces;
   }
 
   public async getDistricts(province_id: string): Promise<Array<any>> {
     const fields: Array<string> = ['name', 'level', 'level_en', 'province', 'province_id'];
-    const provinces: any = await postgreClient.find('maps_districts', { province_id }, fields);
+    const provinces: any = await postgreClient.find(
+      'administrative_divisions_districts',
+      { province_id },
+      fields
+    );
     return provinces;
   }
 

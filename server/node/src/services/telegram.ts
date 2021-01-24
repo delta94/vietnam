@@ -37,7 +37,7 @@ export default class TelegramService {
   private weatherService: WeatherService = new WeatherService();
   private youTubeService: YouTubeService = new YouTubeService();
 
-  async processWebhook(body): Promise<void> {
+  public async processWebhook(body): Promise<void> {
     const text: string = _.get(body, 'message.text', '');
     const chatId: number = _.get(body, 'message.chat.id', 0);
     const command = this.processCommand(text);

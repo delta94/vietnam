@@ -19,7 +19,8 @@ import proxy from './proxy';
 import quotes from './quotes';
 import sports from './sports';
 import telegram from './telegram';
-import vnltk from './vnltk';
+import usa from './usa';
+import visas from './visas';
 import weather from './weather';
 import youtube from './youtube';
 
@@ -41,7 +42,8 @@ const routes: Array<IRoute> = [].concat(
   quotes,
   sports,
   telegram,
-  vnltk,
+  usa,
+  visas,
   weather,
   youtube
 );

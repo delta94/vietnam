@@ -35,7 +35,7 @@ class Provinces extends Component<IProvincesProps, IProvincesState> {
     const rowConfigs = [
       { header: 'Name', key: 'name' },
       { header: 'Capital', key: 'capital' },
-      { header: 'Macro Region', key: 'macroRegion' },
+      { header: 'Macro Region', key: 'macro_region' },
       { header: 'Region', key: 'region' }
     ];
     return (
