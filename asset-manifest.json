@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/vietnam/static/css/main.4c84d873.chunk.css",
-    "main.js": "/vietnam/static/js/main.50a5169f.chunk.js",
-    "main.js.map": "/vietnam/static/js/main.50a5169f.chunk.js.map",
+    "main.js": "/vietnam/static/js/main.bc5a0bd1.chunk.js",
+    "main.js.map": "/vietnam/static/js/main.bc5a0bd1.chunk.js.map",
     "runtime-main.js": "/vietnam/static/js/runtime-main.029dded3.js",
     "runtime-main.js.map": "/vietnam/static/js/runtime-main.029dded3.js.map",
     "static/css/2.150d169a.chunk.css": "/vietnam/static/css/2.150d169a.chunk.css",
@@ -22,6 +22,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.914e6d75.chunk.js",
     "static/css/main.4c84d873.chunk.css",
-    "static/js/main.50a5169f.chunk.js"
+    "static/js/main.bc5a0bd1.chunk.js"
   ]
 }
