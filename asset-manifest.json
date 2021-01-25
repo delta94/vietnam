@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/vietnam/static/css/main.4c84d873.chunk.css",
-    "main.js": "/vietnam/static/js/main.fa449fe8.chunk.js",
-    "main.js.map": "/vietnam/static/js/main.fa449fe8.chunk.js.map",
+    "main.js": "/vietnam/static/js/main.50a5169f.chunk.js",
+    "main.js.map": "/vietnam/static/js/main.50a5169f.chunk.js.map",
     "runtime-main.js": "/vietnam/static/js/runtime-main.029dded3.js",
     "runtime-main.js.map": "/vietnam/static/js/runtime-main.029dded3.js.map",
     "static/css/2.150d169a.chunk.css": "/vietnam/static/css/2.150d169a.chunk.css",
-    "static/js/2.fb979667.chunk.js": "/vietnam/static/js/2.fb979667.chunk.js",
-    "static/js/2.fb979667.chunk.js.map": "/vietnam/static/js/2.fb979667.chunk.js.map",
+    "static/js/2.914e6d75.chunk.js": "/vietnam/static/js/2.914e6d75.chunk.js",
+    "static/js/2.914e6d75.chunk.js.map": "/vietnam/static/js/2.914e6d75.chunk.js.map",
     "static/js/3.53069d71.chunk.js": "/vietnam/static/js/3.53069d71.chunk.js",
     "static/js/3.53069d71.chunk.js.map": "/vietnam/static/js/3.53069d71.chunk.js.map",
     "index.html": "/vietnam/index.html",
@@ -15,13 +15,13 @@
     "service-worker.js.map": "/vietnam/service-worker.js.map",
     "static/css/2.150d169a.chunk.css.map": "/vietnam/static/css/2.150d169a.chunk.css.map",
     "static/css/main.4c84d873.chunk.css.map": "/vietnam/static/css/main.4c84d873.chunk.css.map",
-    "static/js/2.fb979667.chunk.js.LICENSE.txt": "/vietnam/static/js/2.fb979667.chunk.js.LICENSE.txt"
+    "static/js/2.914e6d75.chunk.js.LICENSE.txt": "/vietnam/static/js/2.914e6d75.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.029dded3.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.fb979667.chunk.js",
+    "static/js/2.914e6d75.chunk.js",
     "static/css/main.4c84d873.chunk.css",
-    "static/js/main.fa449fe8.chunk.js"
+    "static/js/main.50a5169f.chunk.js"
   ]
 }
