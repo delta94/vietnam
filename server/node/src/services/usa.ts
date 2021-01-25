@@ -6,7 +6,10 @@ import { redisClient } from '../clients';
 import { proPublica, utils } from '../libs';
 
 export default class USAService {
-  public async getCongressMembers(chamber: any, congress: number = 117): Promise<Array<any>> {
+  public async getCongressMembers(
+    chamber: any = 'house',
+    congress: number = 117
+  ): Promise<Array<any>> {
     const key: string = `usa-congress-${congress}-${chamber}`;
     const cache: string = await redisClient.get(key);
     if (cache) {

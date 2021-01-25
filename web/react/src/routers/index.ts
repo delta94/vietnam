@@ -63,6 +63,8 @@ import {
   Sports,
   SportsClubs,
   SportsVLeague,
+  // USA
+  USACongress,
   // Visas
   Visas,
   VisasList,
@@ -484,6 +486,14 @@ const routes: Array<IRoute> = [
     navigation: false,
     demo: true,
     group: 'sports'
+  },
+  {
+    path: 'usa-congress',
+    text: 'Congress',
+    component: USACongress,
+    navigation: false,
+    demo: false,
+    group: 'usa'
   },
   {
     path: 'visas',

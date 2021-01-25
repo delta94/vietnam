@@ -9,8 +9,8 @@ const usa: Array<IRoute> = [
   {
     method: 'GET',
     query: [
-      { name: 'chamber', type: 'string', required: true },
-      { name: 'congress', type: 'string', required: false }
+      { name: 'chamber', type: 'string', required: false },
+      { name: 'congress', type: 'number', required: false }
     ],
     body: [],
     path: `${prefix}/congress`,

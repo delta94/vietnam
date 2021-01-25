@@ -44,9 +44,9 @@ export default class BanksService {
 
     const docs: Array<any> = await self.getForexRatesFromDB(bankIds);
     const currencies = self.getCurrencies(docs);
-    const data = self.processForexRates(docs);
+    const rates = self.processForexRates(currencies, docs);
 
-    return { currencies, data };
+    return rates;
   }
 
   private async getForexRatesFromDB(bankIds: Array<string> = []): Promise<Array<any>> {
@@ -71,7 +71,7 @@ export default class BanksService {
     const key: string = `forex-rates-${id}`;
     const cache: string = await redisClient.get(key);
     if (cache) {
-      console.log(`Get Forex Rates ${id} from Cache`, cache);
+      console.log(`Get Forex Rates ${id} from Cache`);
       const json = utils.parseJSON(cache, {});
       if (!_.isEmpty(json)) {
         return json;
@@ -94,40 +94,45 @@ export default class BanksService {
     return currencies;
   }
 
-  private processForexRates(docs: Array<any>): Array<any> {
-    return docs
-      .filter(doc => {
-        const { rates = [] } = doc;
-        return rates.length > 0;
-      })
-      .map(doc => {
-        const { bank = '', year = 0, month = 0, date = 0, hour = 0, minute = 0, rates = [] } = doc;
+  private processForexRates(currencies: Array<string>, docs: Array<any>): Array<any> {
+    const banks = _.uniq(docs.map(doc => doc.bank)).sort();
 
-        const buyCash = {};
-        const buyTransfer = {};
-        const sellCash = {};
-        const sellTransfer = {};
+    console.log(currencies);
 
-        for (const rate of rates) {
-          const {
-            buyCash: _buyCash,
-            sellCash: _sellCash,
-            buyTransfer: _buyTransfer,
-            sellTransfer: _sellTransfer,
-            code
-          } = rate;
-          buyCash[code] = utils.numberFormatter(_buyCash);
-          buyTransfer[code] = utils.numberFormatter(_buyTransfer);
-          sellCash[code] = utils.numberFormatter(_sellCash);
-          sellTransfer[code] = utils.numberFormatter(_sellTransfer);
-        }
-
+    const rates = currencies.map(currency => {
+      const item = banks.map(bank => {
+        const bankDoc = docs.find(doc => doc.bank === bank) || {};
+        const { year = 0, month = 0, date = 0, hour = 0, minute = 0 } = bankDoc;
+        const { rates = [] } = bankDoc;
+        const rate = rates.find(rate => rate.code === currency) || {};
+        const {
+          buyCash: _buyCash = 0,
+          sellCash: _sellCash = 0,
+          buyTransfer: _buyTransfer = 0,
+          sellTransfer: _sellTransfer = 0,
+          code = currency
+        } = rate;
+        const buyCash = utils.numberFormatter(_buyCash);
+        const buyTransfer = utils.numberFormatter(_buyTransfer);
+        const sellCash = utils.numberFormatter(_sellCash);
+        const sellTransfer = utils.numberFormatter(_sellTransfer);
         const time =
           `${year}/${utils.addZero(month)}/${utils.addZero(date)} ` +
           `${utils.addZero(hour)}:${utils.addZero(minute)}`;
-
-        return { bank, buyCash, buyTransfer, sellCash, sellTransfer, time };
+        return {
+          bank,
+          code,
+          time,
+          buyCash,
+          buyTransfer,
+          sellCash,
+          sellTransfer
+        };
       });
+      return item;
+    });
+
+    return _.flattenDeep(rates);
   }
 
   public async getForexRatesFromBanks(): Promise<any> {

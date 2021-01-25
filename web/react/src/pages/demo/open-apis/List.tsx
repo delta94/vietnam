@@ -1,10 +1,10 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, Spinner } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
 import { apis } from '../../../services';
-import { NavPills } from '../../../components';
+import { NavPills, Table } from '../../../components';
 
 interface IListProps {
   themeInput: string;
@@ -28,7 +28,6 @@ class List extends Component<IListProps, IListState> {
     this.state = { query: '', technologies: [], filterTechnologies: [], loading: true };
 
     this.getOpenAPIs = this.getOpenAPIs.bind(this);
-    this.renderTable = this.renderTable.bind(this);
     this.filter = this.filter.bind(this);
   }
 
@@ -62,81 +61,14 @@ class List extends Component<IListProps, IListState> {
     this.setState({ technologies, filterTechnologies, loading: false });
   }
 
-  renderTable() {
-    const { filterTechnologies = [], loading = true } = this.state;
-    const {
-      themeBorder = '',
-      themeTextColor = '',
-      themeSpinnerVariant = '',
-      themePrimaryBackgroundColor = ''
-    } = this.props;
-
-    return (
-      <div id="table">
-        {loading && (
-          <div className="text-center">
-            <Spinner animation="border" variant={themeSpinnerVariant}></Spinner>
-          </div>
-        )}
-        {!loading && (
-          <div className={`table-responsive table-container rounded-lg border ${themeBorder}`}>
-            <table className="table">
-              <caption className={`${themePrimaryBackgroundColor} text-center text-white`}>
-                Open APIs ({filterTechnologies.length})
-              </caption>
-              <thead>
-                <tr>
-                  <th className={`${themeTextColor}`}>Name</th>
-                  <th className={`${themeTextColor}`}>Type</th>
-                  <th className={`${themeTextColor}`}>Package</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filterTechnologies.length
-                  ? filterTechnologies.map((ethnicMinority, index) => {
-                      const { name = '', type = '', url = '', npm = '' } = ethnicMinority;
-                      return (
-                        <tr key={index}>
-                          <td className={`${themeTextColor}`}>
-                            <a
-                              href={url}
-                              rel="noreferrer"
-                              target="_blank"
-                              className={`${themeTextColor}`}>
-                              <b>
-                                <u>{name}</u>
-                              </b>
-                            </a>
-                          </td>
-                          <td className={`${themeTextColor}`}>{type}</td>
-                          <td className={`${themeTextColor}`}>
-                            {npm && (
-                              <a
-                                href={`https://www.npmjs.com/package/${npm}`}
-                                rel="noreferrer"
-                                target="_blank"
-                                className={`${themeTextColor}`}>
-                                <b>
-                                  <u>npm</u>
-                                </b>
-                              </a>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })
-                  : ''}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-    );
-  }
-
   render() {
-    const { query } = this.state;
+    const { query = '', filterTechnologies = [], loading = true } = this.state;
     const { themeInput = '' } = this.props;
+    const rowConfigs = [
+      { header: 'Name', key: 'name', type: 'link' },
+      { header: 'Type', key: 'type' },
+      { header: 'npm', key: 'npm', type: 'npm' }
+    ];
     return (
       <div id="List" className="container-fluid">
         <NavPills group={'open-apis'}></NavPills>
@@ -148,7 +80,11 @@ class List extends Component<IListProps, IListState> {
             value={query}
             onChange={this.filter}></Form.Control>
         </Form>
-        {this.renderTable()}
+        <Table
+          loading={loading}
+          caption={'Open APIs'}
+          rows={filterTechnologies}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }

@@ -63,6 +63,7 @@ export {
   PhonesProviders,
   SportsClubs,
   SportsVLeague,
+  USACongress,
   VisasList,
   WeatherAirVisual,
   WeatherCurrent,

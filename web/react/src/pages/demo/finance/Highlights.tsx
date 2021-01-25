@@ -1,11 +1,15 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Form, Spinner } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 
+import { Table } from '../../../components';
 import { periods } from '../../../configs';
 import { apis, helper } from '../../../services';
 
-interface IHighlightsProps {}
+interface IHighlightsProps {
+  themeInput: string;
+}
 
 interface IHighlightsState {
   loading: boolean;
@@ -22,14 +26,13 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
     this.state = { loading: false, highlights: [], from: 0, to: 0, period: '' };
 
     this.updatePeriod = this.updatePeriod.bind(this);
-    this.renderTable = this.renderTable.bind(this);
     this.renderForm = this.renderForm.bind(this);
   }
 
   async componentDidMount() {
     const period = '1M';
     const { from, to } = helper.processPeriod(period);
-    this.setState({ from, to });
+    await this.setState({ from, to });
     await this.getStockHighlights();
   }
 
@@ -47,111 +50,17 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
     this.setState({ highlights, loading: false });
   }
 
-  renderTable() {
-    const { loading = false, highlights = [] } = this.state;
-    return (
-      <div id="table">
-        {loading && (
-          <div className="text-center">
-            <Spinner animation="border" variant="danger"></Spinner>
-          </div>
-        )}
-        {!loading ? (
-          <div className="table-responsive table-container">
-            <table className="table">
-              <caption className="text-white text-center bg-danger">
-                Highlights ({highlights.length})
-              </caption>
-              <thead>
-                <tr>
-                  <th>Symbol</th>
-                  <th>Name</th>
-                  <th>Latest</th>
-                  <th>Diff</th>
-                  <th>Median</th>
-                  <th>Average</th>
-                  <th>Middle</th>
-                </tr>
-              </thead>
-              <tbody>
-                {highlights.length
-                  ? highlights.map((highlight, index) => {
-                      const {
-                        symbol = '',
-                        group = '',
-                        startDate = '',
-                        name = '',
-                        industry = '',
-                        subsector = '',
-                        low = false,
-                        latest,
-                        latestDate,
-                        min,
-                        minDate,
-                        max,
-                        maxDate,
-                        diff,
-                        diffToMin,
-                        diffToMax,
-                        median,
-                        average,
-                        middle
-                      } = highlight;
-                      return (
-                        <tr key={index}>
-                          <td>
-                            <div>{symbol}</div>
-                            <div>{group}</div>
-                            <div>{startDate}</div>
-                          </td>
-                          <td>
-                            <div>{name}</div>
-                            <div>{industry}</div>
-                            <div>{subsector}</div>
-                          </td>
-                          <td>
-                            <div className={low ? 'text-danger' : 'text-success'}>
-                              <div>
-                                {latest} ({latestDate})
-                              </div>
-                              <div>
-                                {min} ({minDate})
-                              </div>
-                              <div>
-                                {max} ({maxDate})
-                              </div>
-                            </div>
-                          </td>
-                          <td>
-                            <div className={low ? 'text-danger' : 'text-success'}>
-                              <div>{diff}</div>
-                              <div>{diffToMin}</div>
-                              <div>{diffToMax}</div>
-                            </div>
-                          </td>
-                          <td>{median}</td>
-                          <td>{average}</td>
-                          <td>{middle}</td>
-                        </tr>
-                      );
-                    })
-                  : ''}
-              </tbody>
-            </table>
-          </div>
-        ) : (
-          ''
-        )}
-      </div>
-    );
-  }
-
   renderForm() {
     const { period = '' } = this.state;
+    const { themeInput = '' } = this.props;
     return (
       <Form>
         <Form.Group>
-          <Form.Control as="select" value={period} onChange={this.updatePeriod}>
+          <Form.Control
+            as="select"
+            className={`${themeInput}`}
+            value={period}
+            onChange={this.updatePeriod}>
             {periods.map((period, index) => {
               const { label, value } = period;
               return (
@@ -167,22 +76,66 @@ class Highlights extends Component<IHighlightsProps, IHighlightsState> {
   }
 
   render() {
+    const { highlights, loading } = this.state;
+    const rowConfigs = [
+      { header: 'Symbol', key: 'symbol' },
+      { header: 'Name', key: 'name' },
+      { header: 'Latest', key: 'latest' },
+      { header: 'Diff', key: 'diff' },
+      { header: 'Median', key: 'median' },
+      { header: 'Average', key: 'average' }
+    ];
+
+    const rows = highlights.map((highlight, index) => {
+      const {
+        symbol = '',
+        group = '',
+        startDate = '',
+        name = '',
+        industry = '',
+        subsector = '',
+        latest,
+        latestDate,
+        min,
+        minDate,
+        max,
+        maxDate,
+        diff,
+        diffToMin,
+        diffToMax,
+        median,
+        average
+      } = highlight;
+      const symbolString = `${symbol} - ${group} - ${startDate}`;
+      const nameString = `${name} - ${industry} - ${subsector}`;
+      const latestString = `${latest} (${latestDate}) - ${min} (${minDate}) - ${max} (${maxDate})`;
+      const diffString = `${diff} - ${diffToMin} - ${diffToMax}`;
+      return {
+        symbol: symbolString,
+        name: nameString,
+        latest: latestString,
+        diff: diffString,
+        median,
+        average
+      };
+    });
     return (
       <div id="Highlights" className="container-fluid">
-        <Card>
-          <Card.Body>
-            <Card.Title className="text-center"></Card.Title>
-            {this.renderForm()}
-            {this.renderTable()}
-          </Card.Body>
-        </Card>
+        {this.renderForm()}
+        <Table
+          rowIndexEnabled={true}
+          caption={`Highlights`}
+          loading={loading}
+          rows={rows}
+          rowConfigs={rowConfigs}></Table>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state: any) => {
-  return {};
+  const themeInput: string = _.get(state, 'theme.input', '');
+  return { themeInput };
 };
 
 export default connect(mapStateToProps)(Highlights);

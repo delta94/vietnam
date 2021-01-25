@@ -13,6 +13,7 @@ import news from './news';
 import openAPIs from './open-apis';
 import phones from './phones';
 import sports from './sports';
+import usa from './usa';
 import visas from './visas';
 import weather from './weather';
 import youtube from './youtube';
@@ -31,6 +32,7 @@ const endpoints: IEndpoints = {
   openAPIs,
   phones,
   sports,
+  usa,
   visas,
   weather,
   youtube

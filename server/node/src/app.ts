@@ -18,7 +18,7 @@ import jobs from './jobs';
 
 const setTelegramWebhook = async () => {
   const URL_BASE: string =
-    NODE_ENV === 'production' ? process.env.URL_BASE : 'https://aeae151aa00c.ngrok.io';
+    NODE_ENV === 'production' ? process.env.URL_BASE : 'https://2963599d2895.ngrok.io';
   const telegramWebhook: string = `${URL_BASE}/api/telegram`;
   await telegramClient.setWebhook(telegramWebhook);
 };

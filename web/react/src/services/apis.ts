@@ -130,12 +130,9 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getBanksForexRates(): Promise<any> {
+  public async getBanksForexRates(): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.banks.getForexRates;
-    const response = await this.fetch(endpoint);
-    const { data = [], currencies = [] } = response;
-    const currency = currencies[0] || '';
-    return { data, currency, currencies };
+    return await this.fetch(endpoint);
   }
 
   public async getForexBanks(): Promise<Array<string>> {
@@ -286,5 +283,10 @@ export default class APIS {
   public async getVisas(): Promise<Array<any>> {
     const endpoint: IEndpoint = endpoints.visas.getVisas;
     return await this.fetch(endpoint);
+  }
+
+  public async getCongress(chamber: string): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.usa.getCongress;
+    return await this.fetch(endpoint, { query: { chamber }, body: {} });
   }
 }

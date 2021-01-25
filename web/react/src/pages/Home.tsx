@@ -49,7 +49,7 @@ class Home extends Component<IHomeProps, IHomeState> {
     };
 
     this.filter = this.filter.bind(this);
-    this.renderTable = this.renderTable.bind(this);
+    this.renderList = this.renderList.bind(this);
     this.updateQuery = this.updateQuery.bind(this);
   }
 
@@ -69,7 +69,7 @@ class Home extends Component<IHomeProps, IHomeState> {
     });
   }
 
-  renderTable() {
+  renderList() {
     const { filterAPIs = [] } = this.state;
     const {
       themeTextColor = '',
@@ -119,7 +119,7 @@ class Home extends Component<IHomeProps, IHomeState> {
             value={query}
             onChange={this.updateQuery}></Form.Control>
         </Form>
-        {this.renderTable()}
+        {this.renderList()}
       </div>
     );
   }

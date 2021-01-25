@@ -71,10 +71,15 @@ class Docs extends Component<IDocsProps, IDocsState> {
     const { endpoints } = this.state;
     const { themeTextColor = '' } = this.props;
     const groups: Array<string> = Object.keys(endpoints);
-    const list = groups.map((group: string) => {
-      const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
-      return { group, apis };
-    });
+    const list = groups
+      .map((group: string) => {
+        const apis = Object.values(endpoints[group]).filter((api: any) => api.public);
+        return { group, apis };
+      })
+      .filter((item: any) => {
+        const { apis } = item;
+        return apis.length > 0;
+      });
 
     return (
       <Accordion defaultActiveKey="0">
