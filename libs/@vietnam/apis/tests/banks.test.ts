@@ -19,15 +19,9 @@ describe('banks', () => {
   });
 
   it('get forex rates', async () => {
-    const response: any = await banks.getForexRates();
-    const { currencies = [], data = [] } = response;
-    console.log(response);
-    assert.ok(
-      typeof currencies === 'object' &&
-        currencies.length > 0 &&
-        typeof data === 'object' &&
-        data.length > 0
-    );
+    const rates: Array<any> = await banks.getForexRates();
+    console.log(rates);
+    assert.ok(typeof rates === 'object' && rates.length > 0);
   });
 
   it('get forex rates by bank', async () => {

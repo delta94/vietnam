@@ -30,16 +30,16 @@ describe('calendar', () => {
     assert.ok(typeof listOfChi === 'object' && listOfChi.length > 0);
   });
 
-  it('get can chi of date', async () => {
+  it('get can chi', async () => {
     const canChi = await calendar.getCanChi(19, 6, 2020);
     console.log(canChi);
-    assert.ok(canChi === 'Quý Mùi');
+    assert.ok(canChi === 'năm canh tý tháng tân tỵ ngày quý hợi');
   });
 
-  it('get can chi of date', async () => {
-    const canChi = await calendar.getTietKhi(19, 6, 2020);
-    console.log(canChi);
-    assert.ok(canChi === 'Quý Mùi');
+  it('get tiet khi', async () => {
+    const tietKhi = await calendar.getTietKhi(19, 6, 2020);
+    console.log(tietKhi);
+    assert.ok(tietKhi === 'Cốc vũ');
   });
 
   it('is solar leap year', async () => {
