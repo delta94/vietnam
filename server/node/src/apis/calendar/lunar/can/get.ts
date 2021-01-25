@@ -2,7 +2,7 @@
 
 import { Request, Response } from 'express';
 
-import { calendar } from 'vnapis';
+import { calendar } from '../../../../libs';
 
 export default async (req: Request, res: Response): Promise<Response<any>> => {
   const listOfCan = calendar.getListOfCan();

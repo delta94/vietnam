@@ -256,8 +256,8 @@ export default class BanksService {
       const rates: any = await self.getForexRatesByBank(id);
       console.log(id, rates);
       if (rates.length === 0) {
-        await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${id}\nNO DATA`);
-        return;
+        await telegramClient.sendMarkdownMessage(TELEGRAM_CHAT_ID, `${index} - ${id}\nNO DATA`);
+        return 'NO DATA';
       }
       const query: any = { year, month, date, hour, minute, bank: id };
       const doc: any = { timestamp, year, month, date, hour, minute, bank: id, rates };

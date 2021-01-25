@@ -1,13 +1,5 @@
 // Ethnic Minorities
 import EthnicMinoritiesList from './demo/ethnic-minorities/List';
-// Government
-import GovernmentGeneralSecretaries from './demo/government/GeneralSecretaries';
-import GovernmentMinisters from './demo/government/Ministers';
-import GovernmentMinistries from './demo/government/Ministries';
-import GovernmentNationalAssemblyChairs from './demo/government/national-assembly/Chairs';
-import GovernmentNationalAssemblyMembers from './demo/government/national-assembly/Members';
-import GovernmentPresidents from './demo/government/Presidents';
-import GovernmentPrimeMinisters from './demo/government/PrimeMinisters';
 // History
 import HistoryDynasties from './demo/history/Dynasties';
 // Home
@@ -32,11 +24,11 @@ export {
   Finance,
   Government,
   History,
+  Information,
   LicensePlates,
   Music,
   News,
   OpenAPIs,
-  Phones,
   Sports,
   Visas,
   Weather,
@@ -58,9 +50,19 @@ export {
   FinanceHistory,
   FinancePotentials,
   FinanceProfit,
+  // Government
+  GovernmentGeneralSecretaries,
+  GovernmentMinisters,
+  GovernmentMinistries,
+  GovernmentNationalAssemblyChairs,
+  GovernmentNationalAssemblyMembers,
+  GovernmentPresidents,
+  GovernmentPrimeMinisters,
+  // Information
+  InformationPhonesPrefixes,
+  InformationPhonesProviders,
+  // News
   NewsFeed,
-  PhonesPrefixes,
-  PhonesProviders,
   SportsClubs,
   SportsVLeague,
   USACongress,
@@ -72,14 +74,6 @@ export {
 export {
   // Ethnic Minorities
   EthnicMinoritiesList,
-  // Government
-  GovernmentGeneralSecretaries,
-  GovernmentMinisters,
-  GovernmentMinistries,
-  GovernmentNationalAssemblyChairs,
-  GovernmentNationalAssemblyMembers,
-  GovernmentPresidents,
-  GovernmentPrimeMinisters,
   // History
   HistoryDynasties,
   Home,

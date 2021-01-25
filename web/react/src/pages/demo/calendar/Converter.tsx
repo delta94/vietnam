@@ -16,6 +16,7 @@ interface IConverterState {
   solarString: string;
   lunarDate: string;
   lunarString: string;
+  tietKhi: string;
 }
 
 class Converter extends Component<IConverterProps, IConverterState> {
@@ -28,7 +29,8 @@ class Converter extends Component<IConverterProps, IConverterState> {
       solarDate: '',
       solarString: this.loadingText,
       lunarDate: '',
-      lunarString: this.loadingText
+      lunarString: this.loadingText,
+      tietKhi: ''
     };
 
     this.updateSolarDate = this.updateSolarDate.bind(this);
@@ -51,9 +53,10 @@ class Converter extends Component<IConverterProps, IConverterState> {
 
     const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
     const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
-    const lunarString = await this.buildLunarString(yyyy, mm, dd);
+    const lunarString: string = await this.buildLunarString(yyyy, mm, dd);
+    const tietKhi: string = await apis.getTietKhi(yyyy, mm, dd);
 
-    await this.setState({ lunarDate, lunarString });
+    await this.setState({ lunarDate, lunarString, tietKhi });
   }
 
   buildSolarString(year: number, month: number, date: number) {
@@ -70,20 +73,22 @@ class Converter extends Component<IConverterProps, IConverterState> {
     const [year, month, date] = solarDate.split('-');
     const solarString = this.buildSolarString(year, parseInt(month, 10), date);
 
-    await this.setState({ solarDate, solarString, lunarString: this.loadingText });
+    await this.setState({ solarDate, solarString, lunarString: this.loadingText, tietKhi: '' });
     const { year: yyyy, month: mm, date: dd } = await apis.convertSolarToLunar(year, month, date);
     const lunarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const lunarString = await this.buildLunarString(yyyy, mm, dd);
+    const tietKhi: string = await apis.getTietKhi(yyyy, mm, dd);
 
-    this.setState({ lunarDate, lunarString });
+    this.setState({ lunarDate, lunarString, tietKhi });
   }
 
   async updateLunarDate(event: any) {
     const { value: lunarDate } = event.target;
     const [year, month, date] = lunarDate.split('-');
-    const lunarString = await this.buildLunarString(year, month, date);
+    const lunarString: string = await this.buildLunarString(year, month, date);
+    const tietKhi: string = await apis.getTietKhi(year, month, date);
 
-    await this.setState({ lunarDate, lunarString, solarString: this.loadingText });
+    await this.setState({ lunarDate, lunarString, tietKhi, solarString: this.loadingText });
     const { year: yyyy, month: mm, date: dd } = await apis.convertLunarToSolar(year, month, date);
     const solarDate = `${yyyy}-${helper.addZero(mm)}-${helper.addZero(dd)}`;
     const solarString = this.buildSolarString(yyyy, mm, dd);
@@ -92,7 +97,13 @@ class Converter extends Component<IConverterProps, IConverterState> {
   }
 
   render() {
-    const { solarDate = '', solarString = '', lunarDate = '', lunarString = '' } = this.state;
+    const {
+      solarDate = '',
+      solarString = '',
+      lunarDate = '',
+      lunarString = '',
+      tietKhi = ''
+    } = this.state;
     const { themeInput = '', themeTextColor = '' } = this.props;
 
     return (
@@ -114,7 +125,9 @@ class Converter extends Component<IConverterProps, IConverterState> {
           </div>
           <div className="col-sm-6">
             <Form.Group controlId="LunarDate">
-              <Form.Label className={themeTextColor}>Lunar Date: {lunarString}</Form.Label>
+              <Form.Label className={themeTextColor}>
+                Lunar Date: {lunarString} ({tietKhi})
+              </Form.Label>
               <Form.Control
                 type="date"
                 placeholder="Lunar Date"

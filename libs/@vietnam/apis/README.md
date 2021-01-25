@@ -21,6 +21,7 @@ If you enjoyed this project — or just feeling generous, consider [buying me a 
     - [Open APIs](#open-apis)
     - [Phones](#phones)
     - [Sports](#sports)
+    - [Visas](#visas)
     - [VNLTK](#vnltk)
   - [Other Libraries](#other-libraries)
 
@@ -86,25 +87,22 @@ const rates: Array<any> = await banks.getForexRatesByBank(id); // Required - Def
 import { calendar } from 'vnapis';
 
 // Convert Solar to Lunar Date
-const { date, month, year } = calendar.convertSolarToLunar(8, 8, 2020); // { date: 19, month: 6, year: 2020 }
+const { date, month, year } = await calendar.convertSolarToLunar(8, 8, 2020); // { date: 19, month: 6, year: 2020 }
 
 // Convert Lunar to Solar Date
-const { date, month, year } = calendar.convertLunarToSolar(19, 6, 2020); // { date: 8, month: 8, year: 2020 }
+const { date, month, year } = await calendar.convertLunarToSolar(19, 6, 2020); // { date: 8, month: 8, year: 2020 }
 
 // List of Can
-const listOfCan = calendar.getListOfCan();
+const listOfCan: Array<string> = await calendar.getListOfCan();
 
 // List of Chi
-const listOfChi = calendar.getListOfChi();
-
-// Get Can Chi of Lunar Year
-const canChiOfYear = calendar.getCanChiOfYear(2020); // Canh Tý
-
-// Get Can Chi of Lunar Month - Lunar Year
-const canChiOfMonth = calendar.getCanChiOfMonth(6, 2020); // Quý Mùi
+const listOfChi: Array<string> = await calendar.getListOfChi();
 
 // Get Can Chi of Lunar Date - Lunar Month - Lunar Year
-const canChiOfDate = calendar.getCanChiOfDate(19, 6, 2020); // Quý Mùi
+const canChi: string = await calendar.getCanChi(19, 6, 2020); // Quý Mùi
+
+// Get Tiet Khi of Lunar Date - Lunar Month - Lunar Year
+const tietKhi: string = await calendar.getTietKhi(19, 6, 2020); // Quý Mùi
 
 // Check Solar Leap Year
 const isSolarLeapYear = calendar.isSolarLeapYear(2020); // true
@@ -302,6 +300,15 @@ const footballClubs = await sports.getFootballClubs();
  
 // Get Futsal Clubs
 const futsalClubs = await sports.getFutsalClubs();
+```
+
+### Visas
+
+```ts
+import { visas } from 'vnapis';
+ 
+// Get Visa Requirements
+const visaRequirements = await visas.getVisaRequirements();
 ```
 
 ### VNLTK

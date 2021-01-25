@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { apis } from '../../../services';
-import { Table, NavPills } from '../../../components';
+import { apis } from '../../../../services';
+import { Table, NavPills } from '../../../../components';
 
 interface IPrefixesProps {}
 
@@ -26,7 +26,7 @@ class Prefixes extends Component<IPrefixesProps, IPrefixesState> {
 
   async getPrefixes() {
     await this.setState({ loading: true });
-    const prefixes = await apis.getPrefixes();
+    const prefixes = await apis.getPhonesPrefixes();
     await this.setState({ prefixes, loading: false });
   }
 

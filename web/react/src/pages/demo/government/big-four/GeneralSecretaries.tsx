@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { apis } from '../../../services';
-import { Table, NavPills } from '../../../components';
+import { apis } from '../../../../services';
+import { Table, NavPills } from '../../../../components';
 
 interface IGeneralSecretariesProps {}
 

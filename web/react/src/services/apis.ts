@@ -198,13 +198,13 @@ export default class APIS {
     return await this.fetch(endpoint);
   }
 
-  public async getProviders(): Promise<Array<any>> {
-    const endpoint: IEndpoint = endpoints.phones.getProviders;
+  public async getPhonesProviders(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.information.getPhonesProviders;
     return await this.fetch(endpoint);
   }
 
-  public async getPrefixes(): Promise<Array<any>> {
-    const endpoint: IEndpoint = endpoints.phones.getPrefixes;
+  public async getPhonesPrefixes(): Promise<Array<any>> {
+    const endpoint: IEndpoint = endpoints.information.getPhonesPrefixes;
     return await this.fetch(endpoint);
   }
 
@@ -222,6 +222,12 @@ export default class APIS {
     const endpoint: IEndpoint = endpoints.calendar.getCanChi;
     const { canChi = '' } = await this.fetch(endpoint, { query: {}, body: { year, month, date } });
     return canChi;
+  }
+
+  public async getTietKhi(year: number, month: number, date: number): Promise<string> {
+    const endpoint: IEndpoint = endpoints.calendar.getTietKhi;
+    const { tietKhi = '' } = await this.fetch(endpoint, { query: {}, body: { year, month, date } });
+    return tietKhi;
   }
 
   public async getVietceteraArticles(type: string): Promise<Array<any>> {

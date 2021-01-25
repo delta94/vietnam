@@ -7,11 +7,11 @@ import ethnicMinorities from './ethnic-minorities';
 import finance from './finance';
 import government from './government';
 import history from './history';
+import information from './information';
 import licensePlates from './license-plates';
 import music from './music';
 import news from './news';
 import openAPIs from './open-apis';
-import phones from './phones';
 import sports from './sports';
 import usa from './usa';
 import visas from './visas';
@@ -26,11 +26,11 @@ const endpoints: IEndpoints = {
   finance,
   government,
   history,
+  information,
   licensePlates,
   music,
   news,
   openAPIs,
-  phones,
   sports,
   usa,
   visas,

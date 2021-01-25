@@ -1,14 +1,14 @@
 import { baseAPI } from '../../urls';
 import { IEndpoint } from '../../interfaces';
 
-const getProviders: IEndpoint = {
-  id: 'getProviders',
-  name: 'Get Providers',
+const getPhonesProviders: IEndpoint = {
+  id: 'getPhonesProviders',
+  name: 'Get Phones Providers',
   public: true,
   method: 'GET',
   path: '/information/phones/providers',
   url: `${baseAPI}/information/phones/providers`,
-  demo: 'phones-providers',
+  demo: 'information-phones-providers',
   request: {
     headers: [{ key: 'Content-Type', value: 'application/json' }],
     query: [],
@@ -34,4 +34,4 @@ const getProviders: IEndpoint = {
   }
 };
 
-export default getProviders;
+export default getPhonesProviders;

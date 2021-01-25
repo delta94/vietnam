@@ -7,11 +7,11 @@ import EthnicMinorities from './EthnicMinorities';
 import Finance from './Finance';
 import Government from './Government';
 import History from './History';
+import Information from './Information';
 import LicensePlates from './LicensePlates';
 import Music from './Music';
 import News from './News';
 import OpenAPIs from './OpenAPIs';
-import Phones from './Phones';
 import Sports from './Sports';
 import Visas from './Visas';
 import Weather from './Weather';
@@ -26,11 +26,11 @@ export {
   Finance,
   Government,
   History,
+  Information,
   LicensePlates,
   Music,
   News,
   OpenAPIs,
-  Phones,
   Sports,
   Visas,
   Weather,

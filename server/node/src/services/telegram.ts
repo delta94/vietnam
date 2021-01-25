@@ -1,10 +1,9 @@
 'use strict';
 
 import * as _ from 'lodash';
-import { calendar } from 'vnapis';
 
 import { telegramClient } from '../clients';
-import { utils, vietcetera } from '../libs';
+import { utils, vietcetera, calendar } from '../libs';
 
 import BanksService from './banks';
 import InformationService from './information';

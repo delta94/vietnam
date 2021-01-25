@@ -141,3 +141,8 @@ export interface IOpenAPI {
   url: string;
   npm: string;
 }
+
+export interface IVisaRequirement {
+  country: string;
+  requirement: string;
+}

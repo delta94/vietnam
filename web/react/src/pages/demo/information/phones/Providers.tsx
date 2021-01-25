@@ -2,8 +2,8 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { apis } from '../../../services';
-import { NavPills, Table } from '../../../components';
+import { apis } from '../../../../services';
+import { NavPills, Table } from '../../../../components';
 
 interface IProvidersProps {
   themeBorder: string;
@@ -32,7 +32,7 @@ class Providers extends Component<IProvidersProps, IProvidersState> {
   async getProviders() {
     this.setState({ loading: true });
 
-    const providers = await apis.getProviders();
+    const providers = await apis.getPhonesProviders();
 
     this.setState({ providers, loading: false });
   }

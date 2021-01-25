@@ -13,8 +13,17 @@ export {
   FinancePotentials,
   FinanceProfit
 } from './finance';
+export {
+  GovernmentGeneralSecretaries,
+  GovernmentPresidents,
+  GovernmentPrimeMinisters,
+  GovernmentNationalAssemblyChairs,
+  GovernmentNationalAssemblyMembers,
+  GovernmentMinisters,
+  GovernmentMinistries
+} from './government';
+export { InformationPhonesPrefixes, InformationPhonesProviders } from './information';
 export { NewsFeed } from './news';
-export { PhonesPrefixes, PhonesProviders } from './phones';
 export { SportsClubs, SportsVLeague } from './sports';
 export { USACongress } from './usa';
 export { VisasList } from './visas';

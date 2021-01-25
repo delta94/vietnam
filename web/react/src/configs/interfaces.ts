@@ -16,11 +16,11 @@ export interface IEndpoints {
   finance: IFinanceEndpoints;
   government: IGovernmentEndpoints;
   history: IHistoryEndpoints;
+  information: IInformationEndpoints;
   licensePlates: ILicensePlatesEndpoints;
   music: IMusicEndpoints;
   news: INewsEndpoints;
   openAPIs: IOpenAPIsEndpoints;
-  phones: IPhonesEndpoints;
   sports: ISportsEndpoints;
   usa: IUSAEndpoints;
   visas: IVisasEndpoints;
@@ -46,6 +46,7 @@ export interface ICalendarEndpoints {
   convertLunarToSolar: IEndpoint;
   convertSolarToLunar: IEndpoint;
   getCanChi: IEndpoint;
+  getTietKhi: IEndpoint;
 }
 export interface IEthnicMinoritiesEndpoints {
   getEthnicMinorities: IEndpoint;
@@ -94,9 +95,9 @@ export interface IOpenAPIsEndpoints {
   getVietceteraArticles: IEndpoint;
 }
 
-export interface IPhonesEndpoints {
-  getPrefixes: IEndpoint;
-  getProviders: IEndpoint;
+export interface IInformationEndpoints {
+  getPhonesPrefixes: IEndpoint;
+  getPhonesProviders: IEndpoint;
 }
 export interface ISportsEndpoints {
   getSportsClubs: IEndpoint;

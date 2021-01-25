@@ -39,6 +39,17 @@ const calendar: Array<IRoute> = [
     ],
     path: `${prefix}/lunar/can-chi`,
     middlewares: []
+  },
+  {
+    method: `POST`,
+    query: [],
+    body: [
+      { name: 'year', required: true, type: 'number' },
+      { name: 'month', required: true, type: 'number' },
+      { name: 'date', required: true, type: 'number' }
+    ],
+    path: `${prefix}/lunar/tiet-khi`,
+    middlewares: []
   }
 ];
 

@@ -39,6 +39,10 @@ import {
   History,
   HistoryDynasties,
   Home,
+  // Phones
+  Information,
+  InformationPhonesPrefixes,
+  InformationPhonesProviders,
   // LicensePlates
   LicensePlates,
   LicensePlatesList,
@@ -55,10 +59,6 @@ import {
   GHNDistricts,
   GHNWards,
   Vietcetera,
-  // Phones
-  Phones,
-  PhonesPrefixes,
-  PhonesProviders,
   // Sports
   Sports,
   SportsClubs,
@@ -344,6 +344,30 @@ const routes: Array<IRoute> = [
     group: 'history'
   },
   {
+    path: 'information',
+    text: 'Information',
+    component: Information,
+    navigation: true,
+    demo: false,
+    group: 'phones'
+  },
+  {
+    path: 'information-phones-prefixes',
+    text: 'Phones Prefixes',
+    component: InformationPhonesPrefixes,
+    navigation: false,
+    demo: true,
+    group: 'phones'
+  },
+  {
+    path: 'information-phones-providers',
+    text: 'Phones Providers',
+    component: InformationPhonesProviders,
+    navigation: false,
+    demo: true,
+    group: 'phones'
+  },
+  {
     path: 'license-plates',
     text: 'License Plates',
     component: LicensePlates,
@@ -438,30 +462,6 @@ const routes: Array<IRoute> = [
     navigation: false,
     demo: true,
     group: 'open-apis'
-  },
-  {
-    path: 'phones',
-    text: 'Phones',
-    component: Phones,
-    navigation: true,
-    demo: false,
-    group: 'phones'
-  },
-  {
-    path: 'phones-prefixes',
-    text: 'Prefixes',
-    component: PhonesPrefixes,
-    navigation: false,
-    demo: true,
-    group: 'phones'
-  },
-  {
-    path: 'phones-providers',
-    text: 'Providers',
-    component: PhonesProviders,
-    navigation: false,
-    demo: true,
-    group: 'phones'
   },
   {
     path: 'sports',

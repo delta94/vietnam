@@ -3,12 +3,13 @@
 import SSI from './stock/ssi';
 import TanViet from './stock/tanviet';
 
-import AirVisual from './air-visual';
 import Banks from './banks';
+import Calendar from './calendar';
 import LiveScore from './live-score';
 import News from './news';
 import Google from './news/google';
-import OpenWeatherMap from './open-weather-map';
+import AirVisual from './weather/air-visual';
+import OpenWeatherMap from './weather/open-weather-map';
 import PassportIndex from './passport-index';
 import ProPublica from './propublica';
 import Utils from './utils';
@@ -20,6 +21,7 @@ import GHN from 'giaohangnhanh';
 import Vietcetera from 'vietcetera';
 
 export const banks: Banks = new Banks();
+export const calendar: Calendar = new Calendar();
 export const liveScore: LiveScore = new LiveScore();
 export const news: News = new News();
 export const google: Google = new Google();

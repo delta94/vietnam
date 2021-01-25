@@ -12,6 +12,7 @@ import News from './news';
 import OpenAPIs from './open-apis';
 import Phones from './phones';
 import Sports from './sports';
+import Visas from './visas';
 import VNLTK from './vnltk';
 
 export {
@@ -27,5 +28,6 @@ export {
   OpenAPIs,
   Phones,
   Sports,
+  Visas,
   VNLTK
 };

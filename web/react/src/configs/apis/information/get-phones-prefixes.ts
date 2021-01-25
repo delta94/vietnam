@@ -1,14 +1,14 @@
 import { baseAPI } from '../../urls';
 import { IEndpoint } from '../../interfaces';
 
-const getPrefixes: IEndpoint = {
-  id: 'getPrefixes',
-  name: 'Get Prefixes',
+const getPhonesPrefixes: IEndpoint = {
+  id: 'getPhonesPrefixes',
+  name: 'Get Phones Prefixes',
   public: true,
   method: 'GET',
   path: '/information/phones/prefixes',
   url: `${baseAPI}/information/phones/prefixes`,
-  demo: 'phones-prefixes',
+  demo: 'information-phones-prefixes',
   request: {
     headers: [{ key: 'Content-Type', value: 'application/json' }],
     query: [{ name: 'prefix', type: 'string', required: false, description: '' }],
@@ -38,4 +38,4 @@ const getPrefixes: IEndpoint = {
   }
 };
 
-export default getPrefixes;
+export default getPhonesPrefixes;

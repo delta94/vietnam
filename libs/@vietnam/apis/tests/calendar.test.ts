@@ -7,45 +7,39 @@ import { calendar } from '../src/';
 
 describe('calendar', () => {
   it('convert solar to lunar', async () => {
-    const { date, month, year } = calendar.convertSolarToLunar(8, 8, 2020);
+    const { date, month, year } = await calendar.convertSolarToLunar(8, 8, 2020);
     console.log(date, month, year);
     assert.ok(date === 19 && month === 6 && year === 2020);
   });
 
   it('convert lunar to solar', async () => {
-    const { date, month, year } = calendar.convertLunarToSolar(19, 6, 2020);
+    const { date, month, year } = await calendar.convertLunarToSolar(19, 6, 2020);
     console.log(date, month, year);
     assert.ok(date === 8 && month === 8 && year === 2020);
   });
 
   it('get list of can', async () => {
-    const listOfCan = calendar.getListOfCan();
+    const listOfCan = await calendar.getListOfCan();
     console.log(listOfCan);
     assert.ok(typeof listOfCan === 'object' && listOfCan.length > 0);
   });
 
   it('get list of chi', async () => {
-    const listOfChi = calendar.getListOfChi();
+    const listOfChi = await calendar.getListOfChi();
     console.log(listOfChi);
     assert.ok(typeof listOfChi === 'object' && listOfChi.length > 0);
   });
 
-  it('get can chi of year', async () => {
-    const canChiOfYear = calendar.getCanChiOfYear(2020);
-    console.log(canChiOfYear);
-    assert.ok(canChiOfYear === 'Canh Tý');
-  });
-
-  it('get can chi of month', async () => {
-    const canChiOfMonth = calendar.getCanChiOfMonth(6, 2020);
-    console.log(canChiOfMonth);
-    assert.ok(canChiOfMonth === 'Quý Mùi');
+  it('get can chi of date', async () => {
+    const canChi = await calendar.getCanChi(19, 6, 2020);
+    console.log(canChi);
+    assert.ok(canChi === 'Quý Mùi');
   });
 
   it('get can chi of date', async () => {
-    const canChiOfDate = calendar.getCanChiOfDate(19, 6, 2020);
-    console.log(canChiOfDate);
-    assert.ok(canChiOfDate === 'Quý Mùi');
+    const canChi = await calendar.getTietKhi(19, 6, 2020);
+    console.log(canChi);
+    assert.ok(canChi === 'Quý Mùi');
   });
 
   it('is solar leap year', async () => {
