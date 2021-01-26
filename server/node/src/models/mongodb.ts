@@ -71,6 +71,18 @@ export const MapsWard: mongoose.model = mongooseClient.modelize('MapsWard', {
 });
 
 export const User: mongoose.model = mongooseClient.modelize('User', {
-  email: { type: String, default: '', required: true, unique: true, index: true },
-  password: { type: String, default: '', required: true }
+  primaryEmail: { type: String, default: '', required: true, unique: true, index: true },
+  primaryPhoneNumber: { type: String, default: '', required: true, unique: true, index: true },
+  username: { type: String, default: '', required: true, unique: true, index: true },
+  password: { type: String, default: '', required: true },
+  joinInAt: { type: Number, default: Date.now(), required: true },
+  balance: { type: Number, default: 0, required: true },
+  currencyCode: { type: String, default: 'VND', required: true },
+  name: { type: String, default: '' },
+  emails: { type: [String], default: [] },
+  phoneNumbers: { type: [String], default: [] },
+  addresses: { type: [Object], default: [] },
+  language: { type: String, default: 'English' },
+  timeZone: { type: Number, default: 7 },
+  nationality: { type: String, default: 'Vietnamese' }
 });

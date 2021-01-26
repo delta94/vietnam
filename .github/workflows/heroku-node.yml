@@ -24,6 +24,9 @@ jobs:
         uses: borales/actions-yarn@v2.0.0
       - name: Set up Compilers
         run: sudo apt-get install libpq-dev g++ make
+      - name: App - Build Angular
+        working-directory: ./web/angular
+        run: yarn install && yarn build
       - name: App - Build Server
         working-directory: ./server/node
         run: yarn install && yarn build

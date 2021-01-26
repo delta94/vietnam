@@ -1,0 +1,51 @@
+<div class="container pt-3">
+  <div class="row">
+    <div class="col-sm-4">
+      <div class="input-group mb-3">
+        <input type="date" aria-label="Start" placeholder="Start" class="form-control">
+        <input type="date" aria-label="End" placeholder="Start" class="form-control">
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <form ngNativeValidate>
+        <div class="input-group mb-3" (submit)="search($event)">
+          <input type="text" aria-label="Start" class="form-control" placeholder="Search activities" required>
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-outline-dark">Search</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="col-sm-2">
+      <button type="button" class="btn btn-primary w-100">Export</button>
+    </div>
+  </div>
+  <div class="list-group">
+    <ng-container *ngIf="transactions.length === 0">
+      <div class="list-group-item text-center">
+        <div class="p-3">
+          <h3 class="m-0 font-weight-normal">No transactions yet.</h3>
+          <p class="m-0">Want to try again with different dates?</p>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="transactions.length > 0">
+      <ng-container *ngFor="let transaction of transactions">
+        <div class="list-group-item">
+          <div class="row">
+            <div class="col-sm-2">
+              <p class="m-0">{{ transaction.dateTime }}</p>
+            </div>
+            <div class="col-sm-8">
+              <p class="m-0">{{ transaction.description }}</p>
+              <p class="m-0">{{ transaction.status }}</p>
+            </div>
+            <div class="col-sm-2">
+              <p class="m-0">{{ transaction.amount }} {{ transaction.code }}</p>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>

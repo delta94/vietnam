@@ -1,0 +1,26 @@
+<div class="card shadow-sm bg-white">
+  <div class="card-body">
+    <h5 class="card-title font-weight-normal">Profile</h5>
+    <div class="row">
+      <div class="col-sm-4">
+        <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.onlinewebfonts.com%2Fsvg%2Fimg_87237.png&f=1&nofb=1" alt="Profile" class="w-100 rounded">
+      </div>
+      <div class="col-sm-8">
+        <ng-container *ngIf="name">
+          <h4 class="card-text font-weight-normal">{{ name }}</h4>
+        </ng-container>
+        <ng-container *ngIf="!name">
+          <div class="input-group mb-3">
+            <input type="text" name="name" class="form-control" placeholder="Name" aria-label="Name" [(ngModel)]="name">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button">Change</button>
+            </div>
+          </div>
+        </ng-container>
+        <ng-container *ngIf="year">
+          <p class="card-subtitle text-muted">Join in {{ year }}</p>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

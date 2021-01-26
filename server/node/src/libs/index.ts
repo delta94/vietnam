@@ -4,8 +4,10 @@ import SSI from './stock/ssi';
 import TanViet from './stock/tanviet';
 
 import Banks from './banks';
+import BCrypt from './bcrypt';
 import Calendar from './calendar';
 import LiveScore from './live-score';
+import JWT from './jwt';
 import News from './news';
 import Google from './news/google';
 import AirVisual from './weather/air-visual';
@@ -48,3 +50,9 @@ export const airVisual: AirVisual = new AirVisual(AIR_VISUAL_API);
 
 const PROPUBLICA_API: string = process.env.PROPUBLICA_API || '';
 export const proPublica: ProPublica = new ProPublica(PROPUBLICA_API);
+
+const X_TOKEN_SECRET: string = process.env.X_TOKEN_SECRET || '';
+export const jwt: JWT = new JWT(X_TOKEN_SECRET);
+
+const BCRYPT_ROUNDS: number = parseInt(process.env.BCRYPT_ROUNDS || '6', 10) || 6;
+export const bcrypt: BCrypt = new BCrypt(BCRYPT_ROUNDS);

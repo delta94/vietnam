@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">X</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ng-container *ngIf="isAuthenticated">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a routerLink="/summary" class="nav-link text-white">
+              <fa-icon [icon]="faUniversity"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Summary</span></a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/transactions" class="nav-link text-white">
+              <fa-icon [icon]="faListAlt"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Transactions</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/transfer" class="nav-link text-white">
+              <fa-icon [icon]="faMoneyBillWave"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Transfer</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/wallet" class="nav-link text-white">
+              <fa-icon [icon]="faWallet"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Wallet</span></a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a routerLink="/settings" class="nav-link text-white">
+              <fa-icon [icon]="faCog"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Settings</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-light" (click)='logOut($event)'>
+              <fa-icon [icon]="faSignOutAlt"></fa-icon>
+              <span class="ml-1 d-inline-block d-sm-none">Log Out</span>
+            </button>
+          </li>
+        </ul>
+      </ng-container>
+      <ng-container *ngIf="!isAuthenticated">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item mr-3">
+            <a routerLink="/sign-in" class="btn btn-outline-light">Sign In</a>
+          </li>
+          <li class="nav-item">
+            <a routerLink="/sign-up" class="btn btn-outline-light">Sign Up</a>
+          </li>
+        </ul>
+      </ng-container>
+    </div>
+  </div>
+</nav>

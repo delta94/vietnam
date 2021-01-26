@@ -1,0 +1,16 @@
+<div class="card shadow-sm bg-white">
+  <div class="card-body">
+    <h5 class="card-title font-weight-normal">Phone Numbers</h5>
+    <ng-container *ngFor="let phone of phoneNumbers">
+      <div class="mb-1">
+        <ng-container *ngIf="phone.primary">
+          <span class="badge badge-primary">Primary</span>
+        </ng-container>
+        <div class="d-flex justify-content-between align-items-center">
+          <span>{{ phone.number }}</span>
+          <a href="#" class="text-primary">Edit</a>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

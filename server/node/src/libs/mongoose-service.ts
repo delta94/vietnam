@@ -11,6 +11,12 @@ interface IFindOptions {
   populate?: string;
 }
 
+interface IFindOneOptions {
+  selectedFields?: Array<string>;
+  excludedFields?: Array<string>;
+  sort?: any;
+}
+
 export default class MongooseService {
   public model: mongoose.model;
 
@@ -88,7 +94,7 @@ export default class MongooseService {
     });
   }
 
-  public async findOne(query: any = {}, options: any = {}): Promise<any> {
+  public async findOne(query: any = {}, options: IFindOneOptions = {}): Promise<any> {
     const self = this;
 
     const { selectedFields = [], excludedFields = [], sort = '' } = options;
@@ -128,10 +134,12 @@ export default class MongooseService {
   public async create(body: any = {}): Promise<any> {
     const self = this;
 
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       self.model.create(body, (error = {}, document = {}) => {
-        if (error) console.error(error);
-        resolve(document);
+        if (error) {
+          return reject(error);
+        }
+        return resolve(document);
       });
     });
   }

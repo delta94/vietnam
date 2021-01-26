@@ -22,7 +22,7 @@ jobs:
           node-version: "14.9.0"
       - name: Set up Yarn
         uses: borales/actions-yarn@v2.0.0
-      - name: Build
+      - name: Build React
         working-directory: web/react
         run: yarn install && yarn build
       - name: Deploy

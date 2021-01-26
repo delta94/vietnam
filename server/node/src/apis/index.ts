@@ -17,7 +17,6 @@ export default app => {
     const { method, path, middlewares = [] } = route;
     const _method = method.toLowerCase();
     const { default: handler } = require(`./${path}/${_method}`);
-    middlewares.unshift('validation/user');
     middlewares.unshift('validation/request');
     middlewares.unshift('track-ip');
     const _middlewares = [];

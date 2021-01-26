@@ -22,6 +22,7 @@ import telegram from './telegram';
 import usa from './usa';
 import visas from './visas';
 import weather from './weather';
+import x from './x';
 import youtube from './youtube';
 
 const routes: Array<IRoute> = [].concat(
@@ -45,6 +46,7 @@ const routes: Array<IRoute> = [].concat(
   usa,
   visas,
   weather,
+  x,
   youtube
 );
 

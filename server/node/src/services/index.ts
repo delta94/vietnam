@@ -17,6 +17,7 @@ import TelegramService from './telegram';
 import USAService from './usa';
 import VisasService from './visas';
 import WeatherService from './weather';
+import XService from './x';
 import YouTubeService from './youtube';
 
 export const administrativeDivisionsService: AdministrativeDivisionsService = new AdministrativeDivisionsService();
@@ -36,4 +37,5 @@ export const telegramService: TelegramService = new TelegramService();
 export const usaService: USAService = new USAService();
 export const visasService: VisasService = new VisasService();
 export const weatherService: WeatherService = new WeatherService();
+export const xService: XService = new XService();
 export const youTubeService: YouTubeService = new YouTubeService();

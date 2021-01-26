@@ -53,13 +53,11 @@ const startServer: Function = async () => {
     app.use(express.static('web'));
 
     app.route('/').get((req, res) => {
-      res.json({ status: 'OK' });
-      // res.sendFile(path.join(__dirname, 'web', 'index.html'));
+      res.sendFile(path.join(__dirname, 'web', 'index.html'));
     });
 
     app.route('*').get((req, res) => {
-      res.json({ status: 'OK' });
-      // res.sendFile(path.join(__dirname, 'web', 'index.html'));
+      res.sendFile(path.join(__dirname, 'web', 'index.html'));
       // res.redirect('https://' + req.headers.host + req.url);
     });
 
